@@ -1,0 +1,415 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>雙向連結的力量：[[wikilink]] 完全指南 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="[[wikilink]] 是 Obsidian 最核心的功能，讓每一則筆記都能與其他筆記建立雙向關聯。本章完整介紹基礎語法、進階連結技巧（標題連結、區塊參考、嵌入）、反向連結面板的使用方式，以及常見的連結錯誤，幫助你把孤立的筆記真正串成知識網絡。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 4 章 · Part 2：核心功能：筆記、連結與關聯圖</span> <h1>雙向連結的力量：[[wikilink]] 完全指南</h1> <p class="cdesc">把孤立的筆記串成知識網絡，從這兩個方括號開始</p> <h2>為什麼連結改變了一切</h2> <p>
+大多數筆記應用的邏輯是：「寫完，歸檔，希望之後找得到。」你把筆記丟進資料夾，資料夾裡放更多資料夾，時間久了，你的知識變成一個很難搜尋的倉庫。
+</p> <p>
+Obsidian 的核心設計完全不同。每一則筆記都可以指向任何其他筆記，而且連結是<strong>雙向的</strong>——當筆記 A 連結到筆記 B，筆記 B 會自動知道有人連結它。這個看似簡單的機制，讓你的知識從「檔案集合」變成「關聯網絡」。
+</p> <div class="call info"> <p><strong>雙向連結的本質</strong>：資料夾告訴你某樣東西放在哪裡；標籤告訴你它屬於哪個類別；連結告訴你它<em>跟什麼有關</em>。三者回答不同問題，雙向連結是其中最能反映思考結構的。</p> </div> <div class="call tip"> <p><strong>新手常見迷思</strong>：很多人以為雙向連結只是「省去手動更新反向連結的時間」。實際上，它的真正價值在於<em>發現未知的關聯</em>——當你寫完一則筆記，打開反向連結面板，看到三則你完全忘記寫過的筆記都提到同一個概念，那種「原來我早就想過這件事」的驚喜，是 Obsidian 最令人上癮的體驗。</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch04/01-infographic-link-network.png" alt="雙向連結把孤立筆記轉成知識網絡" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>雙向連結讓孤立筆記不再只是檔案集合，而是能透過 <code>[[wikilink]]</code>、反向連結與意外發現串成可探索的知識網絡。</figcaption> </figure> <h2>[[wikilink]] 基礎語法</h2> <p>
+在 Obsidian 任何一則筆記的任何位置，輸入兩個左方括號 <code>[[</code>，自動完成下拉選單就會出現，列出 Vault 裡所有的筆記。繼續輸入筆記名稱關鍵字，選單即時過濾；找到目標後按 <code>Enter</code> 確認，連結就建立完成。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 慣性定律
+
+慣性定律是[[三大運動定律]]之一，由牛頓提出。
+
+→ 輸入 [[ 後，Obsidian 顯示所有筆記
+→ 輸入「三大」過濾，按 Enter 插入連結
+→ 連結同時在「三大運動定律」筆記上登記反向連結" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 慣性定律</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">慣性定律是[[</span><span style="color:#61AFEF">三大運動定律</span><span style="color:#ABB2BF">]]之一，由牛頓提出。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">→ 輸入 [[ 後，Obsidian 顯示所有筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 輸入「三大」過濾，按 Enter 插入連結</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 連結同時在「三大運動定律」筆記上登記反向連結</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <h3>連結到尚不存在的筆記</h3> <p>
+你不需要先建立筆記才能連結它。輸入 <code>[[一個還不存在的筆記名稱]]</code> 並按 Enter，Obsidian 會建立一個「佔位符連結」——連結以較淡的顏色顯示，點擊時會自動建立那則空白筆記。
+</p> <p>
+這個設計鼓勵你「先建立連結，之後再補內容」。當你在寫一則筆記突然想到一個還沒記錄的概念，可以直接 <code>[[概念名稱]]</code> 標記起來，不打斷當前思路，之後再回來填寫。
+</p> <div class="call warn"> <p><strong>佔位符連結的陷阱</strong>：佔位符連結雖然方便，但容易累積大量「幽靈筆記」——你連結了卻從未回來填寫內容。建議每週或每月固定一個時間（例如每週日晚上），用 Obsidian 的「未連結提及」面板或第三方外掛（如「Note Refactor」）掃描所有佔位符連結，決定要補內容還是刪除連結。一個有 50 則佔位符連結卻從未填寫的 Vault，比完全沒有連結的 Vault 更令人困惑。</p> </div> <h3>點擊與預覽</h3> <p>
+在閱讀模式（Reading View）下，<code>[[wikilink]]</code> 變成可點擊的連結，點擊即跳轉。在編輯模式下，按住 <code>Ctrl</code>（macOS 為 <code>Cmd</code>）再點擊連結，可以直接開啟目標筆記，或在連結上懸停以預覽筆記內容，不需要離開目前的筆記。
+</p> <h2>進階連結語法</h2> <p>
+基礎 <code>[[wikilink]]</code> 連結到整則筆記。當筆記很長、內容多元的時候，你可能需要更精確地指向特定段落。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 四種進階連結語法
+
+## 1. 標題連結：跳到特定段落
+[[牛頓定律#第二運動定律]]
+→ 點擊直接定位到「牛頓定律」筆記的「第二運動定律」小節
+
+## 2. 區塊參考：引用特定段落
+[[會議紀錄 2026-06-15#^action-items]]
+→ 連結到筆記中以 ^action-items 標記的段落
+
+## 3. 嵌入：直接渲染另一則筆記
+![[每週回顧模板]]
+→ 在目前筆記內直接顯示另一則筆記的完整內容
+
+## 4. 顯示文字：自訂連結標籤
+[[Building a Second Brain|第二大腦]]
+→ 連結指向原筆記，但顯示「第二大腦」四個字" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 四種進階連結語法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 1. 標題連結：跳到特定段落</span></span>
+<span class="line"><span style="color:#ABB2BF">[[</span><span style="color:#61AFEF">牛頓定律#第二運動定律</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 點擊直接定位到「牛頓定律」筆記的「第二運動定律」小節</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 2. 區塊參考：引用特定段落</span></span>
+<span class="line"><span style="color:#ABB2BF">[[會議紀錄 2026-06-15#^action-items]]</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 連結到筆記中以 ^action-items 標記的段落</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 3. 嵌入：直接渲染另一則筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">![[</span><span style="color:#61AFEF">每週回顧模板</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 在目前筆記內直接顯示另一則筆記的完整內容</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 4. 顯示文字：自訂連結標籤</span></span>
+<span class="line"><span style="color:#ABB2BF">[[Building a Second Brain|第二大腦]]</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 連結指向原筆記，但顯示「第二大腦」四個字</span></span></code></pre> </div> </div>   <h3>標題連結：[[筆記名稱#標題]]</h3> <p>
+在筆記名稱後加上 <code>#</code>，Obsidian 會列出目標筆記內所有的標題供選擇，點擊後連結直接定位到那個段落。當一則筆記有多個子主題，標題連結讓你精確引用，而不是讓讀者自己去找。
+</p> <div class="call tip"> <p><strong>標題連結的最佳實踐</strong>：如果你的筆記結構良好（使用 H1、H2、H3 等層級標題），標題連結的效果會最好。建議每則筆記至少使用一個 H1 作為主標題，並用 H2 區分主要段落。這樣當你使用 <code>[[筆記名稱#段落]]</code> 時，Obsidian 的下拉選單會清晰顯示所有可用的標題層級，讓你快速選擇。</p> </div> <h3>區塊參考：[[筆記#^block-id]]</h3> <p>
+區塊參考讓你連結到筆記中的特定段落，而不是整則筆記或整個標題。建立方式：在段落末尾輸入 <code>^</code> 加上一個短 ID（如 <code>^key-insight</code>），Obsidian 會記住這個位置；之後在其他筆記中輸入 <code>[[來源筆記#^key-insight]]</code> 即可精確引用。
+</p> <p>
+區塊參考的核心價值在於「引用而非複製」。如果同樣的資訊需要出現在多則筆記，不需要貼上多份副本（之後難以維護），只需連結到原始段落，內容永遠保持同步。
+</p> <h3>嵌入：![[筆記名稱]]</h3> <p>
+在連結前加驚嘆號 <code>!</code>，目標筆記的內容會直接在目前筆記中渲染出來。嵌入常用於：
+</p> <ul> <li>把「模板筆記」嵌入每日筆記，省去複製貼上</li> <li>建立一則「索引筆記」，嵌入多則子筆記，形成可導覽的總攬頁</li> <li>引用另一則筆記的特定區塊：<code>![[Note#^block-id]]</code></li> </ul> <div class="call warn"> <p><strong>嵌入的效能考量</strong>：嵌入雖然方便，但過度使用會影響 Obsidian 的載入效能。如果你在一則筆記中嵌入了 20 則以上的其他筆記，每次開啟這則筆記時，Obsidian 都需要讀取並渲染所有嵌入內容，可能導致明顯的延遲。建議：索引筆記的嵌入數量控制在 10 則以內；如果超過，考慮改用 <code>[[wikilink]]</code> 搭配反向連結面板來瀏覽。</p> </div> <h3>顯示文字：[[筆記名稱|你想顯示的文字]]</h3> <p>
+用 <code>|</code> 分隔筆記名稱和顯示文字。連結行為不變，但讀者看到的是你指定的標籤。對於筆記名稱很長或技術性很強的情況，顯示文字讓行文更自然流暢。
+</p> <h2>反向連結（Backlinks）面板</h2> <p>
+每則筆記的右側邊欄有一個<strong>反向連結</strong>（Backlinks）面板，列出所有連結到目前筆記的其他筆記。這是雙向連結「雙向」的那一側——你不需要主動去找誰連結了你，Obsidian 自動幫你匯整。
+</p> <p>
+反向連結面板分成兩個區段：
+</p> <ul> <li><strong>已連結本筆記的檔案</strong>：有正式 <code>[[wikilink]]</code> 連到這則筆記的所有筆記</li> <li><strong>未連結提及</strong>：提到這則筆記的名稱但沒有用 <code>[[]]</code> 包起來的筆記</li> </ul> <div class="call info"> <p><strong>活用「未連結提及」</strong>：每個月挑選幾則核心筆記，打開反向連結面板查看「未連結提及」。裡面是 Obsidian 自動偵測到有提及這個概念但還沒正式連結的筆記——一鍵轉換就能讓知識網絡更緊密，不需要自己去記得或搜尋。</p> </div> <p>
+養成「寫完一則筆記，打開反向連結面板確認」的習慣，是讓 Obsidian 真正產生價值的關鍵。如果你寫了幾個月筆記但從來沒有打開過反向連結面板，你只用到了 Obsidian 一半的功能。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch04/02-flowchart-backlinks-discovery.png" alt="Backlinks 發現流程從筆記 A 寫下連結到筆記 B 出現反向連結並補上脈絡" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 4-1：Backlinks 的價值在於讓被動關係浮上檯面；一個連結不只連到目標筆記，也讓目標筆記知道自己被誰引用。</figcaption> </figure> <h2>常見錯誤與正確心態</h2> <h3>過度連結 vs. 從不連結</h3> <p>
+兩個極端都有問題。「從不連結」讓你的 Vault 退化成普通資料夾，連結帶來的知識網絡效益完全消失。「過度連結」——把每次出現的術語都變成連結——則製造視覺雜亂，讓反向連結面板失去意義（當 200 則筆記都連到同一個術語，這個計數還有參考價值嗎？）。
+</p> <div class="call warn"> <p><strong>連結的原則</strong>：在「含義」上連結，而不是在「提及」上連結。「這則筆記跟那則筆記有實質的概念關聯」才值得建立連結；只是碰巧提到同一個詞，不需要連結。一個精確的連結，勝過十個附帶的。</p> </div> <h3>筆記太寬泛，難以精確連結</h3> <p>
+一則叫「研究」或「靈感」的筆記什麼都想涵蓋，結果什麼都連結不精確。狹義、具體的筆記——「主動回憶的記憶鞏固機制」、「2026 Q2 產品路線圖」——更容易精確連結，反向連結出現時也更有參考價值。
+</p> <h3>在 Obsidian 內部重命名，不要用系統檔案總管</h3> <p>
+在 Obsidian 內重命名一則筆記，它會提示你是否要更新整個 Vault 中所有指向這則筆記的連結——選「更新」，連結網絡保持完整。但如果你在外部用檔案總管重命名，Obsidian 無從得知，連結會變成灰色的斷裂文字。筆記名稱的更改，始終在 Obsidian 內部進行。
+</p> <div class="call warn"> <p><strong>斷裂連結的救援方案</strong>：如果不小心在外部重新命名了筆記，導致連結斷裂，有兩種補救方式：1) 在 Obsidian 內將檔案名稱改回原名稱，然後用 Obsidian 重新命名一次；2) 使用第三方外掛如「Broken Links」或「Find & Replace in Vault」來批量修復。但最好的方法還是養成「所有檔案操作都在 Obsidian 內完成」的習慣。</p> </div> <h2>進階技巧：連結策略比較</h2> <p>隨著 Vault 規模成長，你可能會遇到一個問題：什麼時候該用哪種連結方式？以下表格幫助你快速決策：</p> <table> <thead> <tr> <th>使用情境</th> <th>推薦語法</th> <th>原因</th> </tr> </thead> <tbody> <tr> <td>連結到整則筆記</td> <td><code>[[筆記名稱]]</code></td> <td>最簡單，適合大多數情況</td> </tr> <tr> <td>引用特定段落</td> <td><code>[[筆記#標題]]</code></td> <td>精確定位，讀者不需要自己搜尋</td> </tr> <tr> <td>引用一段話或數據</td> <td><code>[[筆記#^block-id]]</code></td> <td>最精確，適合學術引用或數據引用</td> </tr> <tr> <td>在索引頁展示內容</td> <td><code>![[筆記名稱]]</code></td> <td>直接渲染，適合儀表板或總覽頁</td> </tr> <tr> <td>行文需要自然語句</td> <td><code>[[筆記|顯示文字]]</code></td> <td>讓連結融入句子，閱讀更流暢</td> </tr> </tbody> </table> <h2>常見問題與疑難排解</h2> <h3>問題 1：連結沒有出現在自動完成選單中</h3> <p>
+如果你輸入 <code>[[</code> 後沒有看到任何筆記，可能的原因包括：
+</p> <ul> <li><strong>Vault 尚未載入完成</strong>：特別是在剛開啟 Obsidian 或開啟大型 Vault 時，等待幾秒再試。</li> <li><strong>筆記位於排除資料夾</strong>：檢查設定中的「Files & Links」→「Excluded files」，確認目標筆記不在排除清單中。</li> <li><strong>外掛衝突</strong>：某些第三方外掛可能干擾自動完成功能。嘗試在安全模式（Safe Mode）下測試。</li> </ul> <h3>問題 2：嵌入的內容沒有正確渲染</h3> <p>
+如果 <code>![[筆記名稱]]</code> 顯示為純文字而非渲染內容：
+</p> <ul> <li>確認目標筆記確實存在，且名稱完全正確（包括大小寫和空格）。</li> <li>檢查目標筆記是否包含 YAML frontmatter 以外的特殊語法（如 Dataview 查詢），某些外掛的輸出可能無法被嵌入。</li> <li>在閱讀模式（Reading View）下嵌入才會渲染；編輯模式（Editing View）下只會顯示連結文字。</li> </ul> <h3>問題 3：反向連結面板顯示「無結果」</h3> <p>
+如果你確定有其他筆記連結到目前筆記，但反向連結面板是空的：
+</p> <ul> <li>檢查是否開啟了「反向連結」面板（右側邊欄的雙向箭頭圖示）。</li> <li>確認連結語法正確：<code>[[筆記名稱]]</code> 必須完全匹配，包括空格和標點符號。</li> <li>如果使用了「未連結提及」功能，確認該功能已在設定中啟用（Settings → Core plugins → Backlinks → 「Detect unlinked mentions」）。</li> </ul> <h2>建立連結的起步節奏</h2> <p>
+對於剛開始使用 Obsidian 的人，以下節奏供參考：
+</p> <ul> <li><strong>前 50 則筆記</strong>：只用基礎 <code>[[wikilink]]</code>，不要急著學進階語法。先培養「寫筆記時主動想連結」的習慣。</li> <li><strong>50 則之後</strong>：開始使用標題連結和顯示文字，讓連結更精確。</li> <li><strong>100 則之後</strong>：區塊參考、未連結提及、索引筆記才真正發揮作用——這時候 Vault 已有足夠密度，這些工具能幫你找到意想不到的關聯。</li> </ul> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--blue)" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--green)" />
+    </marker>
+  </defs>
+
+  <g transform="translate(45, 60)">
+    <rect x="0" y="0" width="180" height="60" rx="8" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+    <text x="90" y="30" text-anchor="middle" font-weight="bold" fill="var(--blue)">前50則筆記</text>
+    <text x="90" y="50" text-anchor="middle" fill="var(--text)" font-size="15px">基礎[[wikilink]]</text>
+  </g>
+
+  <g transform="translate(285, 60)">
+    <rect x="0" y="0" width="180" height="60" rx="8" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+    <text x="90" y="30" text-anchor="middle" font-weight="bold" fill="var(--green)">50~100則筆記</text>
+    <text x="90" y="50" text-anchor="middle" fill="var(--text)" font-size="15px">標題連結、顯示文字</text>
+  </g>
+
+  <g transform="translate(525, 60)">
+    <rect x="0" y="0" width="180" height="60" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="2"/>
+    <text x="90" y="30" text-anchor="middle" font-weight="bold" fill="var(--accent)">100則以上筆記</text>
+    <text x="90" y="50" text-anchor="middle" fill="var(--text)" font-size="15px">區塊參考、未連結提及</text>
+  </g>
+
+  <path d="M 225,90 L 275,90" fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <path d="M 465,90 L 515,90" fill="none" stroke="var(--green)" stroke-width="2" marker-end="url(#arr-green)"/>
+
+  <g transform="translate(285, 200)">
+    <rect x="0" y="-20" width="180" height="55" rx="8" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="2" stroke-dasharray="4"/>
+    <text x="90" y="5" text-anchor="middle" fill="var(--purple)" font-weight="bold">知識網絡價值指數成長</text>
+    <text x="90" y="25" text-anchor="middle" fill="var(--text)" font-size="15px">連結越多，意外關聯越多</text>
+  </g>
+
+  <path d="M 135,120 C 135,160 310,150 310,180" stroke="var(--blue)" stroke-width="1.5" fill="none" stroke-dasharray="4"/>
+  <path d="M 375,120 C 375,160 375,150 375,180" stroke="var(--green)" stroke-width="1.5" fill="none" stroke-dasharray="4"/>
+  <path d="M 615,120 C 615,160 440,150 440,180" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="4"/>
+</svg> <figcaption>這是建立雙向連結的起步節奏圖：前 50 則專注建立習慣，50-100 則導入標題連結，100 則以上開始發揮 MOC 與區塊參考的強大威力。</figcaption> </figure><p>
+知識網絡的價值不是線性成長的，而是指數的：連結越多，每條新連結能發現的意外關聯就越多。但這一切都從最簡單的 <code>[[]]</code> 開始。
+</p> <h2>孤立筆記（Orphan Notes）：知識網絡的破洞</h2> <p>
+孤立筆記是指沒有任何連結指向它、也沒有連結指向其他筆記的筆記。在圖形視圖裡，它像一個漂浮的孤島，與整個知識網絡斷開。大多數人的 Vault 裡，孤立筆記佔比往往超過 40%——這意味著那些筆記的知識被困在孤島上，永遠無法被「意外發現」。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch04/03-flowchart-orphan-to-moc.png" alt="孤立筆記透過共同主題雙向連結與 MOC 修復成知識網絡" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 4-2：孤立筆記不是單純的整理問題，而是知識網絡的破洞；先找共同主題，再補雙向連結與 MOC，才能重新形成可探索的脈絡。</figcaption> </figure> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-o" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--green)" />
+    </marker>
+  </defs>
+
+  <!-- 左側：孤立節點群 -->
+  <text x="140" y="25" text-anchor="middle" font-size="15px" fill="var(--muted)" font-weight="600">孤立狀態</text>
+  <circle cx="80" cy="80" r="28" fill="var(--bg2)" stroke="var(--border)" stroke-width="2"/>
+  <text x="80" y="85" text-anchor="middle" fill="var(--text2)" font-size="14px">筆記 A</text>
+  <circle cx="200" cy="70" r="28" fill="var(--bg2)" stroke="var(--border)" stroke-width="2"/>
+  <text x="200" y="75" text-anchor="middle" fill="var(--text2)" font-size="14px">筆記 B</text>
+  <circle cx="140" cy="160" r="28" fill="var(--bg2)" stroke="var(--border)" stroke-width="2"/>
+  <text x="140" y="165" text-anchor="middle" fill="var(--text2)" font-size="14px">筆記 C</text>
+  <circle cx="70" cy="220" r="28" fill="var(--bg2)" stroke="var(--border)" stroke-width="2"/>
+  <text x="70" y="225" text-anchor="middle" fill="var(--text2)" font-size="14px">筆記 D</text>
+  <circle cx="210" cy="210" r="28" fill="var(--bg2)" stroke="var(--border)" stroke-width="2"/>
+  <text x="210" y="215" text-anchor="middle" fill="var(--text2)" font-size="14px">筆記 E</text>
+  <text x="140" y="275" text-anchor="middle" font-size="14px" fill="var(--muted)" font-style="italic">各自孤立，無法被發現</text>
+
+  <!-- 中間箭頭 -->
+  <path d="M 290,150 L 360,150" fill="none" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arr-o)"/>
+  <text x="325" y="140" text-anchor="middle" font-size="14px" fill="var(--accent)" font-weight="600">建立連結</text>
+
+  <!-- 右側：連結後的網絡 -->
+  <text x="580" y="25" text-anchor="middle" font-size="15px" fill="var(--muted)" font-weight="600">連結後狀態</text>
+  <circle cx="490" cy="80" r="28" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="490" y="85" text-anchor="middle" fill="var(--green)" font-size="14px">筆記 A</text>
+  <circle cx="620" cy="70" r="28" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="620" y="75" text-anchor="middle" fill="var(--green)" font-size="14px">筆記 B</text>
+  <circle cx="560" cy="160" r="32" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="560" y="157" text-anchor="middle" fill="var(--accent)" font-size="13px" font-weight="700">中樞筆記</text>
+  <text x="560" y="172" text-anchor="middle" fill="var(--accent)" font-size="13px">筆記 C</text>
+  <circle cx="480" cy="235" r="28" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="480" y="240" text-anchor="middle" fill="var(--green)" font-size="14px">筆記 D</text>
+  <circle cx="645" cy="230" r="28" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="645" y="235" text-anchor="middle" fill="var(--green)" font-size="14px">筆記 E</text>
+  <line x1="518" y1="92" x2="534" y2="132" stroke="var(--green)" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <line x1="602" y1="92" x2="585" y2="132" stroke="var(--green)" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <line x1="552" y1="192" x2="502" y2="210" stroke="var(--green)" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <line x1="568" y1="192" x2="622" y2="208" stroke="var(--green)" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <text x="580" y="275" text-anchor="middle" font-size="14px" fill="var(--muted)" font-style="italic">透過中樞筆記，可從任一點抵達其他筆記</text>
+</svg> <figcaption>孤立筆記 vs 連結後的知識網絡：建立連結後，中樞筆記（Hub Note）讓任一節點都能透過一跳或兩跳抵達其他概念。</figcaption> </figure><p>
+解決孤立筆記的方法分兩層：
+</p> <ul> <li><strong>即時預防</strong>：每次寫完一則筆記，強迫自己問一個問題：「這則筆記讓我想起哪則已有的筆記？」哪怕只加一個連結，這則筆記就不再孤立。</li> <li><strong>定期掃描</strong>：使用 Obsidian 圖形視圖（Graph View）過濾，顯示沒有連結的節點；或安裝「Orphan Notes」外掛自動列出清單，每月集中處理一次。</li> </ul> <div class="call tip"> <p><strong>連結的最低門檻</strong>：每則新筆記至少加兩個出站連結（連結到其他筆記）和確認至少一個入站連結（讓其他筆記連結到這則）。這個「兩進一出」原則，讓每則筆記都有最低限度的網絡位置。</p> </div> <h2>MOC（Maps of Content）：知識地圖筆記</h2> <p>
+當 Vault 超過 100 則筆記，你會遇到一個問題：連結太多，不知道從哪裡進入某個主題。<strong>MOC（Maps of Content，內容地圖）</strong>是解決這個問題的架構模式。
+</p> <p>
+MOC 不是一則普通筆記——它是一則以<em>導覽為目的</em>的索引筆記，把同一主題下所有相關筆記用有意義的方式組織在一起，並附上簡短說明。MOC 由 Nick Milo（LYT 系統創始人）推廣，是 Linking Your Thinking（連結你的思考）方法論的核心工具。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 認知科學 MOC
+
+## 核心概念
+- [[工作記憶]] — 短期資訊處理
+- [[長期記憶]] — 儲存與鞏固
+- [[主動回憶]] — 記憶鞏固機制
+- [[間隔重複]] — 遺忘曲線對策
+
+## 應用筆記
+- [[Anki 卡片設計原則]]
+- [[費曼學習法]]
+- [[康乃爾筆記法]]
+
+## 延伸閱讀
+- [[《思考，快與慢》讀書筆記]]
+- [[認知負荷理論]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 認知科學 MOC</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 核心概念</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">工作記憶</span><span style="color:#ABB2BF">]] — 短期資訊處理</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">長期記憶</span><span style="color:#ABB2BF">]] — 儲存與鞏固</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">主動回憶</span><span style="color:#ABB2BF">]] — 記憶鞏固機制</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">間隔重複</span><span style="color:#ABB2BF">]] — 遺忘曲線對策</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 應用筆記</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[Anki 卡片設計原則]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">費曼學習法</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">康乃爾筆記法</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 延伸閱讀</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">《思考，快與慢》讀書筆記</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">認知負荷理論</span><span style="color:#ABB2BF">]]</span></span></code></pre> </div> </div>   <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-moc" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--purple)" />
+    </marker>
+    <marker id="arr-sub" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--blue)" />
+    </marker>
+  </defs>
+
+  <!-- 頂層 MOC -->
+  <rect x="290" y="20" width="220" height="56" rx="10" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="2.5"/>
+  <text x="400" y="46" text-anchor="middle" font-weight="700" fill="var(--purple)" font-size="17px">認知科學 MOC</text>
+  <text x="400" y="64" text-anchor="middle" fill="var(--muted)" font-size="14px">頂層地圖筆記</text>
+
+  <!-- 子 MOC -->
+  <rect x="80" y="145" width="170" height="50" rx="8" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+  <text x="165" y="166" text-anchor="middle" font-weight="600" fill="var(--blue)" font-size="15px">記憶機制 MOC</text>
+  <text x="165" y="183" text-anchor="middle" fill="var(--muted)" font-size="13px">子地圖</text>
+
+  <rect x="315" y="145" width="170" height="50" rx="8" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+  <text x="400" y="166" text-anchor="middle" font-weight="600" fill="var(--blue)" font-size="15px">學習方法 MOC</text>
+  <text x="400" y="183" text-anchor="middle" fill="var(--muted)" font-size="13px">子地圖</text>
+
+  <rect x="550" y="145" width="170" height="50" rx="8" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+  <text x="635" y="166" text-anchor="middle" font-weight="600" fill="var(--blue)" font-size="15px">注意力研究 MOC</text>
+  <text x="635" y="183" text-anchor="middle" fill="var(--muted)" font-size="13px">子地圖</text>
+
+  <!-- 頂層到子 MOC 的連線 -->
+  <path d="M 360,76 L 200,145" fill="none" stroke="var(--purple)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-moc)"/>
+  <path d="M 400,76 L 400,145" fill="none" stroke="var(--purple)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-moc)"/>
+  <path d="M 440,76 L 600,145" fill="none" stroke="var(--purple)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-moc)"/>
+
+  <!-- 具體筆記節點 -->
+  <rect x="40" y="265" width="130" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="105" y="285" text-anchor="middle" fill="var(--text2)" font-size="14px">工作記憶</text>
+  <text x="105" y="298" text-anchor="middle" fill="var(--muted)" font-size="12px">原子筆記</text>
+
+  <rect x="195" y="265" width="130" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="260" y="285" text-anchor="middle" fill="var(--text2)" font-size="14px">間隔重複</text>
+  <text x="260" y="298" text-anchor="middle" fill="var(--muted)" font-size="12px">原子筆記</text>
+
+  <rect x="335" y="265" width="130" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="400" y="285" text-anchor="middle" fill="var(--text2)" font-size="14px">費曼學習法</text>
+  <text x="400" y="298" text-anchor="middle" fill="var(--muted)" font-size="12px">原子筆記</text>
+
+  <rect x="480" y="265" width="130" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="545" y="285" text-anchor="middle" fill="var(--text2)" font-size="14px">深度工作</text>
+  <text x="545" y="298" text-anchor="middle" fill="var(--muted)" font-size="12px">原子筆記</text>
+
+  <rect x="625" y="265" width="130" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="690" y="285" text-anchor="middle" fill="var(--text2)" font-size="14px">認知負荷</text>
+  <text x="690" y="298" text-anchor="middle" fill="var(--muted)" font-size="12px">原子筆記</text>
+
+  <!-- 子 MOC 到筆記的連線 -->
+  <path d="M 165,195 L 120,265" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#arr-sub)"/>
+  <path d="M 165,195 L 255,265" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#arr-sub)"/>
+  <path d="M 400,195 L 395,265" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#arr-sub)"/>
+  <path d="M 635,195 L 560,265" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#arr-sub)"/>
+  <path d="M 635,195 L 685,265" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#arr-sub)"/>
+
+  <!-- 圖例 -->
+  <rect x="240" y="340" width="14" height="14" rx="3" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="1.5"/>
+  <text x="260" y="352" fill="var(--muted)" font-size="14px">頂層 MOC（主題入口）</text>
+  <rect x="400" y="340" width="14" height="14" rx="3" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
+  <text x="420" y="352" fill="var(--muted)" font-size="14px">子 MOC（子主題）</text>
+</svg> <figcaption>MOC 的三層架構：頂層 MOC 作為主題入口，子 MOC 細分各子主題，最底層是原子筆記（Atomic Notes）。這個結構讓你能從任一層級「鑽進去」探索，也能「浮上來」看全貌。</figcaption> </figure><h3>MOC 與一般索引筆記的差別</h3> <p>
+普通索引筆記只是「列清單」——一堆連結，沒有脈絡。MOC 的關鍵在於<strong>加入說明</strong>：每個連結旁都有一句話解釋它在這個主題裡的角色（「核心概念」、「應用案例」、「延伸閱讀」）。當你三個月後回到這則 MOC，你不用點開每則筆記才知道它是什麼——說明文字就是你當時的思考。
+</p> <div class="call info"> <p><strong>MOC 不需要完整</strong>：很多人等到某個主題「研究完了」才建立 MOC，結果永遠沒建立。正確做法是：當你寫到第 3 或 4 則同主題筆記時，就建立一個「半成品 MOC」，只放目前有的連結。MOC 會隨著你的筆記一起成長，它永遠反映你「目前」對這個主題的理解。</p> </div> <h2>連結策略：在哪裡加連結，加多少</h2> <p>
+連結的品質比數量重要。以下是從實踐中提煉的三種連結策略，分別對應不同的連結意圖：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 連結策略三原則
+
+## 1. 概念層連結（最重要）
+[[主動回憶]] 是 [[記憶鞏固]] 的核心機制。
+→ 兩個概念之間有實質的因果或解釋關係
+
+## 2. 來源層連結（追溯用）
+這個想法來自 [[《深度學習》第三章]]。
+→ 追蹤知識的出處，方便日後複查
+
+## 3. 脈絡層連結（相似主題）
+另見：[[費曼學習法]]、[[反芻學習]]
+→ 同一主題的其他角度，不強迫合併" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 連結策略三原則</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 1. 概念層連結（最重要）</span></span>
+<span class="line"><span style="color:#ABB2BF">[[</span><span style="color:#61AFEF">主動回憶</span><span style="color:#ABB2BF">]] 是 [[</span><span style="color:#61AFEF">記憶鞏固</span><span style="color:#ABB2BF">]] 的核心機制。</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 兩個概念之間有實質的因果或解釋關係</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 2. 來源層連結（追溯用）</span></span>
+<span class="line"><span style="color:#ABB2BF">這個想法來自 [[</span><span style="color:#61AFEF">《深度學習》第三章</span><span style="color:#ABB2BF">]]。</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 追蹤知識的出處，方便日後複查</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 3. 脈絡層連結（相似主題）</span></span>
+<span class="line"><span style="color:#ABB2BF">另見：[[</span><span style="color:#61AFEF">費曼學習法</span><span style="color:#ABB2BF">]]、[[</span><span style="color:#61AFEF">反芻學習</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 同一主題的其他角度，不強迫合併</span></span></code></pre> </div> </div>   <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- 三欄標題 -->
+  <rect x="20" y="20" width="230" height="240" rx="10" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2"/>
+  <rect x="285" y="20" width="230" height="240" rx="10" fill="var(--bg2)" stroke="var(--blue)" stroke-width="2"/>
+  <rect x="550" y="20" width="230" height="240" rx="10" fill="var(--bg2)" stroke="var(--green)" stroke-width="2"/>
+
+  <!-- 欄位標題 -->
+  <rect x="20" y="20" width="230" height="40" rx="10" fill="var(--accent-light)"/>
+  <text x="135" y="46" text-anchor="middle" font-weight="700" fill="var(--accent)" font-size="16px">概念層連結</text>
+
+  <rect x="285" y="20" width="230" height="40" rx="10" fill="var(--blue-bg)"/>
+  <text x="400" y="46" text-anchor="middle" font-weight="700" fill="var(--blue)" font-size="16px">來源層連結</text>
+
+  <rect x="550" y="20" width="230" height="40" rx="10" fill="var(--green-bg)"/>
+  <text x="665" y="46" text-anchor="middle" font-weight="700" fill="var(--green)" font-size="16px">脈絡層連結</text>
+
+  <!-- 欄位內容 -->
+  <text x="135" y="90" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">用途</text>
+  <text x="135" y="108" text-anchor="middle" fill="var(--text2)" font-size="14px">概念間因果關係</text>
+  <text x="135" y="126" text-anchor="middle" fill="var(--text2)" font-size="14px">或解釋關係</text>
+
+  <text x="135" y="160" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">典型形式</text>
+  <text x="135" y="178" text-anchor="middle" fill="var(--text2)" font-size="14px">[[概念A]] 導致 [[概念B]]</text>
+
+  <text x="135" y="212" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">價值</text>
+  <text x="135" y="230" text-anchor="middle" fill="var(--accent)" font-size="14px">最高 ⭐⭐⭐</text>
+
+  <text x="400" y="90" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">用途</text>
+  <text x="400" y="108" text-anchor="middle" fill="var(--text2)" font-size="14px">追溯知識出處</text>
+  <text x="400" y="126" text-anchor="middle" fill="var(--text2)" font-size="14px">方便複查驗證</text>
+
+  <text x="400" y="160" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">典型形式</text>
+  <text x="400" y="178" text-anchor="middle" fill="var(--text2)" font-size="14px">來自 [[書名#章節]]</text>
+
+  <text x="400" y="212" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">價值</text>
+  <text x="400" y="230" text-anchor="middle" fill="var(--blue)" font-size="14px">中等 ⭐⭐</text>
+
+  <text x="665" y="90" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">用途</text>
+  <text x="665" y="108" text-anchor="middle" fill="var(--text2)" font-size="14px">相近主題互相</text>
+  <text x="665" y="126" text-anchor="middle" fill="var(--text2)" font-size="14px">補充，供延伸探索</text>
+
+  <text x="665" y="160" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">典型形式</text>
+  <text x="665" y="178" text-anchor="middle" fill="var(--text2)" font-size="14px">另見：[[相關筆記]]</text>
+
+  <text x="665" y="212" text-anchor="middle" fill="var(--muted)" font-size="14px" font-weight="600">價值</text>
+  <text x="665" y="230" text-anchor="middle" fill="var(--green)" font-size="14px">輔助 ⭐</text>
+</svg> <figcaption>連結策略三層架構：概念層連結捕捉思考關係（最有長期價值）、來源層連結追溯出處、脈絡層連結串連相近主題。健康的 Vault 三層都有，但以概念層為主。</figcaption> </figure><h2>Linking Your Thinking（LYT）方法論</h2> <p>
+LYT（連結你的思考）是由 Nick Milo 創立的知識管理方法論，目前是 Obsidian 社群最廣泛使用的組織系統之一。LYT 的核心觀念是：筆記的價值不在於「被收藏」，而在於「被連結時產生的思考」。
+</p> <p>
+LYT 方法論有幾個核心實踐：
+</p> <ul> <li><strong>原子筆記（Atomic Notes）</strong>：每則筆記只記錄一個完整的想法。小而精確的筆記比大而雜的筆記更容易連結。</li> <li><strong>MOC 作為導覽層</strong>：不用資料夾層級組織，改用 MOC 當「地圖」。想找某個主題，打開對應的 MOC。</li> <li><strong>Daily Notes 作為進入點</strong>：每日筆記是流量入口，想法從這裡產生，再連結到永久筆記；會議記錄從 Daily Note 連到人物筆記、專案筆記。</li> <li><strong>連結時要思考</strong>：建立連結不是存檔動作，是思考動作——問「這則筆記和哪則筆記有意義的關聯？為什麼？」</li> </ul> <div class="call tip"> <p><strong>卡片盒筆記法（Zettelkasten）與 LYT 的關係</strong>：兩者核心理念相同（原子筆記＋連結），差異在於 LYT 更強調 MOC 的層次組織，Zettelkasten 更純粹依賴連結本身。Obsidian 使用者通常結合兩者：用 Zettelkasten 風格寫原子筆記，用 MOC 組織大主題。</p> </div> <p>
+知識網絡的價值不是線性成長的，而是指數的：連結越多，每條新連結能發現的意外關聯就越多。但這一切都從最簡單的 <code>[[]]</code> 開始。
+</p> <h2>小結</h2> <p> <code>[[wikilink]]</code> 是 Obsidian 與普通 Markdown 編輯器最核心的差異。本章涵蓋了完整的雙向連結體系：
+</p> <ul> <li><strong>基礎語法</strong>：<code>[[]]</code> 兩個方括號，建立雙向連結的起點</li> <li><strong>進階語法</strong>：標題連結、區塊參考、嵌入、顯示文字，在 Vault 成長後逐步派上用場</li> <li><strong>反向連結面板</strong>：讓你看到知識從四面八方匯聚的全貌，以及「未連結提及」的自動偵測</li> <li><strong>孤立筆記處理</strong>：每則筆記至少兩個出站連結，定期用 Graph View 掃描孤島</li> <li><strong>MOC 地圖筆記</strong>：超過 100 則筆記後，MOC 讓你能從任一層級探索或俯覽全局</li> <li><strong>連結策略三層</strong>：概念層（最高價值）、來源層（可追溯性）、脈絡層（延伸探索）</li> <li><strong>LYT 方法論</strong>：原子筆記 + MOC + Daily Notes 的整合實踐框架</li> </ul> <p>
+連結建立起來的網絡，在視覺上長什麼樣子？下一章我們進入 Graph View，看看你的知識圖譜的形狀——以及如何從中讀出你還沒意識到的思考模式。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span> </a> <a href="/obsidian/ch05-graph-view" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

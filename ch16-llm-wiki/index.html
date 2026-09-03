@@ -1,0 +1,898 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LLM Wiki 知識庫：讓知識自動進化 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="本章介紹 Karpathy LLM Wiki 的知識管理哲學，說明如何結合 Obsidian 與大型語言模型，建立能自動彙整、精煉與進化的個人知識庫。從手動維護到 AI 驅動的知識流程，讓你的 Vault 成為真正活的第二大腦。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 16 章 · Part 5：AI 整合：打造 AI 驅動的知識庫</span> <h1>LLM Wiki 知識庫：讓知識自動進化</h1> <p class="cdesc">從 Karpathy 的靈感到你的個人知識庫自動化實作</p> <h2>傳統 RAG 的根本問題</h2> <p>
+你有沒有這個經驗：用 NotebookLM 或 ChatGPT 上傳一堆文件問問題，
+    得到了一個不錯的答案——然後對話視窗一關，什麼都沒剩下。
+</p> <p>
+這就是傳統 RAG（Retrieval-Augmented Generation）最核心的缺陷。
+    每次提問，AI 都要從零開始在原始文件裡撈片段，拼湊出一次性的答案。
+    知識庫沒有結構，筆記之間沒有連結，過了對話視窗就什麼都不累積。
+</p> <p>
+2026 年 4 月，前 Tesla AI 總監、OpenAI 共同創辦人 Andrej Karpathy
+    在 GitHub 發表了一份 Gist，叫做 <strong>LLM Wiki</strong>，收穫 5000 多顆星和近 2000 萬次曝光。
+    他在開頭就點破了問題所在：
+</p> <blockquote> <p>
+「大多數人用 AI 處理文件的方式就是 RAG——每次都從零開始，
+      沒有累積，沒有沉澱。」
+</p> </blockquote> <p>
+他的替代方案完全不同：不是每次查的時候才去原始文件撈，
+    而是讓 LLM 持續建構和維護一個 wiki——一組結構化、互相連結的 Markdown 檔案，
+    夾在你和原始資料之間。
+</p> <p>
+他用一句話總結這個核心差異：<strong>「The wiki is a persistent, compounding artifact.」</strong>——
+    Wiki 是一個持久且不斷複利的產物。
+</p> <h2>Karpathy 的三層架構哲學</h2> <p>
+LLM Wiki 的精髓在於一個非常清晰的比喻：
+<strong>Obsidian 是 IDE，LLM 是工程師，Wiki 是程式碼</strong>。
+</p> <p>
+Karpathy 在原文描述他的實際使用方式：「一邊開著 LLM Agent，一邊開著 Obsidian。
+    AI 根據對話內容編輯筆記，我即時瀏覽結果：追連結、看知識圖譜、讀更新後的頁面。」
+</p> <p>
+這個分工讓知識管理的兩大障礙迎刃而解：
+</p> <ul> <li><strong>人類負責</strong>：閱讀、思考、策展資料來源、問好問題</li> <li><strong>LLM 負責</strong>：整理、連結、維護、更新交叉引用——也就是所有 bookkeeping 苦工</li> </ul> <p>
+Karpathy 的論點是：人類會放棄維護 wiki 不是因為懶，
+    是因為「維護成本的增長速度比價值還快」。
+    而 LLM 不會無聊，不會忘記更新交叉引用，一次能動 15 個檔案。
+</p> <h2>三層資料夾結構設計</h2> <p>
+要實作 LLM Wiki，第一步是在 Obsidian Vault 裡建立嚴格的資料夾邊界：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="ObsidianVault/
+├── raw/                      # 原始素材區（唯讀證據庫）
+│   ├── 2026-06-20-ai-agent.md
+│   ├── 2026-06-20-llm-wiki.md
+│   └── ...
+│
+├── wiki/                     # 知識百科區（AI 編譯輸出）
+│   ├── Concepts/             # 概念條目（定義、核心觀點）
+│   │   ├── RAG.md
+│   │   ├── LLM-Wiki.md
+│   │   └── ...
+│   ├── Entities/             # 實體條目（人物、組織）
+│   │   └── Andrej-Karpathy.md
+│   ├── Sources/              # 來源摘要（文章摘要與關聯）
+│   ├── index.md              # 整體目錄（AI 查詢導航起點）
+│   └── log.md                # 操作日誌（追蹤 AI 做了什麼）
+│
+├── wiki/.drafts/             # 草稿審稿區（人工確認後才升格）
+│   └── 待審核條目.md
+│
+└── CLAUDE.md                 # AI 行為規範說明書" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>ObsidianVault/</span></span>
+<span class="line"><span>├── raw/                      # 原始素材區（唯讀證據庫）</span></span>
+<span class="line"><span>│   ├── 2026-06-20-ai-agent.md</span></span>
+<span class="line"><span>│   ├── 2026-06-20-llm-wiki.md</span></span>
+<span class="line"><span>│   └── ...</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>├── wiki/                     # 知識百科區（AI 編譯輸出）</span></span>
+<span class="line"><span>│   ├── Concepts/             # 概念條目（定義、核心觀點）</span></span>
+<span class="line"><span>│   │   ├── RAG.md</span></span>
+<span class="line"><span>│   │   ├── LLM-Wiki.md</span></span>
+<span class="line"><span>│   │   └── ...</span></span>
+<span class="line"><span>│   ├── Entities/             # 實體條目（人物、組織）</span></span>
+<span class="line"><span>│   │   └── Andrej-Karpathy.md</span></span>
+<span class="line"><span>│   ├── Sources/              # 來源摘要（文章摘要與關聯）</span></span>
+<span class="line"><span>│   ├── index.md              # 整體目錄（AI 查詢導航起點）</span></span>
+<span class="line"><span>│   └── log.md                # 操作日誌（追蹤 AI 做了什麼）</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>├── wiki/.drafts/             # 草稿審稿區（人工確認後才升格）</span></span>
+<span class="line"><span>│   └── 待審核條目.md</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>└── CLAUDE.md                 # AI 行為規範說明書</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <h3>三層的設計邏輯</h3> <ul> <li> <strong><code>raw/</code>——原始素材區</strong>：
+      所有剪藏、RSS、手動貼入的文章都先放這裡。
+      這個資料夾是唯讀證據庫，原始脈絡和來源在這裡永遠不會被改動。
+</li> <li> <strong><code>wiki/</code>——知識百科區</strong>：
+      AI 在這裡生成概念條目、實體條目、來源摘要。
+      這是不斷演化的知識網路，每加入新素材就會自動更新。
+</li> <li> <strong><code>wiki/.drafts/</code>——草稿審稿區</strong>：
+      第一次導入建議讓 AI 先輸出到草稿區，人工確認品質後再升格到正式 wiki。
+      這道防線能避免 Prompt Injection 或錯誤摘要污染知識庫。
+</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch16/02-infographic-three-layer-structure.png" alt="三層資料夾結構：raw/ 原始素材區（唯讀證據庫）、wiki/ 知識百科區（持續演化知識網路）、wiki/.drafts/ 草稿審稿區（人工確認後才升格）" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 16-2：三層結構的核心是邊界清晰——原始素材唯讀，知識百科持續演化，草稿區把人工確認擋在正式 wiki 之前。</figcaption> </figure> <div class="call info"> <p><strong>原始素材不能丟，AI 結論要可審，人工修訂要優先</strong>——這三句話是這套架構最重要的設計原則。</p> </div> <h2>三大核心操作：Ingest / Query / Lint</h2> <p>
+Karpathy 把 LLM Wiki 的日常操作歸納成三個動作。
+    在 Claude Code 的實作中，這三個動作對應三個 slash command，你可以直接在終端機呼叫：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-cycle" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Input sources at top -->
+    <rect x="20" y="10" width="140" height="44" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="90" y="30" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Web Clipper</text>
+    <text x="90" y="48" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">網頁剪藏</text>
+    <rect x="180" y="10" width="140" height="44" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="250" y="30" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">iOS 捧徑</text>
+    <text x="250" y="48" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">手機分享流</text>
+    <rect x="340" y="10" width="140" height="44" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="410" y="30" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">RSS + n8n</text>
+    <text x="410" y="48" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">全自動訂閱</text>
+    <rect x="500" y="10" width="140" height="44" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="570" y="30" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Wallabag</text>
+    <text x="570" y="48" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">自架稍後閱讀</text>
+    <!-- All inputs arrow to raw/ -->
+    <line x1="90" y1="54" x2="90" y2="84" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="250" y1="54" x2="250" y2="84" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="410" y1="54" x2="410" y2="84" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="570" y1="54" x2="570" y2="84" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <!-- Layer: raw/ -->
+    <rect x="20" y="84" width="730" height="50" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="160" y="108" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">raw/ 原始素材區（唯讀證据庫）</text>
+    <text x="560" y="108" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">文章進來不改動，來源永遠可追準</text>
+    <!-- INGEST arrow -->
+    <line x1="385" y1="134" x2="385" y2="165" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-cycle)" />
+    <text x="430" y="155" font-size="15px" font-weight="bold" fill="var(--accent)">/ingest 編譯</text>
+    <!-- Layer: wiki/ (center) -->
+    <rect x="20" y="165" width="730" height="80" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="385" y="190" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">wiki/ 知識百科區（持續複利累積）</text>
+    <rect x="35" y="202" width="170" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="120" y="222" text-anchor="middle" font-size="15px" fill="var(--text)">Concepts/ 概念條目</text>
+    <rect x="220" y="202" width="170" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="305" y="222" text-anchor="middle" font-size="15px" fill="var(--text)">Entities/ 實體條目</text>
+    <rect x="405" y="202" width="170" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="490" y="222" text-anchor="middle" font-size="15px" fill="var(--text)">Sources/ 來源摘要</text>
+    <rect x="580" y="202" width="165" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="662" y="222" text-anchor="middle" font-size="15px" fill="var(--text)">index.md + log.md</text>
+    <!-- Lint and Query cycle -->
+    <rect x="20" y="295" width="340" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="190" y="319" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">/lint-wiki 知識庫健檢</text>
+    <text x="190" y="342" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">找出知識缺口 → 成為下次閱讀清單</text>
+    <rect x="440" y="295" width="310" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="595" y="319" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Query 從自己知識庫問問題</text>
+    <text x="595" y="342" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">答案存回 wiki → 提問也是一種 Ingest</text>
+    <!-- Lint feedback: lint finds gaps → goes to raw/ (drives next collection) -->
+    <path d="M 190 295 L 190 270 L 10 270 L 10 109 L 20 109" fill="none" stroke="var(--text)" opacity="0.4" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#arr-main)" />
+    <text x="100" y="265" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">缺口回饋</text>
+    <!-- Query feedback: answer saved back to wiki -->
+    <path d="M 595 295 L 595 270 L 770 270 L 770 205 L 750 205" fill="none" stroke="var(--text)" opacity="0.4" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#arr-main)" />
+    <text x="680" y="265" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">答案入庫</text>
+  </g>
+</svg>
+ <figcaption>這張架構圖解說了基於大語言模型的 Wiki 系統如何將分散的筆記轉化為可對話的知識網路。</figcaption> </figure> <h3>Ingest（攝入）：<code>/ingest-url</code> 與 <code>/process-inbox</code></h3> <p>
+Ingest 是把外部資訊「編譯」進知識庫的過程，有兩個入口：
+</p> <ul> <li> <strong><code>/ingest-url &lt;網址&gt;</code></strong>——
+      直接餵給 Claude Code 一個 URL，它自動抓取文章全文，提取出概念、實體、來源摘要，
+      一次最多觸及 5-15 個 wiki 頁面。這是最常用的入口，適合看到好文章當下立刻存入。
+</li> <li> <strong><code>/process-inbox</code></strong>——
+      掃描 <code>raw/</code> 資料夾裡所有尚未處理的 Markdown 檔，批次分類並整合進 wiki。
+      適合用 Web Clipper 或 iOS 捷徑已經預先剪藏一批文章後，一次性消化。
+</li> </ul> <p>每次 Ingest 的內部流程如下：</p> <ol> <li>完整閱讀原文，提取核心概念（Concept）與提到的人物 / 組織（Entity）</li> <li>搜尋 <code>wiki/</code> 裡已有的相關條目，判斷是更新還是新建</li> <li>更新或建立 <code>wiki/Concepts/</code>、<code>wiki/Entities/</code>、<code>wiki/Sources/</code> 條目</li> <li>補上 <code>[[wikilink]]</code> 交叉引用，更新 <code>wiki/index.md</code> 與 <code>wiki/log.md</code></li> </ol> <div class="call info"> <p> <strong>Ingest 不是剪貼，是「編譯」。</strong>
+一篇 3000 字的文章 Ingest 後，wiki 裡可能多出 8 個更新的條目和 20 條新的交叉引用——
+      這是傳統筆記工具做不到的知識密度提升。
+</p> </div> <h3>Query（查詢）：從自己的知識庫問問題</h3> <p>
+Query 不需要特定 slash command——直接在 Claude Code 對話中提問即可。
+    關鍵是 Claude Code 會優先從你的 <code>wiki/</code> 目錄中尋找答案，
+    而不是依賴它的訓練資料或即時網路搜尋。
+</p> <p>這讓 Query 和普通 ChatGPT 的根本差異在於：</p> <ul> <li>答案來自你自己精選、標注過的素材，不是網路平均值</li> <li>引用的是你的 <code>wiki/</code> 頁面（有出處可追溯），而非模糊的「我的訓練資料說」</li> </ul> <p>Karpathy 特別強調一個關鍵洞察：</p> <blockquote> <p>「好的回答應該被存回 wiki 變成新頁面，這樣你的探索也會像新資料一樣在知識庫裡產生複利。」</p> </blockquote> <p>
+也就是說，你的<strong>提問本身就是一種 Ingest</strong>——
+    每次有意義的 Q&A 都應該寫入 <code>wiki/</code>，未來的 Query 就能引用你自己問過的問題和答案。
+</p> <h3>Lint（健檢）：<code>/lint-wiki</code></h3> <p> <code>/lint-wiki</code> 讓 Claude Code 掃描整個 vault，產出一份健診報告，找出：
+</p> <ul> <li><strong>斷掉的 wikilink</strong>——指向不存在頁面的連結</li> <li><strong>孤兒頁面</strong>——沒有任何其他頁面連入的條目（可能是遺忘的死角）</li> <li><strong>內容矛盾</strong>——不同頁面對同一概念有衝突描述</li> <li><strong>知識缺口</strong>——多次被提到但沒有獨立頁面的重要概念（這是下次 Ingest 的方向）</li> <li><strong>Frontmatter 不完整</strong>——缺少 title、tags、created 等必填欄位的筆記</li> </ul> <p>
+Lint 是人類最容易偷懶跳過的步驟，但它是知識庫品質持續提升的關鍵機制。
+    建議每週跑一次，把報告中的「知識缺口」當作下週的閱讀清單——
+    讓 Lint 的輸出驅動 Ingest 的輸入，形成自我強化的學習迴路。
+</p> <h2>Ingest 管道的內部機制</h2> <p>
+理解 Ingest 管道的每一步，有助於你在品質出問題時快速診斷。
+    以下是單篇文章從 <code>raw/</code> 進入到 <code>wiki/</code> 的完整流程：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch16-ingest" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch16-sub" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Step 1: Raw article -->
+    <rect x="10" y="110" width="120" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="70" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">原始文章</text>
+    <text x="70" y="153" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">raw/ 目錄</text>
+    <text x="70" y="171" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">Markdown</text>
+    <!-- Arrow 1 -->
+    <line x1="130" y1="145" x2="160" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch16-ingest)" />
+    <!-- Step 2: LLM Read -->
+    <rect x="160" y="110" width="120" height="70" fill="var(--abg)" stroke="var(--accent)" rx="8" />
+    <text x="220" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">LLM 深度閱讀</text>
+    <text x="220" y="153" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">概念萃取</text>
+    <text x="220" y="171" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">實體辨識</text>
+    <!-- Arrow 2 -->
+    <line x1="280" y1="145" x2="310" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch16-ingest)" />
+    <!-- Step 3: Wiki match -->
+    <rect x="310" y="110" width="120" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="370" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Wiki 比對</text>
+    <text x="370" y="153" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">更新 or 新建</text>
+    <text x="370" y="171" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">衝突偵測</text>
+    <!-- Arrow 3 -->
+    <line x1="430" y1="145" x2="445" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch16-ingest)" />
+    <!-- Step 4: Write -->
+    <rect x="445" y="110" width="150" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="520" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">寫入 Wiki</text>
+    <text x="520" y="153" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">Concepts/</text>
+    <text x="520" y="171" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">Entities/ Sources/</text>
+    <!-- Arrow 4 -->
+    <line x1="595" y1="145" x2="610" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch16-ingest)" />
+    <!-- Step 5: Log -->
+    <rect x="610" y="110" width="130" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="675" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">更新索引</text>
+    <text x="675" y="153" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">index.md</text>
+    <text x="675" y="171" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">log.md 追蹤</text>
+    <!-- Sub-outputs below step 4 -->
+    <line x1="520" y1="180" x2="520" y2="210" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-sub)" />
+    <rect x="390" y="210" width="260" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="520" y="227" text-anchor="middle" font-size="14px" fill="var(--text)">wikilinks 交叉引用自動補全</text>
+    <text x="520" y="243" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">[[概念A]] → [[概念B]] → [[來源C]]</text>
+    <!-- Step labels -->
+    <text x="70" y="100" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">① 讀取</text>
+    <text x="220" y="100" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.8">② 分析</text>
+    <text x="370" y="100" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">③ 比對</text>
+    <text x="520" y="100" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">④ 寫入</text>
+    <text x="675" y="100" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">⑤ 記錄</text>
+    <!-- Title -->
+    <text x="400" y="35" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Ingest 管道：單篇文章的編譯流程</text>
+    <text x="400" y="58" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">一篇 3000 字文章 → 最多觸及 15 個 wiki 頁面更新</text>
+  </g>
+</svg>
+ <figcaption>Ingest 管道五步驟：讀取 → LLM 分析 → Wiki 比對 → 寫入條目 → 更新索引。每一步都有明確的輸入與輸出。</figcaption> </figure> <p>
+最關鍵的是步驟 ③「Wiki 比對」：LLM 在寫入新內容之前，會先搜尋現有的相關條目，
+    決定是要<strong>更新既有頁面</strong>還是<strong>建立新頁面</strong>。
+    這個設計避免了「同一概念有多個分散條目」的知識碎片化問題。
+</p> <p>
+來自 wiki 知識庫的洞察（[[摘要-VID-082-LLM-Wiki-深度解析]]）指出：
+    進階的 LLM Wiki 系統還會在此步驟加入「衝突偵測」——
+    如果新文章對某個概念的描述與現有條目矛盾，會標記為 <code>confidence: low</code> 等待人工審查，
+    而不是直接覆蓋。
+</p> <h2>Wiki 條目的 Frontmatter 規範</h2> <p>
+好的 wiki 系統需要一致的 Frontmatter 格式。
+    這不只是整潔問題——一致的 <code>confidence</code>、<code>sources</code>、<code>related</code> 欄位，
+    讓 AI 在後續的 Query 和 Lint 時能做更精準的推理。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: &quot;RAG 技術&quot;
+type: concept
+tags:
+  - 概念
+  - AI
+  - 知識管理
+created: 2026-06-20
+last_updated: 2026-06-20
+confidence: high        # high / medium / low
+sources:
+  - &quot;[[摘要-VID-019-RAG-工作機制詳解]]&quot;
+  - &quot;[[摘要-VID-082-LLM-Wiki-深度解析]]&quot;
+related:
+  - &quot;[[LLM Wiki]]&quot;
+  - &quot;[[向量資料庫]]&quot;
+  - &quot;[[語義搜索]]&quot;
+---
+
+## 定義
+RAG（Retrieval-Augmented Generation）是一種結合檢索與生成模型的技術，
+先搜尋相關知識文件，再將結果作為上下文輸入語言模型，以提升回應準確性。
+
+## 關鍵資訊
+- 結合向量檢索系統與大型語言模型
+- 可即時引入最新資料，降低重訓成本
+- 主要應用於法律、醫療、客服等專業領域
+- 支持增量更新資料庫，而不必重新訓練整體模型
+- 增強回覆可追溯性與解釋性
+
+## 與 LLM Wiki 的差異
+| 面向 | RAG | LLM Wiki |
+|------|-----|----------|
+| 處理時機 | 查詢時即時撈取 | 寫入時預先編譯 |
+| 知識積累 | 每次從零開始 | 持續複利累積 |
+
+## 關聯連接
+- [[Andrej Karpathy]]
+- [[LLM Wiki]]
+- [[向量資料庫]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"RAG 技術"</span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">concept</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">概念</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">AI</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">知識管理</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">2026-06-20</span></span>
+<span class="line"><span style="color:#E06C75">last_updated</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">2026-06-20</span></span>
+<span class="line"><span style="color:#E06C75">confidence</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">high</span><span style="color:#7F848E;font-style:italic">        # high / medium / low</span></span>
+<span class="line"><span style="color:#E06C75">sources</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[摘要-VID-019-RAG-工作機制詳解]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[摘要-VID-082-LLM-Wiki-深度解析]]"</span></span>
+<span class="line"><span style="color:#E06C75">related</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[LLM Wiki]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[向量資料庫]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[語義搜索]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 定義</span></span>
+<span class="line"><span style="color:#98C379">RAG（Retrieval-Augmented Generation）是一種結合檢索與生成模型的技術，</span></span>
+<span class="line"><span style="color:#98C379">先搜尋相關知識文件，再將結果作為上下文輸入語言模型，以提升回應準確性。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 關鍵資訊</span></span>
+<span class="line"><span style="color:#ABB2BF">- </span><span style="color:#98C379">結合向量檢索系統與大型語言模型</span></span>
+<span class="line"><span style="color:#ABB2BF">- </span><span style="color:#98C379">可即時引入最新資料，降低重訓成本</span></span>
+<span class="line"><span style="color:#ABB2BF">- </span><span style="color:#98C379">主要應用於法律、醫療、客服等專業領域</span></span>
+<span class="line"><span style="color:#ABB2BF">- </span><span style="color:#98C379">支持增量更新資料庫，而不必重新訓練整體模型</span></span>
+<span class="line"><span style="color:#ABB2BF">- </span><span style="color:#98C379">增強回覆可追溯性與解釋性</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 與 LLM Wiki 的差異</span></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 面向 | RAG | LLM Wiki |</span></span>
+<span class="line"><span style="color:#C678DD">|-</span><span style="color:#FFFFFF">-----|-----|----------|</span></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 處理時機 | 查詢時即時撈取 | 寫入時預先編譯 |</span></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 知識積累 | 每次從零開始 | 持續複利累積 |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 關聯連接</span></span>
+<span class="line"><span style="color:#ABB2BF">- [[</span><span style="color:#98C379">Andrej Karpathy</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#ABB2BF">- [[</span><span style="color:#98C379">LLM Wiki</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#ABB2BF">- [[</span><span style="color:#98C379">向量資料庫</span><span style="color:#ABB2BF">]]</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong><code>confidence</code> 欄位的設計哲學</strong>：
+      設定 <code>high</code> 的條目表示有多個來源佐證、且未見矛盾；
+<code>low</code> 表示只有單一來源或曾出現過衝突描述，查詢時應謹慎引用。
+      這讓你的 wiki 從「筆記堆」升級成「帶可信度權重的知識圖譜」。
+</p> </div> <h2>用 Python 自動化 Ingest 流程</h2> <p>
+如果你想要不依賴任何第三方工具，直接用 Anthropic API 自己打造 ingest 腳本，
+    以下是一個完整的最小可用範本：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="#!/usr/bin/env python3
+&quot;&quot;&quot;
+wiki_ingest.py — 將 raw/ 目錄的 Markdown 文件編譯進 wiki/
+用法：python wiki_ingest.py --vault /path/to/vault --file raw/2026-06-20-ai-agent.md
+&quot;&quot;&quot;
+import sys, io, argparse, json
+from pathlib import Path
+from datetime import datetime
+
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+import anthropic  # pip install anthropic
+
+SYSTEM_PROMPT = &quot;&quot;&quot;你是 Obsidian Vault 的 AI 知識管家。
+根據輸入的原始文章，輸出 JSON 格式的 wiki 更新計畫：
+{
+  &quot;concepts&quot;: [{&quot;title&quot;: &quot;...&quot;, &quot;definition&quot;: &quot;...&quot;, &quot;key_facts&quot;: [...]}],
+  &quot;entities&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;type&quot;: &quot;person|org|tool&quot;, &quot;description&quot;: &quot;...&quot;}],
+  &quot;source_summary&quot;: &quot;...&quot;,
+  &quot;wikilinks&quot;: [&quot;[[概念A]]&quot;, &quot;[[概念B]]&quot;]
+}
+保持 NEVER 刪除現有內容的原則。&quot;&quot;&quot;
+
+def ingest_file(vault_path: Path, file_path: Path) -> dict:
+    client = anthropic.Anthropic()
+    article = file_path.read_text(encoding='utf-8')
+
+    message = client.messages.create(
+        model=&quot;claude-sonnet-4-5&quot;,
+        max_tokens=4096,
+        system=SYSTEM_PROMPT,
+        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;請分析此文章並回傳 JSON：\n\n{article}&quot;}]
+    )
+
+    raw = message.content[0].text
+    plan = json.loads(raw[raw.find('{'):raw.rfind('}')+1])
+
+    # 寫入 wiki/Concepts/
+    for concept in plan.get(&quot;concepts&quot;, []):
+        slug = concept[&quot;title&quot;].replace(&quot; &quot;, &quot;-&quot;)
+        out = vault_path / &quot;wiki&quot; / &quot;Concepts&quot; / f&quot;{slug}.md&quot;
+        out.parent.mkdir(parents=True, exist_ok=True)
+        if not out.exists():
+            out.write_text(build_concept_md(concept), encoding='utf-8')
+            print(f&quot;  + 建立概念：{out.name}&quot;)
+
+    # 寫入 wiki/Sources/
+    date_str = datetime.now().strftime(&quot;%Y-%m-%d&quot;)
+    source_slug = file_path.stem
+    source_out = vault_path / &quot;wiki&quot; / &quot;Sources&quot; / f&quot;摘要-{source_slug}.md&quot;
+    source_out.write_text(
+        f&quot;---\ntitle: 摘要-{source_slug}\ntype: source\n&quot;
+        f&quot;created: {date_str}\nsources: [{str(file_path)}]\n---\n\n&quot;
+        f&quot;## 核心摘要\n{plan['source_summary']}\n\n&quot;
+        f&quot;## 關聯連接\n&quot; + &quot;\n&quot;.join(f&quot;- {w}&quot; for w in plan[&quot;wikilinks&quot;]),
+        encoding='utf-8'
+    )
+    print(f&quot;  + 寫入來源摘要：{source_out.name}&quot;)
+    return plan
+
+def build_concept_md(concept: dict) -> str:
+    date_str = datetime.now().strftime(&quot;%Y-%m-%d&quot;)
+    facts = &quot;\n&quot;.join(f&quot;- {f}&quot; for f in concept.get(&quot;key_facts&quot;, []))
+    return (
+        f&quot;---\ntitle: {concept['title']}\ntype: concept\n&quot;
+        f&quot;tags: [概念]\nlast_updated: {date_str}\n---\n\n&quot;
+        f&quot;## 定義\n{concept['definition']}\n\n&quot;
+        f&quot;## 關鍵資訊\n{facts}\n\n## 關聯連接\n&quot;
+    )
+
+if __name__ == &quot;__main__&quot;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&quot;--vault&quot;, required=True, help=&quot;Vault 根目錄路徑&quot;)
+    parser.add_argument(&quot;--file&quot;, required=True, help=&quot;要 ingest 的 raw/ 檔案&quot;)
+    args = parser.parse_args()
+    vault = Path(args.vault)
+    target = vault / args.file
+    print(f&quot;Ingesting: {target.name}&quot;)
+    result = ingest_file(vault, target)
+    print(f&quot;完成！處理了 {len(result.get('concepts',[]))} 個概念&quot;)" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="python"><code><span class="line"><span style="color:#7F848E;font-style:italic">#!/usr/bin/env python3</span></span>
+<span class="line"><span style="color:#98C379">"""</span></span>
+<span class="line"><span style="color:#98C379">wiki_ingest.py — 將 raw/ 目錄的 Markdown 文件編譯進 wiki/</span></span>
+<span class="line"><span style="color:#98C379">用法：python wiki_ingest.py --vault /path/to/vault --file raw/2026-06-20-ai-agent.md</span></span>
+<span class="line"><span style="color:#98C379">"""</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> sys, io, argparse, json</span></span>
+<span class="line"><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> pathlib </span><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> Path</span></span>
+<span class="line"><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> datetime </span><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> datetime</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> sys.platform </span><span style="color:#56B6C2">==</span><span style="color:#98C379"> 'win32'</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    sys.stdout </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> io.</span><span style="color:#61AFEF">TextIOWrapper</span><span style="color:#ABB2BF">(sys.stdout.buffer, </span><span style="color:#E06C75;font-style:italic">encoding</span><span style="color:#56B6C2">=</span><span style="color:#98C379">'utf-8'</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">errors</span><span style="color:#56B6C2">=</span><span style="color:#98C379">'replace'</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> anthropic  </span><span style="color:#7F848E;font-style:italic"># pip install anthropic</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D19A66">SYSTEM_PROMPT</span><span style="color:#56B6C2"> =</span><span style="color:#98C379"> """你是 Obsidian Vault 的 AI 知識管家。</span></span>
+<span class="line"><span style="color:#98C379">根據輸入的原始文章，輸出 JSON 格式的 wiki 更新計畫：</span></span>
+<span class="line"><span style="color:#98C379">{</span></span>
+<span class="line"><span style="color:#98C379">  "concepts": [{"title": "...", "definition": "...", "key_facts": [...]}],</span></span>
+<span class="line"><span style="color:#98C379">  "entities": [{"name": "...", "type": "person|org|tool", "description": "..."}],</span></span>
+<span class="line"><span style="color:#98C379">  "source_summary": "...",</span></span>
+<span class="line"><span style="color:#98C379">  "wikilinks": ["[[概念A]]", "[[概念B]]"]</span></span>
+<span class="line"><span style="color:#98C379">}</span></span>
+<span class="line"><span style="color:#98C379">保持 NEVER 刪除現有內容的原則。"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">def</span><span style="color:#61AFEF"> ingest_file</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66;font-style:italic">vault_path</span><span style="color:#ABB2BF">: Path, </span><span style="color:#D19A66;font-style:italic">file_path</span><span style="color:#ABB2BF">: Path) -> </span><span style="color:#56B6C2">dict</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    client </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> anthropic.</span><span style="color:#61AFEF">Anthropic</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">    article </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> file_path.</span><span style="color:#61AFEF">read_text</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">encoding</span><span style="color:#56B6C2">=</span><span style="color:#98C379">'utf-8'</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">    message </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> client.messages.</span><span style="color:#61AFEF">create</span><span style="color:#ABB2BF">(</span></span>
+<span class="line"><span style="color:#E06C75;font-style:italic">        model</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"claude-sonnet-4-5"</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75;font-style:italic">        max_tokens</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">4096</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75;font-style:italic">        system</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">SYSTEM_PROMPT</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75;font-style:italic">        messages</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">[{</span><span style="color:#98C379">"role"</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"user"</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">"content"</span><span style="color:#ABB2BF">: </span><span style="color:#C678DD">f</span><span style="color:#98C379">"請分析此文章並回傳 JSON：</span><span style="color:#56B6C2">\n\n</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">article</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">}]</span></span>
+<span class="line"><span style="color:#ABB2BF">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">    raw </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> message.content[</span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">].text</span></span>
+<span class="line"><span style="color:#ABB2BF">    plan </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> json.</span><span style="color:#61AFEF">loads</span><span style="color:#ABB2BF">(raw[raw.</span><span style="color:#61AFEF">find</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'{'</span><span style="color:#ABB2BF">):raw.</span><span style="color:#61AFEF">rfind</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'}'</span><span style="color:#ABB2BF">)</span><span style="color:#56B6C2">+</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">])</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    # 寫入 wiki/Concepts/</span></span>
+<span class="line"><span style="color:#C678DD">    for</span><span style="color:#ABB2BF"> concept </span><span style="color:#C678DD">in</span><span style="color:#ABB2BF"> plan.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"concepts"</span><span style="color:#ABB2BF">, []):</span></span>
+<span class="line"><span style="color:#ABB2BF">        slug </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> concept[</span><span style="color:#98C379">"title"</span><span style="color:#ABB2BF">].</span><span style="color:#61AFEF">replace</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">" "</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">"-"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">        out </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> vault_path </span><span style="color:#56B6C2">/</span><span style="color:#98C379"> "wiki"</span><span style="color:#56B6C2"> /</span><span style="color:#98C379"> "Concepts"</span><span style="color:#56B6C2"> /</span><span style="color:#C678DD"> f</span><span style="color:#98C379">"</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">slug</span><span style="color:#D19A66">}</span><span style="color:#98C379">.md"</span></span>
+<span class="line"><span style="color:#ABB2BF">        out.parent.</span><span style="color:#61AFEF">mkdir</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">parents</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">True</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">exist_ok</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">True</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">        if</span><span style="color:#C678DD"> not</span><span style="color:#ABB2BF"> out.</span><span style="color:#61AFEF">exists</span><span style="color:#ABB2BF">():</span></span>
+<span class="line"><span style="color:#ABB2BF">            out.</span><span style="color:#61AFEF">write_text</span><span style="color:#ABB2BF">(</span><span style="color:#61AFEF">build_concept_md</span><span style="color:#ABB2BF">(concept), </span><span style="color:#E06C75;font-style:italic">encoding</span><span style="color:#56B6C2">=</span><span style="color:#98C379">'utf-8'</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#56B6C2">            print</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"  + 建立概念：</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">out.name</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    # 寫入 wiki/Sources/</span></span>
+<span class="line"><span style="color:#ABB2BF">    date_str </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> datetime.</span><span style="color:#61AFEF">now</span><span style="color:#ABB2BF">().</span><span style="color:#61AFEF">strftime</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"%Y-%m-</span><span style="color:#D19A66">%d</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    source_slug </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> file_path.stem</span></span>
+<span class="line"><span style="color:#ABB2BF">    source_out </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> vault_path </span><span style="color:#56B6C2">/</span><span style="color:#98C379"> "wiki"</span><span style="color:#56B6C2"> /</span><span style="color:#98C379"> "Sources"</span><span style="color:#56B6C2"> /</span><span style="color:#C678DD"> f</span><span style="color:#98C379">"摘要-</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">source_slug</span><span style="color:#D19A66">}</span><span style="color:#98C379">.md"</span></span>
+<span class="line"><span style="color:#ABB2BF">    source_out.</span><span style="color:#61AFEF">write_text</span><span style="color:#ABB2BF">(</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"---</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">title: 摘要-</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">source_slug</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">type: source</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"created: </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">date_str</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">sources: [</span><span style="color:#D19A66">{</span><span style="color:#56B6C2">str</span><span style="color:#ABB2BF">(file_path)</span><span style="color:#D19A66">}</span><span style="color:#98C379">]</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">---</span><span style="color:#56B6C2">\n\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"## 核心摘要</span><span style="color:#56B6C2">\n</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">plan[</span><span style="color:#98C379">'source_summary'</span><span style="color:#ABB2BF">]</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"## 關聯連接</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> "</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">join</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"- </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">w</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#C678DD"> for</span><span style="color:#ABB2BF"> w </span><span style="color:#C678DD">in</span><span style="color:#ABB2BF"> plan[</span><span style="color:#98C379">"wikilinks"</span><span style="color:#ABB2BF">]),</span></span>
+<span class="line"><span style="color:#E06C75;font-style:italic">        encoding</span><span style="color:#56B6C2">=</span><span style="color:#98C379">'utf-8'</span></span>
+<span class="line"><span style="color:#ABB2BF">    )</span></span>
+<span class="line"><span style="color:#56B6C2">    print</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"  + 寫入來源摘要：</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">source_out.name</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">    return</span><span style="color:#ABB2BF"> plan</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">def</span><span style="color:#61AFEF"> build_concept_md</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66;font-style:italic">concept</span><span style="color:#ABB2BF">: </span><span style="color:#56B6C2">dict</span><span style="color:#ABB2BF">) -> </span><span style="color:#56B6C2">str</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    date_str </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> datetime.</span><span style="color:#61AFEF">now</span><span style="color:#ABB2BF">().</span><span style="color:#61AFEF">strftime</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"%Y-%m-</span><span style="color:#D19A66">%d</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    facts </span><span style="color:#56B6C2">=</span><span style="color:#98C379"> "</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">join</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"- </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">f</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#C678DD"> for</span><span style="color:#ABB2BF"> f </span><span style="color:#C678DD">in</span><span style="color:#ABB2BF"> concept.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"key_facts"</span><span style="color:#ABB2BF">, []))</span></span>
+<span class="line"><span style="color:#C678DD">    return</span><span style="color:#ABB2BF"> (</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"---</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">title: </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">concept[</span><span style="color:#98C379">'title'</span><span style="color:#ABB2BF">]</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">type: concept</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"tags: [概念]</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">last_updated: </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">date_str</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">---</span><span style="color:#56B6C2">\n\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"## 定義</span><span style="color:#56B6C2">\n</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">concept[</span><span style="color:#98C379">'definition'</span><span style="color:#ABB2BF">]</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">        f</span><span style="color:#98C379">"## 關鍵資訊</span><span style="color:#56B6C2">\n</span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">facts</span><span style="color:#D19A66">}</span><span style="color:#56B6C2">\n\n</span><span style="color:#98C379">## 關聯連接</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#ABB2BF">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">if</span><span style="color:#E06C75"> __name__</span><span style="color:#56B6C2"> ==</span><span style="color:#98C379"> "__main__"</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    parser </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> argparse.</span><span style="color:#61AFEF">ArgumentParser</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">    parser.</span><span style="color:#61AFEF">add_argument</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"--vault"</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">required</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">True</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">help</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"Vault 根目錄路徑"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    parser.</span><span style="color:#61AFEF">add_argument</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"--file"</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">required</span><span style="color:#56B6C2">=</span><span style="color:#D19A66">True</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75;font-style:italic">help</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"要 ingest 的 raw/ 檔案"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    args </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> parser.</span><span style="color:#61AFEF">parse_args</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">    vault </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> Path</span><span style="color:#ABB2BF">(args.vault)</span></span>
+<span class="line"><span style="color:#ABB2BF">    target </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> vault </span><span style="color:#56B6C2">/</span><span style="color:#ABB2BF"> args.file</span></span>
+<span class="line"><span style="color:#56B6C2">    print</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"Ingesting: </span><span style="color:#D19A66">{</span><span style="color:#ABB2BF">target.name</span><span style="color:#D19A66">}</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    result </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> ingest_file</span><span style="color:#ABB2BF">(vault, target)</span></span>
+<span class="line"><span style="color:#56B6C2">    print</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">f</span><span style="color:#98C379">"完成！處理了 </span><span style="color:#D19A66">{</span><span style="color:#56B6C2">len</span><span style="color:#ABB2BF">(result.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'concepts'</span><span style="color:#ABB2BF">,[]))</span><span style="color:#D19A66">}</span><span style="color:#98C379"> 個概念"</span><span style="color:#ABB2BF">)</span></span></code></pre> </div> </div>   <p>
+這個腳本的設計遵循 LLM Wiki 的核心原則：
+    讓 LLM 做分析和結構化的苦工，人類只做策展（選擇哪些文章值得 ingest）。
+    調整 <code>SYSTEM_PROMPT</code> 中的規則，即可客製化你的知識庫風格。
+</p> <h2>實作：安裝 obsidian-llm-wiki</h2> <p>
+開源社群把 Karpathy 的概念做成了可直接安裝的工具——<strong>obsidian-llm-wiki</strong>，
+    預設支援 Ollama 作為本地 LLM Provider，讓你的知識整理完全在本機運行，零隱私外洩。
+</p> <h3>雙模型架構推薦</h3> <p>在開始安裝前，先規劃你的模型配置：</p> <ul> <li><strong>Fast Model</strong>：負責快速分類、路由、初步實體辨識。建議從 <code>gemma4:e4b</code> 入手。</li> <li><strong>Heavy Model</strong>：負責深度萃取、知識融合、條目改寫。建議 14B 以上；顯卡 12GB+ 可嘗試量化版 14B 模型。</li> </ul> <p>
+實務建議：不要一開始就追求最強模型，先確認工作流能跑通，
+    產出的 Wiki 條目結構合理、來源可追溯，再來升級模型。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 步驟一：確保 Python 3.11+ 已安裝
+python --version
+
+# 步驟二：建立獨立虛擬環境（避免污染全域）
+python -m venv olw-env
+source olw-env/bin/activate   # macOS / Linux
+# olw-env\Scripts\activate   # Windows
+
+# 步驟三：安裝 obsidian-llm-wiki
+pip install -U pip
+pip install obsidian-llm-wiki
+
+# 步驟四：進入你的 Obsidian Vault 根目錄
+cd /path/to/ObsidianVault
+
+# 步驟五：初始化設定（互動式精靈）
+olw setup
+# Provider 選擇 Ollama
+# API URL：http://127.0.0.1:11434（本機）
+# 或 http://192.168.x.x:11434（遠端 NAS/AI PC）
+# 綁定 Fast Model 與 Heavy Model
+
+# 步驟六：健康檢查
+olw doctor
+
+# 步驟七：第一次執行（先用少量文章測試）
+olw run
+
+# 確認品質後，切換到監控模式（自動處理新進 raw/）
+olw watch" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 步驟一：確保 Python 3.11+ 已安裝</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#D19A66"> --version</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟二：建立獨立虛擬環境（避免污染全域）</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#D19A66"> -m</span><span style="color:#98C379"> venv</span><span style="color:#98C379"> olw-env</span></span>
+<span class="line"><span style="color:#56B6C2">source</span><span style="color:#98C379"> olw-env/bin/activate</span><span style="color:#7F848E;font-style:italic">   # macOS / Linux</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># olw-env\Scripts\activate   # Windows</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟三：安裝 obsidian-llm-wiki</span></span>
+<span class="line"><span style="color:#61AFEF">pip</span><span style="color:#98C379"> install</span><span style="color:#D19A66"> -U</span><span style="color:#98C379"> pip</span></span>
+<span class="line"><span style="color:#61AFEF">pip</span><span style="color:#98C379"> install</span><span style="color:#98C379"> obsidian-llm-wiki</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟四：進入你的 Obsidian Vault 根目錄</span></span>
+<span class="line"><span style="color:#56B6C2">cd</span><span style="color:#98C379"> /path/to/ObsidianVault</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟五：初始化設定（互動式精靈）</span></span>
+<span class="line"><span style="color:#61AFEF">olw</span><span style="color:#98C379"> setup</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Provider 選擇 Ollama</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># API URL：http://127.0.0.1:11434（本機）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 或 http://192.168.x.x:11434（遠端 NAS/AI PC）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 綁定 Fast Model 與 Heavy Model</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟六：健康檢查</span></span>
+<span class="line"><span style="color:#61AFEF">olw</span><span style="color:#98C379"> doctor</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟七：第一次執行（先用少量文章測試）</span></span>
+<span class="line"><span style="color:#61AFEF">olw</span><span style="color:#98C379"> run</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 確認品質後，切換到監控模式（自動處理新進 raw/）</span></span>
+<span class="line"><span style="color:#61AFEF">olw</span><span style="color:#98C379"> watch</span></span></code></pre> </div> </div>   <div class="call warn"> <p><strong>第一次不要直接開全自動批准</strong>。讓 AI 先產生草稿（進入 <code>wiki/.drafts/</code>），人工確認品質後再改用 <code>olw watch</code> 進入監控模式。這樣可以避免概念混淆或來源誤讀污染正式知識庫。</p> </div> <h2>資料收集的四種方案</h2> <p> <code>raw/</code> 資料夾是整套系統的入口，你需要決定「怎麼把外界資訊送進來」：
+</p> <ul> <li> <strong>方案 A：Obsidian Web Clipper</strong>（推薦新手）——
+      在瀏覽器看到好文章，一鍵剪藏為 Markdown 存入 <code>raw/</code>。
+      最少外部依賴，最容易除錯。
+</li> <li> <strong>方案 B：iOS 捷徑分享流</strong>——
+      手機上分享 URL 給捷徑，使用 Jina Reader（<code>r.jina.ai/[網址]</code>）轉換成乾淨 Markdown，
+      儲存到 iCloud 同步的 vault。適合通勤重度使用者。
+</li> <li> <strong>方案 C：Wallabag</strong>——
+      自架稍後閱讀服務，資料完全自主，適合重視長期可控性的使用者。
+</li> <li> <strong>方案 D：RSS + n8n 全自動訂閱</strong>——
+      固定追蹤媒體或 GitHub releases，n8n 自動抓取全文寫入 <code>raw/</code>。
+      什麼都不用做，追蹤的媒體一發文知識庫就自動更新。
+</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch16/03-infographic-data-collection-methods.png" alt="四種資料收集方案：方案 A Web Clipper（推薦新手·一鍵剪藏）、方案 B iOS 捷徑分享流（Jina Reader 轉換）、方案 C Wallabag（自架稍後閱讀）、方案 D RSS + n8n（全自動訂閱）" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 16-3：四種方案從最簡單到最自動化排列，新手建議從方案 A 開始，跑穩後再逐步導入自動化。</figcaption> </figure> <div class="call info"> <p><strong>建議從方案 A 開始</strong>，等整套流程跑穩後再逐步導入自動化。複雜的收集系統失敗時更難除錯，先確保 AI 編譯的品質，再來擴充資料入口。</p> </div> <h2>CLAUDE.md：AI 的行為規範說明書</h2> <p>
+不管你用哪個工具，讓 Claude Code 直接操作 vault 時，
+<strong>根目錄的 CLAUDE.md 是整個工作流的基石</strong>。
+    它告訴 AI 這個 vault 的結構規則、什麼可以動、什麼絕對不能碰。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Vault 規範（CLAUDE.md 範本）
+
+## 身份與範圍
+你是這個 Obsidian Vault 的 AI 知識管家。
+只操作本 vault 內的 .md 檔案。
+
+## 資料夾結構
+- raw/        原始素材，只讀不改
+- wiki/       AI 整理後的知識條目
+- daily/      每日筆記（YYYY-MM-DD.md）
+- projects/   進行中的專案
+- resources/  參考資料
+
+## 行為規範
+- NEVER 刪除任何檔案
+- NEVER 修改 raw/ 目錄下的檔案
+- NEVER 改動已存在的 frontmatter tags（只能新增）
+- 所有 wikilink 使用 [[雙括號]] 格式
+- frontmatter 必填：title、tags、created、source
+
+## Ingest 規則
+新文章放入 raw/ 後，ingest 時需：
+1. 提取核心概念，更新或建立 wiki/Concepts/ 條目
+2. 提取提到的人物/組織，更新 wiki/Entities/ 條目
+3. 在 wiki/Sources/ 建立來源摘要頁
+4. 更新 wiki/index.md 和 wiki/log.md" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># Vault 規範（CLAUDE.md 範本）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 身份與範圍</span></span>
+<span class="line"><span style="color:#ABB2BF">你是這個 Obsidian Vault 的 AI 知識管家。</span></span>
+<span class="line"><span style="color:#ABB2BF">只操作本 vault 內的 .md 檔案。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 資料夾結構</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> raw/        原始素材，只讀不改</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> wiki/       AI 整理後的知識條目</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> daily/      每日筆記（YYYY-MM-DD.md）</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> projects/   進行中的專案</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> resources/  參考資料</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 行為規範</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> NEVER 刪除任何檔案</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> NEVER 修改 raw/ 目錄下的檔案</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> NEVER 改動已存在的 frontmatter tags（只能新增）</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 所有 wikilink 使用 [[</span><span style="color:#61AFEF">雙括號</span><span style="color:#ABB2BF">]] 格式</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> frontmatter 必填：title、tags、created、source</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## Ingest 規則</span></span>
+<span class="line"><span style="color:#ABB2BF">新文章放入 raw/ 後，ingest 時需：</span></span>
+<span class="line"><span style="color:#E5C07B">1.</span><span style="color:#ABB2BF"> 提取核心概念，更新或建立 wiki/Concepts/ 條目</span></span>
+<span class="line"><span style="color:#E5C07B">2.</span><span style="color:#ABB2BF"> 提取提到的人物/組織，更新 wiki/Entities/ 條目</span></span>
+<span class="line"><span style="color:#E5C07B">3.</span><span style="color:#ABB2BF"> 在 wiki/Sources/ 建立來源摘要頁</span></span>
+<span class="line"><span style="color:#E5C07B">4.</span><span style="color:#ABB2BF"> 更新 wiki/index.md 和 wiki/log.md</span></span></code></pre> </div> </div>   <h3>CLAUDE.md 的關鍵設計原則</h3> <p>
+內容建議控制在 100 行以內——太長會浪費 token，也容易讓 AI 混淆。
+    最重要的是寫清楚 <strong>NEVER 清單</strong>：明確禁止刪除檔案、修改 raw/ 目錄、
+    改動已有 tags 等不可逆操作。AI 工具最危險的不是它不會做什麼，
+    而是它太積極了。
+</p> <h2>Wiki Query 工作流：讓提問也變成 Ingest</h2> <p>
+根據 Karpathy 的原始設計，LLM Wiki 最有趣的特性是「<strong>提問即積累</strong>」——
+    你向 wiki 問一個問題，AI 整合了 5 個相關條目回答你，
+    然後這個答案本身會被寫回 wiki 成為新條目，供下一次 Query 引用。
+</p> <p>
+以下是在 Claude Code 中設置 wiki query 的 slash command 範本：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 在 Claude Code 對話中直接提問 wiki
+# 以下是 .claude/commands/wiki-query.md 的範本內容
+
+---
+description: 從個人 wiki 知識庫回答問題，答案自動存回 wiki
+---
+
+請依照以下步驟回答：
+
+1. 先搜尋 wiki/Concepts/ 和 wiki/Entities/ 找相關條目
+2. 搜尋 wiki/Sources/ 找原始來源佐證
+3. 整合這些知識回答問題：$ARGUMENTS
+4. 如果這個問題的答案值得保存（關鍵洞察、決策依據），
+   在 wiki/Concepts/ 建立新頁面或更新既有頁面
+5. 在 wiki/log.md 追加一筆 [QUERY] 紀錄
+
+回答格式：
+- 直接回答問題
+- 引用的 wiki 頁面：[[頁面名稱]]
+- 是否已寫回 wiki：是/否（說明原因）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 在 Claude Code 對話中直接提問 wiki</span></span>
+<span class="line"><span style="color:#E06C75"># 以下是 .claude/commands/wiki-query.md 的範本內容</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#ABB2BF">description: 從個人 wiki 知識庫回答問題，答案自動存回 wiki</span></span>
+<span class="line"><span style="color:#E06C75">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">請依照以下步驟回答：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">1.</span><span style="color:#ABB2BF"> 先搜尋 wiki/Concepts/ 和 wiki/Entities/ 找相關條目</span></span>
+<span class="line"><span style="color:#E5C07B">2.</span><span style="color:#ABB2BF"> 搜尋 wiki/Sources/ 找原始來源佐證</span></span>
+<span class="line"><span style="color:#E5C07B">3.</span><span style="color:#ABB2BF"> 整合這些知識回答問題：$ARGUMENTS</span></span>
+<span class="line"><span style="color:#E5C07B">4.</span><span style="color:#ABB2BF"> 如果這個問題的答案值得保存（關鍵洞察、決策依據），</span></span>
+<span class="line"><span style="color:#ABB2BF">   在 wiki/Concepts/ 建立新頁面或更新既有頁面</span></span>
+<span class="line"><span style="color:#E5C07B">5.</span><span style="color:#ABB2BF"> 在 wiki/log.md 追加一筆 [</span><span style="color:#61AFEF">QUERY</span><span style="color:#ABB2BF">] 紀錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">回答格式：</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 直接回答問題</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 引用的 wiki 頁面：[[</span><span style="color:#61AFEF">頁面名稱</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 是否已寫回 wiki：是/否（說明原因）</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>什麼樣的答案值得寫回 wiki？</strong>
+判斷標準是：這個答案三個月後我還會想找嗎？
+      如果是的話，就讓 AI 把它整理成一個 Concept 條目存入 <code>wiki/Concepts/</code>。
+      決策依據、技術比較、個人洞察——都是值得沉澱的知識，而不只是一次性的問答。
+</p> </div> <h2>RAG vs LLM Wiki：架構根本差異視覺化</h2> <p>
+傳統 RAG 和 LLM Wiki 的根本差異不只是技術選擇，而是兩種完全不同的知識觀：
+    一個把知識當作「可以即時撈取的原料」，另一個把知識當作「需要持續精煉的資產」。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch16-rag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-ch16-wiki" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Left side: Traditional RAG -->
+    <text x="200" y="30" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">傳統 RAG</text>
+    <text x="200" y="50" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每次從零開始，沒有積累</text>
+    <!-- RAG: Docs -->
+    <rect x="30" y="70" width="110" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="85" y="95" text-anchor="middle" font-size="15px" fill="var(--text)">原始文件堆</text>
+    <!-- RAG: Vector DB -->
+    <rect x="155" y="70" width="110" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="210" y="88" text-anchor="middle" font-size="14px" fill="var(--text)">向量資料庫</text>
+    <text x="210" y="103" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">嵌入 + 索引</text>
+    <!-- RAG: Query -->
+    <rect x="90" y="160" width="110" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="145" y="185" text-anchor="middle" font-size="15px" fill="var(--text)">使用者提問</text>
+    <!-- RAG: Retrieve -->
+    <rect x="30" y="250" width="100" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="80" y="268" text-anchor="middle" font-size="14px" fill="var(--text)">向量相似度</text>
+    <text x="80" y="283" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">片段撈取</text>
+    <!-- RAG: LLM Answer -->
+    <rect x="160" y="250" width="100" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="210" y="268" text-anchor="middle" font-size="14px" fill="var(--text)">LLM 生成</text>
+    <text x="210" y="283" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">一次性答案</text>
+    <!-- RAG: Forget -->
+    <rect x="75" y="330" width="140" height="22" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="145" y="345" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">關閉對話，遺忘</text>
+    <!-- RAG arrows -->
+    <line x1="140" y1="90" x2="155" y2="90" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-rag)" />
+    <line x1="145" y1="110" x2="145" y2="160" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-rag)" />
+    <line x1="145" y1="200" x2="80" y2="250" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-rag)" />
+    <line x1="145" y1="200" x2="210" y2="250" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-rag)" />
+    <line x1="145" y1="290" x2="145" y2="330" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-rag)" />
+    <!-- Divider -->
+    <line x1="400" y1="20" x2="400" y2="360" stroke="var(--border)" stroke-width="1" stroke-dasharray="6,4" opacity="0.5" />
+    <!-- Right side: LLM Wiki -->
+    <text x="600" y="30" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">LLM Wiki</text>
+    <text x="600" y="50" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">寫入時編譯，知識持續複利</text>
+    <!-- Wiki: Raw -->
+    <rect x="415" y="70" width="130" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="480" y="95" text-anchor="middle" font-size="15px" fill="var(--text)">raw/ 原始素材</text>
+    <!-- Wiki: Ingest -->
+    <rect x="555" y="70" width="110" height="40" fill="var(--abg)" stroke="var(--accent)" rx="6" />
+    <text x="610" y="88" text-anchor="middle" font-size="14px" fill="var(--accent)">Ingest 編譯</text>
+    <text x="610" y="103" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">LLM 知識萃取</text>
+    <!-- Wiki: wiki/ -->
+    <rect x="480" y="160" width="240" height="60" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="600" y="184" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">wiki/ 持久知識網路</text>
+    <text x="600" y="202" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">Concepts + Entities + Sources</text>
+    <text x="600" y="216" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">wikilinks 互相連結，越用越豐富</text>
+    <!-- Wiki: Query -->
+    <rect x="480" y="265" width="110" height="40" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="535" y="285" text-anchor="middle" font-size="15px" fill="var(--text)">使用者提問</text>
+    <!-- Wiki: Answer back -->
+    <rect x="610" y="265" width="110" height="40" fill="var(--abg)" stroke="var(--accent)" rx="6" />
+    <text x="665" y="283" text-anchor="middle" font-size="14px" fill="var(--accent)">答案寫回</text>
+    <text x="665" y="298" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">知識複利累積</text>
+    <!-- Wiki arrows -->
+    <line x1="545" y1="90" x2="555" y2="90" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch16-wiki)" />
+    <line x1="610" y1="110" x2="600" y2="160" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch16-wiki)" />
+    <line x1="535" y1="220" x2="535" y2="265" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch16-wiki)" />
+    <line x1="665" y1="265" x2="665" y2="240" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch16-wiki)" />
+    <path d="M 665 225 L 665 215 L 600 215 L 600 220" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch16-wiki)" />
+  </g>
+</svg>
+ <figcaption>左側傳統 RAG 每次查詢從原始文件撈片段，結果不積累；右側 LLM Wiki 在寫入時預先編譯，每次查詢的答案也寫回 wiki，形成複利循環。</figcaption> </figure> <h2>Wiki 知識圖譜：條目如何形成互連網路</h2> <p>
+LLM Wiki 最迷人的特性之一，是在 Obsidian 的圖譜視圖（Graph View）中清晰可見的知識網路。
+    每個 wiki 條目都是一個節點，每條 <code>[[wikilink]]</code> 都是一條邊。
+    當你 ingest 的文章越多，這個網路就越密集、越有意義。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch16-kg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="28" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Wiki 知識圖譜：條目如何形成互連網路</text>
+    <!-- Central concept node -->
+    <circle cx="400" cy="185" r="52" fill="var(--abg)" stroke="var(--accent)" stroke-width="2.5" />
+    <text x="400" y="180" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">LLM Wiki</text>
+    <text x="400" y="198" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">核心概念</text>
+    <!-- Surrounding concept nodes -->
+    <circle cx="180" cy="100" r="40" fill="var(--bg2)" stroke="var(--border)" rx="40" />
+    <text x="180" y="95" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">Andrej</text>
+    <text x="180" y="113" text-anchor="middle" font-size="14px" fill="var(--text)">Karpathy</text>
+    <circle cx="620" cy="100" r="40" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="620" y="95" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">RAG</text>
+    <text x="620" y="113" text-anchor="middle" font-size="14px" fill="var(--text)">技術</text>
+    <circle cx="130" cy="250" r="40" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="130" y="245" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">Obsidian</text>
+    <text x="130" y="263" text-anchor="middle" font-size="14px" fill="var(--text)">Vault</text>
+    <circle cx="670" cy="250" r="40" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="670" y="245" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">Claude</text>
+    <text x="670" y="263" text-anchor="middle" font-size="14px" fill="var(--text)">Code</text>
+    <circle cx="260" cy="335" r="35" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="260" y="330" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">Ingest</text>
+    <text x="260" y="348" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">管道</text>
+    <circle cx="540" cy="335" r="35" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="540" y="330" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">知識</text>
+    <text x="540" y="348" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">複利</text>
+    <circle cx="400" cy="60" r="35" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="400" y="55" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">第二</text>
+    <text x="400" y="73" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">大腦</text>
+    <!-- Edges from center to nodes -->
+    <line x1="355" y1="155" x2="215" y2="118" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="445" y1="155" x2="588" y2="118" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="358" y1="210" x2="168" y2="235" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="442" y1="210" x2="632" y2="235" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="375" y1="230" x2="284" y2="305" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="425" y1="230" x2="516" y2="305" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <line x1="400" y1="133" x2="400" y2="95" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch16-kg)" />
+    <!-- Cross edges between outer nodes -->
+    <line x1="165" y1="283" x2="228" y2="307" stroke="var(--border)" stroke-width="1" opacity="0.4" marker-end="url(#arr-ch16-kg)" />
+    <line x1="635" y1="283" x2="572" y2="307" stroke="var(--border)" stroke-width="1" opacity="0.4" marker-end="url(#arr-ch16-kg)" />
+    <line x1="215" y1="132" x2="367" y2="75" stroke="var(--border)" stroke-width="1" opacity="0.3" marker-end="url(#arr-ch16-kg)" />
+    <!-- Source node label -->
+    <text x="400" y="386" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">每個節點是一個 wiki/ 條目，邊是 [[wikilink]] 連結</text>
+  </g>
+</svg>
+ <figcaption>一個小型 wiki 知識圖譜示意：LLM Wiki 作為核心節點，透過 wikilinks 連接 Karpathy、RAG、Obsidian、Claude Code 等相關概念，形成可導航的知識網路。</figcaption> </figure> <p>
+這個圖譜不只是視覺化的展示——它直接反映了你的知識結構。
+    高連接度的節點是你的核心概念，孤立的節點（沒有邊連入）是 Lint 應該處理的孤兒頁面。
+    圖譜的密度越高，代表你的知識庫整合度越好，查詢時 AI 能找到的上下文也越豐富。
+</p> <div class="call info"> <p> <strong>從知識庫的角度看 Obsidian 圖譜</strong>：
+      每次 ingest 後打開 Graph View，你可以直觀地看到哪些概念因為這篇文章變得更被連結。
+      如果一篇文章 ingest 後圖譜幾乎沒有變化，表示這篇文章和你的既有知識庫重疊度很高；
+      如果圖譜出現很多新節點，表示這篇文章帶來了全新的知識領域。
+</p> </div> <h2>三個實戰工作流</h2> <h3>每日筆記自動生成</h3> <p>
+在 <code>.claude/commands/today.md</code> 放入指令：
+    「檢查今天的 daily note 是否存在，沒有就用 templates/daily.md 建立，
+    然後從昨天搬入未完成的待辦事項」。
+    之後每天打 <code>/today</code>，10 秒內完成。
+</p> <h3>批次加反向連結</h3> <p>
+讓 Claude Code 掃描最近一個月的 daily notes，找出所有提到的人名、專案名、書名，
+    自動補上 <code>[[wikilink]]</code>。沒有對應筆記的就自動建立 entity page。
+    一個下午的手動工作，幾分鐘搞定，而且從此每次 ingest 都會自動維護這些連結。
+</p> <h3>每週回顧自動生成</h3> <p>
+設定 <code>/weekly-review</code> 指令，Claude Code 統計本週完成和未完成的 tasks、
+    辨識重複出現的主題、找出停滯的專案，產出一份結構化回顧筆記。
+    這份回顧本身也是 Obsidian 筆記，未來的 AI 查詢可以引用——這就是 LLM Wiki 的複利效應。
+</p> <h2>與傳統 RAG 的根本差異</h2> <table> <thead> <tr> <th>面向</th> <th>傳統 RAG</th> <th>LLM Wiki</th> </tr> </thead> <tbody> <tr> <td>處理時機</td> <td>查詢時即時撈取</td> <td>寫入時預先編譯</td> </tr> <tr> <td>儲存格式</td> <td>向量資料庫</td> <td>Markdown 純文字</td> </tr> <tr> <td>知識積累</td> <td>每次從零開始</td> <td>持續複利累積</td> </tr> <tr> <td>建置複雜度</td> <td>需要向量 DB 基礎設施</td> <td>只需 Obsidian + Ollama</td> </tr> <tr> <td>適用規模</td> <td>數萬篇以上</td> <td>個人規模約 100 篇最佳</td> </tr> <tr> <td>可讀性</td> <td>向量不可人工閱讀</td> <td>Markdown 隨時可瀏覽</td> </tr> <tr> <td>查詢答案去向</td> <td>一次性，對話結束即消失</td> <td>可寫回 wiki 持久保存</td> </tr> </tbody> </table> <div class="call warn"> <p><strong>LLM Wiki 的規模限制</strong>：這套方法適合個人知識庫，約 100 篇文章的規模效果最好。知識庫越大，每次查詢讀取的 Token 越多，成本線性增長。如果你的資料規模達到數萬篇，傳統 RAG 的向量搜尋方案反而更合適。</p> </div> <h2>本章小結</h2> <p>
+Karpathy 的 LLM Wiki 哲學用一個洞察解開了知識管理的根本矛盾：
+    人類放棄維護 wiki 不是因為懶，是因為 bookkeeping 的成本太高。
+    LLM 不會無聊，不會遺忘，才是真正適合做 bookkeeping 的存在。
+</p> <p>
+這套架構讓 Obsidian vault 從「筆記倉庫」進化成「持續自我演化的個人維基百科」：
+    Raw 是原料，Wiki 是精煉成果，Ingest / Query / Lint 三個動作讓知識庫越用越豐富。
+    每加入一篇新文章，整個知識網路都會因此變得更完整。
+    每一次有意義的提問，都是對知識庫的一次 Ingest。
+</p> <p>
+這一章的知識，配合前兩章（ch14 Claude Code + Obsidian、ch15 Obsidian CLI 與 AI Skills），
+    構成了完整的 AI 知識管理三層架構。下一章我們回到基礎設施層：
+    多終端同步——讓你在手機、電腦、平板上都能看到同一個 vault，不遺漏任何靈感。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span> </a> <a href="/obsidian/ch17-sync" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

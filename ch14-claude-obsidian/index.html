@@ -1,0 +1,615 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Claude Code + Obsidian：AI 第二大腦完整建置 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Obsidian 本地 Markdown 讓 Claude Code 能直接讀寫你的知識庫——不需要 RAG，不需要 vector database。本章從三層解耦架構出發，帶你完成 CLAUDE.md 設定、5 個高頻 prompt 實戰、Karpathy LLM Wiki 系統建置，以及 token 節省策略，把 Vault 從筆記 App 升級為 AI 驅動的個人知識作業系統。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 14 章 · Part 5：AI 整合：打造 AI 驅動的知識庫</span> <h1>Claude Code + Obsidian：AI 第二大腦完整建置</h1> <p class="cdesc">把 Vault 從「本地筆記 App」升級為「能與 AI 雙向溝通的知識作業系統」</p> <figure class="svg-fig"> <img src="/obsidian/img/ch14/01-framework-claude-obsidian-os.png" alt="Claude Code 與 Obsidian 透過本地 Markdown 建立 AI 第二大腦知識作業系統" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 14-0：Claude Code + Obsidian 的三層架構——儲存層、資料層與智能層共同形成 AI 第二大腦。</figcaption> </figure> <h2>Vault 裡有寶藏，但你挖不出來</h2> <p>
+你已經在 Obsidian 累積了幾百篇筆記——每日記錄、讀書心得、會議摘要、剪藏文章。
+    但問你「上個月你對 AI 工具的想法有什麼演變？」，你可能還是要手動翻找半小時。
+</p> <p>
+問題不在筆記，在於你一個人的認知頻寬。
+    這正是 Claude Code 進場的時機：它能一次讀完你的整個 Vault，
+    找出你自己都沒發現的脈絡連結，以你習慣的格式輸出摘要、週報、主題索引。
+</p> <p>
+Obsidian 的殺手鐧在於<strong>本地 Markdown 檔案</strong>。
+    雲端筆記（Notion、Google Docs）需要 API 才能讓 AI 讀取；
+    Obsidian 的筆記就是你電腦上的 <code>.md</code> 檔案，
+    Claude Code 可以直接讀取、直接修改，不需要任何中介層。
+</p> <h2>架構三層解耦</h2> <p>整個系統的核心邏輯：把「存哪裡」和「怎麼用」分開。</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Layer 1: Obsidian (Storage) -->
+    <rect x="40" y="20" width="720" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="200" y="48" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">儲存層 · Obsidian App</text>
+    <text x="200" y="70" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">資料夾結構 · 雙向連結 · Graph View · Plugins</text>
+    <rect x="440" y="32" width="140" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="510" y="54" text-anchor="middle" font-size="15px" fill="var(--text)">PARA 資料夾架構</text>
+    <rect x="594" y="32" width="140" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="664" y="54" text-anchor="middle" font-size="15px" fill="var(--text)">Canvas · Bases</text>
+    <!-- Down arrow 1 -->
+    <line x1="400" y1="90" x2="400" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <text x="430" y="110" font-size="14px" fill="var(--text)" opacity="0.7">本地 .md 檔案</text>
+    <!-- Layer 2: Markdown (Data) -->
+    <rect x="40" y="120" width="720" height="70" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="200" y="148" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">資料層 · Markdown 純文字</text>
+    <text x="200" y="170" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">可被任何工具讀取 · 不依賴特定 App</text>
+    <rect x="440" y="132" width="140" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="510" y="154" text-anchor="middle" font-size="15px" fill="var(--text)">YAML Frontmatter</text>
+    <rect x="594" y="132" width="140" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="664" y="154" text-anchor="middle" font-size="15px" fill="var(--text)">[[雙向連結]]</text>
+    <!-- Down arrow 2 -->
+    <line x1="400" y1="190" x2="400" y2="220" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <text x="430" y="210" font-size="14px" fill="var(--text)" opacity="0.7">直接讀寫</text>
+    <!-- Layer 3: Claude Code (Intelligence) -->
+    <rect x="40" y="220" width="720" height="60" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="200" y="248" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">智能層 · Claude Code</text>
+    <text x="200" y="268" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">分析 · 整理 · 連結知識 · 產出週報</text>
+    <rect x="430" y="232" width="160" height="36" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="510" y="255" text-anchor="middle" font-size="15px" fill="var(--text)">CLAUDE.md 行為邊界</text>
+    <rect x="594" y="232" width="140" height="36" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="664" y="255" text-anchor="middle" font-size="15px" fill="var(--text)">高頻 Prompt 模板</text>
+  </g>
+</svg>
+ <figcaption>展示了 Claude AI 與 Obsidian 的協作架構，AI 作為大腦負責思考與生成，而 Obsidian 作為知識庫負責儲存與連結。</figcaption> </figure> <ul> <li><strong>儲存層（Obsidian）</strong>：資料夾結構、雙向連結、視覺化介面——這是你每天打開的 App</li> <li><strong>資料層（Markdown 檔案）</strong>：儲存在本地檔案系統的 <code>.md</code> 純文字——資料的真正形式</li> <li><strong>智能層（Claude Code）</strong>：透過讀寫 Markdown 檔案來分析、整理、連結知識——AI 的操作介面</li> </ul> <p>
+三層解耦的好處是任一層都可以替換。
+    未來有更好的 AI 工具，只換智能層；想換筆記 App，只要還是 Markdown 格式，資料一行都不會丟。
+</p> <div class="call info"> <p><strong>Obsidian vs Notion 切換時機</strong>：Notion 在 500 頁以下、有團隊協作需求時仍有優勢。Obsidian 適合個人知識資產（1 萬頁仍秒搜）+ AI Agent 整合。從 Notion 遷移時建議只搬最近 6 個月高頻使用的筆記，不要全部遷移。</p> </div> <h2>Step 1：建立基礎資料夾結構</h2> <p>
+結構清晰的 Vault 讓 AI 更快找到相關內容，也更容易寫出精準的 prompt。
+    推薦使用 PARA 方法（Projects / Areas / Resources / Archive）：
+</p> <ul> <li><code>0-inbox/</code> — 未分類的新筆記，每天清空到對應位置</li> <li><code>1-projects/</code> — 進行中的專案，每個專案一個子資料夾</li> <li><code>2-areas/</code> — 長期負責的領域（健康、財務、學習、工作）</li> <li><code>3-resources/</code> — 參考資料與研究筆記</li> <li><code>4-archive/</code> — 已完結的項目</li> <li><code>daily/</code> — 每日筆記，命名格式 <code>YYYY-MM-DD.md</code></li> </ul> <h2>Step 2：建立 CLAUDE.md — 給 AI 的工作說明書</h2> <p>
+Claude Code 啟動時會自動讀取工作目錄中的 <code>CLAUDE.md</code> 作為行為指南。
+    在終端機執行 <code>cd /path/to/your/vault</code>，然後執行 <code>claude</code>。
+    在 vault 根目錄建立以下 CLAUDE.md：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# CLAUDE.md — Obsidian Vault 工作說明書
+
+## Vault 結構
+- 0-inbox/     → 未分類的新筆記，每天清空
+- 1-projects/  → 進行中的專案（一個資料夾一個專案）
+- 2-areas/     → 長期負責的領域（健康、財務、學習）
+- 3-resources/ → 參考資料與研究筆記
+- 4-archive/   → 已完結的項目
+- daily/       → 每日筆記
+
+## 你的任務
+- 所有筆記使用繁體中文
+- frontmatter 必須包含 title, created, tags
+- 幫我建立雙向連結（用 [[]] 語法）
+- 摘要長度控制在 3 句話以內
+- 找到關聯時，在筆記底部加上「## 相關筆記」區塊
+
+## 禁止事項
+- 不要刪除任何現有筆記
+- 不要修改 daily/ 資料夾的日期格式
+- 找不到相關內容時，直接說「找不到」，不要編造" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># CLAUDE.md — Obsidian Vault 工作說明書</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## Vault 結構</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 0-inbox/     → 未分類的新筆記，每天清空</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 1-projects/  → 進行中的專案（一個資料夾一個專案）</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 2-areas/     → 長期負責的領域（健康、財務、學習）</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 3-resources/ → 參考資料與研究筆記</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 4-archive/   → 已完結的項目</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> daily/       → 每日筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 你的任務</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 所有筆記使用繁體中文</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> frontmatter 必須包含 title, created, tags</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 幫我建立雙向連結（用 [[]] 語法）</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 摘要長度控制在 3 句話以內</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 找到關聯時，在筆記底部加上「## 相關筆記」區塊</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 禁止事項</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 不要刪除任何現有筆記</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 不要修改 daily/ 資料夾的日期格式</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 找不到相關內容時，直接說「找不到」，不要編造</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <p>
+CLAUDE.md 的關鍵在於「禁止事項」——明確告訴 AI 不能做什麼，
+    比只說能做什麼更能防止意外修改。特別重要的是「不要刪除任何現有筆記」這一條。
+</p> <h2>Step 3：5 個立刻能用的高頻 Prompt</h2> <p>
+以下是最常見的 Vault 操作場景。建議存成 Obsidian 的 Template，方便隨時叫出：
+</p> <h3>週報自動產出</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 高頻 Prompt 1：週報自動產出
+請掃描 daily/ 資料夾中本週（週一到今天）的所有筆記，
+整理出：
+1. 本週完成的事項（從「完成」「done」「✅」等關鍵字識別）
+2. 本週學到的新知識（從「學到」「新發現」「TIL」等識別）
+3. 本週出現超過 3 次的話題（可能是需要深挖的主題）
+4. 下週需要跟進的事項
+
+輸出格式：Markdown，可直接貼到週報模板" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 高頻 Prompt 1：週報自動產出</span></span>
+<span class="line"><span style="color:#ABB2BF">請掃描 daily/ 資料夾中本週（週一到今天）的所有筆記，</span></span>
+<span class="line"><span style="color:#ABB2BF">整理出：</span></span>
+<span class="line"><span style="color:#E5C07B">1.</span><span style="color:#ABB2BF"> 本週完成的事項（從「完成」「done」「✅」等關鍵字識別）</span></span>
+<span class="line"><span style="color:#E5C07B">2.</span><span style="color:#ABB2BF"> 本週學到的新知識（從「學到」「新發現」「TIL」等識別）</span></span>
+<span class="line"><span style="color:#E5C07B">3.</span><span style="color:#ABB2BF"> 本週出現超過 3 次的話題（可能是需要深挖的主題）</span></span>
+<span class="line"><span style="color:#E5C07B">4.</span><span style="color:#ABB2BF"> 下週需要跟進的事項</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">輸出格式：Markdown，可直接貼到週報模板</span></span></code></pre> </div> </div>   <h3>跨筆記主題識別</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 高頻 Prompt 2：跨筆記主題識別
+請掃描整個 vault，找出在 5 篇以上不同筆記中都出現的主題或概念。
+對每個主題：
+- 列出提到它的筆記路徑
+- 說明這個主題在不同脈絡下的不同意義
+- 建議是否值得新建一篇「主題索引頁」
+
+輸出：結構化 Markdown，包含 [[雙向連結]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 高頻 Prompt 2：跨筆記主題識別</span></span>
+<span class="line"><span style="color:#ABB2BF">請掃描整個 vault，找出在 5 篇以上不同筆記中都出現的主題或概念。</span></span>
+<span class="line"><span style="color:#ABB2BF">對每個主題：</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 列出提到它的筆記路徑</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 說明這個主題在不同脈絡下的不同意義</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 建議是否值得新建一篇「主題索引頁」</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">輸出：結構化 Markdown，包含 [[</span><span style="color:#61AFEF">雙向連結</span><span style="color:#ABB2BF">]]</span></span></code></pre> </div> </div>   <p>其他常用高頻 prompt：</p> <ul> <li><strong>想法歸類</strong>：「請讀取 0-inbox/ 的所有筆記，依主題分類並建議移到哪個資料夾」</li> <li><strong>會議準備</strong>：「我明天要和 X 開會，請從 vault 找出過去所有和 X 相關的筆記，整理成一頁簡報」</li> <li><strong>找連結機會</strong>：「請比較這兩篇筆記，找出概念上的相似點和矛盾點，並建議如何建立雙向連結」</li> </ul> <h2>LLM Wiki：讓知識庫自動長大</h2> <p>
+Andrej Karpathy 提出了一個不需要 RAG、不需要 vector database 的知識庫架構：<strong>LLM Wiki</strong>。
+    核心思想是把 Vault 分成四層，讓 AI 在每次「Ingest」（攝入新素材）時，知識庫像網一樣自動延伸連結。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="vault/
+├── raw/           # 原始素材（逐字稿、PDF 摘錄、會議記錄）
+│   ├── 2026-06-01-meeting-abc.md
+│   └── 2026-06-03-youtube-video.md
+├── wiki/          # AI 整理後的知識條目（一個主題一個檔案）
+│   ├── prompt-engineering.md
+│   └── vector-database.md
+├── index/         # 自動生成的索引頁（按標籤 / 主題）
+│   ├── by-tag.md
+│   └── by-date.md
+└── log/           # Ingest 記錄（哪些 raw 已被處理）
+    └── ingest-log.md" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>vault/</span></span>
+<span class="line"><span>├── raw/           # 原始素材（逐字稿、PDF 摘錄、會議記錄）</span></span>
+<span class="line"><span>│   ├── 2026-06-01-meeting-abc.md</span></span>
+<span class="line"><span>│   └── 2026-06-03-youtube-video.md</span></span>
+<span class="line"><span>├── wiki/          # AI 整理後的知識條目（一個主題一個檔案）</span></span>
+<span class="line"><span>│   ├── prompt-engineering.md</span></span>
+<span class="line"><span>│   └── vector-database.md</span></span>
+<span class="line"><span>├── index/         # 自動生成的索引頁（按標籤 / 主題）</span></span>
+<span class="line"><span>│   ├── by-tag.md</span></span>
+<span class="line"><span>│   └── by-date.md</span></span>
+<span class="line"><span>└── log/           # Ingest 記錄（哪些 raw 已被處理）</span></span>
+<span class="line"><span>    └── ingest-log.md</span></span></code></pre> </div> </div>   <p>運作流程如下：</p> <ol> <li>把新的原始素材丟進 <code>raw/</code>（一篇文章逐字稿、一份 PDF 摘錄）</li> <li>Claude Code 執行 Ingest：讀取 raw 素材，判斷與 <code>wiki/</code> 哪些現有條目相關</li> <li>更新相關的 wiki 條目，建立雙向連結，把新知識織進既有知識網</li> <li>把處理記錄寫入 <code>log/</code>，更新 <code>index/</code> 的索引頁</li> </ol> <p>
+每次 Ingest 之後，知識庫不只多了一筆新資料，
+    還多了「新資料與既有知識的所有關聯」——這才是「每次都長大一張網」的意義。
+</p> <div class="call info"> <p><strong>一個主題，一個獨立 Vault</strong>：Karpathy 建議不同主題的 LLM Wiki 放在不同 vault，不要全部混在一起。主題越集中，Claude Code 讀取時的訊噪比越高，回應品質越好。工作 / 個人學習 / 研究專題各自一個 vault 是常見做法。</p> </div> <h2>Token 節省策略：讓 AI 精準讀取</h2> <p>
+把整個 Vault 丟給 Claude Code 不是好策略——10,000 頁筆記會消耗大量 token，
+    而且 AI 搜索效率反而下降。有效控制 token 用量的方法：
+</p> <ul> <li><strong>在 CLAUDE.md 限定讀取範圍</strong>：例如「只需讀取 1-projects/ 和 daily/，其他資料夾不用主動掃描」</li> <li><strong>用日期限制搜尋範圍</strong>：「只看最近 30 天的筆記」比「看全部」省 80% 以上的 token</li> <li><strong>先問再讀</strong>：讓 Claude Code 先列出相關筆記路徑，你確認後再全文讀取</li> <li><strong>專題 vault 不混用</strong>：避免不相關內容干擾 AI 判斷，也讓 CLAUDE.md 更精準</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch14/02-infographic-token-saving-strategies.png" alt="四個 token 節省策略：CLAUDE.md 限定讀取範圍、用日期限制搜尋範圍、先問再讀、專題 vault 不混用" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 14-2：四個實務策略都指向同一件事——讓 Claude Code 只讀真正需要的內容，而不是每次都掃過整個 Vault。</figcaption> </figure> <div class="call warn"> <p><strong>Token 成本提醒</strong>：讓 Claude Code 掃描整個 vault 屬於高 token 操作。使用高頻 prompt 時加上範圍限定詞（如「只看 daily/ 本週的筆記」），可將 token 用量降低 90% 以上，而不犧牲答案品質。</p> </div> <h2>每天 30 分鐘的知識儀式</h2> <p>系統建好後，最重要的是建立固定的使用習慣。建議的每日流程：</p> <ol> <li><strong>打開 daily note（5 分鐘）</strong>：記錄今天的三件事、會議、學到的事</li> <li><strong>處理 inbox（10 分鐘）</strong>：把昨天丟進去的零散內容分類到對應資料夾</li> <li><strong>呼叫 Claude Code（15 分鐘）</strong>：執行一個高頻 prompt——週一跑主題識別、週五跑週報、其他天跑 inbox 分類或連結建議</li> </ol> <p>
+30 分鐘的儀式看似短，但 Claude Code 能在這 15 分鐘裡掃描你一週的筆記並輸出結構化分析，
+    等效於讓助理幫你做了 2 小時的整理工作。
+</p> <h2>3 個進階工作流</h2> <h3>主題演化追蹤</h3> <p>
+每季讓 Claude Code 掃描 <code>daily/</code> 過去 90 天的筆記，
+    找出反覆出現（超過 10 次）的主題，並顯示這個主題在不同時期的觀點演變。
+    讓你看見自己思考的「成長軌跡」。
+</p> <h3>個人 RAG 系統</h3> <p>
+把 vault 作為個人 RAG（Retrieval-Augmented Generation）系統：
+    在執行任何新任務前，先讓 Claude Code 讀取相關的 <code>wiki/</code> 條目，
+    然後在這個「知識脈絡」下完成任務。
+    等效於讓 AI 在回答問題前先「複習」你所有的相關知識。
+</p> <h3>知識資產複利化</h3> <p>
+每季跑一次「主題識別 + 內容延伸」：把過去 90 天 daily 裡反覆出現的主題抓出來，
+    讓 Claude Code 起草一篇 deep dive 文章草稿。
+    你加入個人見解後發布——把筆記中的原材料轉化成對外輸出的內容，這就是知識資產的複利效應。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch14/03-infographic-advanced-workflows.png" alt="三個進階工作流：主題演化追蹤（90 天反覆主題的觀點演變）、個人 RAG 系統（任務前先讀 wiki/ 相關條目）、知識資產複利化（主題識別 + deep dive 草稿）" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 14-3：三個進階工作流層層遞進——先追蹤觀點如何演變，再把知識庫當成任務前的複習來源，最後把累積的原材料轉化為對外輸出的內容。</figcaption> </figure> <h2>wiki-ingest：讓知識庫自動成長的核心流程</h2> <p>
+LLM Wiki 的理念說起來簡單，但「如何落地執行」才是關鍵。
+    wiki-ingest 是一個具體的三步驟循環：<strong>收入（Ingest）→ 整理（Compile）→ 連結（Link）</strong>。
+    每次執行後，知識庫不只多了一筆新資料，還多了「新資料與既有知識的所有關聯」。
+</p> <figure class="svg-fig"> <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch14-ingest" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch14-dashed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="24" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">wiki-ingest 工作流程</text>
+
+    <!-- Step 1: raw/ -->
+    <rect x="30" y="50" width="160" height="80" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="110" y="78" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">raw/</text>
+    <text x="110" y="98" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">原始素材</text>
+    <text x="110" y="116" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">文章 · 影片逐字稿 · PDF</text>
+
+    <!-- Arrow 1 -->
+    <line x1="190" y1="90" x2="248" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch14-ingest)" />
+    <text x="219" y="82" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">Ingest</text>
+
+    <!-- Step 2: Claude Code 處理 -->
+    <rect x="250" y="50" width="170" height="80" fill="var(--abg)" stroke="var(--accent)" stroke-width="1.5" rx="8" />
+    <text x="335" y="75" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Claude Code</text>
+    <text x="335" y="95" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">提取概念 · 識別實體</text>
+    <text x="335" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">比對 log.md 去重</text>
+
+    <!-- Arrow 2 -->
+    <line x1="420" y1="90" x2="478" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch14-ingest)" />
+    <text x="449" y="82" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">寫入</text>
+
+    <!-- Step 3: wiki/ -->
+    <rect x="480" y="50" width="200" height="80" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="580" y="78" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">wiki/</text>
+    <text x="580" y="97" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">sources · concepts · entities</text>
+    <text x="580" y="115" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">雙向連結自動建立</text>
+
+    <!-- Arrow down from wiki to index -->
+    <line x1="580" y1="130" x2="580" y2="165" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-ch14-dashed)" />
+
+    <!-- Step 4: index.md -->
+    <rect x="480" y="167" width="200" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="580" y="191" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">index.md</text>
+    <text x="580" y="212" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">全局索引自動更新</text>
+
+    <!-- Arrow down from Claude to log -->
+    <line x1="335" y1="130" x2="335" y2="165" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-ch14-dashed)" />
+
+    <!-- Step 5: log.md -->
+    <rect x="250" y="167" width="170" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="335" y="191" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">log/ingest-log.md</text>
+    <text x="335" y="212" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">已處理檔案記錄</text>
+
+    <!-- Bottom summary bar -->
+    <rect x="30" y="260" width="740" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="400" y="283" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">三層知識結構</text>
+    <text x="170" y="306" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">raw/ — 唯讀原始素材</text>
+    <text x="400" y="306" text-anchor="middle" font-size="14px" fill="var(--accent)" opacity="0.9">wiki/ — AI 整理知識層</text>
+    <text x="630" y="306" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">index/ — 自動生成索引</text>
+  </g>
+</svg> <figcaption>wiki-ingest 工作流程：從 raw 原始素材，經 Claude Code 處理，自動分層寫入 wiki/sources、wiki/concepts、wiki/entities，並更新 index.md 全局索引</figcaption> </figure> <p>
+整個流程的防重複機制靠 <code>wiki/log/ingest-log.md</code>——每次 Ingest 結束後，
+    已處理的檔案路徑會寫入這份日誌，下次執行時 Claude Code 先讀取日誌再掃描 raw/，
+    確保每份原始素材只被處理一次。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# wiki-ingest 指令 Prompt
+請執行 wiki-ingest 流程，處理 raw/ 資料夾中所有尚未被處理的檔案。
+
+步驟：
+1. 讀取 wiki/log/ingest-log.md，取得「已處理」清單
+2. 掃描 raw/ 資料夾，找出「未在清單中」的新檔案
+3. 對每個新檔案：
+   a. 提取核心概念與實體（人名、工具、術語）
+   b. 在 wiki/sources/ 建立摘要頁（格式：摘要-{原始檔案名}.md）
+   c. 更新 wiki/concepts/ 中相關概念條目（加入 [[雙向連結]]）
+   d. 更新 wiki/entities/ 中相關實體條目
+   e. 更新 wiki/index.md 全局索引
+4. 完成後，將已處理檔案加入 wiki/log/ingest-log.md
+
+輸出：處理摘要（共處理 N 筆，新建 X 頁，更新 Y 條目）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># wiki-ingest 指令 Prompt</span></span>
+<span class="line"><span style="color:#ABB2BF">請執行 wiki-ingest 流程，處理 raw/ 資料夾中所有尚未被處理的檔案。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">步驟：</span></span>
+<span class="line"><span style="color:#E5C07B">1.</span><span style="color:#ABB2BF"> 讀取 wiki/log/ingest-log.md，取得「已處理」清單</span></span>
+<span class="line"><span style="color:#E5C07B">2.</span><span style="color:#ABB2BF"> 掃描 raw/ 資料夾，找出「未在清單中」的新檔案</span></span>
+<span class="line"><span style="color:#E5C07B">3.</span><span style="color:#ABB2BF"> 對每個新檔案：</span></span>
+<span class="line"><span style="color:#ABB2BF">   a. 提取核心概念與實體（人名、工具、術語）</span></span>
+<span class="line"><span style="color:#ABB2BF">   b. 在 wiki/sources/ 建立摘要頁（格式：摘要-{原始檔案名}.md）</span></span>
+<span class="line"><span style="color:#ABB2BF">   c. 更新 wiki/concepts/ 中相關概念條目（加入 [[</span><span style="color:#61AFEF">雙向連結</span><span style="color:#ABB2BF">]]）</span></span>
+<span class="line"><span style="color:#ABB2BF">   d. 更新 wiki/entities/ 中相關實體條目</span></span>
+<span class="line"><span style="color:#ABB2BF">   e. 更新 wiki/index.md 全局索引</span></span>
+<span class="line"><span style="color:#E5C07B">4.</span><span style="color:#ABB2BF"> 完成後，將已處理檔案加入 wiki/log/ingest-log.md</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">輸出：處理摘要（共處理 N 筆，新建 X 頁，更新 Y 條目）</span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>Ingest 頻率建議</strong>：不必每天執行。建議「累積 5-10 份 raw 素材後執行一次」——批次處理比單筆更有效率，Claude Code 也能發現跨素材的共同概念，建立更豐富的連結網絡。</p> </div> <h2>Claude + Obsidian 整合架構：兩種連接方式</h2> <p>
+Claude Code 與 Obsidian 有兩條整合路徑，適合不同使用情境：
+</p> <figure class="svg-fig"> <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch14-mcp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch14-mcp2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="24" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Claude + Obsidian 整合架構全圖</text>
+
+    <!-- Claude Code block -->
+    <rect x="30" y="50" width="200" height="100" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="10" />
+    <text x="130" y="80" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">Claude Code</text>
+    <text x="130" y="100" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">CLI Agent</text>
+    <text x="130" y="118" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">CLAUDE.md 行為邊界</text>
+    <text x="130" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">高頻 Prompt 模板庫</text>
+
+    <!-- 直連箭頭 -->
+    <line x1="230" y1="100" x2="294" y2="100" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch14-mcp)" />
+    <text x="262" y="92" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.9">直接讀寫</text>
+    <text x="262" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.55">.md 檔案</text>
+
+    <!-- Markdown Files block -->
+    <rect x="296" y="50" width="200" height="100" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="396" y="80" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Markdown 檔案</text>
+    <text x="396" y="100" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">本地 .md 純文字</text>
+    <text x="396" y="118" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">YAML Frontmatter</text>
+    <text x="396" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">[[雙向連結語法]]</text>
+
+    <!-- MCP 箭頭 -->
+    <line x1="496" y1="100" x2="600" y2="100" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ch14-mcp2)" />
+    <text x="551" y="92" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">MCP Server</text>
+    <text x="551" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">Local REST API</text>
+
+    <!-- Obsidian block -->
+    <rect x="606" y="50" width="164" height="100" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="688" y="80" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Obsidian App</text>
+    <text x="688" y="100" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">Graph View · Bases</text>
+    <text x="688" y="118" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Dataview · Templater</text>
+    <text x="688" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Smart Connections</text>
+
+    <!-- Ollama block at bottom left -->
+    <rect x="30" y="200" width="200" height="90" fill="var(--bg2)" stroke="var(--border)" stroke-dasharray="6,3" rx="10" />
+    <text x="130" y="228" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Ollama（地端 LLM）</text>
+    <text x="130" y="248" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">llama3.2 · gemma3</text>
+    <text x="130" y="266" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">隱私敏感筆記 · 批次作業</text>
+    <text x="130" y="282" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.55">完全離線 · 零費用</text>
+
+    <!-- Ollama up arrow to Claude Code -->
+    <line x1="130" y1="200" x2="130" y2="152" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-ch14-mcp2)" />
+    <text x="145" y="178" font-size="13px" fill="var(--text)" opacity="0.55">切換</text>
+
+    <!-- Legend -->
+    <line x1="320" y1="225" x2="360" y2="225" stroke="var(--accent)" stroke-width="2" />
+    <text x="370" y="229" font-size="14px" fill="var(--text)" opacity="0.8">直連（無需 API）</text>
+    <line x1="320" y1="252" x2="360" y2="252" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="5,3" />
+    <text x="370" y="256" font-size="14px" fill="var(--text)" opacity="0.8">MCP / Local REST API</text>
+    <line x1="320" y1="279" x2="360" y2="279" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4,3" />
+    <text x="370" y="283" font-size="14px" fill="var(--text)" opacity="0.8">可選替換（隱私模式）</text>
+  </g>
+</svg> <figcaption>Claude + Obsidian 整合架構全圖：直連方式（讀寫本地 .md 檔）與 MCP Server 方式（透過 Local REST API）的差異，以及 Ollama 本地 LLM 在隱私敏感場景的替換角色</figcaption> </figure> <ul> <li> <strong>直連方式（推薦）</strong>：Claude Code 直接讀寫 vault 資料夾的 <code>.md</code> 檔案。
+      優點是無需任何外掛或 API，速度最快，也是本章的主要操作模式。
+</li> <li> <strong>MCP Server 方式</strong>：安裝 <code>mcp-obsidian</code>（需搭配 Obsidian Local REST API 外掛），
+      讓 Claude AI Web 界面也能操作 vault，適合不想打開終端機的使用場景。
+      安裝步驟：<code>pip install uv</code> → <code>uvx mcp-obsidian</code> → 設定 Obsidian Local REST API 外掛。
+</li> </ul> <div class="call info"> <p><strong>Smart Connections、Copilot、Dataview</strong>：這幾個外掛在「Obsidian App 內部」做 AI 輔助，與 Claude Code「從外部操作 vault」是互補的，可以同時安裝。Smart Connections 適合即時行內補全；Claude Code 適合批次整理和跨檔案深度分析。</p> </div> <h2>Daily Notes 自動化：從日誌到週摘要</h2> <p>
+每天的 Daily Note 是最有價值卻最容易被遺忘的知識資產。
+    透過 Claude Code，可以在每週五讓 AI 掃描全週日誌，自動產生結構化的週摘要——
+    不只整理「做了什麼」，還能追蹤「思考如何演變」。
+</p> <figure class="svg-fig"> <svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch14-daily" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="24" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Daily Notes → 週摘要 自動化流程</text>
+
+    <!-- Monday to Friday boxes -->
+    <rect x="30"  y="50" width="90" height="70" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="75"  y="78" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">週一</text>
+    <text x="75"  y="98" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Daily Note</text>
+    <text x="75" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">✅ TIL TODO</text>
+
+    <rect x="132" y="50" width="90" height="70" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="177"  y="78" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">週二</text>
+    <text x="177"  y="98" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Daily Note</text>
+    <text x="177" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">✅ TIL TODO</text>
+
+    <rect x="234" y="50" width="90" height="70" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="279"  y="78" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">週三</text>
+    <text x="279"  y="98" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Daily Note</text>
+    <text x="279" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">✅ TIL TODO</text>
+
+    <rect x="336" y="50" width="90" height="70" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="381"  y="78" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">週四</text>
+    <text x="381"  y="98" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Daily Note</text>
+    <text x="381" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">✅ TIL TODO</text>
+
+    <rect x="438" y="50" width="90" height="70" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="483"  y="78" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">週五</text>
+    <text x="483"  y="98" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">Daily Note</text>
+    <text x="483" y="113" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">✅ TIL TODO</text>
+
+    <!-- Big arrow -->
+    <line x1="540" y1="85" x2="595" y2="85" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arr-ch14-daily)" />
+    <text x="567" y="77" text-anchor="middle" font-size="13px" fill="var(--accent)">Claude</text>
+    <text x="567" y="97" text-anchor="middle" font-size="13px" fill="var(--accent)">Prompt</text>
+
+    <!-- Weekly summary block -->
+    <rect x="598" y="40" width="172" height="100" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="684" y="66" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">週摘要</text>
+    <text x="684" y="86" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">核心成就 · 學習快照</text>
+    <text x="684" y="104" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.65">熱點主題 · 下週跟進</text>
+    <text x="684" y="122" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.55">存至 daily/weekly/</text>
+
+    <!-- Bottom row: Frontmatter -->
+    <rect x="30" y="170" width="350" height="68" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="205" y="192" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Frontmatter 自動補全</text>
+    <text x="205" y="213" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">掃描缺少屬性的筆記 → AI 推斷 title、tags、type</text>
+    <text x="205" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.55">不確定欄位加 # TODO 標記，等待人工確認</text>
+
+    <!-- Ollama private note -->
+    <rect x="410" y="170" width="360" height="68" fill="var(--bg2)" stroke="var(--border)" stroke-dasharray="5,3" rx="8" />
+    <text x="590" y="192" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">隱私筆記 → Ollama 本地處理</text>
+    <text x="590" y="213" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">標有 #private 或 2-areas/health/ → 不上雲端</text>
+    <text x="590" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.55">呼叫本機 llama3.2:3b，完全離線執行</text>
+  </g>
+</svg> <figcaption>Daily Notes → 週摘要自動化流程，以及 Frontmatter 補全與 Ollama 隱私模式的搭配方式</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Daily Notes → 週摘要 Prompt
+今天是 {{date:YYYY-MM-DD}}（週五）
+請讀取 daily/ 資料夾中本週所有日誌（週一到今天），
+自動產生週摘要，格式如下：
+
+---
+title: 週摘要 {{date:YYYY-[W]WW}}
+created: {{date:YYYY-MM-DD}}
+tags: [週摘要, review]
+type: weekly
+---
+
+## 本週核心成就
+<從各日誌中提取「完成」「done」「✅」「交付」等標記事項，整理為 3-5 條>
+
+## 本週學習快照
+<提取「TIL」「學到」「新發現」「發現問題」等關鍵字後的內容>
+
+## 反覆出現的主題（熱點）
+<找出在 3 篇以上日誌中出現的主題，附出現次數>
+
+## 下週跟進事項
+<提取「TODO」「待確認」「下週」「記得」等標記>
+
+## 本週能量指數
+<從日誌語氣推斷：高能 / 正常 / 疲憊，附簡短說明>
+
+請將此週摘要存至：daily/weekly/{{date:YYYY-[W]WW}}.md" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># Daily Notes → 週摘要 Prompt</span></span>
+<span class="line"><span style="color:#ABB2BF">今天是 {{date:YYYY-MM-DD}}（週五）</span></span>
+<span class="line"><span style="color:#ABB2BF">請讀取 daily/ 資料夾中本週所有日誌（週一到今天），</span></span>
+<span class="line"><span style="color:#ABB2BF">自動產生週摘要，格式如下：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">---</span></span>
+<span class="line"><span style="color:#ABB2BF">title: 週摘要 {{date:YYYY-[</span><span style="color:#61AFEF">W</span><span style="color:#ABB2BF">]WW}}</span></span>
+<span class="line"><span style="color:#ABB2BF">created: {{date:YYYY-MM-DD}}</span></span>
+<span class="line"><span style="color:#ABB2BF">tags: [週摘要, review]</span></span>
+<span class="line"><span style="color:#ABB2BF">type: weekly</span></span>
+<span class="line"><span style="color:#E06C75">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 本週核心成就</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;從各日誌中提取「完成」「done」「✅」「交付」等標記事項，整理為 3-5 條></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 本週學習快照</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;提取「TIL」「學到」「新發現」「發現問題」等關鍵字後的內容></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 反覆出現的主題（熱點）</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;找出在 3 篇以上日誌中出現的主題，附出現次數></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 下週跟進事項</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;提取「TODO」「待確認」「下週」「記得」等標記></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 本週能量指數</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;從日誌語氣推斷：高能 / 正常 / 疲憊，附簡短說明></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">請將此週摘要存至：daily/weekly/{{date:YYYY-[</span><span style="color:#61AFEF">W</span><span style="color:#ABB2BF">]WW}}.md</span></span></code></pre> </div> </div>   <p>
+週摘要的「能量指數」欄位特別值得注意——Claude Code 從你的寫作語氣（句子長短、用詞積極程度）
+    推斷本週整體狀態。積累幾個月後，你會看到工作壓力與個人狀態的長期模式，
+    這是傳統週報做不到的隱含訊息。
+</p> <h2>Frontmatter 自動補全：讓 AI 整頓舊筆記</h2> <p>
+大多數人的 vault 都有一批「沒有 Frontmatter」的舊筆記——當初快速記錄，
+    沒時間加標籤，導致這些筆記很難被 AI 找到、也很難在 Graph View 中分類。
+    Claude Code 可以批次補全這些缺失的屬性：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Frontmatter 自動補全 Prompt
+請掃描 vault 中所有缺少標準 Frontmatter 的筆記，
+並依照以下規範自動補全：
+
+標準 Frontmatter 格式：
+---
+title: <從 H1 標題提取，若無 H1 則從檔名推斷>
+created: <YYYY-MM-DD，從檔案建立時間或內容推斷>
+tags: [<從內容自動推斷 2-5 個標籤>]
+type: note | daily | source | concept | project
+status: draft | active | archived
+---
+
+規則：
+- 不修改已有完整 Frontmatter 的筆記
+- 若推斷不確定的欄位，在值後加 # TODO
+- 輸出：已更新的筆記清單" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># Frontmatter 自動補全 Prompt</span></span>
+<span class="line"><span style="color:#ABB2BF">請掃描 vault 中所有缺少標準 Frontmatter 的筆記，</span></span>
+<span class="line"><span style="color:#ABB2BF">並依照以下規範自動補全：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">標準 Frontmatter 格式：</span></span>
+<span class="line"><span style="color:#E06C75">---</span></span>
+<span class="line"><span style="color:#ABB2BF">title: &#x3C;從 H1 標題提取，若無 H1 則從檔名推斷></span></span>
+<span class="line"><span style="color:#ABB2BF">created: &#x3C;YYYY-MM-DD，從檔案建立時間或內容推斷></span></span>
+<span class="line"><span style="color:#ABB2BF">tags: [&#x3C;從內容自動推斷 2-5 個標籤>]</span></span>
+<span class="line"><span style="color:#ABB2BF">type: note | daily | source | concept | project</span></span>
+<span class="line"><span style="color:#ABB2BF">status: draft | active | archived</span></span>
+<span class="line"><span style="color:#E06C75">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">規則：</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 不修改已有完整 Frontmatter 的筆記</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 若推斷不確定的欄位，在值後加 # TODO</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 輸出：已更新的筆記清單</span></span></code></pre> </div> </div>   <div class="call warn"> <p><strong>補全前備份</strong>：執行批次 Frontmatter 補全前，建議先用 Obsidian Git 外掛 commit 一次，或直接用 <code>git commit -m "backup before frontmatter patch"</code>。Claude Code 修改大量檔案後若有問題，可以用 git 一鍵還原。</p> </div> <h2>Ollama 整合：隱私筆記的本地 LLM 方案</h2> <p>
+日記、健康記錄、財務筆記——這些內容你可能不希望上傳到雲端 AI。
+    Ollama 讓你在本機跑 LLM，Claude Code 可以根據筆記的標籤或位置，
+    自動切換到本地模型處理敏感內容。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Ollama 本地 LLM 整合設定（CLAUDE.md）
+
+## 本地 LLM 切換規則
+- 隱私敏感筆記（標有 #private 或在 2-areas/health/）
+  → 使用 Ollama（本地，不上雲）
+- 一般筆記整理、摘要生成
+  → 優先使用 Claude（品質較高）
+- 批次 Frontmatter 補全（大量、低思考需求）
+  → 使用 Ollama（節省 API 費用）
+
+## Ollama 呼叫方式
+```bash
+# 在 vault 根目錄建立 .env
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=llama3.2:3b   # 輕量版，適合筆記整理
+
+# 呼叫範例
+curl http://localhost:11434/api/generate \
+  -d '{&quot;model&quot;:&quot;llama3.2:3b&quot;,&quot;prompt&quot;:&quot;整理這篇筆記的重點：...&quot;,&quot;stream&quot;:false}'
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Ollama 本地 LLM 整合設定（CLAUDE.md）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 本地 LLM 切換規則</span></span>
+<span class="line"><span style="color:#61AFEF">-</span><span style="color:#98C379"> 隱私敏感筆記（標有</span><span style="color:#7F848E;font-style:italic"> #private 或在 2-areas/health/）</span></span>
+<span class="line"><span style="color:#61AFEF">  →</span><span style="color:#98C379"> 使用</span><span style="color:#98C379"> Ollama（本地，不上雲）</span></span>
+<span class="line"><span style="color:#61AFEF">-</span><span style="color:#98C379"> 一般筆記整理、摘要生成</span></span>
+<span class="line"><span style="color:#61AFEF">  →</span><span style="color:#98C379"> 優先使用</span><span style="color:#98C379"> Claude（品質較高）</span></span>
+<span class="line"><span style="color:#61AFEF">-</span><span style="color:#98C379"> 批次</span><span style="color:#98C379"> Frontmatter</span><span style="color:#98C379"> 補全（大量、低思考需求）</span></span>
+<span class="line"><span style="color:#61AFEF">  →</span><span style="color:#98C379"> 使用</span><span style="color:#98C379"> Ollama（節省</span><span style="color:#98C379"> API</span><span style="color:#98C379"> 費用）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## Ollama 呼叫方式</span></span>
+<span class="line"><span style="color:#98C379">```</span><span style="color:#61AFEF">bash</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 在 vault 根目錄建立 .env</span></span>
+<span class="line"><span style="color:#E06C75">OLLAMA_HOST</span><span style="color:#56B6C2">=</span><span style="color:#98C379">http://localhost:11434</span></span>
+<span class="line"><span style="color:#E06C75">OLLAMA_MODEL</span><span style="color:#56B6C2">=</span><span style="color:#98C379">llama3.2:3b   </span><span style="color:#7F848E;font-style:italic"># 輕量版，適合筆記整理</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 呼叫範例</span></span>
+<span class="line"><span style="color:#61AFEF">curl</span><span style="color:#98C379"> http://localhost:11434/api/generate </span><span style="color:#56B6C2">\</span></span>
+<span class="line"><span style="color:#D19A66">  -d</span><span style="color:#98C379"> '{"model":"llama3.2:3b","prompt":"整理這篇筆記的重點：...","stream":false}'</span></span>
+<span class="line"><span style="color:#98C379">```</span></span></code></pre> </div> </div>   <p>
+實際工作流中，建議在 <code>CLAUDE.md</code> 加入切換規則：
+    標有 <code>#private</code> 的筆記或位於 <code>2-areas/health/</code> 的內容，
+    一律走 Ollama；其他批次作業（大量 Frontmatter 補全）也可以切到 Ollama 降低 API 費用。
+    知識提煉、週摘要等高品質輸出則仍使用 Claude。
+</p> <div class="call info"> <p><strong>推薦 Ollama 模型</strong>：<code>llama3.2:3b</code>（輕量，適合 8GB RAM 機器，筆記整理夠用）；<code>gemma3:12b</code>（品質接近 Claude Haiku，需要 16GB RAM）；<code>qwen2.5:7b</code>（中文效果特別好）。透過 <code>ollama list</code> 確認已安裝的模型。</p> </div> <h2>本章小結</h2> <p>
+Claude Code + Obsidian 的組合威力來自「本地 Markdown = AI 可直接操作的資料格式」這個根本優勢。
+    透過 CLAUDE.md 設定 AI 行為邊界、建立高頻 prompt 應對日常場景、用 LLM Wiki 讓知識庫自動增長，
+    你的 Vault 就從「放筆記的地方」變成了真正的 AI 第二大腦。
+</p> <p>
+下一章我們進入更有技術深度的主題——Obsidian CLI 與自訂 AI Skills，
+    讓 Claude Code 不只能讀寫筆記，還能在 vault 裡執行結構化的自動化流程，
+    打造屬於你的個人 AI 技能庫。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span> </a> <a href="/obsidian/ch15-obsidian-cli-skills" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

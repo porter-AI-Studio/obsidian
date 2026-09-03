@@ -1,0 +1,946 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>多終端同步：手機、電腦、平板一致體驗 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Obsidian 的資料存在本地，跨裝置同步需要自行設定。本章介紹五種主流同步方案的優缺點與選型建議，從最省心的官方 Sync 到免費的 Remotely Save + WebDAV、離線優先的 Syncthing，以及程式設計師最愛的 Git 版本控制，幫你找到最適合自己的同步策略。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 17 章 · Part 5：AI 整合：打造 AI 驅動的知識庫</span> <h1>多終端同步：手機、電腦、平板一致體驗</h1> <p class="cdesc">五種方案選型指南，從零到跨裝置無縫切換</p> <p>
+Obsidian 最大的優勢是「本地優先」——筆記存在你自己的硬碟，沒有廠商鎖定，永遠可以存取。
+    但這也帶來了一個現實問題：<strong>不同裝置之間的資料，預設是彼此隔離的。</strong> </p> <p>
+你在電腦上寫的晨間日記，手機裡看不到；在咖啡廳用 iPad 剪藏的文章，回到辦公室也不見蹤影。
+    若不設定同步，Obsidian 的知識庫就只是單一裝置的孤島。
+</p> <p>
+好消息是：Obsidian 的筆記全部是標準的 Markdown 純文字檔，任何可以同步檔案的工具都能使用。
+    社群因此發展出五條不同路線，各有其適用場景與代價。本章帶你一次看清楚，找到最適合你的方案。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch17-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <rect x="250" y="20" width="300" height="40" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="400" y="45" text-anchor="middle" font-weight="bold" font-size="17px" fill="var(--accent)">Obsidian 五大同步方案</text>
+
+    <!-- Central Hub Line -->
+    <path d="M 400 60 L 400 90" stroke="var(--border)" stroke-width="1.5" />
+    <path d="M 100 90 L 700 90" stroke="var(--border)" stroke-width="1.5" />
+
+    <!-- Vertical Connectors -->
+    <line x1="100" y1="90" x2="100" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-main)" />
+    <line x1="250" y1="90" x2="250" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-main)" />
+    <line x1="400" y1="90" x2="400" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-main)" />
+    <line x1="550" y1="90" x2="550" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-main)" />
+    <line x1="700" y1="90" x2="700" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-main)" />
+
+    <!-- Box 1 -->
+    <rect x="35" y="120" width="130" height="90" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="100" y="145" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">官方 Sync</text>
+    <text x="100" y="165" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">$4/月起, 最省心</text>
+    <text x="100" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">端到端加密</text>
+    <text x="100" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">全資料同步</text>
+
+    <!-- Box 2 -->
+    <rect x="185" y="120" width="130" height="90" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="250" y="145" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">雲端硬碟</text>
+    <text x="250" y="165" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">iCloud/OneDrive</text>
+    <text x="250" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">免費, 內建功能</text>
+    <text x="250" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">iOS 易產生衝突</text>
+
+    <!-- Box 3 -->
+    <rect x="335" y="120" width="130" height="90" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="400" y="145" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">Remotely Save</text>
+    <text x="400" y="165" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">免費, 強烈推薦</text>
+    <text x="400" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">支援 WebDAV/S3</text>
+    <text x="400" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">全平台無縫接軌</text>
+
+    <!-- Box 4 -->
+    <rect x="485" y="120" width="130" height="90" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="550" y="145" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">Syncthing</text>
+    <text x="550" y="165" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">P2P, 隱私極佳</text>
+    <text x="550" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">區網速度最快</text>
+    <text x="550" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">需同時開機</text>
+
+    <!-- Box 5 -->
+    <rect x="635" y="120" width="130" height="90" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="700" y="145" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">Obsidian Git</text>
+    <text x="700" y="165" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">開發者, 完美備份</text>
+    <text x="700" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">完整歷史紀錄</text>
+    <text x="700" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">手機端不友善</text>
+
+    <!-- Persona Connections -->
+    <line x1="100" y1="210" x2="100" y2="240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4" opacity="0.3" marker-end="url(#arr-ch17-main)" />
+    <line x1="250" y1="210" x2="250" y2="240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4" opacity="0.3" marker-end="url(#arr-ch17-main)" />
+    <line x1="400" y1="210" x2="400" y2="240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4" opacity="0.3" marker-end="url(#arr-ch17-main)" />
+    <line x1="550" y1="210" x2="550" y2="240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4" opacity="0.3" marker-end="url(#arr-ch17-main)" />
+    <line x1="700" y1="210" x2="700" y2="240" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4" opacity="0.3" marker-end="url(#arr-ch17-main)" />
+
+    <!-- Personas -->
+    <rect x="35" y="240" width="130" height="35" fill="var(--bg)" stroke="var(--accent)" rx="4" />
+    <text x="100" y="262" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">不折騰 / 預算足</text>
+
+    <rect x="185" y="240" width="130" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="250" y="262" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">輕量 / 蘋果生態</text>
+
+    <rect x="335" y="240" width="130" height="35" fill="var(--bg)" stroke="var(--accent)" rx="4" />
+    <text x="400" y="262" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">想免費 / 全平台</text>
+
+    <rect x="485" y="240" width="130" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="550" y="262" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">重視隱私 / 雙電腦</text>
+
+    <rect x="635" y="240" width="130" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="700" y="262" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">程式設計師 / 版控</text>
+  </g>
+</svg>
+ <figcaption>這張圖整理了 Obsidian 的多種同步方案比較，從官方 Sync 到第三方雲端硬碟的優缺點與適用情境。</figcaption> </figure> <h2>五種同步方案全覽</h2> <table> <thead> <tr> <th>方案</th> <th>費用</th> <th>iOS 支援</th> <th>設定難度</th> <th>特色</th> </tr> </thead> <tbody> <tr> <td><strong>Obsidian Sync（官方）</strong></td> <td>$4/月起</td> <td>✅ 完整</td> <td>★☆☆ 極低</td> <td>端到端加密，同步插件與主題設定</td> </tr> <tr> <td><strong>第三方雲端硬碟</strong>（iCloud / OneDrive）</td> <td>免費～低</td> <td>⚠️ 不穩定</td> <td>★☆☆ 極低</td> <td>電腦端穩定，iOS 偶有衝突</td> </tr> <tr> <td><strong>Remotely Save 插件</strong>（WebDAV / S3）</td> <td>免費</td> <td>✅ 完整</td> <td>★★☆ 中等</td> <td>全平台，可對接堅果雲、自建 NAS</td> </tr> <tr> <td><strong>Syncthing</strong>（P2P 同步）</td> <td>免費</td> <td>⚠️ 需付費 App</td> <td>★★☆ 中等</td> <td>速度最快，不過雲端，隱私最高</td> </tr> <tr> <td><strong>Obsidian Git</strong>（版本控制）</td> <td>免費</td> <td>❌ 困難</td> <td>★★★ 較高</td> <td>完整歷史紀錄，最適合開發者</td> </tr> </tbody> </table> <h2>方案一：Obsidian Sync（官方，最省心）</h2> <p>
+Obsidian 官方推出的付費同步服務。
+    開啟後一切自動化：筆記、插件設定、主題、甚至 hotkey 都會一起同步。
+</p> <p> <strong>端到端加密</strong>是其核心承諾——Obsidian 的伺服器看不到你的資料內容。
+    如果你願意每月花一杯咖啡錢換取零配置的跨裝置體驗，這是最直接的選擇。
+</p> <div class="call warn"> <p><strong>價格查證（2026-09 查證）</strong>：本章原先標示的 $10 美元/月（或 $96/年）已經過時。依 Obsidian 官網 <code>obsidian.md/pricing</code> 當下公告，Sync 現行價格是年繳 $4 美元/月，或月繳 $5 美元/月，較本章原先數字低不少；官網未再列出裝置數量上限等細節，實際額度請以官網當下頁面為準，訂閱前務必重新核對一次。</p> </div> <div class="call info"> <p><strong>官方 Sync 特別適合：</strong> 非技術用戶、重度 iOS 使用者、不想折騰的知識工作者。</p> </div> <h2>方案二：第三方雲端硬碟（免費入門）</h2> <p>
+macOS + iPhone 用戶可以把 Vault 放在 iCloud Drive；Windows 用戶可以選 OneDrive。
+    電腦端幾乎零配置，只要把 Vault 資料夾建在雲端同步目錄內即可。
+</p> <p> <strong>主要風險在 iOS 端：</strong> iCloud 的 iOS 同步機制可能產生衝突檔案（conflict file），
+    在雙向快速編輯時偶發性地製造出 <code>filename.md.conflict.md</code> 這類重複檔案。
+    如果你只用電腦主力寫作、手機偶爾查看，此方案完全夠用。
+</p> <h2>方案三：Remotely Save + WebDAV（推薦免費方案）</h2> <p> <strong>Remotely Save</strong> 是 Obsidian 社群最受歡迎的免費同步插件，支援多種後端：
+</p> <ul> <li>WebDAV（堅果雲、自建 Cloudreve、NAS）</li> <li>Amazon S3 / Cloudflare R2</li> <li>Dropbox / OneDrive</li> </ul> <p>
+對台灣用戶來說，<strong>堅果雲免費版（1GB 流量/月）</strong>搭配 Remotely Save 是最簡單的方案——
+    堅果雲提供 WebDAV 存取，不需要任何伺服器。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 在 Obsidian 安裝 Remotely Save 插件
+# 路徑：設定 → 社區插件 → 瀏覽 → 搜尋 Remotely Save → 安裝並啟用
+
+# 插件設定（以堅果雲 WebDAV 為例）
+Remote Service: WebDAV
+Server Address: https://dav.jianguoyun.com/dav/
+Username:       你的堅果雲帳號（Email）
+Password:       你的 WebDAV 應用密碼（非登入密碼）
+Remote Base Dir: obsidian-vault  # 在雲端建立的資料夾名稱
+
+# 完成後點「測試連線」，成功後按「立即同步」" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 在 Obsidian 安裝 Remotely Save 插件</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 路徑：設定 → 社區插件 → 瀏覽 → 搜尋 Remotely Save → 安裝並啟用</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 插件設定（以堅果雲 WebDAV 為例）</span></span>
+<span class="line"><span style="color:#61AFEF">Remote</span><span style="color:#98C379"> Service:</span><span style="color:#98C379"> WebDAV</span></span>
+<span class="line"><span style="color:#61AFEF">Server</span><span style="color:#98C379"> Address:</span><span style="color:#98C379"> https://dav.jianguoyun.com/dav/</span></span>
+<span class="line"><span style="color:#61AFEF">Username:</span><span style="color:#98C379">       你的堅果雲帳號（Email）</span></span>
+<span class="line"><span style="color:#61AFEF">Password:</span><span style="color:#98C379">       你的</span><span style="color:#98C379"> WebDAV</span><span style="color:#98C379"> 應用密碼（非登入密碼）</span></span>
+<span class="line"><span style="color:#61AFEF">Remote</span><span style="color:#98C379"> Base</span><span style="color:#98C379"> Dir:</span><span style="color:#98C379"> obsidian-vault</span><span style="color:#7F848E;font-style:italic">  # 在雲端建立的資料夾名稱</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 完成後點「測試連線」，成功後按「立即同步」</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <div class="call warn"> <p> <strong>注意：</strong>堅果雲 WebDAV 密碼需要在堅果雲官網「帳號設定 → 安全設定 → 第三方應用管理」另行產生，
+      不是你的登入密碼。
+</p> </div> <h2>方案四：Syncthing（離線優先，隱私最高）</h2> <p> <strong>Syncthing</strong> 是一套開源的 P2P 同步工具，裝置之間直接傳輸，不經過任何雲端伺服器。
+    速度比雲端方案快 3~5 倍（區域網路下接近滿速），且所有資料從不離開你掌控的設備。
+</p> <p> <strong>限制：</strong>兩台裝置必須同時開機才能同步；iOS 端需要購買 <strong>MobiusSync</strong>（約 $7 美元，一次性）。
+    如果你的主要場景是「公司電腦 ↔ 家用電腦」或「電腦 ↔ Android 手機」，Syncthing 是體驗最流暢的免費方案。
+</p> <h2>方案五：Obsidian Git（開發者的版本控制）</h2> <p>
+如果你已經熟悉 Git，把 Vault 放在 GitHub Private Repo 是最強的方案——
+    每一次修改都有完整歷史紀錄，誤刪筆記可以隨時復原，免費且容量幾乎無限。
+</p> <p>
+安裝 <strong>Obsidian Git</strong> 插件後，它會定時自動 commit + push，你完全不需要手動操作。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 前置條件：安裝 Git 並設定 GitHub 帳號
+git config --global user.name &quot;你的名字&quot;
+git config --global user.email &quot;你的Email&quot;
+
+# 在 Vault 根目錄初始化 Git
+cd /path/to/your/vault
+git init
+git remote add origin https://github.com/你的帳號/obsidian-vault.git
+
+# 第一次推送
+git add .
+git commit -m &quot;init: Obsidian vault&quot;
+git push -u origin main
+
+# Obsidian Git 插件設定（設定 → 社區插件 → Obsidian Git）
+Auto pull interval:  10  # 每 10 分鐘自動拉取
+Auto push interval:  10  # 每 10 分鐘自動推送
+Commit message:      vault backup: {{date}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 前置條件：安裝 Git 並設定 GitHub 帳號</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> config</span><span style="color:#D19A66"> --global</span><span style="color:#98C379"> user.name</span><span style="color:#98C379"> "你的名字"</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> config</span><span style="color:#D19A66"> --global</span><span style="color:#98C379"> user.email</span><span style="color:#98C379"> "你的Email"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 在 Vault 根目錄初始化 Git</span></span>
+<span class="line"><span style="color:#56B6C2">cd</span><span style="color:#98C379"> /path/to/your/vault</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> init</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> remote</span><span style="color:#98C379"> add</span><span style="color:#98C379"> origin</span><span style="color:#98C379"> https://github.com/你的帳號/obsidian-vault.git</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 第一次推送</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> add</span><span style="color:#98C379"> .</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> commit</span><span style="color:#D19A66"> -m</span><span style="color:#98C379"> "init: Obsidian vault"</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> push</span><span style="color:#D19A66"> -u</span><span style="color:#98C379"> origin</span><span style="color:#98C379"> main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Git 插件設定（設定 → 社區插件 → Obsidian Git）</span></span>
+<span class="line"><span style="color:#61AFEF">Auto</span><span style="color:#98C379"> pull</span><span style="color:#98C379"> interval:</span><span style="color:#D19A66">  10</span><span style="color:#7F848E;font-style:italic">  # 每 10 分鐘自動拉取</span></span>
+<span class="line"><span style="color:#61AFEF">Auto</span><span style="color:#98C379"> push</span><span style="color:#98C379"> interval:</span><span style="color:#D19A66">  10</span><span style="color:#7F848E;font-style:italic">  # 每 10 分鐘自動推送</span></span>
+<span class="line"><span style="color:#61AFEF">Commit</span><span style="color:#98C379"> message:</span><span style="color:#98C379">      vault</span><span style="color:#98C379"> backup:</span><span style="color:#98C379"> {{date}}</span></span></code></pre> </div> </div>   <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch17-git" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch17-git-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="28" text-anchor="middle" font-weight="bold" font-size="18px" fill="var(--accent)">Obsidian Git 同步工作流程</text>
+
+    <!-- Device A: Laptop -->
+    <rect x="30" y="50" width="180" height="240" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="120" y="78" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">電腦 A（辦公室）</text>
+    <rect x="50" y="90" width="140" height="36" fill="var(--abg)" stroke="var(--accent)" rx="6" />
+    <text x="120" y="113" text-anchor="middle" font-size="15px" fill="var(--accent)">編輯筆記</text>
+    <line x1="120" y1="126" x2="120" y2="148" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="50" y="148" width="140" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="120" y="171" text-anchor="middle" font-size="15px" fill="var(--text)">Auto Commit</text>
+    <line x1="120" y1="184" x2="120" y2="206" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="50" y="206" width="140" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="120" y="229" text-anchor="middle" font-size="15px" fill="var(--text)">Auto Push</text>
+    <line x1="120" y1="242" x2="120" y2="264" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="50" y="264" width="140" height="26" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="120" y="281" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">每 10 分鐘一次</text>
+
+    <!-- GitHub Remote -->
+    <rect x="300" y="90" width="200" height="120" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="10" />
+    <text x="400" y="118" text-anchor="middle" font-weight="bold" font-size="17px" fill="var(--accent)">GitHub</text>
+    <text x="400" y="138" text-anchor="middle" font-size="15px" fill="var(--text)">Private Repository</text>
+    <rect x="320" y="152" width="160" height="26" fill="var(--abg)" stroke="var(--accent)" rx="4" />
+    <text x="400" y="169" text-anchor="middle" font-size="14px" fill="var(--accent)">完整提交歷史紀錄</text>
+    <rect x="320" y="184" width="160" height="26" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="400" y="201" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">加密傳輸 (HTTPS/SSH)</text>
+
+    <!-- Device B: Phone -->
+    <rect x="590" y="50" width="180" height="240" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="680" y="78" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">電腦 B（家用）</text>
+    <rect x="610" y="90" width="140" height="36" fill="var(--abg)" stroke="var(--accent)" rx="6" />
+    <text x="680" y="113" text-anchor="middle" font-size="15px" fill="var(--accent)">Auto Pull</text>
+    <line x1="680" y1="126" x2="680" y2="148" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="610" y="148" width="140" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="680" y="171" text-anchor="middle" font-size="15px" fill="var(--text)">取得最新筆記</text>
+    <line x1="680" y1="184" x2="680" y2="206" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="610" y="206" width="140" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="680" y="229" text-anchor="middle" font-size="15px" fill="var(--text)">繼續編輯</text>
+    <line x1="680" y1="242" x2="680" y2="264" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-git-gray)" />
+    <rect x="610" y="264" width="140" height="26" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="680" y="281" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">自動 Push 回去</text>
+
+    <!-- Arrows: A -> GitHub -->
+    <line x1="210" y1="170" x2="295" y2="150" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch17-git)" />
+    <text x="252" y="150" text-anchor="middle" font-size="14px" fill="var(--accent)">push</text>
+
+    <!-- Arrows: GitHub -> B -->
+    <line x1="505" y1="150" x2="588" y2="170" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch17-git)" />
+    <text x="547" y="150" text-anchor="middle" font-size="14px" fill="var(--accent)">pull</text>
+
+    <!-- Bottom note -->
+    <rect x="200" y="300" width="400" height="30" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="400" y="320" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">免費 · 無限儲存 · 完整版本歷史 · 適合開發者</text>
+  </g>
+</svg>
+ <figcaption>Obsidian Git 雙機同步流程：電腦 A 自動 commit/push，GitHub 作為中繼，電腦 B 自動 pull 取得最新版本。</figcaption> </figure> <p> <strong>缺點：</strong>iOS 端幾乎不可行（App Store 政策限制 Git 操作），
+    Android 端需要額外 App（如 MGit）且設定繁瑣。
+    建議只作為電腦端的備份與版本控制，搭配其他方案在行動端補強。
+</p> <h2>Git 同步必備：.gitignore 設定</h2> <p>
+將 Vault 放進 Git 時，有些檔案<strong>不應該</strong>被追蹤：裝置特定的工作區快取、OS 系統檔、
+    以及可能含有敏感資訊的資料夾。在 Vault 根目錄建立 <code>.gitignore</code> 可以精準控制同步範圍。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Obsidian Vault .gitignore 範本
+# 工作區設定（包含裝置特定設定，通常不想同步）
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# 快取與暫存
+.obsidian/cache
+.trash/
+
+# OS 系統檔
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 如果有敏感筆記資料夾，可加入排除
+# private/
+# diary/
+
+# 大型附件（超過 GitHub 50MB 限制）
+# *.pdf
+# *.mp4
+# *.zip
+
+# 插件編譯產物
+.obsidian/plugins/*/node_modules/
+.obsidian/plugins/*/*.js.map" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Vault .gitignore 範本</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 工作區設定（包含裝置特定設定，通常不想同步）</span></span>
+<span class="line"><span style="color:#61AFEF">.obsidian/workspace.json</span></span>
+<span class="line"><span style="color:#61AFEF">.obsidian/workspace-mobile.json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 快取與暫存</span></span>
+<span class="line"><span style="color:#61AFEF">.obsidian/cache</span></span>
+<span class="line"><span style="color:#61AFEF">.trash/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># OS 系統檔</span></span>
+<span class="line"><span style="color:#61AFEF">.DS_Store</span></span>
+<span class="line"><span style="color:#61AFEF">Thumbs.db</span></span>
+<span class="line"><span style="color:#61AFEF">desktop.ini</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 如果有敏感筆記資料夾，可加入排除</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># private/</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># diary/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 大型附件（超過 GitHub 50MB 限制）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># *.pdf</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># *.mp4</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># *.zip</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 插件編譯產物</span></span>
+<span class="line"><span style="color:#61AFEF">.obsidian/plugins/*/node_modules/</span></span>
+<span class="line"><span style="color:#61AFEF">.obsidian/plugins/*/*.js.map</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>技巧：</strong><code>.obsidian/workspace.json</code> 記錄的是「目前開啟哪些分頁」，
+      每次切換都會變動。將它加入 <code>.gitignore</code> 可以避免每次開關 Obsidian 就產生 commit。
+</p> </div> <h2>選型建議：怎麼選最適合你的方案？</h2> <p>根據你的使用情境快速選擇：</p> <ul> <li><strong>不想折騰，願意付費：</strong> → Obsidian Sync</li> <li><strong>Mac + iPhone 用戶，筆記量不大：</strong> → iCloud Drive</li> <li><strong>想免費、全平台（含 iOS）：</strong> → Remotely Save + 堅果雲 WebDAV</li> <li><strong>Android + 電腦，重視隱私：</strong> → Syncthing</li> <li><strong>開發者，需要完整版本歷史：</strong> → Obsidian Git（電腦端）+ 其他方案（手機）</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch17/02-infographic-selection-guide.png" alt="五種使用情境對應的同步方案推薦：不想折騰願意付費對應 Obsidian Sync，Mac+iPhone 筆記量不大對應 iCloud Drive，想免費全平台對應 Remotely Save+堅果雲，Android+電腦重視隱私對應 Syncthing，開發者需完整版本歷史對應 Obsidian Git" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 17-2：五種情境各自對應一個最省事的方案，不確定選哪個時，先從自己的情境找起。</figcaption> </figure> <div class="call info"> <p> <strong>進階用法：</strong> 多種方案可以混搭。例如使用 Obsidian Git 作為版本控制與備份，
+      同時開啟 Remotely Save 讓 iOS 裝置也能存取——兩者互不干擾，各司其職。
+</p> </div> <h2>同步衝突怎麼處理？</h2> <p>
+無論使用哪種方案，「同步衝突」都是無法完全避免的情況——當你在兩台裝置同時修改同一份筆記時，
+    系統需要決定以哪個版本為準。
+</p> <p>幾個避免衝突的實用原則：</p> <ul> <li>切換裝置前，<strong>先同步再開啟</strong>，確保拿到最新版本</li> <li>同一份筆記盡量只在一台裝置上主力編輯</li> <li>使用 Obsidian Git 時，設定 auto pull 頻率高於 auto push</li> <li>發現衝突檔案（.conflict.md）時，比對兩份內容後手動合併</li> </ul> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch17-cf" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-ch17-cf-ok" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4caf50" />
+    </marker>
+    <marker id="arr-ch17-cf-warn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ff9800" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-weight="bold" font-size="18px" fill="var(--accent)">同步衝突處理流程</text>
+
+    <!-- Start -->
+    <ellipse cx="400" cy="60" rx="90" ry="22" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" />
+    <text x="400" y="65" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">發現同步衝突</text>
+
+    <line x1="400" y1="82" x2="400" y2="108" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+
+    <!-- Diamond: type? -->
+    <polygon points="400,108 520,148 400,188 280,148" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="400" y="144" text-anchor="middle" font-size="15px" fill="var(--text)">衝突類型？</text>
+    <text x="400" y="160" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">iCloud / Git / 其他</text>
+
+    <!-- Left: iCloud -->
+    <line x1="280" y1="148" x2="130" y2="148" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+    <text x="205" y="140" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">iCloud 衝突檔</text>
+    <rect x="40" y="162" width="180" height="50" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="130" y="183" text-anchor="middle" font-size="15px" fill="var(--text)">搜尋 .conflict.md</text>
+    <text x="130" y="200" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">比對兩份，刪除舊版</text>
+
+    <!-- Right: Git -->
+    <line x1="520" y1="148" x2="670" y2="148" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+    <text x="595" y="140" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">Git merge 衝突</text>
+    <rect x="580" y="162" width="180" height="50" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="670" y="183" text-anchor="middle" font-size="15px" fill="var(--text)">git status 查看</text>
+    <text x="670" y="200" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">手動移除衝突標記</text>
+
+    <!-- Both merge down -->
+    <line x1="130" y1="212" x2="130" y2="248" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+    <line x1="670" y1="212" x2="670" y2="248" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+
+    <!-- Middle: Merge -->
+    <line x1="400" y1="188" x2="400" y2="248" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-cf)" />
+    <text x="400" y="218" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">Remotely Save 衝突</text>
+
+    <rect x="130" y="248" width="540" height="46" fill="var(--bg2)" stroke="#4caf50" stroke-width="1.5" rx="8" />
+    <text x="400" y="271" text-anchor="middle" font-size="16px" font-weight="bold" fill="#4caf50">選擇正確版本，手動合併內容</text>
+    <text x="400" y="287" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">保留想要的段落，確認筆記完整性</text>
+
+    <line x1="400" y1="294" x2="400" y2="320" stroke="#4caf50" stroke-width="1.5" marker-end="url(#arr-ch17-cf-ok)" />
+
+    <rect x="260" y="320" width="280" height="40" fill="var(--abg)" stroke="#4caf50" stroke-width="2" rx="8" />
+    <text x="400" y="341" text-anchor="middle" font-size="16px" font-weight="bold" fill="#4caf50">衝突解決，重新同步</text>
+    <text x="400" y="355" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">commit / 重新觸發 sync</text>
+  </g>
+</svg>
+ <figcaption>同步衝突處理決策流程：依衝突來源（iCloud 衝突檔、Git merge 衝突、Remotely Save 衝突）採取不同的解決路徑。</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Git 衝突解決工作流程
+
+# 1. 查看有哪些衝突檔案
+git status
+
+# 2. 開啟衝突檔案，手動合併
+# 衝突標記格式：
+# <<<<<<< HEAD
+# 你的本地版本內容
+# =======
+# 遠端版本內容
+# >>>>>>> origin/main
+
+# 3. 編輯後移除衝突標記，保留正確內容
+
+# 4. 標記為已解決並提交
+git add 衝突的筆記.md
+git commit -m &quot;fix: resolve sync conflict in 衝突的筆記.md&quot;
+
+# 5. 推送
+git push
+
+# ── 預防衝突的 Git 設定 ──
+# 使用 rebase 取代 merge，減少衝突提交
+git config pull.rebase true
+
+# 設定較短的 auto-pull 間隔（Obsidian Git 插件）
+# Pull interval: 5 分鐘（比 push 頻率更高）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Git 衝突解決工作流程</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 1. 查看有哪些衝突檔案</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> status</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 2. 開啟衝突檔案，手動合併</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 衝突標記格式：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># &#x3C;&#x3C;&#x3C;&#x3C;&#x3C;&#x3C;&#x3C; HEAD</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 你的本地版本內容</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># =======</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 遠端版本內容</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># >>>>>>> origin/main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 3. 編輯後移除衝突標記，保留正確內容</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 4. 標記為已解決並提交</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> add</span><span style="color:#98C379"> 衝突的筆記.md</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> commit</span><span style="color:#D19A66"> -m</span><span style="color:#98C379"> "fix: resolve sync conflict in 衝突的筆記.md"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 5. 推送</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> push</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ── 預防衝突的 Git 設定 ──</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 使用 rebase 取代 merge，減少衝突提交</span></span>
+<span class="line"><span style="color:#61AFEF">git</span><span style="color:#98C379"> config</span><span style="color:#98C379"> pull.rebase</span><span style="color:#D19A66"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 設定較短的 auto-pull 間隔（Obsidian Git 插件）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Pull interval: 5 分鐘（比 push 頻率更高）</span></span></code></pre> </div> </div>   <h2>備份策略：3-2-1 原則</h2> <p>
+同步不等於備份。同步只保證多台裝置內容一致，但如果你不小心刪除了一個重要資料夾，
+    所有裝置都會同步這個「刪除」操作。<strong>真正的備份需要獨立、可回溯的副本。</strong> </p> <p>
+資訊安全領域的 <strong>3-2-1 備份原則</strong>：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch17-bk" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-weight="bold" font-size="18px" fill="var(--accent)">3-2-1 備份策略</text>
+
+    <!-- 3 copies -->
+    <rect x="20" y="50" width="220" height="180" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="10" />
+    <text x="130" y="78" text-anchor="middle" font-weight="bold" font-size="19px" fill="var(--accent)">3 份拷貝</text>
+    <line x1="50" y1="90" x2="190" y2="90" stroke="var(--border)" stroke-width="1" />
+    <circle cx="55" cy="115" r="6" fill="var(--accent)" />
+    <text x="70" y="119" font-size="15px" fill="var(--text)">本機 Vault（主要）</text>
+    <circle cx="55" cy="145" r="6" fill="var(--accent)" />
+    <text x="70" y="149" font-size="15px" fill="var(--text)">雲端同步（次要）</text>
+    <circle cx="55" cy="175" r="6" fill="var(--accent)" />
+    <text x="70" y="179" font-size="15px" fill="var(--text)">外部備份（第三份）</text>
+    <text x="130" y="210" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">永遠有多一份可救援</text>
+
+    <!-- 2 media -->
+    <rect x="290" y="50" width="220" height="180" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="400" y="78" text-anchor="middle" font-weight="bold" font-size="19px" fill="var(--text)">2 種媒介</text>
+    <line x1="310" y1="90" x2="490" y2="90" stroke="var(--border)" stroke-width="1" />
+    <rect x="298" y="105" width="204" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="400" y="125" text-anchor="middle" font-size="15px" fill="var(--text)">雲端（GitHub / WebDAV）</text>
+    <rect x="298" y="145" width="204" height="30" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="400" y="165" text-anchor="middle" font-size="15px" fill="var(--text)">本地（外接硬碟 / NAS）</text>
+    <text x="400" y="210" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">不同失效模式，互補防護</text>
+
+    <!-- 1 offsite -->
+    <rect x="560" y="50" width="220" height="180" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="670" y="78" text-anchor="middle" font-weight="bold" font-size="19px" fill="var(--text)">1 份異地</text>
+    <line x1="580" y1="90" x2="760" y2="90" stroke="var(--border)" stroke-width="1" />
+    <text x="670" y="120" text-anchor="middle" font-size="15px" fill="var(--text)">至少一份存放在</text>
+    <text x="670" y="140" text-anchor="middle" font-size="15px" fill="var(--text)">不同地理位置</text>
+    <rect x="580" y="155" width="180" height="30" fill="var(--abg)" stroke="var(--accent)" rx="4" />
+    <text x="670" y="175" text-anchor="middle" font-size="15px" fill="var(--accent)">GitHub = 天然異地備份</text>
+    <text x="670" y="210" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">防火災、竊盜等實體風險</text>
+
+    <!-- Arrow between -->
+    <line x1="240" y1="140" x2="288" y2="140" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-bk)" />
+    <line x1="510" y1="140" x2="558" y2="140" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch17-bk)" />
+  </g>
+</svg>
+ <figcaption>3-2-1 備份原則：3 份拷貝、2 種不同媒介、1 份異地存放——GitHub 天然滿足「異地備份」需求。</figcaption> </figure> <p>
+對 Obsidian 用戶的實際建議：
+</p> <ul> <li><strong>第 1 份：</strong>本機 Vault（主要工作位置）</li> <li><strong>第 2 份：</strong>雲端同步（Remotely Save / Obsidian Sync）</li> <li><strong>第 3 份：</strong>GitHub Private Repo 或每週本地壓縮備份</li> </ul> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="#!/bin/bash
+# Obsidian Vault 自動備份腳本
+# 建議放在 ~/scripts/backup-vault.sh，加入 crontab 每日執行
+
+VAULT_PATH=&quot;$HOME/Documents/ObsidianVault&quot;
+BACKUP_DIR=&quot;$HOME/Backups/obsidian&quot;
+DATE=$(date +%Y-%m-%d)
+KEEP_DAYS=30  # 保留最近 30 天備份
+
+# 建立備份目錄
+mkdir -p &quot;$BACKUP_DIR&quot;
+
+# 壓縮備份
+tar -czf &quot;$BACKUP_DIR/vault-$DATE.tar.gz&quot;   --exclude=&quot;$VAULT_PATH/.obsidian/cache&quot;   --exclude=&quot;$VAULT_PATH/.trash&quot;   &quot;$VAULT_PATH&quot;
+
+echo &quot;備份完成：$BACKUP_DIR/vault-$DATE.tar.gz&quot;
+
+# 清理超過 30 天的舊備份
+find &quot;$BACKUP_DIR&quot; -name &quot;vault-*.tar.gz&quot; -mtime +$KEEP_DAYS -delete
+echo &quot;已清理超過 $KEEP_DAYS 天的舊備份&quot;
+
+# crontab 設定（每天凌晨 3 點執行）：
+# 0 3 * * * /bin/bash ~/scripts/backup-vault.sh >> ~/logs/vault-backup.log 2>&amp;1" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic">#!/bin/bash</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Vault 自動備份腳本</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 建議放在 ~/scripts/backup-vault.sh，加入 crontab 每日執行</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">VAULT_PATH</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"</span><span style="color:#E06C75">$HOME</span><span style="color:#98C379">/Documents/ObsidianVault"</span></span>
+<span class="line"><span style="color:#E06C75">BACKUP_DIR</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"</span><span style="color:#E06C75">$HOME</span><span style="color:#98C379">/Backups/obsidian"</span></span>
+<span class="line"><span style="color:#E06C75">DATE</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">$(</span><span style="color:#61AFEF">date</span><span style="color:#98C379"> +%Y-%m-%d</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#E06C75">KEEP_DAYS</span><span style="color:#56B6C2">=</span><span style="color:#98C379">30</span><span style="color:#7F848E;font-style:italic">  # 保留最近 30 天備份</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 建立備份目錄</span></span>
+<span class="line"><span style="color:#61AFEF">mkdir</span><span style="color:#D19A66"> -p</span><span style="color:#98C379"> "</span><span style="color:#E06C75">$BACKUP_DIR</span><span style="color:#98C379">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 壓縮備份</span></span>
+<span class="line"><span style="color:#61AFEF">tar</span><span style="color:#D19A66"> -czf</span><span style="color:#98C379"> "</span><span style="color:#E06C75">$BACKUP_DIR</span><span style="color:#98C379">/vault-</span><span style="color:#E06C75">$DATE</span><span style="color:#98C379">.tar.gz"</span><span style="color:#D19A66">   --exclude=</span><span style="color:#98C379">"</span><span style="color:#E06C75">$VAULT_PATH</span><span style="color:#98C379">/.obsidian/cache"</span><span style="color:#D19A66">   --exclude=</span><span style="color:#98C379">"</span><span style="color:#E06C75">$VAULT_PATH</span><span style="color:#98C379">/.trash"</span><span style="color:#98C379">   "</span><span style="color:#E06C75">$VAULT_PATH</span><span style="color:#98C379">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#56B6C2">echo</span><span style="color:#98C379"> "備份完成：</span><span style="color:#E06C75">$BACKUP_DIR</span><span style="color:#98C379">/vault-</span><span style="color:#E06C75">$DATE</span><span style="color:#98C379">.tar.gz"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 清理超過 30 天的舊備份</span></span>
+<span class="line"><span style="color:#61AFEF">find</span><span style="color:#98C379"> "</span><span style="color:#E06C75">$BACKUP_DIR</span><span style="color:#98C379">"</span><span style="color:#D19A66"> -name</span><span style="color:#98C379"> "vault-*.tar.gz"</span><span style="color:#D19A66"> -mtime</span><span style="color:#98C379"> +</span><span style="color:#E06C75">$KEEP_DAYS</span><span style="color:#D19A66"> -delete</span></span>
+<span class="line"><span style="color:#56B6C2">echo</span><span style="color:#98C379"> "已清理超過 </span><span style="color:#E06C75">$KEEP_DAYS</span><span style="color:#98C379"> 天的舊備份"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># crontab 設定（每天凌晨 3 點執行）：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 0 3 * * * /bin/bash ~/scripts/backup-vault.sh >> ~/logs/vault-backup.log 2>&#x26;1</span></span></code></pre> </div> </div>   <div class="call warn"> <p> <strong>重要：</strong>定期測試備份的可還原性。每個月花 5 分鐘，從備份中還原一個測試資料夾，
+      確認備份真的可以用，而不只是「存在那裡」。
+</p> </div> <h2>行動裝置同步實戰建議</h2> <p>
+行動端（iOS / Android）的同步體驗與電腦端有些差異，以下是幾個常見問題與對應方法：
+</p> <ul> <li> <strong>iOS + iCloud：</strong>在 iOS 版 Obsidian 開啟 Vault 時，選擇「Store in iCloud」。
+      注意：切換到其他 App 後，iCloud 可能需要數秒才會同步完成，回來時要等一下再編輯。
+</li> <li> <strong>iOS + Remotely Save：</strong>每次打開 Obsidian，插件會自動觸發同步。
+      若想確保同步完成，可以在插件設定中開啟「Sync on start」與「Sync on close」。
+</li> <li> <strong>Android + Syncthing：</strong>安裝 Syncthing-Fork（免費），設定 Vault 資料夾為同步目標。
+      在背景持續運行時需要允許電池優化豁免。
+</li> <li> <strong>Android + Obsidian Git：</strong>安裝 Termux + Git，或使用 MGit App 手動 pull/push。
+      適合有技術背景的用戶。
+</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch17/03-infographic-mobile-sync-tips.png" alt="四種行動裝置同步組合實戰提示：iOS+iCloud 切換 App 後需等待同步、iOS+Remotely Save 開啟 Sync on start/close、Android+Syncthing 允許電池優化豁免、Android+Obsidian Git 用 Termux+Git 或 MGit" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 17-3：四種行動端組合各有一個容易忽略的細節，設定前先確認自己屬於哪一種。</figcaption> </figure> <div class="call info"> <p> <strong>行動端建議：</strong>如果主要在電腦工作、手機只是查閱，可以選「唯讀同步」策略——
+      手機只 pull 不 push，避免在小螢幕上誤觸修改導致衝突。
+</p> </div> <h2>完整功能矩陣：五大方案一目了然</h2> <p>
+在決定方案前，先看這張完整的功能矩陣——涵蓋 iOS 支援、端到端加密、版本歷史、插件設定同步、費用與設定難度六個維度：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-weight="bold" font-size="18px" fill="var(--accent)">同步方案功能矩陣比較</text>
+
+    <!-- Header row -->
+    <rect x="10" y="40" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+    <text x="85" y="63" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">功能 / 方案</text>
+
+    <rect x="162" y="40" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="4" />
+    <text x="221" y="58" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">Obsidian</text>
+    <text x="221" y="71" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">Sync</text>
+
+    <rect x="282" y="40" width="118" height="36" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+    <text x="341" y="58" text-anchor="middle" font-size="14px" fill="var(--text)">iCloud /</text>
+    <text x="341" y="71" text-anchor="middle" font-size="14px" fill="var(--text)">OneDrive</text>
+
+    <rect x="402" y="40" width="118" height="36" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+    <text x="461" y="58" text-anchor="middle" font-size="14px" fill="var(--text)">Remotely</text>
+    <text x="461" y="71" text-anchor="middle" font-size="14px" fill="var(--text)">Save</text>
+
+    <rect x="522" y="40" width="118" height="36" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+    <text x="581" y="63" text-anchor="middle" font-size="14px" fill="var(--text)">Syncthing</text>
+
+    <rect x="642" y="40" width="148" height="36" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+    <text x="716" y="63" text-anchor="middle" font-size="14px" fill="var(--text)">Obsidian Git</text>
+
+    <!-- Rows -->
+    <!-- Row 1: iOS -->
+    <rect x="10" y="78" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="101" text-anchor="middle" font-size="14px" fill="var(--text)">iOS 支援</text>
+    <rect x="162" y="78" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="101" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 完整</text>
+    <rect x="282" y="78" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="101" text-anchor="middle" font-size="16px" fill="#ff9800">⚠️ 不穩定</text>
+    <rect x="402" y="78" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="101" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 完整</text>
+    <rect x="522" y="78" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="101" text-anchor="middle" font-size="16px" fill="#ff9800">⚠️ 付費App</text>
+    <rect x="642" y="78" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="101" text-anchor="middle" font-size="16px" fill="#f44336">❌ 困難</text>
+
+    <!-- Row 2: End-to-End Encryption -->
+    <rect x="10" y="116" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="139" text-anchor="middle" font-size="14px" fill="var(--text)">端到端加密</text>
+    <rect x="162" y="116" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="139" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 內建</text>
+    <rect x="282" y="116" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="139" text-anchor="middle" font-size="16px" fill="#ff9800">⚠️ 傳輸加密</text>
+    <rect x="402" y="116" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="139" text-anchor="middle" font-size="16px" fill="#ff9800">⚠️ 傳輸加密</text>
+    <rect x="522" y="116" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="139" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 本地P2P</text>
+    <rect x="642" y="116" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="139" text-anchor="middle" font-size="16px" fill="#4caf50">✅ Private Repo</text>
+
+    <!-- Row 3: Version History -->
+    <rect x="10" y="154" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="177" text-anchor="middle" font-size="14px" fill="var(--text)">版本歷史</text>
+    <rect x="162" y="154" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="177" text-anchor="middle" font-size="15px" fill="#4caf50">✅ 1 年</text>
+    <rect x="282" y="154" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="177" text-anchor="middle" font-size="15px" fill="#ff9800">⚠️ 有限</text>
+    <rect x="402" y="154" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="177" text-anchor="middle" font-size="15px" fill="#f44336">❌ 無</text>
+    <rect x="522" y="154" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="177" text-anchor="middle" font-size="15px" fill="#ff9800">⚠️ 可設定</text>
+    <rect x="642" y="154" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="177" text-anchor="middle" font-size="15px" fill="#4caf50">✅ 完整 Git log</text>
+
+    <!-- Row 4: Plugin sync -->
+    <rect x="10" y="192" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="215" text-anchor="middle" font-size="14px" fill="var(--text)">插件設定同步</text>
+    <rect x="162" y="192" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="215" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 一鍵</text>
+    <rect x="282" y="192" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="215" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 隨資料夾</text>
+    <rect x="402" y="192" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="215" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 隨資料夾</text>
+    <rect x="522" y="192" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="215" text-anchor="middle" font-size="16px" fill="#4caf50">✅ 隨資料夾</text>
+    <rect x="642" y="192" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="215" text-anchor="middle" font-size="16px" fill="#4caf50">✅ .obsidian/</text>
+
+    <!-- Row 5: Cost -->
+    <rect x="10" y="230" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="253" text-anchor="middle" font-size="14px" fill="var(--text)">費用</text>
+    <rect x="162" y="230" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="253" text-anchor="middle" font-size="15px" fill="var(--accent)">$4/月起</text>
+    <rect x="282" y="230" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="253" text-anchor="middle" font-size="15px" fill="#4caf50">免費起</text>
+    <rect x="402" y="230" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="253" text-anchor="middle" font-size="15px" fill="#4caf50">免費</text>
+    <rect x="522" y="230" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="253" text-anchor="middle" font-size="15px" fill="#4caf50">免費*</text>
+    <rect x="642" y="230" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="253" text-anchor="middle" font-size="15px" fill="#4caf50">免費</text>
+
+    <!-- Row 6: Setup difficulty -->
+    <rect x="10" y="268" width="150" height="36" fill="var(--bg2)" stroke="var(--border)" rx="2" />
+    <text x="85" y="291" text-anchor="middle" font-size="14px" fill="var(--text)">設定難度</text>
+    <rect x="162" y="268" width="118" height="36" fill="var(--abg)" stroke="var(--accent)" rx="2" />
+    <text x="221" y="291" text-anchor="middle" font-size="15px" fill="var(--text)">★☆☆☆☆</text>
+    <rect x="282" y="268" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="341" y="291" text-anchor="middle" font-size="15px" fill="var(--text)">★☆☆☆☆</text>
+    <rect x="402" y="268" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="461" y="291" text-anchor="middle" font-size="15px" fill="var(--text)">★★☆☆☆</text>
+    <rect x="522" y="268" width="118" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="581" y="291" text-anchor="middle" font-size="15px" fill="var(--text)">★★★☆☆</text>
+    <rect x="642" y="268" width="148" height="36" fill="var(--bg)" stroke="var(--border)" rx="2" />
+    <text x="716" y="291" text-anchor="middle" font-size="15px" fill="var(--text)">★★★★☆</text>
+
+    <text x="400" y="340" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">* Syncthing iOS 端需購買 MobiusSync（約 $7 美元一次性）</text>
+  </g>
+</svg>
+ <figcaption>六維度功能矩陣：綠色代表完整支援、橘色代表有條件支援、紅色代表不支援或困難。</figcaption> </figure> <div class="call info"> <p> <strong>矩陣解讀：</strong>Obsidian Sync 是唯一在所有維度都「開箱即用」的方案；
+      Obsidian Git 在版本歷史與加密方面最強，但 iOS 端支援幾乎為零；
+      Remotely Save 是「免費全平台」的最佳平衡點。
+</p> </div> <h2>Syncthing 詳解：P2P 架構與設定</h2> <p>
+Syncthing 的核心優勢是<strong>去中心化</strong>——裝置之間直接同步，沒有任何中間伺服器。
+    這意味著你的筆記從未離開你的裝置網路，隱私保護達到最高等級。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch17-st" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch17-st2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-weight="bold" font-size="18px" fill="var(--accent)">Syncthing P2P 同步架構</text>
+
+    <!-- Device: Mac -->
+    <rect x="20" y="55" width="160" height="180" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="10" />
+    <text x="100" y="82" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--accent)">Mac / PC</text>
+    <rect x="40" y="95" width="120" height="30" fill="var(--abg)" stroke="var(--accent)" rx="5" />
+    <text x="100" y="115" text-anchor="middle" font-size="15px" fill="var(--accent)">Obsidian Vault</text>
+    <rect x="32" y="135" width="136" height="28" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="100" y="154" text-anchor="middle" font-size="14px" fill="var(--text)">Syncthing Daemon</text>
+    <rect x="40" y="173" width="120" height="28" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="100" y="192" text-anchor="middle" font-size="14px" fill="var(--text)">Web UI :8384</text>
+    <text x="100" y="222" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">Device ID: AAAA-BBBB</text>
+
+    <!-- Device: Android -->
+    <rect x="320" y="55" width="160" height="180" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="400" y="82" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">Android</text>
+    <rect x="340" y="95" width="120" height="30" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="400" y="115" text-anchor="middle" font-size="15px" fill="var(--text)">Obsidian App</text>
+    <rect x="340" y="135" width="120" height="28" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="400" y="154" text-anchor="middle" font-size="14px" fill="var(--text)">Syncthing-Fork</text>
+    <rect x="336" y="173" width="128" height="28" fill="var(--abg)" stroke="var(--accent)" rx="5" />
+    <text x="400" y="192" text-anchor="middle" font-size="14px" fill="var(--accent)">免費（Play Store）</text>
+    <text x="400" y="222" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">Device ID: CCCC-DDDD</text>
+
+    <!-- Device: iOS -->
+    <rect x="620" y="55" width="160" height="180" fill="var(--bg2)" stroke="var(--border)" rx="10" />
+    <text x="700" y="82" text-anchor="middle" font-weight="bold" font-size="16px" fill="var(--text)">iPhone / iPad</text>
+    <rect x="640" y="95" width="120" height="30" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="700" y="115" text-anchor="middle" font-size="15px" fill="var(--text)">Obsidian App</text>
+    <rect x="640" y="135" width="120" height="28" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="700" y="154" text-anchor="middle" font-size="14px" fill="var(--text)">MobiusSync</text>
+    <rect x="640" y="173" width="120" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+    <text x="700" y="186" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">$7 一次性</text>
+    <text x="700" y="199" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">（App Store）</text>
+    <text x="700" y="222" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">Device ID: EEEE-FFFF</text>
+
+    <!-- Arrows: bidirectional P2P -->
+    <line x1="182" y1="150" x2="318" y2="150" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch17-st)" />
+    <line x1="318" y1="160" x2="182" y2="160" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch17-st)" />
+    <text x="250" y="143" text-anchor="middle" font-size="13px" fill="var(--accent)">P2P 直連</text>
+
+    <line x1="482" y1="150" x2="618" y2="150" stroke="var(--border)" stroke-width="2" marker-end="url(#arr-ch17-st2)" />
+    <line x1="618" y1="160" x2="482" y2="160" stroke="var(--border)" stroke-width="2" marker-end="url(#arr-ch17-st2)" />
+    <text x="550" y="143" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">P2P 直連</text>
+
+    <!-- Note at bottom -->
+    <rect x="100" y="255" width="600" height="32" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="400" y="270" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">不經過任何雲端伺服器 · 區域網路速度接近滿速 · 需要兩台裝置同時在線</text>
+    <text x="400" y="282" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">若不在同一 WiFi，自動透過 Syncthing Relay 伺服器中繼（仍然端到端加密）</text>
+  </g>
+</svg>
+ <figcaption>Syncthing P2P 架構：Mac、Android、iOS 三裝置直連同步，不經過任何雲端中繼（同一 WiFi 下）。</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Syncthing 安裝與設定（Linux / macOS / Windows）
+
+# 1. 下載並啟動 Syncthing（以 macOS Homebrew 為例）
+brew install syncthing
+brew services start syncthing
+# 開啟 Web UI：http://127.0.0.1:8384
+
+# 2. 新增裝置
+# → Web UI → Actions → Show ID
+# 把這串 Device ID 輸入到另一台裝置
+
+# 3. 在 Web UI 新增資料夾
+# Folder Path: /Users/你的帳號/Documents/ObsidianVault
+# Folder Type: Send &amp; Receive
+# 勾選想要共享的裝置
+
+# 4. Android 端（Syncthing-Fork）
+# Play Store 搜尋 Syncthing-Fork（免費）
+# 新增裝置 → 輸入電腦的 Device ID
+# 新增資料夾 → 選手機上的同步路徑
+
+# 5. iOS 端（MobiusSync，約 $7 美元一次性）
+# App Store 搜尋 MobiusSync
+# 步驟同 Android
+
+# ── 衝突排除技巧 ──
+# 若出現 .sync-conflict 檔，代表兩台同時修改
+# 先關閉 Obsidian，手動合併後刪除衝突副本
+# 建議設定：File Versioning → Staggered（保留最近 10 份）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Syncthing 安裝與設定（Linux / macOS / Windows）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 1. 下載並啟動 Syncthing（以 macOS Homebrew 為例）</span></span>
+<span class="line"><span style="color:#61AFEF">brew</span><span style="color:#98C379"> install</span><span style="color:#98C379"> syncthing</span></span>
+<span class="line"><span style="color:#61AFEF">brew</span><span style="color:#98C379"> services</span><span style="color:#98C379"> start</span><span style="color:#98C379"> syncthing</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 開啟 Web UI：http://127.0.0.1:8384</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 2. 新增裝置</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># → Web UI → Actions → Show ID</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 把這串 Device ID 輸入到另一台裝置</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 3. 在 Web UI 新增資料夾</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Folder Path: /Users/你的帳號/Documents/ObsidianVault</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Folder Type: Send &#x26; Receive</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 勾選想要共享的裝置</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 4. Android 端（Syncthing-Fork）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Play Store 搜尋 Syncthing-Fork（免費）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 新增裝置 → 輸入電腦的 Device ID</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 新增資料夾 → 選手機上的同步路徑</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 5. iOS 端（MobiusSync，約 $7 美元一次性）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># App Store 搜尋 MobiusSync</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 步驟同 Android</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ── 衝突排除技巧 ──</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 若出現 .sync-conflict 檔，代表兩台同時修改</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 先關閉 Obsidian，手動合併後刪除衝突副本</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 建議設定：File Versioning → Staggered（保留最近 10 份）</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>Syncthing 使用訣竅：</strong>在 Web UI 設定 <code>File Versioning → Staggered</code>，
+      可以保留最近數份歷史版本。若某次衝突造成筆記損毀，可以從版本歷史還原，
+      功能類似 Obsidian Sync 的 Version History。
+</p> </div> <h2>Obsidian Sync 進階：版本歷史與加密設定</h2> <p>
+付費使用者常常沒有充分利用 Obsidian Sync 的進階功能。
+<strong>版本歷史（Version History）</strong>讓你可以回溯到任意時間點的筆記狀態，
+    而<strong>端到端加密密碼</strong>確保即使 Obsidian 伺服器遭入侵，你的資料也無法被解讀。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Obsidian Sync 進階設定（CLI 與 API 層級）
+
+# Obsidian Sync 儲存庫列表（官方 API，僅供參考）
+# GET https://sync.obsidian.md/vault/list
+# Authorization: Bearer <your_api_key>
+
+# 選擇性同步設定（在 Obsidian 設定 → 同步）
+# 可個別開關以下項目同步：
+# ✅ 插件設定（Settings files）
+# ✅ 插件本體（Installed plugins）
+# ✅ 佈景主題（Themes）
+# ✅ 片段樣式（CSS snippets）
+# ❌ 工作區佈局（Workspace layout）← 建議關閉，避免視窗狀態互相覆蓋
+
+# 版本歷史回溯（Version History）
+# 官方 Sync 保留最近 1 年的版本歷史
+# 操作方式：右鍵點擊筆記 → View version history
+# 可逐版本預覽 diff，選擇恢復到任意時間點
+
+# 端到端加密密碼（Encryption password）
+# 設定後，雲端伺服器無法解讀你的筆記內容
+# 重要：密碼遺失無法恢復，請存入密碼管理器！
+# 建議：使用 Bitwarden / 1Password 保存" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Sync 進階設定（CLI 與 API 層級）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Sync 儲存庫列表（官方 API，僅供參考）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># GET https://sync.obsidian.md/vault/list</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Authorization: Bearer &#x3C;your_api_key></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 選擇性同步設定（在 Obsidian 設定 → 同步）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 可個別開關以下項目同步：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ✅ 插件設定（Settings files）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ✅ 插件本體（Installed plugins）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ✅ 佈景主題（Themes）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ✅ 片段樣式（CSS snippets）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># ❌ 工作區佈局（Workspace layout）← 建議關閉，避免視窗狀態互相覆蓋</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 版本歷史回溯（Version History）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 官方 Sync 保留最近 1 年的版本歷史</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 操作方式：右鍵點擊筆記 → View version history</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 可逐版本預覽 diff，選擇恢復到任意時間點</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 端到端加密密碼（Encryption password）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 設定後，雲端伺服器無法解讀你的筆記內容</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 重要：密碼遺失無法恢復，請存入密碼管理器！</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 建議：使用 Bitwarden / 1Password 保存</span></span></code></pre> </div> </div>   <div class="call warn"> <p> <strong>加密密碼警告：</strong>啟用端到端加密後，<strong>密碼遺失即永久無法解密</strong>。
+      請務必在密碼管理器（如 Bitwarden、1Password）中儲存此密碼，
+      且所有裝置都需要輸入相同密碼才能解密同步內容。
+</p> </div> <h2>Git Hooks：讓版本控制更聰明</h2> <p>
+Git 的 Hooks 機制讓你可以在每次 commit 前後自動執行腳本。
+    對 Obsidian Vault 來說，最實用的是 <code>pre-commit</code> hook——
+    可以自動偵測敏感資訊、更新 frontmatter 的修改日期，甚至觸發 Lint 檢查。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="#!/bin/bash
+# Obsidian Vault Git Hooks：自動化品質把關
+# 放在 .git/hooks/pre-commit，chmod +x 後生效
+
+echo &quot;🔍 Pre-commit: 檢查筆記品質...&quot;
+
+# 1. 禁止提交包含私密關鍵字的筆記
+SECRETS_PATTERN=&quot;(password|secret|api.key|token)s*[:=]s*['&quot;]?[a-zA-Z0-9]&quot;
+if git diff --cached --name-only | xargs grep -lEi &quot;$SECRETS_PATTERN&quot; 2>/dev/null; then
+  echo &quot;❌ 偵測到可能的敏感資訊！請確認後再提交。&quot;
+  exit 1
+fi
+
+# 2. 自動更新 modified 日期（frontmatter）
+for file in $(git diff --cached --name-only | grep &quot;.md$&quot;); do
+  if [ -f &quot;$file&quot; ]; then
+    TODAY=$(date +%Y-%m-%d)
+    # 若 frontmatter 有 modified 欄位則更新
+    sed -i.bak &quot;s/^modified: .*/modified: $TODAY/&quot; &quot;$file&quot;
+    rm -f &quot;$file.bak&quot;
+    git add &quot;$file&quot;
+  fi
+done
+
+echo &quot;✅ Pre-commit 檢查通過&quot;
+exit 0
+
+# ── 安裝方式 ──
+# cp pre-commit .git/hooks/pre-commit
+# chmod +x .git/hooks/pre-commit" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic">#!/bin/bash</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian Vault Git Hooks：自動化品質把關</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 放在 .git/hooks/pre-commit，chmod +x 後生效</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#56B6C2">echo</span><span style="color:#98C379"> "🔍 Pre-commit: 檢查筆記品質..."</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 1. 禁止提交包含私密關鍵字的筆記</span></span>
+<span class="line"><span style="color:#E06C75">SECRETS_PATTERN</span><span style="color:#56B6C2">=</span><span style="color:#98C379">"(password|secret|api.key|token)s*[:=]s*['"</span><span style="color:#ABB2BF">]?[a-zA-Z0-9]</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">if git diff --cached --name-only | xargs grep -lEi "</span><span style="color:#E06C75">$SECRETS_PATTERN</span><span style="color:#98C379">" 2>/dev/null; then</span></span>
+<span class="line"><span style="color:#98C379">  echo "</span><span style="color:#ABB2BF">❌ 偵測到可能的敏感資訊！請確認後再提交。</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">  exit 1</span></span>
+<span class="line"><span style="color:#98C379">fi</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379"># 2. 自動更新 modified 日期（frontmatter）</span></span>
+<span class="line"><span style="color:#98C379">for file in $(</span><span style="color:#61AFEF">git</span><span style="color:#98C379"> diff </span><span style="color:#D19A66">--cached</span><span style="color:#D19A66"> --name-only</span><span style="color:#ABB2BF"> |</span><span style="color:#61AFEF"> grep</span><span style="color:#98C379"> ".md$"); do</span></span>
+<span class="line"><span style="color:#98C379">  if [ -f "</span><span style="color:#E06C75">$file</span><span style="color:#98C379">" ]; then</span></span>
+<span class="line"><span style="color:#98C379">    TODAY=$(</span><span style="color:#61AFEF">date</span><span style="color:#98C379"> +%Y-%m-%d)</span></span>
+<span class="line"><span style="color:#98C379">    # 若 frontmatter 有 modified 欄位則更新</span></span>
+<span class="line"><span style="color:#98C379">    sed -i.bak "</span><span style="color:#ABB2BF">s/^modified: .*/modified: </span><span style="color:#E06C75">$TODAY</span><span style="color:#ABB2BF">/</span><span style="color:#98C379">" "</span><span style="color:#E06C75">$file</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">    rm -f "</span><span style="color:#E06C75">$file</span><span style="color:#ABB2BF">.bak</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">    git add "</span><span style="color:#E06C75">$file</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">  fi</span></span>
+<span class="line"><span style="color:#98C379">done</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379">echo "</span><span style="color:#ABB2BF">✅ Pre-commit 檢查通過</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#98C379">exit 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379"># ── 安裝方式 ──</span></span>
+<span class="line"><span style="color:#98C379"># cp pre-commit .git/hooks/pre-commit</span></span>
+<span class="line"><span style="color:#98C379"># chmod +x .git/hooks/pre-commit</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>自動更新 modified 日期：</strong>搭配 Templater 插件，
+      可以在筆記 frontmatter 中維護 <code>created</code> 與 <code>modified</code> 兩個欄位。
+      透過 pre-commit hook 自動更新 <code>modified</code>，讓你的 Git 歷史同時也是完整的筆記時間軸。
+</p> </div> <h2>小結</h2> <p>
+同步方案沒有唯一正確答案，只有最適合你當前習慣的選擇。
+    建議從最簡單的方案開始——免費用戶先試 Remotely Save + 堅果雲，
+    如果覺得配置麻煩就升級 Obsidian Sync，如果你是開發者就直接上 Git。
+</p> <p>
+無論選哪種同步方案，記得額外設定獨立備份。同步確保「即時一致」，備份確保「可以回頭」，兩者缺一不可。
+</p> <p>
+至此，你已經掌握了 Obsidian 從基礎筆記、插件生態、AI 整合到跨裝置同步的完整工作流。
+    知識管理系統的終極目標不是「工具最完美」，而是「你會持續使用」。
+    選一個讓你感覺自然的組合，開始積累，知識自會隨時間複利增長。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span> </a> <a href="/obsidian/ch18-task-scheduling" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

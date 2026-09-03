@@ -1,0 +1,605 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>進階剪藏：自訂模板與 AI 自動摘要 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Web Clipper 的 AI 解釋器、模板觸發器、高亮同步等進階功能，讓每一次剪藏都比上一次更聰明。本章深入介紹 AI 變數設計、多場景模板策略，以及中文增強版對 B 站與飛書的支援。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 13 章 · Part 4：Web Clipper 與資訊收集</span> <h1>進階剪藏：自訂模板與 AI 自動摘要</h1> <p class="cdesc">讓 AI 在剪藏的瞬間就讀懂你的資料，而不是等你以後有空再整理</p> <figure class="svg-fig"> <img src="/obsidian/img/ch13/01-framework-ai-clipper-interpreter.png" alt="Web Clipper 進階剪藏透過 AI 解釋器與 Schema Interpreter 生成結構化筆記" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 13-0：進階剪藏的核心框架——從普通變數到 AI 解釋器、Schema Interpreter 與 Dataview-ready 結構化筆記。</figcaption> </figure> <h2>從「存進去」到「讀懂再存」</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-ai" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--text)" opacity="0.7" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- URL Input -->
+    <rect x="20" y="90" width="175" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="107" y="115" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">打開目標網頁</text>
+    <text x="107" y="137" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">點擊 Web Clipper 圖示</text>
+    <!-- Arrow to trigger -->
+    <line x1="195" y1="120" x2="220" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <!-- Template Trigger Router -->
+    <rect x="220" y="70" width="170" height="100" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="305" y="95" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">模板觸發器路由</text>
+    <line x1="230" y1="105" x2="380" y2="105" stroke="var(--border)" stroke-width="1" />
+    <text x="305" y="128" text-anchor="middle" font-size="15px" fill="var(--text)">比對 URL 規則</text>
+    <text x="305" y="148" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">自動選擇對應模板</text>
+    <!-- Three branches -->
+    <line x1="390" y1="100" x2="430" y2="50" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="390" y1="120" x2="430" y2="120" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="390" y1="140" x2="430" y2="190" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <!-- Template A -->
+    <rect x="430" y="28" width="150" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="505" y="53" text-anchor="middle" font-size="15px" fill="var(--text)">技術文章模板</text>
+    <!-- Template B -->
+    <rect x="430" y="98" width="150" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="505" y="123" text-anchor="middle" font-size="15px" fill="var(--text)">YouTube 影片模板</text>
+    <!-- Template C -->
+    <rect x="430" y="168" width="150" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="505" y="193" text-anchor="middle" font-size="15px" fill="var(--text)">學術論文模板</text>
+    <!-- Arrow to AI -->
+    <line x1="580" y1="50" x2="620" y2="100" stroke="var(--text)" opacity="0.4" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-ai)" />
+    <line x1="580" y1="118" x2="620" y2="118" stroke="var(--text)" opacity="0.4" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-ai)" />
+    <line x1="580" y1="188" x2="620" y2="138" stroke="var(--text)" opacity="0.4" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-ai)" />
+    <!-- AI Output box -->
+    <rect x="620" y="70" width="155" height="100" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="697" y="95" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">AI 解釋器輸出</text>
+    <line x1="630" y1="105" x2="765" y2="105" stroke="var(--border)" stroke-width="1" />
+    <text x="697" y="128" text-anchor="middle" font-size="15px" fill="var(--text)">{{ai: prompt}}</text>
+    <text x="697" y="152" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">摘要 / 標籤 / 翻譯</text>
+  </g>
+</svg>
+ <figcaption>這張圖表展示了進階的 Web Clipper 技巧，包含自訂抓取規則、屬性對應與正則表達式的應用。</figcaption> </figure> <p>
+上一章我們設定好了 Web Clipper 的基礎流程：點一下，進 Vault。
+    但「進了 Vault 放著」和「進了 Vault 就有摘要、有標籤、有脈絡」，
+    是完全不同的知識管理體驗。
+</p> <p>
+Web Clipper 的進階功能核心是 <strong>AI 解釋器（Interpreter）</strong>——
+    它讓你的模板不只能抓取網頁的靜態資訊，還能在剪藏時即時呼叫大語言模型，
+    用自然語言指令對內容做摘要、翻譯、重新結構化。
+    本章從解釋器的設定開始，一路到多場景模板設計和中文平台的進階支援。
+</p> <h2>AI 解釋器：讓 LLM 參與剪藏過程</h2> <h3>普通變數 vs AI 解釋器變數</h3> <p>
+Web Clipper 的變數分兩類，理解這個差異是設計好模板的關鍵：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// 普通變數：插件從網頁 HTML 直接抓取
+{{title}}     → 讀取 <title> 標籤
+{{author}}    → 讀取 meta[name=&quot;author&quot;]
+
+// AI 解釋器變數：插件把頁面內容送給 LLM，由 AI 計算填入
+{{ai:請用 3 點條列這篇文章的核心論點，每點不超過 20 字}}
+{{ai:如果這篇文章是一本書的某章，它的章節標題會是什麼？}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>// 普通變數：插件從網頁 HTML 直接抓取</span></span>
+<span class="line"><span>{{title}}     → 讀取 &#x3C;title> 標籤</span></span>
+<span class="line"><span>{{author}}    → 讀取 meta[name="author"]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// AI 解釋器變數：插件把頁面內容送給 LLM，由 AI 計算填入</span></span>
+<span class="line"><span>{{ai:請用 3 點條列這篇文章的核心論點，每點不超過 20 字}}</span></span>
+<span class="line"><span>{{ai:如果這篇文章是一本書的某章，它的章節標題會是什麼？}}</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <p>
+普通變數（<code>&#123;&#123;title&#125;&#125;</code>、<code>&#123;&#123;url&#125;&#125;</code>）
+    是從網頁 HTML 直接讀取固定欄位，速度快、不需要 API Key。
+    AI 解釋器變數（<code>&#123;&#123;ai:...&#125;&#125;</code>）則是把整個頁面內容送給你指定的 LLM，
+    讓 AI「讀懂」之後填入這個位置——相當於每次剪藏都有一個 AI 助理幫你預處理。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch13/02-comparison-static-vs-ai-variable.png" alt="普通變數與 AI 解釋器變數對比：普通變數直接讀取 HTML、速度快、不需 API Key；AI 解釋器變數送給 LLM 推斷、需要 API Key、能理解語意" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 13-2：普通變數快而簡單，AI 解釋器變數慢但能理解語意——模板設計時依欄位性質混用兩者。</figcaption> </figure> <h3>開啟並設定解釋器</h3> <ol> <li>點擊瀏覽器工具列的 Web Clipper 圖示</li> <li>點右上角齒輪進入設定</li> <li>選擇「<strong>Interpreter</strong>」頁籤（預設關閉，需手動啟用）</li> <li>點「Add provider」新增 AI 供應商，填入 API Key</li> <li>選擇模型</li> </ol> <div class="call info"> <p><strong>選哪個模型？</strong> 強烈建議選小型、速度快的模型，例如 <strong>Gemini 1.5 Flash</strong> 或 <strong>Claude Haiku</strong>。每次剪藏都會呼叫 API，如果用 GPT-4o 等大模型，等待時間會長達數十秒，嚴重影響使用意願。小模型每篇成本不到 0.01 美元，速度卻快 3-5 倍。如果你有架設 Ollama 本地模型（第 15 章），也可以完全免費且零延遲。</p> </div> <h2>模板觸發器：對的網站，自動套對的模板</h2> <p>
+你可能有多個模板：技術文章模板、YouTube 影片模板、學術論文模板……
+    每次剪藏都要手動切換，累積下來是不小的摩擦力。
+<strong>模板觸發器（Template Triggers）</strong>允許你為每個模板設定 URL 規則，
+    打開符合規則的網頁時，Web Clipper 會自動預選對應的模板。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// 模板觸發器範例（在模板設定的頂部配置）
+
+// 視頻模板（YouTube + B站）
+URL 規則 1：youtube.com/watch
+URL 規則 2：bilibili.com/video
+
+// 學術論文模板
+URL 規則 1：arxiv.org/abs
+URL 規則 2：pubmed.ncbi.nlm.nih.gov
+
+// 公眾號模板
+URL 規則：mp.weixin.qq.com" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>// 模板觸發器範例（在模板設定的頂部配置）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// 視頻模板（YouTube + B站）</span></span>
+<span class="line"><span>URL 規則 1：youtube.com/watch</span></span>
+<span class="line"><span>URL 規則 2：bilibili.com/video</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// 學術論文模板</span></span>
+<span class="line"><span>URL 規則 1：arxiv.org/abs</span></span>
+<span class="line"><span>URL 規則 2：pubmed.ncbi.nlm.nih.gov</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// 公眾號模板</span></span>
+<span class="line"><span>URL 規則：mp.weixin.qq.com</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>觸發器設定位置</strong>：在模板編輯頁面的最頂部，有一個「Template triggers」欄位，可以新增多條 URL 規則（支援部分字串比對）。同一個模板可以配多條規則；如果多個模板的觸發器都符合，以列表中排序最前面的模板優先。</p> </div> <h2>高亮文本同步：邊讀邊標記，自動進 Vault</h2> <p>
+Web Clipper 有一個常被忽略的功能：在網頁上直接用滑鼠選取文字，
+    點擊 Web Clipper 的高亮按鈕，這段文字就會被標記。
+    當你最後執行「Add to Obsidian」時，所有高亮的段落會自動彙整到模板的
+<code>&#123;&#123;highlights&#125;&#125;</code> 變數中。
+</p> <p>
+這個工作流的好處是：
+</p> <ul> <li>讀文章時一邊劃重點，不需要切換視窗</li> <li>剪藏後笔記裡已經有「你認為重要的段落」，不必再回頭整理</li> <li>搭配 AI 變數，可以讓 AI 只針對你高亮的部分生成摘要，而不是整篇文章</li> </ul> <div class="call info"> <p><strong>進階用法</strong>：在模板中同時放 <code>&#123;&#123;highlights&#125;&#125;</code> 和 <code>&#123;&#123;content&#125;&#125;</code>，並用 AI 變數 <code>&#123;&#123;ai:根據以下高亮段落，推斷這篇文章對我最有用的應用場景&#125;&#125;</code>，讓 AI 只分析你標記的部分，節省 token 又更精準。</p> </div> <h2>組合技：沉浸式翻譯 + Web Clipper</h2> <p>
+如果你習慣使用「<strong>沉浸式翻譯</strong>」瀏覽器擴充功能閱讀英文文章，
+    有一個省時技巧：不需要在 Web Clipper 設定翻譯解釋器，
+    只需在沉浸式翻譯開啟的頁面直接使用 Web Clipper——
+    它會同時抓取原文和翻譯後的中文，讓筆記裡同時保留雙語版本。
+</p> <p>
+這個方式比在 Web Clipper 內設定翻譯 AI 變數更快，因為：
+</p> <ul> <li>沉浸式翻譯已經在頁面渲染翻譯結果，Web Clipper 直接抓取 HTML，不需額外 API 呼叫</li> <li>翻譯品質可由沉浸式翻譯的設定控制（支援 DeepL、Claude 等引擎）</li> <li>剪藏速度更快，沒有等待 AI 回應的延遲</li> </ul> <h2>多場景模板設計實戰</h2> <p>以下是兩個可以直接使用的完整模板範例：</p> <h3>技術文章模板</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: &quot;{{title}}&quot;
+source: &quot;{{url}}&quot;
+author: &quot;{{author}}&quot;
+created: {{date:YYYY-MM-DD}}
+domain: &quot;{{domain}}&quot;
+tags:
+  - tech
+  - {{ai:從文章內容提取 1-2 個技術關鍵詞，用逗號分隔}}
+---
+
+> [!abstract] TL;DR
+> {{ai:用繁體中文，一句話說明這篇文章解決了什麼問題}}
+
+> [!info] 三點精華
+> {{ai:條列這篇文章最值得記住的三個技術觀點，每點一行}}
+
+## 原文筆記
+
+{{highlights}}
+
+---
+
+{{content}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{title}}"</span></span>
+<span class="line"><span style="color:#E06C75">source</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{url}}"</span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{author}}"</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: {{</span><span style="color:#98C379">date:YYYY-MM-DD</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#E06C75">domain</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{domain}}"</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">tech</span></span>
+<span class="line"><span style="color:#ABB2BF">  - {{</span><span style="color:#98C379">ai:從文章內容提取 1-2 個技術關鍵詞，用逗號分隔</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> [!abstract] TL;DR</span></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> {{ai:用繁體中文，一句話說明這篇文章解決了什麼問題}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> [!info] 三點精華</span></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> {{ai:條列這篇文章最值得記住的三個技術觀點，每點一行}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 原文筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#98C379">highlights</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#98C379">content</span><span style="color:#ABB2BF">}}</span></span></code></pre> </div> </div>   <h3>YouTube / 影片模板</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: &quot;{{title}}&quot;
+source: &quot;{{url}}&quot;
+channel: &quot;{{author}}&quot;
+watched: {{date:YYYY-MM-DD}}
+tags:
+  - video
+---
+
+> [!abstract] 影片摘要
+> {{ai:用繁體中文，3-4 句話總結這段影片的核心內容與最重要的觀點}}
+
+> [!tip] 可行動的重點
+> {{ai:從這段影片中，整理出 3 個觀眾可以立刻實踐的行動建議}}
+
+## 逐字稿
+
+{{content}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{title}}"</span></span>
+<span class="line"><span style="color:#E06C75">source</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{url}}"</span></span>
+<span class="line"><span style="color:#E06C75">channel</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{author}}"</span></span>
+<span class="line"><span style="color:#E06C75">watched</span><span style="color:#ABB2BF">: {{</span><span style="color:#98C379">date:YYYY-MM-DD</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">video</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> [!abstract] 影片摘要</span></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> {{ai:用繁體中文，3-4 句話總結這段影片的核心內容與最重要的觀點}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> [!tip] 可行動的重點</span></span>
+<span class="line"><span style="color:#C678DD">></span><span style="color:#FFFFFF"> {{ai:從這段影片中，整理出 3 個觀眾可以立刻實踐的行動建議}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 逐字稿</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#98C379">content</span><span style="color:#ABB2BF">}}</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>模板設計原則</strong>：AI 變數的 prompt 越具體，輸出品質越高。避免用「總結這篇文章」這種泛化指令，改用「用繁體中文，條列三個技術觀點，每點不超過 20 字」——語言、格式、數量、長度都明確，AI 的輸出才會一致。</p> </div> <h2>中文增強版：Obsidian Clipper CN</h2> <p>
+官方 Web Clipper 對中文平台的支援有限，社群開發者 Next蔡蔡 維護的
+<strong>obsidian-clipper-cn</strong>（GitHub: nextcaicai/obsidian-clipper-cn）
+    在官方版本基礎上增加了兩個重要的中文平台支援：
+</p> <h3>B 站影片支援</h3> <ul> <li>提取影片簡介、章節時間軸、完整字幕</li> <li>在 Obsidian 的 Reader Mode 中嵌入 B 站播放器，可按時間軸自訂跳轉</li> <li>搭配 AI 解釋器，可自動生成影片摘要（與 YouTube 體驗一致）</li> </ul> <h3>飛書文件支援</h3> <p>
+飛書文件需要透過 API 才能讀取結構化內容，設定流程如下：
+</p> <ol> <li>前往飛書開放平台（open.feishu.cn），建立一個「自建應用」</li> <li>為應用開通 Wiki 相關權限（<code>wiki:wiki:readonly</code> 等）</li> <li>建立版本並發布（未發布的應用無法使用 API）</li> <li>從「憑證與基礎資訊」頁面取得 <code>App ID</code> 和 <code>App Secret</code></li> <li>在 Obsidian Clipper CN 設定的底部「飛書模塊」填入這兩個值</li> </ol> <div class="call info"> <p><strong>隱私說明</strong>：App ID 和 App Secret 僅儲存在你的本機瀏覽器中，不會上傳到任何伺服器。目前飛書版本的限制是無法擷取文件中的圖片，其他文字內容可完整保存。</p> </div> <div class="call warn"> <p><strong>為什麼不合併進官方版本？</strong> 作者曾嘗試向官方提交 PR，但官方的定位是 Web Clipper 只處理其自有工具處理後的內容，因此中文平台的支援被拒絕合併。這就是為什麼需要使用獨立維護的 obsidian-clipper-cn。</p> </div> <h2>剪藏工作流的完整建議</h2> <p>
+把本章與上一章的功能串聯起來，建議的最佳實踐工作流如下：
+</p> <ol> <li><strong>設定 2-4 個情境模板</strong>（技術文章、影片、論文、社群貼文），每個模板配觸發器 URL</li> <li><strong>每個模板內放 1-2 個 AI 變數</strong>，用小型模型生成摘要，不追求面面俱到</li> <li><strong>閱讀時用高亮功能標記重點</strong>，剪藏後的筆記已包含你認為值得記錄的段落</li> <li><strong>英文內容配合沉浸式翻譯</strong>，同時保留原文與中文翻譯</li> <li><strong>中文平台（B 站、飛書）用 obsidian-clipper-cn</strong></li> <li>定期用 Obsidian Base（第 12 章提到）審視剪藏庫，把「已讀未整理」的筆記標記狀態</li> </ol> <div class="call info"> <p><strong>剪藏不是終點</strong>：Web Clipper 解決的是「收集」這個環節的摩擦，但知識管理的價值在於「回顧與連結」。建議每週花 15-20 分鐘瀏覽本週的剪藏，加入雙向連結，讓這些資訊真正融入你的 Vault 知識網絡（見第 4 章）。</p> </div>  <h2>Handlebars 進階模板語法</h2> <p>
+Web Clipper 的模板引擎底層使用 <strong>Handlebars</strong> 語法，
+    除了基本的 <code>&#123;&#123;變數名&#125;&#125;</code> 插值，還支援條件判斷、迭代陣列與巢狀邏輯，
+    讓模板根據剪藏的網頁類型動態調整輸出結構。
+</p> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch13-tmpl" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="28" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Handlebars 進階模板結構</text>
+    <!-- Frontmatter zone -->
+    <rect x="20" y="45" width="350" height="215" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="195" y="68" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">YAML Frontmatter 區</text>
+    <line x1="30" y1="75" x2="360" y2="75" stroke="var(--border)" stroke-width="0.8" opacity="0.5" />
+    <!-- Static vars block -->
+    <rect x="35" y="83" width="145" height="75" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="107" y="102" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">靜態變數</text>
+    <text x="107" y="118" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;title&#125;&#125; · &#123;&#123;url&#125;&#125;</text>
+    <text x="107" y="133" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;author&#125;&#125; · &#123;&#123;date&#125;&#125;</text>
+    <text x="107" y="148" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;domain&#125;&#125;</text>
+    <!-- Conditional block -->
+    <rect x="195" y="83" width="160" height="75" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="275" y="102" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">條件邏輯</text>
+    <text x="275" y="118" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.8">&#123;&#123;#if author&#125;&#125;</text>
+    <text x="275" y="133" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;#each tags&#125;&#125;</text>
+    <text x="275" y="148" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;#unless x&#125;&#125;</text>
+    <!-- AI Schema block spanning full width -->
+    <rect x="35" y="170" width="320" height="75" fill="var(--abg)" stroke="var(--accent)" stroke-width="1.5" rx="6" />
+    <text x="195" y="190" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">AI Schema 變數</text>
+    <text x="195" y="207" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">&#123;&#123;ai:判斷分類...&#125;&#125; · &#123;&#123;ai:難度...&#125;&#125;</text>
+    <text x="195" y="223" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">&#123;&#123;ai:閱讀時間...&#125;&#125; · &#123;&#123;ai:相關技術...&#125;&#125;</text>
+    <text x="195" y="239" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.7">→ 每次剪藏呼叫 LLM API 推斷</text>
+    <!-- Arrow to body -->
+    <line x1="370" y1="155" x2="420" y2="155" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-tmpl)" />
+    <!-- Body zone -->
+    <rect x="420" y="45" width="360" height="215" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="600" y="68" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">筆記內文區</text>
+    <line x1="430" y1="75" x2="770" y2="75" stroke="var(--border)" stroke-width="0.8" opacity="0.5" />
+    <!-- Callout block -->
+    <rect x="435" y="83" width="330" height="55" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="600" y="102" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">AI 摘要 Callout</text>
+    <text x="600" y="120" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&gt; [!abstract] &#123;&#123;ai:一句話摘要...&#125;&#125;</text>
+    <!-- Highlights block -->
+    <rect x="435" y="148" width="150" height="55" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="510" y="167" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">高亮段落</text>
+    <text x="510" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;highlights&#125;&#125;</text>
+    <text x="510" y="196" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">選取文字優先</text>
+    <!-- Full content block -->
+    <rect x="600" y="148" width="165" height="55" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="682" y="167" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">全文內容</text>
+    <text x="682" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">&#123;&#123;content&#125;&#125;</text>
+    <text x="682" y="196" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">無高亮時 fallback</text>
+    <!-- Tags block -->
+    <rect x="435" y="213" width="330" height="35" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="600" y="233" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">JSON 匯出 → 版本控制 → 多裝置同步</text>
+  </g>
+</svg> <figcaption>進階模板的完整結構：Frontmatter 區（靜態變數 + 條件邏輯 + AI Schema）與內文區（AI 摘要 Callout + 高亮 + 全文）。</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="{{! 條件渲染：只在有作者時顯示 }}
+{{#if author}}
+author: &quot;{{author}}&quot;
+{{/if}}
+
+{{! 陣列迭代：把 tags 陣列展開成 YAML 清單 }}
+tags:
+{{#each tags}}
+  - {{this}}
+{{/each}}
+
+{{! 巢狀條件：學術論文才加 doi 欄位 }}
+{{#if (includes url &quot;arxiv.org&quot;)}}
+doi: &quot;{{doi}}&quot;
+{{/if}}
+
+{{! 選取文字優先，沒有就用全文 }}
+{{#if highlights}}
+{{highlights}}
+{{else}}
+{{content}}
+{{/if}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="handlebars"><code><span class="line"><span style="color:#7F848E;font-style:italic">{{! 條件渲染：只在有作者時顯示 }}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">#if</span><span style="color:#E06C75;font-style:italic"> author</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">author: "{{</span><span style="color:#E06C75;font-style:italic">author</span><span style="color:#ABB2BF">}}"</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">/if</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">{{! 陣列迭代：把 tags 陣列展開成 YAML 清單 }}</span></span>
+<span class="line"><span style="color:#ABB2BF">tags:</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">#each</span><span style="color:#E06C75;font-style:italic"> tags</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">  - {{</span><span style="color:#E06C75;font-style:italic">this</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">/each</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">{{! 巢狀條件：學術論文才加 doi 欄位 }}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">#if</span><span style="color:#ABB2BF"> (</span><span style="color:#E06C75;font-style:italic">includes</span><span style="color:#E06C75;font-style:italic"> url</span><span style="color:#98C379"> "arxiv.org"</span><span style="color:#ABB2BF">)}}</span></span>
+<span class="line"><span style="color:#ABB2BF">doi: "{{</span><span style="color:#E06C75;font-style:italic">doi</span><span style="color:#ABB2BF">}}"</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">/if</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">{{! 選取文字優先，沒有就用全文 }}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">#if</span><span style="color:#E06C75;font-style:italic"> highlights</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#E06C75;font-style:italic">highlights</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">else</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#E06C75;font-style:italic">content</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">/if</span><span style="color:#ABB2BF">}}</span></span></code></pre> </div> </div>   <p>
+幾個實用技巧：
+</p> <ul> <li><code>&#123;&#123;#if author&#125;&#125;</code>：只在頁面有 <code>meta[name="author"]</code> 時才寫入 author 欄位，避免空值出現在 frontmatter</li> <li><code>&#123;&#123;#each tags&#125;&#125;</code>：把 Clipper 抓到的多個標籤自動展開為 YAML 清單格式</li> <li><code>&#123;&#123;#if highlights&#125;&#125;...&#123;&#123;else&#125;&#125;&#123;&#123;content&#125;&#125;</code>：有選取文字時插入高亮段落，否則 fallback 到全文——讓「快速剪藏」和「精選剪藏」使用同一個模板</li> </ul> <div class="call tip"> <p><strong>includes helper</strong>：Clipper 內建了 <code>&#123;&#123;#if (includes url "arxiv.org")&#125;&#125;</code> 這類 helper，可以對 URL 做字串比對。這讓同一個模板在剪藏學術論文時自動加入 DOI 欄位，剪藏其他頁面時省略，比分成兩個模板更易維護。</p> </div> <h2>Schema Interpreter：用 AI 自動萃取結構化 Properties</h2> <p>
+一般的 AI 解釋器用法是讓 AI 生成「摘要文字」填入筆記內文。
+<strong>Schema Interpreter</strong> 則是把 AI 變數放進 frontmatter，
+    讓 AI 直接推斷並填入結構化屬性——分類、難度、閱讀時間、技術清單——
+    這些屬性日後可以被 Dataview 直接查詢，真正做到「剪藏即結構化」。
+</p> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch13-schema" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+    <marker id="arr-ch13-plain" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Step 1: Webpage -->
+    <rect x="20" y="130" width="130" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="85" y="155" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">目標網頁</text>
+    <text x="85" y="175" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">HTML 全文內容</text>
+    <!-- Arrow 1 -->
+    <line x1="150" y1="160" x2="190" y2="160" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-plain)" />
+    <!-- Step 2: Clipper Parsing -->
+    <rect x="190" y="110" width="145" height="100" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="262" y="135" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Web Clipper</text>
+    <line x1="200" y1="145" x2="325" y2="145" stroke="var(--border)" stroke-width="0.8" opacity="0.5" />
+    <text x="262" y="163" text-anchor="middle" font-size="14px" fill="var(--text)">靜態變數萃取</text>
+    <text x="262" y="180" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">title / url / author</text>
+    <text x="262" y="197" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">date / domain</text>
+    <!-- Arrow 2: to LLM -->
+    <line x1="335" y1="140" x2="380" y2="100" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ch13-schema)" />
+    <!-- Arrow 3: to output -->
+    <line x1="335" y1="180" x2="380" y2="220" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-plain)" />
+    <!-- Step 3a: LLM / Schema Interpreter -->
+    <rect x="380" y="50" width="185" height="110" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="472" y="75" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Schema Interpreter</text>
+    <line x1="390" y1="85" x2="555" y2="85" stroke="var(--accent)" stroke-width="0.8" opacity="0.4" />
+    <text x="472" y="103" text-anchor="middle" font-size="14px" fill="var(--text)">AI 讀取全文 → 推斷語義</text>
+    <text x="472" y="120" text-anchor="middle" font-size="14px" fill="var(--text)">category / difficulty</text>
+    <text x="472" y="137" text-anchor="middle" font-size="14px" fill="var(--text)">technology / est. read</text>
+    <!-- Arrow 4: LLM to merge -->
+    <line x1="472" y1="160" x2="472" y2="215" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ch13-schema)" />
+    <!-- Step 3b: Static output -->
+    <rect x="380" y="220" width="185" height="60" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="472" y="245" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">靜態屬性</text>
+    <text x="472" y="265" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">title / source / date…</text>
+    <!-- Arrow merge to final note -->
+    <line x1="565" y1="160" x2="615" y2="190" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-ch13-schema)" />
+    <line x1="565" y1="250" x2="615" y2="220" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-plain)" />
+    <!-- Final Note -->
+    <rect x="615" y="140" width="165" height="120" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="697" y="165" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Obsidian 筆記</text>
+    <line x1="625" y1="175" x2="770" y2="175" stroke="var(--border)" stroke-width="0.8" opacity="0.5" />
+    <text x="697" y="193" text-anchor="middle" font-size="14px" fill="var(--text)">完整 Frontmatter</text>
+    <text x="697" y="210" text-anchor="middle" font-size="14px" fill="var(--text)">AI 萃取屬性</text>
+    <text x="697" y="228" text-anchor="middle" font-size="14px" fill="var(--text)">正文 / 高亮段落</text>
+    <text x="697" y="248" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.8">可直接 Dataview 查詢</text>
+    <!-- Label -->
+    <text x="400" y="30" font-size="14px" fill="var(--text)" opacity="0.5">虛線 = AI 呼叫  實線 = 直接讀取</text>
+  </g>
+</svg> <figcaption>Schema Interpreter 工作流程：Web Clipper 同時走兩條路徑——靜態變數直接讀取 HTML，AI Schema 變數則把全文送給 LLM 推斷語義屬性，最終合併為完整的 Obsidian 筆記。</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: &quot;{{title}}&quot;
+source: &quot;{{url}}&quot;
+author: &quot;{{author}}&quot;
+created: {{date:YYYY-MM-DD}}
+
+{{! Schema Interpreter：AI 自動萃取結構化屬性 }}
+category: &quot;{{ai:判斷這篇文章最適合的分類，從以下選項選一個：技術教學/產品評測/觀點分析/新聞/學術}}&quot;
+difficulty: &quot;{{ai:這篇技術文章的難度是？回答 beginner / intermediate / advanced 其中一個}}&quot;
+estimated_read: &quot;{{ai:這篇文章約需幾分鐘閱讀？只回答數字}}&quot;
+technology:
+{{ai:條列這篇文章提到的技術工具名稱（每行一個），最多 5 個，格式：  - 工具名稱}}
+---
+
+{{content}}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{title}}"</span></span>
+<span class="line"><span style="color:#E06C75">source</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{url}}"</span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{author}}"</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: {{</span><span style="color:#98C379">date:YYYY-MM-DD</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#C678DD">!</span><span style="color:#98C379"> Schema Interpreter：AI 自動萃取結構化屬性</span><span style="color:#ABB2BF"> }}</span></span>
+<span class="line"><span style="color:#E06C75">category</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{ai:判斷這篇文章最適合的分類，從以下選項選一個：技術教學/產品評測/觀點分析/新聞/學術}}"</span></span>
+<span class="line"><span style="color:#E06C75">difficulty</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{ai:這篇技術文章的難度是？回答 beginner / intermediate / advanced 其中一個}}"</span></span>
+<span class="line"><span style="color:#E06C75">estimated_read</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"{{ai:這篇文章約需幾分鐘閱讀？只回答數字}}"</span></span>
+<span class="line"><span style="color:#E06C75">technology</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#98C379">ai:條列這篇文章提到的技術工具名稱（每行一個），最多 5 個，格式：  - 工具名稱</span><span style="color:#ABB2BF">}}</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{{</span><span style="color:#98C379">content</span><span style="color:#ABB2BF">}}</span></span></code></pre> </div> </div>   <div class="call warn"> <p><strong>Schema Interpreter 的成本意識</strong>：frontmatter 裡每個 <code>&#123;&#123;ai:...&#125;&#125;</code> 都是一次獨立的 LLM 呼叫。建議把相關的屬性合併成一個 prompt，例如「請用 JSON 格式回傳以下欄位：category、difficulty、estimated_read、technology（陣列）」，再用 Handlebars 解構輸出——把 4 次 API 呼叫壓縮成 1 次，速度更快、成本更低。</p> </div> <h3>自訂 Properties 映射策略</h3> <p>
+不同網站的元數據品質差異極大：有些網站 <code>meta[name="author"]</code> 是空的，
+    有些網站把作者名稱放在特定的 CSS class 裡而非 meta 標籤。
+    這時可以用 AI 做 fallback 映射：
+</p> <ul> <li><strong>作者欄位</strong>：<code>&#123;&#123;#if author&#125;&#125;&#123;&#123;author&#125;&#125;&#123;&#123;else&#125;&#125;&#123;&#123;ai:從文章內容推斷作者名稱，只回傳名字&#125;&#125;&#123;&#123;/if&#125;&#125;</code></li> <li><strong>出版日期</strong>：當 <code>&#123;&#123;date&#125;&#125;</code> 讀取到的是今天（表示網頁沒有發布日期 meta）時，改用 AI 在文章中搜尋日期線索</li> <li><strong>主題分類</strong>：讓 AI 根據你自定義的分類體系（PARA、Zettelkasten 等）把文章放入對應類別</li> </ul> <h2>Clipper + Dataview：剪藏後自動建立動態閱讀清單</h2> <p>
+Schema Interpreter 的最大回報，體現在和 Dataview 的整合。
+    當每篇剪藏筆記的 frontmatter 都有一致的結構化屬性後，
+    你只需要在一個「閱讀清單 MOC」筆記裡放一段 Dataview 查詢語句，
+    就能自動看到所有待讀文章——不需要手動維護清單。
+</p> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch13-dv" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-ch13-dv-accent" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="28" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Clipper + Dataview 整合架構</text>
+    <!-- Clippings Vault -->
+    <rect x="20" y="50" width="180" height="220" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="110" y="73" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Clippings/ 資料夾</text>
+    <line x1="30" y1="80" x2="190" y2="80" stroke="var(--border)" stroke-width="0.8" opacity="0.5" />
+    <rect x="35" y="88" width="150" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="110" y="110" text-anchor="middle" font-size="13px" fill="var(--text)">article-001.md</text>
+    <rect x="35" y="130" width="150" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="110" y="152" text-anchor="middle" font-size="13px" fill="var(--text)">video-005.md</text>
+    <rect x="35" y="172" width="150" height="35" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="110" y="194" text-anchor="middle" font-size="13px" fill="var(--text)">paper-003.md</text>
+    <text x="110" y="240" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.5">…每筆都有</text>
+    <text x="110" y="257" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.7">Frontmatter 屬性</text>
+    <!-- Arrow to Dataview -->
+    <line x1="200" y1="160" x2="250" y2="160" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-dv)" />
+    <!-- Dataview engine -->
+    <rect x="250" y="100" width="160" height="120" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="330" y="124" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Dataview</text>
+    <line x1="260" y1="132" x2="400" y2="132" stroke="var(--accent)" stroke-width="0.8" opacity="0.4" />
+    <text x="330" y="150" text-anchor="middle" font-size="14px" fill="var(--text)">查詢 Frontmatter</text>
+    <text x="330" y="167" text-anchor="middle" font-size="14px" fill="var(--text)">FROM "Clippings"</text>
+    <text x="330" y="184" text-anchor="middle" font-size="14px" fill="var(--text)">WHERE / SORT</text>
+    <text x="330" y="205" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.7">實時渲染表格</text>
+    <!-- Three output arrows -->
+    <line x1="410" y1="130" x2="460" y2="90" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch13-dv-accent)" />
+    <line x1="410" y1="160" x2="460" y2="160" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch13-dv-accent)" />
+    <line x1="410" y1="190" x2="460" y2="230" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch13-dv-accent)" />
+    <!-- View A: Reading List -->
+    <rect x="460" y="60" width="170" height="60" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="545" y="82" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">待讀清單</text>
+    <text x="545" y="99" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">tags = to-read</text>
+    <text x="545" y="112" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">依收藏日期排序</text>
+    <!-- View B: Category -->
+    <rect x="460" y="130" width="170" height="60" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="545" y="152" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">分類 Dashboard</text>
+    <text x="545" y="169" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">category = 技術教學</text>
+    <text x="545" y="182" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">依難度 GROUP BY</text>
+    <!-- View C: Weekly Review -->
+    <rect x="460" y="200" width="170" height="60" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+    <text x="545" y="222" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--text)">週回顧統計</text>
+    <text x="545" y="239" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">created &gt; date(-7d)</text>
+    <text x="545" y="252" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">本週剪藏了幾篇</text>
+    <!-- Arrow to note link -->
+    <line x1="630" y1="160" x2="680" y2="160" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch13-dv)" />
+    <!-- Final: MOC Note -->
+    <rect x="680" y="120" width="110" height="80" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="735" y="145" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">MOC 筆記</text>
+    <text x="735" y="162" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">動態索引</text>
+    <text x="735" y="178" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">自動更新</text>
+    <text x="735" y="192" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.7">零維護成本</text>
+  </g>
+</svg> <figcaption>Clipper + Dataview 整合架構：Clippings/ 資料夾的每個筆記透過 Schema Interpreter 建立結構化 Frontmatter，Dataview 實時查詢產生待讀清單、分類 Dashboard 和週回顧統計，最終組成零維護成本的 MOC 動態索引。</figcaption> </figure> <h3>待讀清單 Dataview 查詢</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE source, category, estimated_read, created
+FROM &quot;Clippings&quot;
+WHERE contains(tags, &quot;to-read&quot;)
+SORT created DESC
+LIMIT 20
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE source, category, estimated_read, created</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "Clippings"</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE contains(tags, "to-read")</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT created DESC</span></span>
+<span class="line"><span style="color:#ABB2BF">LIMIT 20</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>進階：未讀過濾 + 分類排序</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE
+  source AS &quot;來源&quot;,
+  category AS &quot;分類&quot;,
+  estimated_read AS &quot;預估(分鐘)&quot;,
+  created AS &quot;收藏日期&quot;
+FROM &quot;Clippings&quot;
+WHERE !contains(file.tags, &quot;read&quot;) AND contains(file.tags, &quot;to-read&quot;)
+SORT created ASC
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE</span></span>
+<span class="line"><span style="color:#ABB2BF">  source AS "來源",</span></span>
+<span class="line"><span style="color:#ABB2BF">  category AS "分類",</span></span>
+<span class="line"><span style="color:#ABB2BF">  estimated_read AS "預估(分鐘)",</span></span>
+<span class="line"><span style="color:#ABB2BF">  created AS "收藏日期"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "Clippings"</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE !contains(file.tags, "read") AND contains(file.tags, "to-read")</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT created ASC</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>建立閱讀進度追蹤</strong>：在每個剪藏筆記的 frontmatter 加入 <code>status: to-read</code> 欄位（Web Clipper 模板預設值），讀完後在 Obsidian 裡手動改為 <code>status: read</code>。Dataview 查詢只顯示 <code>status = "to-read"</code> 的筆記，等於有一個永遠同步的「未讀清單」，完全不需要手動維護。</p> </div> <h2>進階選取模式：只剪藏你真正需要的部分</h2> <p>
+Web Clipper 提供三種不同粒度的內容擷取模式，根據剪藏目的選擇正確的模式
+    可以讓筆記更乾淨、更容易回顧：
+</p> <ul> <li> <strong>全文模式（Article）</strong>：Clipper 用 Mozilla Readability 解析頁面，
+      去除導航欄、廣告和側欄，只保留文章主體。適合技術教學文章、部落格長文。
+</li> <li> <strong>選取文字模式（Selection）</strong>：在頁面上先用滑鼠選取要剪藏的段落，
+      再點擊 Clipper——只有選取的文字會進入 <code>&#123;&#123;content&#125;&#125;</code>。
+      適合只需要某個程式碼片段、某段論述或某個定義，不需要全文的場景。
+</li> <li> <strong>高亮彙整模式（Highlights）</strong>：閱讀時在多處點擊高亮按鈕標記重點，
+      最後執行剪藏時，所有高亮段落彙整到 <code>&#123;&#123;highlights&#125;&#125;</code> 變數。
+      適合需要「精選重點」的閱讀流程，剪藏後不需要再整理。
+</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch13/03-infographic-capture-modes.png" alt="三種剪藏粒度模式：全文模式 Article 用 Readability 解析全文、選取文字模式 Selection 只剪藏選取段落、高亮彙整模式 Highlights 彙整多處標記" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 13-3：三種擷取模式對應不同的剪藏目的——全文適合深讀，選取文字適合片段引用，高亮彙整適合邊讀邊標記。</figcaption> </figure> <div class="call tip"> <p><strong>組合使用策略</strong>：建立一個「快速剪藏模板」只有 frontmatter + <code>&#123;&#123;content&#125;&#125;</code>，和一個「精讀模板」同時包含 <code>&#123;&#123;highlights&#125;&#125;</code>、AI 摘要和全文。平時看到感興趣的文章用快速模板一鍵剪藏，深入研究某篇文章時切換到精讀模板，兼顧效率與品質。</p> </div> <h2>模板 JSON 匯出與版本控制</h2> <p>
+精心設計好的模板是知識管理系統的核心資產。Web Clipper 支援將模板匯出為 JSON 格式，
+    這讓模板可以：備份到 Vault 的 <code>.obsidian/</code> 目錄一起被 Git 版本控制、
+    在不同裝置上同步、與團隊成員分享。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// 在 Web Clipper 設定頁面，點擊「Templates」→ 選擇模板 → 點右上角「…」→「Export template」
+// 會匯出 .json 檔案，可以直接分享或版本控制
+
+// 匯入流程
+// 1. 點擊「Templates」頁籤右上角的「Import」按鈕
+// 2. 拖入 .json 檔案或複製 JSON 內容貼入
+// 3. 模板立即生效，包含所有變數與觸發規則
+
+// 推薦備份路徑（與 Vault 一起版本控制）
+vault/
+  .obsidian/
+    clipper-templates/
+      tech-article.json
+      youtube-video.json
+      academic-paper.json" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>// 在 Web Clipper 設定頁面，點擊「Templates」→ 選擇模板 → 點右上角「…」→「Export template」</span></span>
+<span class="line"><span>// 會匯出 .json 檔案，可以直接分享或版本控制</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// 匯入流程</span></span>
+<span class="line"><span>// 1. 點擊「Templates」頁籤右上角的「Import」按鈕</span></span>
+<span class="line"><span>// 2. 拖入 .json 檔案或複製 JSON 內容貼入</span></span>
+<span class="line"><span>// 3. 模板立即生效，包含所有變數與觸發規則</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// 推薦備份路徑（與 Vault 一起版本控制）</span></span>
+<span class="line"><span>vault/</span></span>
+<span class="line"><span>  .obsidian/</span></span>
+<span class="line"><span>    clipper-templates/</span></span>
+<span class="line"><span>      tech-article.json</span></span>
+<span class="line"><span>      youtube-video.json</span></span>
+<span class="line"><span>      academic-paper.json</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>社群模板庫</strong>：Obsidian 官方 GitHub（github.com/obsidianmd/obsidian-clipper）的 <code>templates/</code> 目錄有來自社群的現成模板，涵蓋 GitHub 倉庫剪藏、Twitter/X 貼文剪藏、Reddit 討論串剪藏等場景，可以直接 import 使用或作為設計起點。</p> </div> <h2>本章小結</h2> <p>
+本章介紹了讓 Web Clipper 從「存檔工具」進化為「智慧整理工具」的四個進階功能：
+    AI 解釋器（即時生成摘要）、模板觸發器（自動套用對應模板）、
+    高亮同步（邊讀邊標記）、沉浸式翻譯組合技。
+    搭配針對中文平台的 obsidian-clipper-cn，幾乎所有常見的資訊來源都能高品質地進入 Vault。
+</p> <p>
+進一步，本章補強了 <strong>Handlebars 進階語法</strong>（條件渲染與陣列迭代）、
+<strong>Schema Interpreter</strong>（AI 自動萃取結構化 frontmatter properties）、
+    以及 <strong>Clipper + Dataview 整合</strong>（剪藏即建立動態閱讀清單）。
+    這三個進階技巧是把 Web Clipper 從「被動收集」升級為「主動組織」的關鍵。
+</p> <p>
+下一章我們進入更大的主題——如何把 Claude Code 與 Obsidian 深度整合，
+    讓 AI 直接在你的 Vault 裡操作筆記、建立連結、生成摘要，
+    把你的知識庫打造成真正意義上的 AI 第二大腦。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span> </a> <a href="/obsidian/ch14-claude-obsidian" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

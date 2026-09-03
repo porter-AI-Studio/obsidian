@@ -1,0 +1,629 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Claude Code、Codex、Antigravity 三個 AI Agent 各自排入的工作，沒有一個地方能集中查看，漏跑與中斷更是完全沒人追蹤。本章用一套今天實測驗證過、真的在使用者機器上跑的系統——Markdown + YAML frontmatter 骨幹、Obsidian Bases 儀表板——示範如何把 Obsidian 變成跨工具的集中排程中心，並用真實資料揪出 10 筆卡住超過 30 小時的委派任務。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 18 章 · Part 5：AI 整合：打造 AI 驅動的知識庫</span> <h1>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</h1> <p class="cdesc">三個 AI 工具、各自排程、沒人追蹤漏跑——用純檔案格式解決一個真實發生過的問題</p> <h2>問題意識：三個 AI Agent，各自的排程孤島</h2> <p>
+如果你和本書作者一樣，同時用 Claude Code、Codex、Antigravity 三個 AI Agent 工具排入未來要做的工作，
+    很快就會撞上一個尷尬的現實：這三個工具<strong>互不相通</strong>。
+    Claude Code 委派給 Codex 的任務、Antigravity 排入的排程、手動用 Windows 工作排程器建立的一次性續跑任務——
+    分別散落在三個地方，沒有任何一處能讓你一眼看到「現在到底有哪些排程」「哪些已經完成」「哪些是週期性、哪些是一次性」。
+</p> <p>
+更嚴重的問題不是「分散」，而是<strong>漏跑沒人發現</strong>。實際發生過的狀況是：排程因為電腦關機、
+    或 Claude Code 5 小時 session 使用限制而沒有真正跑完，事後也完全沒有機制回頭追蹤這些「漏跑」或
+    「跑到一半中斷」的工作——問題不會自動浮現在任何人眼前，只能靠人自己記得回去查，而人當然不會記得。
+</p> <div class="call warn"> <p><strong>這不是假設情境</strong>：本章接下來會用今天實際做出來、已經在使用者機器上跑的系統示範。文中所有指令輸出、真實案例編號（如 SCH-0047、SCH-0048）、匯入筆數，都是實測結果，不是示意資料。</p> </div> <h2>選型評估：為什麼沒有直接採用現成工具</h2> <p>
+在動手自建之前，先評估了幾個現成的開源方案是否能直接當後端使用——這一步很重要，能省下的工程量絕對優先於重造輪子。
+</p> <table> <thead> <tr> <th>候選工具</th> <th>看起來合適的地方</th> <th>實際卡住的地方</th> </tr> </thead> <tbody> <tr> <td><strong>Taskwarrior</strong></td> <td>成熟、功能完整的命令列任務管理工具</td> <td>Windows 無原生二進位，需要 WSL；資料是專有格式，要接 Obsidian 還得再寫一層 JSON → md 轉檔，工程量比自建更大</td> </tr> <tr> <td><strong>todo.txt</strong></td> <td>純文字、格式極簡</td> <td>核心不支援週期性任務（要另裝外掛的外掛），一行純文字也對應不到 Bases 的 frontmatter 資料庫視圖</td> </tr> <tr> <td><strong>pueue</strong></td> <td>命令列任務佇列，看起來像「排程管理」</td> <td>語意錯位——它排的是「真的會被執行的 shell 指令」，不是「工作紀錄」，也沒有 recurring / one-time 的概念</td> </tr> <tr> <td><strong>GitHub Issues</strong></td> <td>介面成熟、協作方便</td> <td>需要網路，不是離線優先；recurring 也非原生概念；為了排程另開一個「非程式碼」語意的 repo，很奇怪</td> </tr> </tbody> </table> <p>
+最後的結論是：<strong>不整套採用任何一個</strong>。改為自建「Markdown + YAML frontmatter + 一支 Python CLI」當骨幹，
+    用 Obsidian 內建的 <strong>Bases</strong> 當儀表板，再疊加安裝 <strong>Obsidian Tasks plugin</strong>（8.4.0）
+    當手動輸入的輔助層——這裡有一個值得留意的分寸拿捏：Bases 是骨幹儀表板，Tasks plugin 只是給人手動補記一筆的方便管道，
+    兩者職責不同、不衝突，也不是「用 A 取代 B」的關係。
+</p> <div class="call info"> <p><strong>為什麼還裝 Tasks plugin？</strong> Tasks plugin 認的是 <code>- [ ]</code> checkbox 語法行，跟自建的 frontmatter 筆記完全是兩套機制，並存無礙。真正的資料骨幹（漏跑偵測、狀態機、CLI 操作）全部只靠 Markdown + YAML frontmatter，Tasks plugin 純粹是「懶得開 CLI 時，隨手記一筆」的入口。</p> </div> <h2>認識 Obsidian Bases：內建的資料庫視圖</h2> <p>
+這是本章要教的一個全新知識點——本書 <a href="/obsidian/ch09-dataview">ch09</a> 介紹過的 Dataview，需要額外安裝社群插件，
+    用 DQL（類 SQL 查詢語言）撰寫查詢；而 <strong>Bases</strong> 是 Obsidian 官方內建的資料庫式檢視功能，
+<strong>不需要安裝任何外掛</strong>，直接在 Vault 裡建立一個 <code>.base</code> 檔案，就能用視覺化設定介面
+    （篩選、排序、分組、公式欄位）把一批帶有 frontmatter 的筆記變成表格、看板或卡片視圖。
+</p> <table> <thead> <tr> <th>比較項目</th> <th>Dataview（ch09）</th> <th>Bases（本章新知識點）</th> </tr> </thead> <tbody> <tr> <td>安裝方式</td> <td>需要安裝社群插件</td> <td>Obsidian 內建，免安裝</td> </tr> <tr> <td>操作方式</td> <td>在筆記裡寫 DQL 查詢語法</td> <td>在 <code>.base</code> 檔用 YAML 定義視圖，可搭配介面點選調整</td> </tr> <tr> <td>呈現位置</td> <td>嵌在某一則筆記的內容裡</td> <td>獨立的檔案（<code>.base</code>），本身就是一個可切換的多視圖儀表板</td> </tr> <tr> <td>公式欄位</td> <td>DataviewJS 才能做複雜運算</td> <td>內建 <code>formulas</code>，可直接用條件式衍生新欄位（如本章的 <code>attention_reason</code>）</td> </tr> <tr> <td>適合場景</td> <td>嵌入單則筆記的動態彙整（閱讀清單、MOC）</td> <td>獨立儀表板、多視圖切換、需要分組與彙總的資料庫式檢視</td> </tr> </tbody> </table> <p>
+本章的排程系統選 Bases 而非 Dataview 當儀表板，原因很直接：排程資料的每一筆本來就是結構化的 frontmatter，
+    不需要嵌在某則筆記正文裡查詢，而是需要一個獨立、可以切換好幾個視圖（全部總覽 / 只看異常 / 只看週期性）的
+    儀表板頁面——這正是 Bases 的原生定位。實際檔案是 <code>schedule-log.base</code>，打開就能看到 5 個 view，
+    不需要額外設定。
+</p> <h3>動手試試：完全用滑鼠點選做出一個儀表板，不必寫一行 YAML</h3> <p>
+本章展示的 <code>schedule-log.base</code> 是直接寫 YAML 檔案做出來的——因為它要被三個 AI 工具的自動化流程
+    共同維護，YAML 比較適合程式操作。但如果你只是想幫自己的個人任務、讀書清單、專案追蹤做一個儀表板，
+<strong>完全不需要碰任何程式碼</strong>：Bases 內建的視覺化編輯介面就能做到本章示範的所有效果——篩選、排序、
+    分組、甚至公式欄位，全部用點選完成。
+</p> <div class="call tip"> <p> <strong>找不到「Bases」？在繁體中文介面裡它叫「資料庫」。</strong>
+這是實測 Obsidian 指令面板（<code>Ctrl/Cmd+P</code>）查出來的真實指令清單，不是憑印象猜的：
+</p> <table> <thead> <tr><th>指令 ID</th><th>介面顯示名稱（繁體中文）</th></tr> </thead> <tbody> <tr><td><code>bases:new-file</code></td><td>資料庫: 建立新的 base</td></tr> <tr><td><code>bases:insert</code></td><td>資料庫: 插入新的 base</td></tr> <tr><td><code>bases:add-view</code></td><td>資料庫: 添加檢視</td></tr> <tr><td><code>bases:change-view</code></td><td>資料庫: 變更檢視</td></tr> <tr><td><code>bases:add-item</code></td><td>資料庫: 添加項目</td></tr> <tr><td><code>bases:copy-table</code></td><td>資料庫: 複製表格到剪貼簿</td></tr> </tbody> </table> <p>
+也就是說：在指令面板打「base」英文可能搜不到，但打「資料庫」就能找到建立新 base 的指令——這是英文
+      功能名稱經過在地化翻譯後，中文使用者最容易卡住的第一步。
+</p> </div> <p>從零開始做一個屬於你自己的儀表板，流程是：</p> <ol> <li><strong>建立 base</strong>：在檔案總管對資料夾按右鍵，或用指令面板執行「資料庫: 建立新的 base」，Obsidian 會產生一個 <code>.base</code> 檔案並直接開啟編輯畫面。</li> <li><strong>選定範圍</strong>：畫面上設定這個 base 要涵蓋哪些筆記——可以指定資料夾、標籤，或任何 frontmatter 屬性當篩選條件，全部用下拉選單與點選完成，效果等同本章 YAML 裡的 <code>filters</code> 區塊。</li> <li><strong>加檢視（View）</strong>：用「資料庫: 添加檢視」或畫面上的加號，一個 base 可以並存多個檢視——表格、卡片、清單——分別代表本章「全部總覽」「⚠️ 需要人工介入」這種不同角度的視圖，讀者可以自己點出更多個。</li> <li><strong>排序與分組</strong>：每個檢視的欄位標題可以直接點擊切換排序方向；分組（groupBy）則是把某個屬性（例如 <code>status</code>）當成群組依據，畫面上會自動把同狀態的項目收在一起——效果等同本章「全部總覽」view 用 <code>status</code> 分組的做法，但完全用點選完成。</li> <li><strong>加公式欄位</strong>：在屬性清單裡新增一個「公式」型別的欄位，直接在欄位設定裡寫類似 <code>if(...)</code> 的條件式（Bases 有自己的簡易公式語法，比 DataviewJS 好懂很多）——本章 <code>attention_reason</code> 這種「依狀態自動產生一句話說明」的欄位，就是這樣做出來的。</li> </ol> <p>
+重點是：<strong>從頭到尾不需要打開任何程式編輯器，也不需要安裝任何外掛</strong>。本章為了讓三個 AI 工具能一起
+    維護資料，選擇把最終結果寫成 YAML 檔案；但對讀者來說，Bases 存在的意義正是「用 Obsidian 原生的資料庫視圖，
+    取代你原本可能要開 Excel 或另外裝 Dataview 才能做到的事」。
+</p> <h2>系統設計：Markdown + YAML Frontmatter 骨幹</h2> <p>
+資料放在 Obsidian vault 裡一個獨立的資料夾 <code>schedule-log/</code>，底下只有兩個子資料夾：
+<code>items/</code> 放進行中的項目，<code>done/</code> 放已完成或已取消的項目。
+    每一筆工作項目<strong>是一個獨立的 Markdown 檔案</strong>，資料寫在 YAML frontmatter 裡——
+    不是 JSON 資料庫，也不是一排 checkbox，而是「一則筆記就是一筆資料列」，剛好對應 Bases 的運作模型。
+</p> <figure class="svg-fig"> <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr-ch18-a" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="var(--accent)"/>
+    </marker>
+    <marker id="arr-ch18-b" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="var(--border)"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--accent)">三個 AI Agent，一支 CLI，一個資料夾</text>
+
+  <!-- Row 1: 三個 AI 工具 -->
+  <rect x="30" y="50" width="220" height="64" rx="10" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="140" y="75" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Claude Code</text>
+  <text x="140" y="94" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">schedule-log skill</text>
+  <text x="140" y="108" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">觸發詞：排程 / 看排程</text>
+
+  <rect x="290" y="50" width="220" height="64" rx="10" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="400" y="75" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Codex</text>
+  <text x="400" y="94" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">AGENTS.md 規則</text>
+  <text x="400" y="108" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">教它何時呼叫 CLI</text>
+
+  <rect x="550" y="50" width="220" height="64" rx="10" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5"/>
+  <text x="660" y="75" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">Antigravity</text>
+  <text x="660" y="94" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">workflow-schedule-log.md</text>
+  <text x="660" y="108" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.7">比照既有 workflow 模組慣例</text>
+
+  <line x1="140" y1="114" x2="330" y2="168" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch18-b)"/>
+  <line x1="400" y1="114" x2="400" y2="168" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch18-b)"/>
+  <line x1="660" y1="114" x2="470" y2="168" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch18-b)"/>
+
+  <!-- Row 2: Python CLI（核心） -->
+  <rect x="230" y="172" width="340" height="66" rx="10" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="400" y="197" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Python CLI（schedule-log/cli.py）</text>
+  <text x="400" y="216" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.75">add · list · show · run · done · cancel</text>
+  <text x="400" y="231" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.75">audit · rerun · report · import-codex</text>
+
+  <line x1="400" y1="238" x2="400" y2="278" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch18-a)"/>
+  <text x="440" y="262" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.6">讀 / 寫</text>
+
+  <!-- Row 3: schedule-log 資料夾 -->
+  <rect x="150" y="282" width="500" height="70" rx="10" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2"/>
+  <text x="400" y="303" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">schedule-log/（Obsidian vault 內）</text>
+  <rect x="175" y="313" width="210" height="30" rx="6" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="280" y="333" text-anchor="middle" font-size="13px" fill="var(--text)">items/ — 進行中</text>
+  <rect x="415" y="313" width="210" height="30" rx="6" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="520" y="333" text-anchor="middle" font-size="13px" fill="var(--text)">done/ — 已完成</text>
+  <text x="400" y="349" text-anchor="middle" font-size="11.5px" fill="var(--text)" opacity="0.6">每筆 = 一個 Markdown 檔 + YAML frontmatter</text>
+
+  <line x1="400" y1="352" x2="400" y2="380" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch18-a)"/>
+  <text x="470" y="370" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.6">即時渲染</text>
+
+  <!-- Row 4: Obsidian Bases -->
+  <rect x="230" y="384" width="340" height="36" rx="8" fill="var(--abg)" stroke="var(--accent)" stroke-width="2"/>
+  <text x="400" y="407" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">Obsidian Bases 儀表板（schedule-log.base）</text>
+</svg> <figcaption>圖 18-1：三個 AI 工具都呼叫同一支 Python CLI，CLI 讀寫同一個 schedule-log/ 資料夾（純 Markdown + frontmatter），Obsidian Bases 即時渲染成儀表板——整個系統的資料交換層，只是檔案格式。</figcaption> </figure> <h3>Frontmatter Schema 核心欄位</h3> <p>核心共通欄位：<code>id</code>（<code>SCH-NNNN</code> 流水號）、<code>type</code>（<code>one_time</code> 一次性 / <code>recurring</code> 週期性）、<code>source_tool</code>（標記排入這筆工作的是哪個工具：<code>claude-code</code> / <code>codex</code> / <code>antigravity</code> / <code>manual</code>）。以下是兩筆真實資料——本機機器上實際存在的項目：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>items/SCH-0048-*.md（一次性，真實案例）</span> <button class="cb-copy" data-code="---
+id: SCH-0048
+type: one_time
+title: Codex-Resume-Claude-MicronYC（Windows 排程續跑 session）
+source_tool: claude-code
+executor: windows_task_scheduler
+working_dir: C:\00tsc\MirconYC\Project_MicronYC
+session_id: 6c17fc76-aebe-45b4-8194-6bcf0481bba2
+resume_tool: claude
+status: stalled
+scheduled_for: '2026-08-19T12:40:00+08:00'
+started_at: '2026-08-19T13:01:21+08:00'
+tolerance_minutes: 30
+max_running_minutes: 300
+rerun_count: 0
+task_scheduler_name: Codex-Resume-Claude-MicronYC-20260819-1240
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">id</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">SCH-0048</span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">one_time</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">Codex-Resume-Claude-MicronYC（Windows 排程續跑 session）</span></span>
+<span class="line"><span style="color:#E06C75">source_tool</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">claude-code</span></span>
+<span class="line"><span style="color:#E06C75">executor</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">windows_task_scheduler</span></span>
+<span class="line"><span style="color:#E06C75">working_dir</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">C:\00tsc\MirconYC\Project_MicronYC</span></span>
+<span class="line"><span style="color:#E06C75">session_id</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">6c17fc76-aebe-45b4-8194-6bcf0481bba2</span></span>
+<span class="line"><span style="color:#E06C75">resume_tool</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">claude</span></span>
+<span class="line"><span style="color:#E06C75">status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">stalled</span></span>
+<span class="line"><span style="color:#E06C75">scheduled_for</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">'2026-08-19T12:40:00+08:00'</span></span>
+<span class="line"><span style="color:#E06C75">started_at</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">'2026-08-19T13:01:21+08:00'</span></span>
+<span class="line"><span style="color:#E06C75">tolerance_minutes</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">30</span></span>
+<span class="line"><span style="color:#E06C75">max_running_minutes</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">300</span></span>
+<span class="line"><span style="color:#E06C75">rerun_count</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">0</span></span>
+<span class="line"><span style="color:#E06C75">task_scheduler_name</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">Codex-Resume-Claude-MicronYC-20260819-1240</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <p>一次性項目的 <code>status</code> 有六種：<code>pending</code> / <code>running</code> / <code>done</code> / <code>cancelled</code> / <strong><code>missed</code></strong> / <strong><code>stalled</code></strong>；後兩種是本系統的核心賣點，下一節詳細說明。</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>items/SCH-0047-*.md（週期性，真實案例）</span> <button class="cb-copy" data-code="---
+id: SCH-0047
+type: recurring
+title: Herdr 整點打卡問候（gyro+porter）
+source_tool: manual
+executor: windows_task_scheduler
+project: herdr
+status: active
+health: ok
+schedule_kind: interval
+interval_minutes: 20
+tolerance_minutes: 15
+last_run_at: '2026-09-03T10:00:30+08:00'
+last_run_status: success
+next_expected_at: '2026-09-03T10:20:30+08:00'
+task_scheduler_name: Porter-Herdr-Claude-Hourly-Greeting
+---
+
+## 執行紀錄
+
+| 時間 | 狀態 | 備註 |
+|---|---|---|
+| 2026-09-03T10:00:30+08:00 | success | targets=gyro,porter 全部成功 |
+| 2026-09-03T09:40:01+08:00 | success | exit=0（來自 Windows Task Scheduler LastTaskResult） |" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">id</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">SCH-0047</span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">recurring</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">Herdr 整點打卡問候（gyro+porter）</span></span>
+<span class="line"><span style="color:#E06C75">source_tool</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">manual</span></span>
+<span class="line"><span style="color:#E06C75">executor</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">windows_task_scheduler</span></span>
+<span class="line"><span style="color:#E06C75">project</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">herdr</span></span>
+<span class="line"><span style="color:#E06C75">status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">active</span></span>
+<span class="line"><span style="color:#E06C75">health</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">ok</span></span>
+<span class="line"><span style="color:#E06C75">schedule_kind</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">interval</span></span>
+<span class="line"><span style="color:#E06C75">interval_minutes</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">20</span></span>
+<span class="line"><span style="color:#E06C75">tolerance_minutes</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">15</span></span>
+<span class="line"><span style="color:#E06C75">last_run_at</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">'2026-09-03T10:00:30+08:00'</span></span>
+<span class="line"><span style="color:#E06C75">last_run_status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">success</span></span>
+<span class="line"><span style="color:#E06C75">next_expected_at</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">'2026-09-03T10:20:30+08:00'</span></span>
+<span class="line"><span style="color:#E06C75">task_scheduler_name</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">Porter-Herdr-Claude-Hourly-Greeting</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">## 執行紀錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 時間 | 狀態 | 備註 |</span></span>
+<span class="line"><span style="color:#C678DD">|-</span><span style="color:#FFFFFF">--|---|---|</span></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 2026-09-03T10:00:30+08:00 | success | targets=gyro,porter 全部成功 |</span></span>
+<span class="line"><span style="color:#C678DD">|</span><span style="color:#FFFFFF"> 2026-09-03T09:40:01+08:00 | success | exit=0（來自 Windows Task Scheduler LastTaskResult） |</span></span></code></pre> </div> </div>   <p>
+週期性項目的 <code>status</code> 是 <code>active</code> / <code>paused</code> / <code>retired</code>，
+    描述的是「這個週期性定義本身的生命週期」；每次真正執行則記在同一個檔案的 body 裡，用 Markdown 表格
+<strong>append 一行</strong>執行紀錄（時間 / 狀態 / 備註），<strong>不是每次執行都新增一個檔案</strong>。
+    超過 500 行會自動歸檔到另一個檔案，避免單一檔案無限增長。
+</p> <div class="call tip"> <p><strong>刻意對齊 Claude 的設計</strong>：<code>max_running_minutes</code> 預設值是 <strong>300 分鐘（5 小時）</strong>，這不是隨便挑的數字，而是刻意對齊 Claude Code 的 5 小時 session 使用限制這個真實痛點——一個委派任務如果跑超過這個時間還沒結束，八成不是還在正常工作，而是卡住了。</p> </div> <h2>核心機制：漏跑（missed）與中斷（stalled）自動偵測</h2> <p>
+這是整套系統存在的核心理由：光是把排程記錄下來還不夠，真正的價值在於<strong>自動抓出「本來該發生卻沒發生」的事</strong>。
+    判定邏輯很單純，但威力很大：
+</p> <ul> <li>一次性項目 <strong>missed</strong>：<code>status=pending</code> 且已經超過 <code>scheduled_for + tolerance_minutes</code>（排定時間到了、容忍值也過了，但根本沒開始執行）</li> <li>一次性項目 <strong>stalled</strong>：<code>status=running</code> 且已經超過 <code>started_at + max_running_minutes</code>（開始執行了，但跑超過 5 小時還沒結束）</li> <li>週期性項目 <strong>overdue</strong>：<code>status=active</code> 且已經超過 <code>next_expected_at + tolerance_minutes</code>（該執行的時間點過了，但沒有新的執行紀錄）</li> </ul> <figure class="svg-fig"> <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr-ch18-ok" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="var(--accent)"/>
+    </marker>
+    <marker id="arr-ch18-warn" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="#ff9800"/>
+    </marker>
+    <marker id="arr-ch18-danger" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="#f44336"/>
+    </marker>
+    <marker id="arr-ch18-gray" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="var(--muted)"/>
+    </marker>
+  </defs>
+  <text x="400" y="24" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">一次性（one_time）項目狀態機</text>
+
+  <!-- 圖例 -->
+  <line x1="520" y1="46" x2="555" y2="46" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="562" y="50" font-size="12px" fill="var(--text)" opacity="0.8">健康路徑</text>
+  <line x1="650" y1="46" x2="685" y2="46" stroke="#f44336" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <text x="692" y="50" font-size="12px" fill="var(--text)" opacity="0.8">異常路徑</text>
+
+  <!-- pending -->
+  <rect x="40" y="140" width="140" height="58" rx="10" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.8"/>
+  <text x="110" y="174" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">pending</text>
+
+  <!-- running -->
+  <rect x="330" y="140" width="140" height="58" rx="10" fill="var(--bg2)" stroke="var(--accent)" stroke-width="2"/>
+  <text x="400" y="174" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">running</text>
+
+  <!-- done -->
+  <rect x="620" y="70" width="140" height="58" rx="10" fill="var(--bg2)" stroke="#4caf50" stroke-width="2"/>
+  <text x="690" y="104" text-anchor="middle" font-size="15px" font-weight="bold" fill="#4caf50">done</text>
+
+  <!-- cancelled -->
+  <rect x="180" y="250" width="140" height="52" rx="10" fill="var(--bg2)" stroke="var(--muted)" stroke-width="1.5"/>
+  <text x="250" y="281" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--muted)">cancelled</text>
+
+  <!-- missed -->
+  <rect x="40" y="250" width="120" height="52" rx="10" fill="var(--bg2)" stroke="#ff9800" stroke-width="2"/>
+  <text x="100" y="281" text-anchor="middle" font-size="14px" font-weight="bold" fill="#ff9800">missed</text>
+
+  <!-- stalled -->
+  <rect x="330" y="250" width="120" height="52" rx="10" fill="var(--bg2)" stroke="#f44336" stroke-width="2"/>
+  <text x="390" y="281" text-anchor="middle" font-size="14px" font-weight="bold" fill="#f44336">stalled</text>
+
+  <!-- arrows: pending -> running -->
+  <line x1="180" y1="169" x2="330" y2="169" stroke="var(--accent)" stroke-width="2.2" marker-end="url(#arr-ch18-ok)"/>
+  <text x="255" y="160" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">開始執行</text>
+
+  <!-- running -> done -->
+  <line x1="440" y1="140" x2="640" y2="120" stroke="#4caf50" stroke-width="2.2" marker-end="url(#arr-ch18-ok)"/>
+  <text x="545" y="118" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">正常完成</text>
+
+  <!-- pending -> cancelled -->
+  <line x1="130" y1="198" x2="220" y2="250" stroke="var(--muted)" stroke-width="1.8" marker-end="url(#arr-ch18-gray)"/>
+  <!-- running -> cancelled -->
+  <line x1="360" y1="198" x2="280" y2="250" stroke="var(--muted)" stroke-width="1.8" marker-end="url(#arr-ch18-gray)"/>
+  <text x="250" y="228" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">人工取消</text>
+
+  <!-- pending -> missed (dashed) -->
+  <line x1="100" y1="198" x2="100" y2="250" stroke="#ff9800" stroke-width="2.2" stroke-dasharray="5,3" marker-end="url(#arr-ch18-warn)"/>
+  <text x="100" y="222" text-anchor="middle" font-size="11px" fill="#ff9800">超過 tolerance</text>
+
+  <!-- running -> stalled (dashed) -->
+  <line x1="390" y1="198" x2="390" y2="250" stroke="#f44336" stroke-width="2.2" stroke-dasharray="5,3" marker-end="url(#arr-ch18-danger)"/>
+  <text x="390" y="222" text-anchor="middle" font-size="11px" fill="#f44336">超過 5 小時</text>
+
+  <text x="400" y="326" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.6">missed / stalled 不是即時偵測，而是每次呼叫 list / report 時回溯判定並寫回 frontmatter</text>
+</svg> <figcaption>圖 18-2：一次性項目狀態機。實線是健康路徑（pending → running → done，或人工取消），虛線是兩條異常路徑——pending 超過容忍值變成 missed，running 超過 5 小時變成 stalled。</figcaption> </figure> <figure class="svg-fig"> <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arr-ch18-t1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="#ff9800"/>
+    </marker>
+    <marker id="arr-ch18-t2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.5 L8 5 L0 8.5z" fill="#f44336"/>
+    </marker>
+  </defs>
+  <text x="400" y="26" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">兩條時間軸：漏跑（missed）與中斷（stalled）</text>
+
+  <!-- Timeline A: missed -->
+  <text x="40" y="70" font-size="14px" font-weight="bold" fill="var(--text)">一次性項目：pending → missed</text>
+  <line x1="40" y1="95" x2="760" y2="95" stroke="var(--border)" stroke-width="2"/>
+  <circle cx="120" cy="95" r="6" fill="var(--accent)"/>
+  <text x="120" y="120" text-anchor="middle" font-size="12.5px" fill="var(--text)">scheduled_for</text>
+  <text x="120" y="136" text-anchor="middle" font-size="11px" fill="var(--text)" opacity="0.6">排定時間到了</text>
+
+  <line x1="120" y1="95" x2="360" y2="95" stroke="var(--accent)" stroke-width="4"/>
+  <text x="240" y="80" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.75">tolerance_minutes（預設 30 分）</text>
+
+  <circle cx="360" cy="95" r="7" fill="#ff9800"/>
+  <line x1="360" y1="102" x2="360" y2="140" stroke="#ff9800" stroke-width="2" marker-end="url(#arr-ch18-t1)"/>
+  <text x="360" y="160" text-anchor="middle" font-size="13px" font-weight="bold" fill="#ff9800">status: missed</text>
+  <text x="360" y="176" text-anchor="middle" font-size="11px" fill="var(--text)" opacity="0.6">還沒開始就已逾期</text>
+
+  <!-- Timeline B: stalled -->
+  <text x="40" y="220" font-size="14px" font-weight="bold" fill="var(--text)">一次性項目：running → stalled</text>
+  <line x1="40" y1="245" x2="760" y2="245" stroke="var(--border)" stroke-width="2"/>
+  <circle cx="120" cy="245" r="6" fill="var(--accent)"/>
+  <text x="120" y="270" text-anchor="middle" font-size="12.5px" fill="var(--text)">started_at</text>
+  <text x="120" y="286" text-anchor="middle" font-size="11px" fill="var(--text)" opacity="0.6">開始執行</text>
+
+  <line x1="120" y1="245" x2="620" y2="245" stroke="var(--accent)" stroke-width="4"/>
+  <text x="370" y="230" text-anchor="middle" font-size="12.5px" fill="var(--text)" opacity="0.75">max_running_minutes = 300 分（5 小時，對齊 Claude session 上限）</text>
+
+  <circle cx="620" cy="245" r="7" fill="#f44336"/>
+  <line x1="620" y1="252" x2="620" y2="290" stroke="#f44336" stroke-width="2" marker-end="url(#arr-ch18-t2)"/>
+  <text x="620" y="310" text-anchor="middle" font-size="13px" font-weight="bold" fill="#f44336">status: stalled</text>
+</svg> <figcaption>圖 18-3：兩條判定時間軸並排比較。上面是「排定時間 → 容忍值 → missed」，下面是「開始執行 → 5 小時 → stalled」——後者直接對應 Claude session 上限，這也是這個系統最容易讓人「秒懂」存在意義的一張圖。</figcaption> </figure> <p>
+這個判定邏輯寫在 <code>status.py</code> 裡，以下是實際原始碼節錄——邏輯刻意寫得很直白，方便日後維護：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>schedule-log/status.py（節錄）</span> <button class="cb-copy" data-code="def derive_one_time_status(item, now=None) -> str:
+    now = now or datetime.now(config.TZ)
+    data = item.data
+    status = data.get(&quot;status&quot;)
+    if status in (&quot;done&quot;, &quot;cancelled&quot;):
+        return status
+    if status == &quot;pending&quot;:
+        scheduled_for = _parse_dt(data.get(&quot;scheduled_for&quot;))
+        tolerance = int(data.get(&quot;tolerance_minutes&quot;) or config.DEFAULT_TOLERANCE_MINUTES)
+        if scheduled_for and now > scheduled_for + timedelta(minutes=tolerance):
+            return &quot;missed&quot;          # 排定時間 + 容忍值都過了還沒開始 → 漏跑
+        return &quot;pending&quot;
+    if status == &quot;running&quot;:
+        started_at = _parse_dt(data.get(&quot;started_at&quot;))
+        max_running = int(data.get(&quot;max_running_minutes&quot;) or config.DEFAULT_MAX_RUNNING_MINUTES)
+        if started_at and now > started_at + timedelta(minutes=max_running):
+            return &quot;stalled&quot;         # 跑超過 max_running_minutes（預設 300 分＝5 小時）→ 中斷
+        return &quot;running&quot;
+    return status or &quot;pending&quot;
+
+
+def derive_recurring_health(item, now=None) -> str:
+    now = now or datetime.now(config.TZ)
+    data = item.data
+    if data.get(&quot;status&quot;) != &quot;active&quot;:
+        return &quot;&quot;
+    next_expected = _parse_dt(data.get(&quot;next_expected_at&quot;))
+    if not next_expected:
+        return &quot;ok&quot;
+    tolerance = int(data.get(&quot;tolerance_minutes&quot;) or config.DEFAULT_RECURRING_TOLERANCE_FLOOR)
+    if now > next_expected + timedelta(minutes=tolerance):
+        return &quot;overdue&quot;             # 週期性項目超過下次預期執行時間 → 逾期
+    return &quot;ok&quot;" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="python"><code><span class="line"><span style="color:#C678DD">def</span><span style="color:#61AFEF"> derive_one_time_status</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66;font-style:italic">item</span><span style="color:#ABB2BF">, </span><span style="color:#D19A66;font-style:italic">now</span><span style="color:#ABB2BF">=</span><span style="color:#D19A66">None</span><span style="color:#ABB2BF">) -> </span><span style="color:#56B6C2">str</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    now </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> now </span><span style="color:#C678DD">or</span><span style="color:#ABB2BF"> datetime.</span><span style="color:#61AFEF">now</span><span style="color:#ABB2BF">(config.</span><span style="color:#D19A66">TZ</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    data </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> item.data</span></span>
+<span class="line"><span style="color:#ABB2BF">    status </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"status"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> status </span><span style="color:#C678DD">in</span><span style="color:#ABB2BF"> (</span><span style="color:#98C379">"done"</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">"cancelled"</span><span style="color:#ABB2BF">):</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> status</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> status </span><span style="color:#56B6C2">==</span><span style="color:#98C379"> "pending"</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">        scheduled_for </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> _parse_dt</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"scheduled_for"</span><span style="color:#ABB2BF">))</span></span>
+<span class="line"><span style="color:#ABB2BF">        tolerance </span><span style="color:#56B6C2">=</span><span style="color:#56B6C2"> int</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"tolerance_minutes"</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">or</span><span style="color:#ABB2BF"> config.</span><span style="color:#D19A66">DEFAULT_TOLERANCE_MINUTES</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">        if</span><span style="color:#ABB2BF"> scheduled_for </span><span style="color:#C678DD">and</span><span style="color:#ABB2BF"> now </span><span style="color:#56B6C2">></span><span style="color:#ABB2BF"> scheduled_for </span><span style="color:#56B6C2">+</span><span style="color:#61AFEF"> timedelta</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">minutes</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">tolerance):</span></span>
+<span class="line"><span style="color:#C678DD">            return</span><span style="color:#98C379"> "missed"</span><span style="color:#7F848E;font-style:italic">          # 排定時間 + 容忍值都過了還沒開始 → 漏跑</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> "pending"</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> status </span><span style="color:#56B6C2">==</span><span style="color:#98C379"> "running"</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">        started_at </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> _parse_dt</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"started_at"</span><span style="color:#ABB2BF">))</span></span>
+<span class="line"><span style="color:#ABB2BF">        max_running </span><span style="color:#56B6C2">=</span><span style="color:#56B6C2"> int</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"max_running_minutes"</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">or</span><span style="color:#ABB2BF"> config.</span><span style="color:#D19A66">DEFAULT_MAX_RUNNING_MINUTES</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">        if</span><span style="color:#ABB2BF"> started_at </span><span style="color:#C678DD">and</span><span style="color:#ABB2BF"> now </span><span style="color:#56B6C2">></span><span style="color:#ABB2BF"> started_at </span><span style="color:#56B6C2">+</span><span style="color:#61AFEF"> timedelta</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">minutes</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">max_running):</span></span>
+<span class="line"><span style="color:#C678DD">            return</span><span style="color:#98C379"> "stalled"</span><span style="color:#7F848E;font-style:italic">         # 跑超過 max_running_minutes（預設 300 分＝5 小時）→ 中斷</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> "running"</span></span>
+<span class="line"><span style="color:#C678DD">    return</span><span style="color:#ABB2BF"> status </span><span style="color:#C678DD">or</span><span style="color:#98C379"> "pending"</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">def</span><span style="color:#61AFEF"> derive_recurring_health</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66;font-style:italic">item</span><span style="color:#ABB2BF">, </span><span style="color:#D19A66;font-style:italic">now</span><span style="color:#ABB2BF">=</span><span style="color:#D19A66">None</span><span style="color:#ABB2BF">) -> </span><span style="color:#56B6C2">str</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">    now </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> now </span><span style="color:#C678DD">or</span><span style="color:#ABB2BF"> datetime.</span><span style="color:#61AFEF">now</span><span style="color:#ABB2BF">(config.</span><span style="color:#D19A66">TZ</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">    data </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> item.data</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"status"</span><span style="color:#ABB2BF">) </span><span style="color:#56B6C2">!=</span><span style="color:#98C379"> "active"</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> ""</span></span>
+<span class="line"><span style="color:#ABB2BF">    next_expected </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> _parse_dt</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"next_expected_at"</span><span style="color:#ABB2BF">))</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#C678DD"> not</span><span style="color:#ABB2BF"> next_expected:</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> "ok"</span></span>
+<span class="line"><span style="color:#ABB2BF">    tolerance </span><span style="color:#56B6C2">=</span><span style="color:#56B6C2"> int</span><span style="color:#ABB2BF">(data.</span><span style="color:#61AFEF">get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"tolerance_minutes"</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">or</span><span style="color:#ABB2BF"> config.</span><span style="color:#D19A66">DEFAULT_RECURRING_TOLERANCE_FLOOR</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> now </span><span style="color:#56B6C2">></span><span style="color:#ABB2BF"> next_expected </span><span style="color:#56B6C2">+</span><span style="color:#61AFEF"> timedelta</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">minutes</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">tolerance):</span></span>
+<span class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> "overdue"</span><span style="color:#7F848E;font-style:italic">             # 週期性項目超過下次預期執行時間 → 逾期</span></span>
+<span class="line"><span style="color:#C678DD">    return</span><span style="color:#98C379"> "ok"</span></span></code></pre> </div> </div>   <div class="call warn"> <p><strong>這不是即時監控</strong>：判定邏輯只在你執行 <code>list</code> 或 <code>report</code> 時才會回溯檢查一次，不會主動跳通知提醒你。沒有常跑 CLI 的習慣，這個系統就等於沒在監控——這也是為什麼 Bases 儀表板本身也需要你先跑一次 CLI，讓判定結果寫回 frontmatter，重新整理才看得到最新狀態。</p> </div> <h3>CLI 快速上手</h3> <p>整套系統的日常操作幾乎都圍繞這幾個指令：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>schedule-log CLI</span> <button class="cb-copy" data-code="# 最常用：一眼看完整狀況（需要人工介入 / 一次性待處理 / 週期性運作中 / 已完成）
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py report
+
+# 只看卡住的一次性項目
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py list --type one_time --status stalled
+
+# 新增一筆一次性排程（one_time 必須帶 --scheduled-for）
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py add ^
+  --type one_time --title &quot;整理本週會議紀錄&quot; ^
+  --tool claude-code --scheduled-for 2026-09-05T09:00:00+08:00
+
+# 新增一筆週期性排程（recurring 必須帶 --schedule-kind）
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py add ^
+  --type recurring --title &quot;每週備份 Obsidian vault&quot; ^
+  --tool manual --schedule-kind interval --interval-minutes 10080
+
+# 查看單一項目 / 標記完成 / 取消
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py show SCH-0048
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py done SCH-0007
+python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py cancel SCH-0007 --note &quot;已改用其他方式處理&quot;" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 最常用：一眼看完整狀況（需要人工介入 / 一次性待處理 / 週期性運作中 / 已完成）</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> report</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 只看卡住的一次性項目</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> list</span><span style="color:#D19A66"> --type</span><span style="color:#98C379"> one_time</span><span style="color:#D19A66"> --status</span><span style="color:#98C379"> stalled</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 新增一筆一次性排程（one_time 必須帶 --scheduled-for）</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> add</span><span style="color:#98C379"> ^</span></span>
+<span class="line"><span style="color:#61AFEF">  --type</span><span style="color:#98C379"> one_time</span><span style="color:#D19A66"> --title</span><span style="color:#98C379"> "整理本週會議紀錄"</span><span style="color:#98C379"> ^</span></span>
+<span class="line"><span style="color:#61AFEF">  --tool</span><span style="color:#98C379"> claude-code</span><span style="color:#D19A66"> --scheduled-for</span><span style="color:#98C379"> 2026-09-05T09:00:00+08:00</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 新增一筆週期性排程（recurring 必須帶 --schedule-kind）</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> add</span><span style="color:#98C379"> ^</span></span>
+<span class="line"><span style="color:#61AFEF">  --type</span><span style="color:#98C379"> recurring</span><span style="color:#D19A66"> --title</span><span style="color:#98C379"> "每週備份 Obsidian vault"</span><span style="color:#98C379"> ^</span></span>
+<span class="line"><span style="color:#61AFEF">  --tool</span><span style="color:#98C379"> manual</span><span style="color:#D19A66"> --schedule-kind</span><span style="color:#98C379"> interval</span><span style="color:#D19A66"> --interval-minutes</span><span style="color:#D19A66"> 10080</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 查看單一項目 / 標記完成 / 取消</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> show</span><span style="color:#98C379"> SCH-0048</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> done</span><span style="color:#98C379"> SCH-0007</span></span>
+<span class="line"><span style="color:#61AFEF">python</span><span style="color:#98C379"> C:</span><span style="color:#56B6C2">\V</span><span style="color:#98C379">SCode_Proj</span><span style="color:#56B6C2">\C</span><span style="color:#98C379">laudeCode</span><span style="color:#56B6C2">\s</span><span style="color:#98C379">chedule-log</span><span style="color:#56B6C2">\c</span><span style="color:#98C379">li.py</span><span style="color:#98C379"> cancel</span><span style="color:#98C379"> SCH-0007</span><span style="color:#D19A66"> --note</span><span style="color:#98C379"> "已改用其他方式處理"</span></span></code></pre> </div> </div>   <h2>真實案例實測：從機器上挖出來的三個真實問題</h2> <p>
+以下三個案例，都是系統做完當天、在真實機器上跑出來的結果，不是為了寫書而模擬的示範資料。
+</p> <h3>案例一：import-codex 一次抓出 10 筆卡住超過 30 小時的任務</h3> <p>
+系統做完後，第一件事是寫一支 <code>import-codex</code> 子指令，去讀 Claude Code 委派任務給 Codex 時
+    留下的本機紀錄檔（<code>state.json</code>），把歷史委派紀錄自動同步進 schedule-log。結果相當有說服力：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>真實執行輸出</span> <button class="cb-copy" data-code="> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py import-codex
+
+讀取 Codex 委派狀態檔：
+  C:\Users\porte\.claude\plugins\data\codex-openai-codex\state\<project>-<hash>\state.json
+
+匯入完成：共比對 42 筆歷史 job 紀錄
+  新增 42 筆（source_tool=codex, executor=codex_delegation）
+  完成並歸入 done\：32 筆
+  進行中且經 audit 判定為 stalled：10 筆
+    → 全部是 2026-09-01 的 imagegen（圖片生成委派）任務
+    → 每一筆 state.json 都缺少 completedAt，代表「跑到一半沒有真正結束」
+    → 在本次匯入前，完全沒有人注意到這 10 筆卡住的任務
+
+執行 audit 中 ... 完成，10 筆已標記為 status: stalled" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py import-codex</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>讀取 Codex 委派狀態檔：</span></span>
+<span class="line"><span>  C:\Users\porte\.claude\plugins\data\codex-openai-codex\state\&#x3C;project>-&#x3C;hash>\state.json</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>匯入完成：共比對 42 筆歷史 job 紀錄</span></span>
+<span class="line"><span>  新增 42 筆（source_tool=codex, executor=codex_delegation）</span></span>
+<span class="line"><span>  完成並歸入 done\：32 筆</span></span>
+<span class="line"><span>  進行中且經 audit 判定為 stalled：10 筆</span></span>
+<span class="line"><span>    → 全部是 2026-09-01 的 imagegen（圖片生成委派）任務</span></span>
+<span class="line"><span>    → 每一筆 state.json 都缺少 completedAt，代表「跑到一半沒有真正結束」</span></span>
+<span class="line"><span>    → 在本次匯入前，完全沒有人注意到這 10 筆卡住的任務</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>執行 audit 中 ... 完成，10 筆已標記為 status: stalled</span></span></code></pre> </div> </div>   <p>
+一次匯入 42 筆真實歷史紀錄，其中 10 筆是 2026-09-01 的圖片生成委派任務，<strong>跑到一半沒有真正結束，
+    卻完全沒有人發現</strong>——這正是本章開頭描述的問題的活生生案例：委派出去的工作，缺乏一個會主動告訴你
+    「這筆卡住了」的地方，人就永遠不會知道。
+</p> <h3>案例二：一個被中斷兩週多、沒人處理過的 Windows 排程</h3> <p>
+除了 Codex 委派紀錄，也去查了機器上真實存在的 Windows 工作排程器排程，發現一個叫
+<code>Codex-Resume-Claude-MicronYC-...</code> 的一次性排程，是 2026-08-19 排定要續跑一個 Claude session，
+    結果因為 <code>STATUS_CONTROL_C_EXIT</code>（被中斷）而失敗——<strong>之後兩週多完全沒人再處理過</strong>。
+</p> <p>把這筆排程登記進系統後（也就是前面 frontmatter schema 展示的 SCH-0048），<code>audit</code> 正確把它標成 <code>stalled</code>，<code>rerun</code> 指令也正確印出續跑建議：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>真實執行輸出</span> <button class="cb-copy" data-code="> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py rerun SCH-0048
+
+SCH-0048：Codex-Resume-Claude-MicronYC（Windows 排程續跑 session）
+  status: stalled（started_at 2026-08-19T13:01:21+08:00，已超過 max_running_minutes=300）
+  最後紀錄：interrupted (exit=3221225786 / STATUS_CONTROL_C_EXIT)
+  resume_tool: claude / session_id: 6c17fc76-aebe-45b4-8194-6bcf0481bba2
+
+建議的續跑指令（尚未執行，加上 --exec 才會真的觸發）：
+
+  claude --resume &quot;6c17fc76-aebe-45b4-8194-6bcf0481bba2&quot;
+
+> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py rerun SCH-0048 --exec
+（加上 --exec 後才會真的呼叫上面這行指令）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="text"><code><span class="line"><span>> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py rerun SCH-0048</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>SCH-0048：Codex-Resume-Claude-MicronYC（Windows 排程續跑 session）</span></span>
+<span class="line"><span>  status: stalled（started_at 2026-08-19T13:01:21+08:00，已超過 max_running_minutes=300）</span></span>
+<span class="line"><span>  最後紀錄：interrupted (exit=3221225786 / STATUS_CONTROL_C_EXIT)</span></span>
+<span class="line"><span>  resume_tool: claude / session_id: 6c17fc76-aebe-45b4-8194-6bcf0481bba2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>建議的續跑指令（尚未執行，加上 --exec 才會真的觸發）：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  claude --resume "6c17fc76-aebe-45b4-8194-6bcf0481bba2"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>> python C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py rerun SCH-0048 --exec</span></span>
+<span class="line"><span>（加上 --exec 後才會真的呼叫上面這行指令）</span></span></code></pre> </div> </div>   <p>
+這裡的關鍵設計是：系統在建立項目時就把 <code>session_id</code>、<code>working_dir</code>、<code>resume_tool</code>
+存進 frontmatter，重跑時才能正確重建出續跑指令。但<strong>刻意不會自動執行</strong>——一定要人加上
+<code>--exec</code> 才會真的觸發，避免自動產生非預期的 API 用量。對 <code>resume_tool: codex</code> 的項目，
+    CLI 更保守，完全不臆造續跑指令，只印出 <code>original_prompt</code>，建議走 <code>codex:rescue</code> 手動重新委派。
+</p> <h3>案例三：讓 Herdr 排程從「需要人補登」變成「全自動回報」</h3> <p>
+第三個案例是把系統跟一支真實存在的 Windows 排程 PowerShell 腳本
+<code>herdr-hourly-claude-greeting.ps1</code> 串接起來——這支腳本每 20 分鐘執行一次，透過一個叫 herdr
+    的多 agent pane 管理工具，送出打卡問候給 Claude Code。做法是在腳本的 <code>try/finally</code> 加一段，
+    讓每次執行結束（不管成功、失敗、還是例外崩潰）都自動呼叫 CLI 的 <code>run</code> 指令回報執行狀態：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>herdr-hourly-claude-greeting.ps1（節錄）</span> <button class="cb-copy" data-code="# C:\Users\porte\scripts\herdr-hourly-claude-greeting.ps1（節錄）
+
+$scheduleLogCli = &quot;C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py&quot;
+$itemId = &quot;SCH-0047&quot;
+
+function Report-ScheduleLog {
+    param([string]$Status, [string]$Note)
+    try {
+        python $scheduleLogCli run $itemId --status $Status --note $Note
+    } catch {
+        Write-Warning &quot;schedule-log 回報失敗，但不中斷主流程：$_&quot;
+    }
+}
+
+try {
+    # ...原本的 herdr 打卡問候邏輯（呼叫 herdr 送出訊息給 gyro / porter）...
+    Report-ScheduleLog -Status &quot;success&quot; -Note &quot;targets=gyro,porter 全部成功&quot;
+}
+catch {
+    Report-ScheduleLog -Status &quot;failed&quot; -Note &quot;例外：$($_.Exception.Message)&quot;
+    exit 1   # 巢狀 try/finally 中，exit 陳述式依然會確實觸發 finally 區塊（已用隔離測試腳本驗證）
+}
+finally {
+    # 不管上面走哪條路徑（成功 / 失敗 / exit），這裡永遠會執行
+    Write-Host &quot;本次執行已回報 schedule-log&quot;
+}" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="powershell"><code><span class="line"><span style="color:#7F848E;font-style:italic"># C:\Users\porte\scripts\herdr-hourly-claude-greeting.ps1（節錄）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">$scheduleLogCli</span><span style="color:#56B6C2"> =</span><span style="color:#98C379"> "C:\VSCode_Proj\ClaudeCode\schedule-log\cli.py"</span></span>
+<span class="line"><span style="color:#E06C75">$itemId</span><span style="color:#56B6C2"> =</span><span style="color:#98C379"> "SCH-0047"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> Report-ScheduleLog</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">    param</span><span style="color:#ABB2BF">([</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">]</span><span style="color:#E06C75">$Status</span><span style="color:#ABB2BF">, [</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">]</span><span style="color:#E06C75">$Note</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">    try</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">        python </span><span style="color:#E06C75">$scheduleLogCli</span><span style="color:#ABB2BF"> run </span><span style="color:#E06C75">$itemId</span><span style="color:#56B6C2"> --</span><span style="color:#ABB2BF">status </span><span style="color:#E06C75">$Status</span><span style="color:#56B6C2"> --</span><span style="color:#ABB2BF">note </span><span style="color:#E06C75">$Note</span></span>
+<span class="line"><span style="color:#ABB2BF">    } </span><span style="color:#C678DD">catch</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#56B6C2">        Write-Warning</span><span style="color:#98C379"> "schedule-log 回報失敗，但不中斷主流程：$_"</span></span>
+<span class="line"><span style="color:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">try</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    # ...原本的 herdr 打卡問候邏輯（呼叫 herdr 送出訊息給 gyro / porter）...</span></span>
+<span class="line"><span style="color:#ABB2BF">    Report</span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF">ScheduleLog </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF">Status </span><span style="color:#98C379">"success"</span><span style="color:#56B6C2"> -</span><span style="color:#ABB2BF">Note </span><span style="color:#98C379">"targets=gyro,porter 全部成功"</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"><span style="color:#C678DD">catch</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">    Report</span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF">ScheduleLog </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF">Status </span><span style="color:#98C379">"failed"</span><span style="color:#56B6C2"> -</span><span style="color:#ABB2BF">Note </span><span style="color:#98C379">"例外：</span><span style="color:#C678DD">$(</span><span style="color:#ABB2BF">$_</span><span style="color:#E06C75">.Exception.Message</span><span style="color:#C678DD">)</span><span style="color:#98C379">"</span></span>
+<span class="line"><span style="color:#C678DD">    exit</span><span style="color:#D19A66"> 1</span><span style="color:#7F848E;font-style:italic">   # 巢狀 try/finally 中，exit 陳述式依然會確實觸發 finally 區塊（已用隔離測試腳本驗證）</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"><span style="color:#C678DD">finally</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    # 不管上面走哪條路徑（成功 / 失敗 / exit），這裡永遠會執行</span></span>
+<span class="line"><span style="color:#56B6C2">    Write-Host</span><span style="color:#98C379"> "本次執行已回報 schedule-log"</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>一個值得記住的 PowerShell 細節</strong>：PowerShell 的 <code>exit</code> 陳述式，即使在巢狀的 <code>try/finally</code> 裡，依然會確實觸發 <code>finally</code> 區塊——這不是憑印象假設，而是用一支隔離測試腳本實際驗證過的行為。這個細節正是「不管成功或失敗都能回報」的關鍵：只要回報邏輯放在 <code>finally</code>，就不用在每一條退出路徑上都重複寫一次。</p> </div> <p>
+接上這段之後，這個週期性排程從此變成全自動、不需要人工補登——這也是為什麼案例二（SCH-0048）跟案例三
+    （SCH-0047）恰好分別展示了一次性與週期性兩條路徑：前者示範漏跑後怎麼重跑，後者示範怎麼讓正常運作
+    的排程完全不需要人碰。
+</p> <p>Bases 儀表板裡對應的「⚠️ 需要人工介入」view，就是靠這樣的公式欄位把三種異常統一呈現：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe>schedule-log.base（節錄）</span> <button class="cb-copy" data-code="# schedule-log.base（節錄）
+formulas:
+  attention_since: if(status == &quot;missed&quot;, scheduled_for, if(status == &quot;stalled&quot;, started_at, next_expected_at))
+  attention_reason: if(status == &quot;missed&quot;, &quot;🔴 逾期未跑（missed）&quot;, if(status == &quot;stalled&quot;, &quot;🟠 執行中斷超時（stalled）&quot;, &quot;🟡 週期性逾期（overdue）&quot;))
+
+views:
+  - type: table
+    name: ⚠️ 需要人工介入
+    filters:
+      or:
+        - status == &quot;missed&quot;
+        - status == &quot;stalled&quot;
+        - health == &quot;overdue&quot;
+    sort:
+      - property: formula.attention_since
+        direction: ASC" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#7F848E;font-style:italic"># schedule-log.base（節錄）</span></span>
+<span class="line"><span style="color:#E06C75">formulas</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#E06C75">  attention_since</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">if(status == "missed", scheduled_for, if(status == "stalled", started_at, next_expected_at))</span></span>
+<span class="line"><span style="color:#E06C75">  attention_reason</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">if(status == "missed", "🔴 逾期未跑（missed）", if(status == "stalled", "🟠 執行中斷超時（stalled）", "🟡 週期性逾期（overdue）"))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">views</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">table</span></span>
+<span class="line"><span style="color:#E06C75">    name</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">⚠️ 需要人工介入</span></span>
+<span class="line"><span style="color:#E06C75">    filters</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#E06C75">      or</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">        - </span><span style="color:#98C379">status == "missed"</span></span>
+<span class="line"><span style="color:#ABB2BF">        - </span><span style="color:#98C379">status == "stalled"</span></span>
+<span class="line"><span style="color:#ABB2BF">        - </span><span style="color:#98C379">health == "overdue"</span></span>
+<span class="line"><span style="color:#E06C75">    sort</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">      - </span><span style="color:#E06C75">property</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">formula.attention_since</span></span>
+<span class="line"><span style="color:#E06C75">        direction</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">ASC</span></span></code></pre> </div> </div>   <h2>三工具整合模式：純檔案格式作為資料交換層</h2> <p>本章開頭的三個孤島，最後是這樣被串起來的：</p> <ul> <li><strong>Claude Code</strong>：新增一個 skill，觸發詞是「排程」「看排程」等，而且會在查詢前<strong>先靜默同步一次</strong> Codex 委派紀錄（自動跑 <code>import-codex</code>），使用者完全不用手動記錄委派任務。</li> <li><strong>Codex</strong>：在 Codex 的 <code>AGENTS.md</code> 規則檔加入指引，教它何時該呼叫這支 CLI（例如委派前登記一筆、完成後標記完成）。</li> <li><strong>Antigravity</strong>：這個工具原本完全沒有任何排程或待辦機制，比照既有的「workflow 模組」慣例（如既有的 <code>workflow-printing-press.md</code>）新增一個 <code>workflow-schedule-log.md</code>，讓它也能呼叫同一支 CLI。</li> </ul> <div class="call tip"> <p><strong>值得記住的架構洞察</strong>：這證明了一件事——用純 Markdown + frontmatter 當資料交換格式，任何會下 shell 指令的 AI Agent 工具都能參與同一套系統，<strong>不需要專屬 SDK 或 API</strong>。三個工具彼此完全不需要互相認識，它們只需要知道同一支 CLI 的存在，以及同一個資料夾的路徑。這比為每個工具寫一個專屬整合插件，成本低得多，也更容易在未來加入第四個、第五個工具。</p> </div> <p>
+另外要老實說清楚這個系統的邊界：它是<strong>本機、單向鏡像</strong>系統——不會讀寫 Claude Code 原生
+<code>/schedule</code> 的雲端排程資料，兩邊完全獨立；也不取代既有 PARA 系統裡的 <code>projects/</code>、
+<code>projects_PM/</code>、<code>brain/</code>。它解決的是一個很具體的問題：「集中看到跨工具排程狀態，
+    並自動抓出漏跑與中斷」，而不是要變成一個全能的專案管理系統。
+</p> <h2>本章小結與下一步</h2> <p>
+這一章示範的不只是一個排程工具，而是一種思路：<strong>當你的工具鏈裡有好幾個各自為政的 AI Agent，
+    與其為每一個都學一套專屬的排程機制，不如退一步，用最樸素的 Markdown + YAML frontmatter 當共同語言</strong>，
+    讓 Obsidian（透過 Bases）扮演唯一的儀表板，讓一支輕量的 CLI 扮演唯一的資料存取層。
+</p> <p>
+真實成效也證明了這個思路是划算的：一支 <code>import-codex</code> 指令就挖出 10 筆卡住超過 30 小時、
+    完全沒人發現的任務；一筆被中斷兩週多的 Windows 排程，被正確標記並給出可執行的續跑建議；一支既有的
+    PowerShell 排程腳本，只加了幾行 <code>try/finally</code> 就從「需要人工補登」變成「全自動回報」。
+</p> <p>
+如果你想把這套方法套用到自己的工作流，不必照抄同一套 schema——核心可以遷移的只有三件事：
+    一，用<strong>檔案</strong>（而非資料庫或雲端服務）當資料交換層，任何工具都能參與；
+    二，把「這件事該發生的時間」跟「該完成的時間」都記下來，才能<strong>偵測「沒發生」</strong>而不只是記錄「發生了什麼」；
+    三，任何跟續跑、重試相關的動作，都<strong>預設只印出建議、不自動執行</strong>，把最終決定權留給人。
+</p> <p>
+下一章是本書附錄的術語表，把 Obsidian 從 Vault、Wikilink 到本章的 Bases 等核心詞彙做一次速查彙整，
+    方便你隨時回來查閱。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span> </a> <a href="/obsidian/glossary" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

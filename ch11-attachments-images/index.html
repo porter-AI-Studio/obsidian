@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>附件與圖片管理：讓 Vault 保持整潔 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Obsidian 預設將所有附件丟進根目錄，累積幾個月後附件區一片混亂。本章介紹四種附件組織策略、兩款核心插件（Custom Attachment Location、Image Converter），讓圖片跟著筆記走、自動壓縮、一鍵清除無效附件，從此告別 Vault 亂象。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 11 章 · Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <h1>附件與圖片管理：讓 Vault 保持整潔</h1> <p class="cdesc">從散落一地到井然有序——圖片跟著筆記走的完整方案</p> <figure class="svg-fig"> <img src="/obsidian/img/ch11/01-flowchart-attachment-hygiene.png" alt="Obsidian 附件與圖片管理工作流，從預設 attachments 到圖片跟著筆記走" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 11-0：附件管理的核心路徑——把預設 attachments/ 的混亂，轉成圖片跟著筆記走、可壓縮、可清理的 Vault 結構。</figcaption> </figure> <p>
+剛開始使用 Obsidian 時，圖片管理看起來不是問題：截圖貼上，立刻出現在筆記裡，省事。
+    但三個月後，當你的 <code>attachments/</code> 資料夾裡堆了兩百張不知屬於哪篇筆記的截圖，
+    找一張圖要翻半天，你就知道問題在哪了。
+</p> <p>
+Obsidian 的附件管理有個根本設計取捨：它把<strong>所有附件都存在本地</strong>（這是優點），
+    但預設不限制存放位置（這是隱患）。本章的目標就是把這個隱患消除，讓圖片自動跟著筆記走。
+</p> <h2>問題根源：預設設定的四個痛點</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Paste Image Input -->
+    <rect x="50" y="40" width="160" height="90" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="130" y="65" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">1. 貼上原始圖片</text>
+    <text x="130" y="90" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">Pasted image...png</text>
+    <text x="130" y="108" text-anchor="middle" font-size="14px" fill="var(--accent)">體積大 (如 5MB+)</text>
+
+    <!-- Connectors -->
+    <line x1="210" y1="85" x2="270" y2="85" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+
+    <!-- Optimization Plugins -->
+    <rect x="270" y="30" width="370" height="110" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="455" y="52" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">2. 核心優化插件處理</text>
+    <line x1="280" y1="62" x2="630" y2="62" stroke="var(--border)" stroke-width="1" />
+    <text x="290" y="82" font-size="15px" fill="var(--text)">• Image Converter: 轉 WebP + 壓縮 (-70% 體積)</text>
+    <text x="290" y="102" font-size="15px" fill="var(--text)">• Custom Attachment: 依筆記名稱建立子目錄</text>
+    <text x="290" y="122" font-size="15px" fill="var(--text)">• Auto Rename: 自動重新命名為 [筆記名-序號]</text>
+
+    <line x1="640" y1="85" x2="665" y2="85" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+
+    <!-- Storage destination -->
+    <rect x="665" y="40" width="160" height="90" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="745" y="65" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">3. 整潔儲存結構</text>
+    <text x="745" y="90" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">assets/專案名稱/1.webp</text>
+    <text x="745" y="108" text-anchor="middle" font-size="14px" fill="var(--accent)">體積小 (約 200KB)</text>
+
+    <!-- Purge line underneath -->
+    <path d="M 745 130 L 745 190 L 130 190 L 130 130" fill="none" stroke="var(--text)" opacity="0.3" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-main)" />
+
+    <rect x="270" y="170" width="370" height="40" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="455" y="194" text-anchor="middle" font-size="15px" fill="var(--text)">定期維護: Clear Unused Images (清除無效孤兒圖)</text>
+  </g>
+</svg>
+ <figcaption>這張流程圖展示了處理圖片與附件的最佳實踐，包括如何設定儲存路徑與管理檔案結構。</figcaption> </figure> <p>Obsidian 的原廠附件行為會造成以下困擾：</p> <ul> <li><strong>所有附件堆在根目錄</strong>：<code>attachments/</code> 變成無差別垃圾桶</li> <li><strong>隨機命名</strong>：截圖自動命名 <code>Pasted image 20250329.png</code>，毫無意義</li> <li><strong>刪了筆記，圖片還在</strong>：孤兒圖片佔用空間無法自動清除</li> <li><strong>笔記移動後引用斷掉</strong>：手動移動附件會讓筆記裡的圖片連結失效</li> </ul> <h2>四種附件組織策略</h2> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch11-a" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- 左側：中央集中式 -->
+    <rect x="30" y="10" width="340" height="310" fill="var(--bg2)" stroke="var(--border)" rx="10" stroke-width="1.5"/>
+    <text x="200" y="38" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">集中式（預設）</text>
+    <text x="200" y="56" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">所有附件集中在根目錄 attachments/</text>
+    <!-- Vault root -->
+    <rect x="50" y="68" width="120" height="28" fill="var(--abg)" stroke="var(--accent)" rx="4"/>
+    <text x="110" y="87" text-anchor="middle" font-size="15px" fill="var(--accent)">📁 Vault/</text>
+    <!-- attachments folder -->
+    <rect x="80" y="112" width="130" height="28" fill="var(--bg2)" stroke="var(--border)" rx="4"/>
+    <text x="145" y="131" text-anchor="middle" font-size="14px" fill="var(--text)">📁 attachments/</text>
+    <line x1="145" y1="96" x2="145" y2="112" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-a)"/>
+    <!-- Files -->
+    <text x="95" y="158" font-size="13px" fill="var(--text)" opacity="0.75">🖼 Pasted image 20250301.png</text>
+    <text x="95" y="175" font-size="13px" fill="var(--text)" opacity="0.75">🖼 Pasted image 20250302.png</text>
+    <text x="95" y="192" font-size="13px" fill="var(--text)" opacity="0.75">🖼 圖片1.png</text>
+    <text x="95" y="209" font-size="13px" fill="var(--text)" opacity="0.75">🖼 screenshot-123.png</text>
+    <text x="95" y="226" font-size="13px" fill="var(--text)" opacity="0.5">...（200+ 張混在一起）</text>
+    <!-- 痛點標籤 -->
+    <rect x="50" y="248" width="300" height="52" fill="var(--bg)" stroke="var(--border)" rx="6" stroke-dasharray="4"/>
+    <text x="200" y="268" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">痛點：無法辨識附件與筆記關係</text>
+    <text x="200" y="286" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.8">移動筆記後引用連結斷裂</text>
+
+    <!-- 右側：分散式（推薦） -->
+    <rect x="430" y="10" width="340" height="310" fill="var(--bg2)" stroke="var(--accent)" rx="10" stroke-width="2"/>
+    <text x="600" y="38" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">分散式（推薦）</text>
+    <text x="600" y="56" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每篇筆記旁建立 assets/ 子目錄</text>
+    <!-- Vault root -->
+    <rect x="450" y="68" width="120" height="28" fill="var(--abg)" stroke="var(--accent)" rx="4"/>
+    <text x="510" y="87" text-anchor="middle" font-size="15px" fill="var(--accent)">📁 Vault/</text>
+    <!-- 筆記 A -->
+    <rect x="450" y="112" width="130" height="24" fill="var(--bg)" stroke="var(--border)" rx="4"/>
+    <text x="515" y="129" text-anchor="middle" font-size="14px" fill="var(--text)">📄 專案計劃.md</text>
+    <line x1="510" y1="96" x2="510" y2="112" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-a)"/>
+    <!-- assets/專案計劃 -->
+    <rect x="470" y="148" width="130" height="24" fill="var(--abg)" stroke="var(--accent)" rx="4"/>
+    <text x="535" y="165" text-anchor="middle" font-size="13px" fill="var(--accent)">📁 assets/專案計劃/</text>
+    <line x1="535" y1="136" x2="535" y2="148" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arr-ch11-a)"/>
+    <text x="490" y="185" font-size="13px" fill="var(--text)" opacity="0.75">🖼 專案計劃-1.webp</text>
+    <text x="490" y="200" font-size="13px" fill="var(--text)" opacity="0.75">🖼 專案計劃-2.webp</text>
+    <!-- 筆記 B -->
+    <rect x="450" y="220" width="130" height="24" fill="var(--bg)" stroke="var(--border)" rx="4"/>
+    <text x="515" y="237" text-anchor="middle" font-size="14px" fill="var(--text)">📄 會議紀錄.md</text>
+    <line x1="510" y1="208" x2="510" y2="220" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-a)"/>
+    <rect x="470" y="256" width="130" height="24" fill="var(--abg)" stroke="var(--accent)" rx="4"/>
+    <text x="535" y="273" text-anchor="middle" font-size="13px" fill="var(--accent)">📁 assets/會議紀錄/</text>
+    <line x1="535" y1="244" x2="535" y2="256" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3" marker-end="url(#arr-ch11-a)"/>
+    <text x="490" y="295" font-size="13px" fill="var(--text)" opacity="0.75">🖼 會議紀錄-1.webp</text>
+  </g>
+</svg> <figcaption>附件資料夾結構對比：集中式（預設）vs 分散式（推薦）。分散式讓每篇筆記的附件緊鄰存放，搬移不斷連。</figcaption> </figure> <p>根據使用習慣，常見的組織方式有四種，各有取捨：</p> <table> <thead> <tr> <th>策略</th> <th>結構範例</th> <th>優點</th> <th>缺點</th> </tr> </thead> <tbody> <tr> <td><strong>單一目錄</strong>（預設）</td> <td><code>/attachments/圖片.png</code></td> <td>零設定</td> <td>附件多後極度混亂</td> </tr> <tr> <td><strong>按日期分類</strong></td> <td><code>/attachments/2025-03/筆記名/圖.png</code></td> <td>時間軸清晰</td> <td>找附件需記得日期</td> </tr> <tr> <td><strong>按檔案大小</strong></td> <td><code>/attachments/1-5MB/圖.png</code></td> <td>方便識別需壓縮的圖</td> <td>與筆記內容無關聯</td> </tr> <tr> <td><strong>按筆記名分類</strong>（推薦）</td> <td><code>/assets/專案計劃/圖1.png</code></td> <td>附件與筆記綁定，搬移不斷線</td> <td>需插件輔助自動化</td> </tr> </tbody> </table> <p>
+絕大多數重度使用者最終都會選擇<strong>「按筆記名分類」</strong>——每篇筆記旁邊建立同名子目錄，
+    附件完全跟著筆記走，不管你把筆記搬到哪個資料夾，附件關係永遠正確。
+</p> <h2>原生設定：先做這一步</h2> <p>不安裝任何插件，Obsidian 原生就支援基本的附件位置設定：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Obsidian 原生設定路徑
+設定 → 檔案與連結 → 新附件的預設位置
+
+選項一：Vault 根目錄（預設，不建議）
+選項二：指定資料夾 → attachments/
+選項三：與目前筆記相同的資料夾
+選項四：目前資料夾的子資料夾 → assets/（推薦）
+
+# 推薦設定：每篇筆記旁邊建立 assets/ 子目錄
+新附件位置：目前資料夾的子資料夾
+子資料夾名稱：assets" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Obsidian 原生設定路徑</span></span>
+<span class="line"><span style="color:#61AFEF">設定</span><span style="color:#98C379"> →</span><span style="color:#98C379"> 檔案與連結</span><span style="color:#98C379"> →</span><span style="color:#98C379"> 新附件的預設位置</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">選項一：Vault</span><span style="color:#98C379"> 根目錄（預設，不建議）</span></span>
+<span class="line"><span style="color:#61AFEF">選項二：指定資料夾</span><span style="color:#98C379"> →</span><span style="color:#98C379"> attachments/</span></span>
+<span class="line"><span style="color:#61AFEF">選項三：與目前筆記相同的資料夾</span></span>
+<span class="line"><span style="color:#61AFEF">選項四：目前資料夾的子資料夾</span><span style="color:#98C379"> →</span><span style="color:#98C379"> assets/（推薦）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 推薦設定：每篇筆記旁邊建立 assets/ 子目錄</span></span>
+<span class="line"><span style="color:#61AFEF">新附件位置：目前資料夾的子資料夾</span></span>
+<span class="line"><span style="color:#61AFEF">子資料夾名稱：assets</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <p>
+「目前資料夾的子資料夾 → <code>assets</code>」是最保守的起點——
+    不需要插件，圖片就會存在筆記旁邊的 <code>assets/</code> 目錄，已比預設好很多。
+    但它的缺點是：<strong>筆記重新命名或移動後，不會自動更新附件路徑</strong>。
+    要解決這個問題，需要下一節的插件。
+</p> <h2>插件一：Custom Attachment Location（核心必裝）</h2> <p>
+這是附件管理最關鍵的插件，解決了原生設定最大的痛點：
+<strong>附件路徑與筆記生命週期完全同步</strong>。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Custom Attachment Location 插件設定（推薦方案）
+# 安裝：設定 → 社群插件 → 搜尋 custom-attachment-location
+
+附件路徑規則：./assets/${filename}/
+# 效果：每篇筆記的附件存在同名子目錄
+# 例：「專案計劃.md」的圖片 → assets/專案計劃/圖片1.png
+
+# 啟用以下功能：
+✅ 筆記重新命名時自動更新附件引用
+✅ 筆記移動時自動遷移附件目錄
+✅ 批次整理全庫現有附件（一鍵套用規則）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Custom Attachment Location 插件設定（推薦方案）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 安裝：設定 → 社群插件 → 搜尋 custom-attachment-location</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">附件路徑規則：./assets/$</span><span style="color:#98C379">{filename}</span><span style="color:#61AFEF">/</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 效果：每篇筆記的附件存在同名子目錄</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 例：「專案計劃.md」的圖片 → assets/專案計劃/圖片1.png</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 啟用以下功能：</span></span>
+<span class="line"><span style="color:#61AFEF">✅</span><span style="color:#98C379"> 筆記重新命名時自動更新附件引用</span></span>
+<span class="line"><span style="color:#61AFEF">✅</span><span style="color:#98C379"> 筆記移動時自動遷移附件目錄</span></span>
+<span class="line"><span style="color:#61AFEF">✅</span><span style="color:#98C379"> 批次整理全庫現有附件（一鍵套用規則）</span></span></code></pre> </div> </div>   <p>裝好後，整個 Vault 的附件管理邏輯就變成：</p> <ul> <li>貼圖時 → 自動存到 <code>assets/筆記名/</code></li> <li>筆記改名 → 附件目錄自動跟著改名，筆記內連結自動更新</li> <li>筆記移動 → 附件跟著搬，連結不斷</li> <li>舊附件 → 執行「批次整理」，一鍵套用規則到全庫現有圖片</li> </ul> <div class="call info"> <p> <strong>一鍵整理舊附件：</strong>安裝後在命令面板（Ctrl/Cmd + P）搜尋
+<code>Custom Attachment Location: Reorganize</code>，即可將全庫既有附件按新規則批次搬移。
+      建議先備份 Vault 再執行。
+</p> </div> <h2>插件二：Image Converter（圖片壓縮 + 編輯）</h2> <p> <strong>Image Converter</strong> 解決的是另一個痛點：截圖通常是 PNG，未壓縮的 PNG 動輒幾 MB，
+    累積幾百張後 Vault 體積暴增，同步速度也跟著變慢。
+</p> <p>它的核心功能：</p> <ul> <li><strong>自動壓縮</strong>：貼上圖片時自動轉成 WebP，體積縮小 70~80%</li> <li><strong>格式統一</strong>：全庫圖片統一成 PNG / JPG / WebP，告別格式混雜</li> <li><strong>自動重命名</strong>：以筆記名 + 序號命名（如 <code>專案計劃-1.webp</code>）</li> <li><strong>右鍵複製</strong>：解決 Obsidian 圖片「貼得進去、複製不出去」的老問題</li> <li><strong>滾輪縮放</strong>：按住 Ctrl + 滑鼠滾輪，直接在筆記內縮放圖片預覽大小</li> </ul> <div class="call info"> <p> <strong>Image Converter vs Paste Image Rename：</strong>
+如果你只裝一個，選 Image Converter——它涵蓋了 Paste Image Rename 的所有功能，
+      並額外增加壓縮與格式轉換。
+</p> </div> <h2>插件三：Clear Unused Images（清除孤兒圖片）</h2> <p>
+刪除一篇筆記後，Obsidian 不會自動刪除它引用過的圖片——這些「孤兒圖片」靜靜佔用空間。
+<strong>Clear Unused Images</strong> 插件可以掃描整個 Vault，找出沒有被任何筆記引用的圖片，
+    一鍵清除。
+</p> <p>建議的使用節奏：每個月執行一次，搭配清理無用筆記一起做。</p> <div class="call warn"> <p> <strong>三插件併用的已知風險（2026-09 查證）</strong>：Obsidian 官方論壇在 2025 年底有使用者回報，
+      同時併用 Custom Attachment Location、Image Converter、Clear Unused Images 三個插件時，
+      偶爾會出現圖片誤刪或遺失的狀況——原因通常是三者對「附件路徑」的判斷時機沒有完全同步，
+      Clear Unused Images 掃描時誤判某些圖片為孤兒檔。執行「清除孤兒圖片」前，
+      務必先用 Obsidian Git 或手動備份 Vault，並先用預覽/模擬模式確認清單再真正刪除。
+</p> </div> <h2>統計 Vault 附件現況</h2> <p>整理前，先了解 Vault 的附件規模：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# macOS / Linux：統計 Vault 內的圖片數量
+cd /path/to/your/vault
+find ./ -type f \( -name &quot;*.jpeg&quot; -o -name &quot;*.png&quot; -o -name &quot;*.jpg&quot; -o -name &quot;*.webp&quot; \) | wc -l
+
+# 找出超過 5MB 的附件
+find ./ -type f -size +5M -not -path &quot;*/.obsidian/*&quot;" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># macOS / Linux：統計 Vault 內的圖片數量</span></span>
+<span class="line"><span style="color:#56B6C2">cd</span><span style="color:#98C379"> /path/to/your/vault</span></span>
+<span class="line"><span style="color:#61AFEF">find</span><span style="color:#98C379"> ./</span><span style="color:#D19A66"> -type</span><span style="color:#98C379"> f</span><span style="color:#56B6C2"> \(</span><span style="color:#D19A66"> -name</span><span style="color:#98C379"> "*.jpeg"</span><span style="color:#D19A66"> -o</span><span style="color:#D19A66"> -name</span><span style="color:#98C379"> "*.png"</span><span style="color:#D19A66"> -o</span><span style="color:#D19A66"> -name</span><span style="color:#98C379"> "*.jpg"</span><span style="color:#D19A66"> -o</span><span style="color:#D19A66"> -name</span><span style="color:#98C379"> "*.webp"</span><span style="color:#56B6C2"> \)</span><span style="color:#ABB2BF"> | </span><span style="color:#61AFEF">wc</span><span style="color:#D19A66"> -l</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 找出超過 5MB 的附件</span></span>
+<span class="line"><span style="color:#61AFEF">find</span><span style="color:#98C379"> ./</span><span style="color:#D19A66"> -type</span><span style="color:#98C379"> f</span><span style="color:#D19A66"> -size</span><span style="color:#98C379"> +5M</span><span style="color:#D19A66"> -not</span><span style="color:#D19A66"> -path</span><span style="color:#98C379"> "*/.obsidian/*"</span></span></code></pre> </div> </div>   <p>
+Windows 用戶可安裝 <strong>Vault Statistics</strong> 插件，
+    它會在狀態列即時顯示：筆記數、附件數、連結數、Vault 總大小，
+    不需要打開終端機。
+</p> <h2>圖片嵌入語法完全指南</h2> <p>
+Obsidian 使用 wikilink 語法嵌入圖片，比 Markdown 標準語法更簡潔，
+    且支援直接控制顯示尺寸——這是多數 Markdown 工具做不到的。
+</p> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch11-b" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Obsidian 圖片嵌入語法結構</text>
+
+    <!-- 語法主體 -->
+    <rect x="80" y="44" width="640" height="52" fill="var(--abg)" stroke="var(--accent)" rx="8" stroke-width="1.5"/>
+    <text x="400" y="76" text-anchor="middle" font-size="21px" font-family="monospace" fill="var(--accent)" font-weight="bold">![[image.png|alt text|400]]</text>
+
+    <!-- 標註：! -->
+    <line x1="104" y1="96" x2="104" y2="128" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-b)"/>
+    <rect x="50" y="128" width="108" height="36" fill="var(--bg2)" stroke="var(--border)" rx="6"/>
+    <text x="104" y="148" text-anchor="middle" font-size="14px" fill="var(--text)">! = 嵌入顯示</text>
+    <text x="104" y="162" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">（省略則為連結）</text>
+
+    <!-- 標註：[[ ]] -->
+    <line x1="160" y1="96" x2="232" y2="128" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-b)"/>
+    <rect x="166" y="128" width="132" height="36" fill="var(--bg2)" stroke="var(--border)" rx="6"/>
+    <text x="232" y="148" text-anchor="middle" font-size="14px" fill="var(--text)">[[ ]] = wikilink</text>
+    <text x="232" y="162" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">Obsidian 內部連結</text>
+
+    <!-- 標註：image.png -->
+    <line x1="310" y1="96" x2="401" y2="128" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-b)"/>
+    <rect x="308" y="128" width="186" height="36" fill="var(--bg2)" stroke="var(--border)" rx="6"/>
+    <text x="401" y="148" text-anchor="middle" font-size="14px" fill="var(--text)">檔案名稱</text>
+    <text x="401" y="162" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">支援 png/jpg/webp/gif/svg</text>
+
+    <!-- 標註：alt text -->
+    <line x1="490" y1="96" x2="569" y2="128" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch11-b)"/>
+    <rect x="504" y="128" width="130" height="36" fill="var(--bg2)" stroke="var(--border)" rx="6"/>
+    <text x="569" y="148" text-anchor="middle" font-size="14px" fill="var(--text)">Alt 替代文字</text>
+    <text x="569" y="162" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">圖片說明（可省略）</text>
+
+    <!-- 標註：400 -->
+    <line x1="680" y1="96" x2="708" y2="128" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-ch11-b)"/>
+    <rect x="644" y="128" width="128" height="36" fill="var(--abg)" stroke="var(--accent)" rx="6"/>
+    <text x="708" y="148" text-anchor="middle" font-size="14px" fill="var(--accent)" font-weight="bold">寬度（px）</text>
+    <text x="708" y="162" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.8">控制顯示尺寸</text>
+
+    <!-- 範例列表 -->
+    <rect x="80" y="188" width="640" height="76" fill="var(--bg2)" stroke="var(--border)" rx="8"/>
+    <text x="108" y="210" font-size="14px" font-weight="bold" fill="var(--text)">常用範例：</text>
+    <text x="108" y="228" font-size="14px" font-family="monospace" fill="var(--text)">![[圖1.png]]</text>
+    <text x="320" y="228" font-size="14px" fill="var(--text)" opacity="0.7">— 原始大小顯示</text>
+    <text x="108" y="246" font-size="14px" font-family="monospace" fill="var(--accent)">![[圖1.png|400]]</text>
+    <text x="320" y="246" font-size="14px" fill="var(--text)" opacity="0.7">— 限制寬度 400px，高度自動等比縮放</text>
+    <text x="108" y="258" font-size="14px" font-family="monospace" fill="var(--text)">![[圖1.png|說明文字|600]]</text>
+    <text x="440" y="258" font-size="14px" fill="var(--text)" opacity="0.7">— 含 alt 文字 + 600px 寬</text>
+  </g>
+</svg> <figcaption>Obsidian 圖片嵌入語法解析。<code>![[檔案名|alt文字|寬度px]]</code> 三個部分皆可選用，最常用的是加上寬度限制。</figcaption> </figure> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 基本嵌入（顯示原始大小）
+![[image.png]]
+
+# 指定顯示寬度（px），高度自動等比縮放
+![[image.png|400]]
+
+# 含替代文字（alt text）+ 寬度
+![[圖表說明.png|系統架構圖|600]]
+
+# 引用外部 Markdown 標準語法（不推薦在 Obsidian 內使用）
+![alt text](image.png)
+
+# 嵌入 PDF（顯示第 1 頁）
+![[report.pdf]]
+
+# 嵌入 PDF 指定頁面（需 PDF++ 插件）
+![[report.pdf#page=3]]
+
+# 嵌入 Excalidraw 繪圖
+![[architecture.excalidraw]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 基本嵌入（顯示原始大小）</span></span>
+<span class="line"><span style="color:#ABB2BF">![[image.png]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 指定顯示寬度（px），高度自動等比縮放</span></span>
+<span class="line"><span style="color:#ABB2BF">![[image.png|400]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 含替代文字（alt text）+ 寬度</span></span>
+<span class="line"><span style="color:#ABB2BF">![[圖表說明.png|系統架構圖|600]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 引用外部 Markdown 標準語法（不推薦在 Obsidian 內使用）</span></span>
+<span class="line"><span style="color:#ABB2BF">![alt text](</span><span style="color:#61AFEF">image.png</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 嵌入 PDF（顯示第 1 頁）</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 嵌入 PDF 指定頁面（需 PDF++ 插件）</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf#page</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">3]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 嵌入 Excalidraw 繪圖</span></span>
+<span class="line"><span style="color:#ABB2BF">![[architecture.excalidraw]]</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>大小控制技巧：</strong>使用 <code>![[image.png|400]]</code> 限制寬度後，
+      圖片會自動等比縮放。在寬螢幕筆記中建議設定 600–800px；行動裝置閱讀建議 400px 以下。
+      不設定寬度時，圖片以原始解析度顯示，可能超出筆記可視範圍。
+</p> </div> <h2>圖片命名規範與 Dataview 搜圖</h2> <p>
+好的命名規範不只是整齊好看，它直接影響你事後能否快速找到圖片，
+    也影響 Dataview 查詢的可靠性。Image Converter 插件可以幫你自動命名，
+    但了解規範背後的邏輯同樣重要。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 圖片命名規範建議
+# 格式：[筆記主題]-[序號].[副檔名]
+
+# 好的命名範例
+專案計劃-1.webp          ✅ 一眼看出歸屬
+API設計-架構圖.webp       ✅ 加入描述性詞彙
+2025-Q2-roadmap.webp     ✅ 含時間軸資訊
+
+# 差的命名範例
+Pasted image 20250301.png  ❌ 預設名，無意義
+image.png                  ❌ 極度模糊
+1.png                      ❌ 無任何資訊
+
+# Dataview 搜圖查詢（找出特定筆記的所有附件）
+```dataview
+TABLE file.size as &quot;大小&quot;
+FROM &quot;&quot;
+WHERE file.extension = &quot;webp&quot; OR file.extension = &quot;png&quot;
+WHERE contains(file.folder, &quot;assets/專案計劃&quot;)
+SORT file.name ASC
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 圖片命名規範建議</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 格式：[筆記主題]-[序號].[副檔名]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 好的命名範例</span></span>
+<span class="line"><span style="color:#61AFEF">專案計劃-1.webp</span><span style="color:#98C379">          ✅</span><span style="color:#98C379"> 一眼看出歸屬</span></span>
+<span class="line"><span style="color:#61AFEF">API設計-架構圖.webp</span><span style="color:#98C379">       ✅</span><span style="color:#98C379"> 加入描述性詞彙</span></span>
+<span class="line"><span style="color:#61AFEF">2025-Q2-roadmap.webp</span><span style="color:#98C379">     ✅</span><span style="color:#98C379"> 含時間軸資訊</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 差的命名範例</span></span>
+<span class="line"><span style="color:#61AFEF">Pasted</span><span style="color:#98C379"> image</span><span style="color:#98C379"> 20250301.png</span><span style="color:#98C379">  ❌</span><span style="color:#98C379"> 預設名，無意義</span></span>
+<span class="line"><span style="color:#61AFEF">image.png</span><span style="color:#98C379">                  ❌</span><span style="color:#98C379"> 極度模糊</span></span>
+<span class="line"><span style="color:#61AFEF">1.png</span><span style="color:#98C379">                      ❌</span><span style="color:#98C379"> 無任何資訊</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># Dataview 搜圖查詢（找出特定筆記的所有附件）</span></span>
+<span class="line"><span style="color:#98C379">```</span><span style="color:#61AFEF">dataview</span></span>
+<span class="line"><span style="color:#61AFEF">TABLE</span><span style="color:#98C379"> file.size as "大小"</span></span>
+<span class="line"><span style="color:#61AFEF">FROM</span><span style="color:#98C379"> ""</span></span>
+<span class="line"><span style="color:#61AFEF">WHERE</span><span style="color:#98C379"> file.extension = "webp" OR file.extension = "png"</span></span>
+<span class="line"><span style="color:#61AFEF">WHERE</span><span style="color:#98C379"> contains(</span><span style="color:#61AFEF">file.folder,</span><span style="color:#98C379"> "assets/專案計劃")</span></span>
+<span class="line"><span style="color:#61AFEF">SORT</span><span style="color:#98C379"> file.name ASC</span></span>
+<span class="line"><span style="color:#98C379">```</span></span></code></pre> </div> </div>   <figure class="svg-fig"> <img src="/obsidian/img/ch11/02-comparison-image-naming.png" alt="圖片命名規範對比：差的命名（Pasted image、image.png、1.png）與好的命名（含主題與時間資訊的檔名）" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 11-2：好的命名一眼看出歸屬、可搜尋；差的命名（如 Pasted image 20250301.png）事後幾乎無法辨識內容。</figcaption> </figure> <div class="call info"> <p> <strong>Dataview 搜圖前提：</strong>Dataview 查詢附件需要附件也在 Vault 索引範圍內。
+      確認設定 → 檔案與連結 → 「偵測所有檔案類型」已開啟，
+      否則圖片不會出現在 Dataview 查詢結果中。
+</p> </div> <h2>PDF 嵌入與頁面引用</h2> <p>
+Obsidian 原生支援 PDF 嵌入，可以直接在筆記內瀏覽 PDF 文件。
+    搭配 <strong>PDF++</strong> 插件，更可以做到精確頁面引用、文字高亮批注、
+    以及將 PDF 片段轉為可引用的 wikilink——這對學術研究和技術閱讀筆記非常有用。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# PDF 嵌入語法
+![[report.pdf]]               # 嵌入整份 PDF（顯示第 1 頁）
+
+# 使用 PDF++ 插件的進階語法
+![[report.pdf#page=5]]        # 從第 5 頁開始顯示
+![[report.pdf#page=3&amp;height=400]]  # 指定頁 + 高度限制
+
+# 帶 annotation（批注）的引用
+![[report.pdf#page=2&amp;annotation=highlight-1]]
+
+# 文字區塊選取引用（PDF++ 專屬）
+# 在 PDF 檢視模式下選取文字後，使用 Ctrl/Cmd+C 複製成 wikilink
+![[report.pdf#page=10,0,100,800,200]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># PDF 嵌入語法</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf]]               </span><span style="color:#7F848E;font-style:italic"># 嵌入整份 PDF（顯示第 1 頁）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 使用 PDF++ 插件的進階語法</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf#page</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">5]]        </span><span style="color:#7F848E;font-style:italic"># 從第 5 頁開始顯示</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf#page</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">3&#x26;height</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">400]]  </span><span style="color:#7F848E;font-style:italic"># 指定頁 + 高度限制</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 帶 annotation（批注）的引用</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf#page</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">2&#x26;annotation</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">highlight-1]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 文字區塊選取引用（PDF++ 專屬）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 在 PDF 檢視模式下選取文字後，使用 Ctrl/Cmd+C 複製成 wikilink</span></span>
+<span class="line"><span style="color:#ABB2BF">![[report.pdf#page</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">10,0,100,800,200]]</span></span></code></pre> </div> </div>   <div class="call warn"> <p> <strong>PDF 體積警告：</strong>技術手冊類 PDF 動輒數十 MB，
+      直接存入 Vault 會大幅拖慢同步速度（iCloud / Obsidian Sync 皆受影響）。
+      建議將大型 PDF 存放在 Vault 外，只在筆記中記錄路徑或外部連結，
+      或使用 PDF++ 的「外部 PDF 引用」模式。
+</p> </div> <h2>Excalidraw：手繪風格圖表工作流</h2> <p> <strong>Excalidraw</strong> 是 Obsidian 社群最受歡迎的視覺化插件之一。
+    它提供手繪風格的繪圖介面，非常適合製作系統架構圖、流程說明、概念地圖。
+    繪製完成的 <code>.excalidraw</code> 檔案可以直接嵌入筆記，也可以匯出成 PNG/SVG 供外部使用。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# Excalidraw 工作流程
+
+# 1. 建立新繪圖
+命令面板（Ctrl/Cmd+P）→ Excalidraw: Create New Drawing
+
+# 2. 嵌入到筆記
+![[my-diagram.excalidraw]]          # 嵌入完整繪圖
+![[my-diagram.excalidraw|800]]      # 指定寬度
+
+# 3. 匯出為靜態圖片（供分享/文件使用）
+右鍵圖形 → Export Image → PNG/SVG
+# 匯出的 PNG 會自動存入同目錄
+
+# 4. 自動匯出（推薦設定）
+Excalidraw 插件設定 → 啟用「Auto-export SVG/PNG」
+# 每次儲存 .excalidraw 檔案時，自動同步輸出靜態圖" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># Excalidraw 工作流程</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 1. 建立新繪圖</span></span>
+<span class="line"><span style="color:#61AFEF">命令面板（Ctrl/Cmd+P）→</span><span style="color:#98C379"> Excalidraw:</span><span style="color:#98C379"> Create</span><span style="color:#98C379"> New</span><span style="color:#98C379"> Drawing</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 2. 嵌入到筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">![[my-diagram.excalidraw]]          </span><span style="color:#7F848E;font-style:italic"># 嵌入完整繪圖</span></span>
+<span class="line"><span style="color:#ABB2BF">![[my-diagram.excalidraw|800]]      </span><span style="color:#7F848E;font-style:italic"># 指定寬度</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 3. 匯出為靜態圖片（供分享/文件使用）</span></span>
+<span class="line"><span style="color:#61AFEF">右鍵圖形</span><span style="color:#98C379"> →</span><span style="color:#98C379"> Export</span><span style="color:#98C379"> Image</span><span style="color:#98C379"> →</span><span style="color:#98C379"> PNG/SVG</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 匯出的 PNG 會自動存入同目錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 4. 自動匯出（推薦設定）</span></span>
+<span class="line"><span style="color:#61AFEF">Excalidraw</span><span style="color:#98C379"> 插件設定</span><span style="color:#98C379"> →</span><span style="color:#98C379"> 啟用「Auto-export</span><span style="color:#98C379"> SVG/PNG」</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 每次儲存 .excalidraw 檔案時，自動同步輸出靜態圖</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>Excalidraw 嵌入筆記卡片：</strong>在 Excalidraw 畫布內，
+      可以嵌入 Obsidian 的現有筆記——這讓圖表與知識庫之間形成雙向連結。
+      按住 <code>Ctrl/Cmd</code> 點擊嵌入的筆記卡片，即可直接跳轉開啟。
+</p> </div> <h2>Excalidraw vs Obsidian Canvas：如何選擇</h2> <p>
+Obsidian 1.1 後內建了 <strong>Canvas</strong>（畫布）功能，和 Excalidraw 都是視覺化工具，
+    但定位不同。Canvas 是「筆記排列板」，Excalidraw 是「繪圖工具」。
+    理解兩者的差異，可以在正確場景選用正確工具。
+</p> <figure class="svg-fig"> <svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch11-c" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Excalidraw vs Canvas：如何選擇？</text>
+
+    <!-- 軸標籤 -->
+    <text x="400" y="52" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">↑ 高複雜度圖表</text>
+    <text x="400" y="322" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">↓ 簡單排列 / 視覺板</text>
+    <text x="30" y="192" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6" transform="rotate(-90, 30, 192)">← 靜態輸出</text>
+    <text x="770" y="192" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6" transform="rotate(90, 770, 192)">← 互動連結</text>
+
+    <!-- 十字軸線 -->
+    <line x1="80" y1="192" x2="720" y2="192" stroke="var(--border)" stroke-width="1.5" opacity="0.4"/>
+    <line x1="400" y1="60" x2="400" y2="320" stroke="var(--border)" stroke-width="1.5" opacity="0.4"/>
+
+    <!-- Excalidraw 象限（左上：複雜圖表 + 靜態輸出） -->
+    <rect x="90" y="68" width="290" height="112" fill="var(--abg)" stroke="var(--accent)" rx="10" stroke-width="1.5" opacity="0.9"/>
+    <text x="235" y="95" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">Excalidraw</text>
+    <text x="235" y="113" text-anchor="middle" font-size="13px" fill="var(--text)">手繪風格系統架構圖</text>
+    <text x="235" y="129" text-anchor="middle" font-size="13px" fill="var(--text)">流程圖 / 資料流圖</text>
+    <text x="235" y="145" text-anchor="middle" font-size="13px" fill="var(--text)">技術說明示意圖</text>
+    <text x="235" y="161" text-anchor="middle" font-size="13px" fill="var(--text)">可匯出 PNG/SVG 給文件使用</text>
+
+    <!-- Canvas 象限（右下：簡單排列 + 互動連結） -->
+    <rect x="420" y="200" width="290" height="112" fill="var(--bg2)" stroke="var(--border)" rx="10" stroke-width="1.5"/>
+    <text x="565" y="227" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Obsidian Canvas</text>
+    <text x="565" y="245" text-anchor="middle" font-size="13px" fill="var(--text)">筆記地圖 / MOC 視覺化</text>
+    <text x="565" y="261" text-anchor="middle" font-size="13px" fill="var(--text)">書籍章節規劃板</text>
+    <text x="565" y="277" text-anchor="middle" font-size="13px" fill="var(--text)">嵌入真實筆記卡片</text>
+    <text x="565" y="293" text-anchor="middle" font-size="13px" fill="var(--text)">連結可直接開啟筆記</text>
+
+    <!-- 說明框：兩者皆可 -->
+    <rect x="90" y="200" width="290" height="80" fill="var(--bg)" stroke="var(--border)" rx="10" stroke-dasharray="4"/>
+    <text x="235" y="224" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">兩者都能用的場景：</text>
+    <text x="235" y="242" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">頭腦風暴（Excalidraw 更自由）</text>
+    <text x="235" y="258" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">知識整理（Canvas 更結構化）</text>
+    <rect x="420" y="68" width="290" height="112" fill="var(--bg)" stroke="var(--border)" rx="10" stroke-dasharray="4"/>
+    <text x="565" y="92" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">Excalidraw 進階功能：</text>
+    <text x="565" y="110" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">嵌入 Obsidian 筆記卡片</text>
+    <text x="565" y="126" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">支援自訂字型與主題</text>
+    <text x="565" y="142" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">可協作（匯出 .excalidraw 共享）</text>
+    <text x="565" y="158" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">GitHub Repo 圖表版本控制</text>
+  </g>
+</svg> <figcaption>Excalidraw vs Obsidian Canvas 適用場景矩陣。需要繪製複雜圖形時選 Excalidraw；需要連結真實筆記進行視覺整理時選 Canvas。</figcaption> </figure> <table> <thead> <tr> <th>功能</th> <th>Excalidraw</th> <th>Obsidian Canvas</th> </tr> </thead> <tbody> <tr> <td>手繪圖形</td> <td>✅ 核心功能</td> <td>❌ 不支援</td> </tr> <tr> <td>嵌入真實筆記卡片</td> <td>✅ 支援（需插件）</td> <td>✅ 原生支援</td> </tr> <tr> <td>匯出 PNG/SVG</td> <td>✅ 支援</td> <td>❌ 僅截圖</td> </tr> <tr> <td>版本控制（Git）</td> <td>✅ 純文字 JSON</td> <td>✅ 純文字 JSON</td> </tr> <tr> <td>自訂樣式/字型</td> <td>✅ 豐富</td> <td>⚠️ 有限</td> </tr> <tr> <td>學習成本</td> <td>中（有操作介面）</td> <td>低（即插即用）</td> </tr> <tr> <td>最適場景</td> <td>技術圖表、教學示意</td> <td>筆記地圖、MOC 整理</td> </tr> </tbody> </table> <div class="call info"> <p> <strong>兩者並用的工作流：</strong>用 Canvas 做整體知識地圖（哪些筆記屬於同一主題），
+      用 Excalidraw 繪製特定技術概念的說明圖，再用 <code>![[diagram.excalidraw]]</code> 嵌入到對應的筆記中。
+      兩者互補，不必二選一。
+</p> </div> <h2>外部圖片連結 vs 本機圖片：優劣比較</h2> <p>
+有些使用者習慣直接在筆記中貼入網路圖片 URL，省去管理本機附件的麻煩。
+    這在短期內看似方便，但長期會帶來問題。以下是兩種方式的完整對比：
+</p> <table> <thead> <tr> <th>面向</th> <th>本機圖片（推薦）</th> <th>外部 URL 圖片</th> </tr> </thead> <tbody> <tr> <td>離線可用</td> <td>✅ 永遠可存取</td> <td>❌ 斷網即失效</td> </tr> <tr> <td>連結持久性</td> <td>✅ 本地路徑穩定</td> <td>❌ 外部圖片可能被刪除</td> </tr> <tr> <td>Vault 體積</td> <td>⚠️ 增加 Vault 大小</td> <td>✅ 不增加 Vault 體積</td> </tr> <tr> <td>隱私保護</td> <td>✅ 完全本地</td> <td>❌ 請求外部伺服器</td> </tr> <tr> <td>版本控制</td> <td>✅ Git 可追蹤變更</td> <td>❌ URL 內容可能被替換</td> </tr> <tr> <td>適用場景</td> <td>個人知識庫、長期筆記</td> <td>暫時性筆記、快速記錄</td> </tr> </tbody> </table> <div class="call warn"> <p> <strong>圖床的正確定位：</strong>圖床（如 Imgur、阿里雲 OSS）適合「對外發布」場景，
+      例如部落格文章或對外分享的文件。但你的 Obsidian Vault 是個人知識庫，
+      應以本機圖片為主。若要同時發布到外部，再額外上傳到圖床並替換連結。
+</p> </div> <h2>推薦組合與工作流</h2> <p>根據使用需求選擇插件組合：</p> <ul> <li> <strong>一般用戶（輕量）：</strong>
+原生設定 → 子資料夾 <code>assets/</code> + Clear Unused Images
+</li> <li> <strong>進階用戶（推薦）：</strong>
+Custom Attachment Location + Image Converter + Clear Unused Images
+</li> <li> <strong>需要對外發布：</strong>
+上述組合 + 阿里雲 OSS / Cloudflare R2 圖床（僅限公開發布的圖片）
+</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch11/03-infographic-plugin-combo-tiers.png" alt="三種附件插件組合層級：一般用戶（輕量）用原生設定 assets/ 加 Clear Unused Images；進階用戶（推薦）加上 Custom Attachment Location 與 Image Converter；需要對外發布再加上圖床（僅限公開圖片）" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>圖 11-3：三種插件組合層級由輕到重——大多數人從「進階用戶（推薦）」開始就已足夠，只有對外發布才需要再加圖床。</figcaption> </figure> <div class="call warn"> <p> <strong>本地優先原則：</strong>即使你有圖床，Obsidian Vault 內建議保留本地副本。
+      圖床適合「對外發布」，本地附件才是「知識庫的真正資料」。
+      斷網狀態下，本地圖片永遠可以存取；雲端圖床不行。
+</p> </div> <h2>小結</h2> <p>
+附件管理看起來是小事，但它影響的是整個 Vault 的長期可維護性。
+    設定好「按筆記名分類」的規則後，你可以放心貼圖，不用擔心哪天找不到，
+    也不用擔心筆記搬移後圖片斷連。
+</p> <p>
+本章涵蓋了完整的附件管理體系：從<strong>資料夾結構策略</strong>的設計選擇，
+    到<strong>圖片嵌入語法</strong>的精確控制；從 <strong>Excalidraw</strong> 的手繪圖表工作流，
+    到 <strong>Canvas</strong> 的筆記視覺整理；從 <strong>PDF 嵌入</strong>與頁面引用，
+    到<strong>命名規範</strong>與 Dataview 搜圖查詢。
+</p> <p> <strong>Custom Attachment Location + Image Converter</strong> 是這套體系的核心：
+    前者管「在哪裡」，後者管「長什麼樣子」。兩者搭配，就是目前社群公認最穩的附件管理方案。
+    下一章我們進入網頁剪藏，看看 Obsidian Web Clipper 如何讓外部內容無縫進入你的知識庫。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span> </a> <a href="/obsidian/ch12-web-clipper" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

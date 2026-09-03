@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>日常筆記工作流：每日筆記與 LYT 系統 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="每日筆記（Daily Notes）是 Obsidian 最重要的日常入口——你今天的想法、會議、待辦都從這裡開始。本章介紹如何設計 Daily Note 模板、如何搭配 LYT（Linking Your Thinking）系統讓筆記不再孤立，以及 MOC 如何成為連結知識與行動的樞紐。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 7 章 · Part 2：核心功能：筆記、連結與關聯圖</span> <h1>日常筆記工作流：每日筆記與 LYT 系統</h1> <p class="cdesc">讓 Obsidian 成為你每天思考的起點，而不只是一個偶爾查閱的資料庫</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+    <marker id="arr-link" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--text)" opacity="0.7" />
+    </marker>
+  </defs>
+
+  <g font-family="system-ui, sans-serif">
+    <!-- Top Row -->
+    <rect x="80" y="40" width="160" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="160" y="64" text-anchor="middle" font-size="17px" fill="var(--text)">Daily Notes</text>
+
+    <rect x="320" y="40" width="160" height="40" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="6" />
+    <text x="400" y="64" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">LYT Framework</text>
+
+    <rect x="560" y="40" width="160" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="640" y="64" text-anchor="middle" font-size="17px" fill="var(--text)">Knowledge Base</text>
+
+    <!-- Mid Row -->
+    <rect x="80" y="160" width="160" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="160" y="184" text-anchor="middle" font-size="17px" fill="var(--text)">MOC (地圖)</text>
+
+    <!-- LYT Sub Box -->
+    <rect x="320" y="110" width="160" height="110" fill="var(--bg2)" stroke="var(--border)" stroke-dasharray="4" rx="6" />
+    <text x="400" y="133" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">ACE Structure</text>
+    <line x1="330" y1="145" x2="470" y2="145" stroke="var(--border)" stroke-width="1" />
+    <text x="400" y="163" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Atlas (地圖)</text>
+    <text x="400" y="183" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Calendar (日曆)</text>
+    <text x="400" y="203" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Efforts (專案)</text>
+
+    <rect x="560" y="160" width="160" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="640" y="184" text-anchor="middle" font-size="17px" fill="var(--text)">Statements</text>
+
+    <!-- Bottom Row -->
+    <rect x="320" y="280" width="160" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="400" y="304" text-anchor="middle" font-size="17px" fill="var(--text)">Weekly Review</text>
+
+    <!-- Connections -->
+    <line x1="240" y1="60" x2="310" y2="60" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    
+    <!-- Flow from Daily to LYT structure -->
+    <path d="M 160 80 L 160 120 L 310 120" fill="none" stroke="var(--text)" opacity="0.7" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-link)" />
+    
+    <!-- Flow from LYT to KB -->
+    <line x1="480" y1="60" x2="550" y2="60" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+
+    <!-- Flow from MOC to KB -->
+    <line x1="240" y1="180" x2="310" y2="180" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="480" y1="180" x2="550" y2="180" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+
+    <!-- Flow down to Weekly Review -->
+    <path d="M 160 200 L 160 300 L 310 300" fill="none" stroke="var(--text)" opacity="0.7" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-link)" />
+  </g>
+</svg>
+ <figcaption>這張圖展示了 LYT 架構與日常筆記的互動：由每日筆記 (Daily Notes) 作為輸入，透過 MOC 組織，最終轉化為知識庫與行動。</figcaption> </figure> <h2>知識結構有了，然後呢？</h2> <p>
+前幾章我們建立了 Obsidian 的核心結構：雙向連結讓筆記彼此相連，Graph View 讓知識可視化，Metadata 讓筆記可以被找到。但很多人用了一段時間後會發現一個新問題：
+</p> <p> <em>知識庫整理得很漂亮，但每天早上打開 Obsidian，我還是不知道要從哪裡開始。</em> </p> <figure class="svg-fig"> <img src="/obsidian/img/ch07/01-flowchart-daily-notes-lyt-pipeline.png" alt="Daily Notes 透過週回顧與 LYT 架構流向長期知識庫的流程圖" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>Daily Notes 是每天的收件匣；透過 Weekly Review，把會議、閱讀、想法與待辦升格為 LYT 架構中的長期知識。</figcaption> </figure> <p>
+這個問題的解答，是 <strong>每日筆記（Daily Notes）</strong>。它是 Obsidian 為數不多的「有時間軸」的功能——每天一則，按日期命名，讓你有一個固定的思考起點。搭配 <strong>LYT（Linking Your Thinking）</strong> 這套知識管理框架，日常輸入和長期知識積累就能連成一條可以流動的管道。
+</p> <h2>Daily Notes：每天的思考收件匣</h2> <p>
+Daily Notes 是 Obsidian 的核心插件之一，開啟方式：<strong>設定 → Core Plugins → Daily Notes → 啟用</strong>。啟用後，每天可以用快捷鍵 <code>Alt+D</code> 快速建立今天的筆記，或在左側工具欄點擊日曆圖示。
+</p> <p>
+Daily Note 最實用的定位，是充當你每天的<strong>知識收件匣（Inbox）</strong>：
+</p> <ul> <li>今天閱讀文章的摘要與感想</li> <li>會議紀錄與討論摘要</li> <li>突然冒出來的想法（Fleeting Notes）</li> <li>今天的待辦清單</li> <li>當天的情緒或觀察（若有日記習慣）</li> </ul> <p>
+這些東西不需要分類，不需要想「該放哪個資料夾」——先統統倒進今天的 Daily Note，之後再整理。這個「先收後整理」的觀念，是所有知識管理系統的共同核心。
+</p> <h3>Daily Note 模板設計</h3> <p>
+搭配模板插件（Templater 或 Core Templates），每天的 Daily Note 可以自動填入固定結構：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+date: 2026-06-20
+week: W25
+---
+
+## 今日重點
+- [ ]
+
+## 會議筆記
+<!-- 今天的會議記錄放這裡，完成後連結到對應的人物或專案筆記 -->
+
+## 閱讀與學習
+<!-- 今天看到的文章、影片、書籍摘要 -->
+
+## 想法速記
+<!-- 隨手記下的想法，之後整理成知識卡片 -->
+
+## 今日回顧
+<!-- 一天結束前花 5 分鐘填寫 -->" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">date</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">2026-06-20</span></span>
+<span class="line"><span style="color:#E06C75">week</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">W25</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日重點</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 會議筆記</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 今天的會議記錄放這裡，完成後連結到對應的人物或專案筆記 --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 閱讀與學習</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 今天看到的文章、影片、書籍摘要 --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 想法速記</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 隨手記下的想法，之後整理成知識卡片 --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日回顧</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 一天結束前花 5 分鐘填寫 --></span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <div class="call info"> <p><strong>建議資料夾結構</strong>：將所有 Daily Notes 統一存放在 <code>Calendar/Journal/</code> 資料夾，按年份建子資料夾（如 <code>Calendar/Journal/2026/</code>）。在 Daily Notes 設定裡指定「新筆記位置」即可自動歸位。</p> </div> <h2>LYT：給你的知識庫一個骨架</h2> <p>
+Daily Notes 解決了「每天從哪裡開始」的問題，但它本身是線性的——一天一則，按時間排列。如果每天的想法只停留在 Daily Note 裡，就跟寫日記差不多，無法積累成可以被重複利用的知識。
+</p> <p>
+這時候需要一個長期知識架構，把 Daily Notes 的輸入轉化為有結構的知識。<strong>LYT（Linking Your Thinking，連結你的思考）</strong> 就是目前 Obsidian 社群最廣泛使用的框架。它由 Nick Milo 在 2020 年開發，免費版的入門套件已被下載超過 70,000 次。
+</p> <p>LYT 的核心信念只有一句話：</p> <blockquote> <p>不要用分類整理筆記，用連結。</p> </blockquote> <h3>核心概念一：MOC（Maps of Content，內容地圖）</h3> <p>
+MOC 是 LYT 最重要的發明。它是一則專門用來<strong>連結其他筆記</strong>的索引筆記——裡面放的是指向其他筆記的連結，按照你的思路排列。
+</p> <p>它不是資料夾，不是標籤，而是一張你自己畫的主題地圖。舉個例子：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# AI MOC
+
+## 核心概念
+- [[Agentic Coding]]
+- [[MCP]]
+- [[Claude Skills]]
+
+## 工具與實踐
+- [[Claude Code]]
+- [[AI Agent]]
+
+## 我的洞察
+- [[MCP 與 Skills 是廚房與食譜的關係]]
+- [[AI 工具的普及是分發問題]]
+
+## 近期資訊
+- [[Anthropic 收購 Bun]]（2025-12）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># AI MOC</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 核心概念</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[Agentic Coding]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">MCP</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[Claude Skills]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 工具與實踐</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[Claude Code]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[AI Agent]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 我的洞察</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[MCP 與 Skills 是廚房與食譜的關係]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[AI 工具的普及是分發問題]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 近期資訊</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[Anthropic 收購 Bun]]（2025-12）</span></span></code></pre> </div> </div>   <p>
+MOC 和資料夾最大的差別：<strong>一則筆記可以同時出現在多個 MOC 裡</strong>。<code>[[Claude Code]]</code> 既出現在 AI MOC，也出現在 PKM MOC，因為它跨越了兩個主題。資料夾做不到這件事。
+</p> <p>
+什麼時候建 MOC？Nick Milo 的建議是：當同一個主題累積到 5~10 則筆記，你開始感覺「有點亂」的時候。這個「有點亂」是一個訊號，代表這個主題已經值得有一張地圖了。
+</p> <h3>核心概念二：ACE 頂層架構</h3> <p>
+MOC 管個別主題，但整個 Vault 的頂層結構呢？LYT 用 <strong>ACE</strong> 三個資料夾解決這個問題：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="Vault/
+├── Atlas/        ← 我「知道」什麼（知識）
+│   ├── Notes/    ← 知識卡片
+│   ├── Maps/     ← MOC 索引
+│   └── Sources/  ← 書、文章、剪藏
+├── Calendar/     ← 我「經歷」了什麼（時間）
+│   └── Journal/  ← Daily Notes
+└── Efforts/      ← 我「在做」什麼（行動）
+    ├── Areas/    ← 持續進行的領域
+    ├── Projects/ ← 有明確終點的專案
+    └── Works/    ← 已完成的產出" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">Vault/</span></span>
+<span class="line"><span style="color:#ABB2BF">├── Atlas/        ← 我「知道」什麼（知識）</span></span>
+<span class="line"><span style="color:#ABB2BF">│   ├── Notes/    ← 知識卡片</span></span>
+<span class="line"><span style="color:#ABB2BF">│   ├── Maps/     ← MOC 索引</span></span>
+<span class="line"><span style="color:#ABB2BF">│   └── Sources/  ← 書、文章、剪藏</span></span>
+<span class="line"><span style="color:#ABB2BF">├── Calendar/     ← 我「經歷」了什麼（時間）</span></span>
+<span class="line"><span style="color:#ABB2BF">│   └── Journal/  ← Daily Notes</span></span>
+<span class="line"><span style="color:#ABB2BF">└── Efforts/      ← 我「在做」什麼（行動）</span></span>
+<span class="line"><span style="color:#ABB2BF">    ├── Areas/    ← 持續進行的領域</span></span>
+<span class="line"><span style="color:#ABB2BF">    ├── Projects/ ← 有明確終點的專案</span></span>
+<span class="line"><span style="color:#ABB2BF">    └── Works/    ← 已完成的產出</span></span></code></pre> </div> </div>   <p>
+ACE 的設計哲學不只是整理檔案，而是讓你在不同資料夾裡切換不同的思考模式：打開 <strong>Atlas</strong> 是學習模式，打開 <strong>Calendar</strong> 是反思模式，打開 <strong>Efforts</strong> 是執行模式。很多人的問題是把所有東西混在一起——學習筆記和待辦清單放同一個地方，兩邊都做不好。ACE 用物理空間幫你切換心智狀態。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch07/02-framework-ace-mental-modes.png" alt="ACE 三個頂層資料夾對應三種心智模式：Atlas 是知識與學習模式，Calendar 是時間與反思模式，Efforts 是行動與執行模式" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>ACE 不只是資料夾分類，而是三種心智模式：打開 Atlas 是學習，打開 Calendar 是反思，打開 Efforts 是執行。</figcaption> </figure> <div class="call info"> <p><strong>Daily Notes 的位置</strong>：在 ACE 架構裡，Daily Notes 放在 <code>Calendar/Journal/</code>。它屬於「時間軸」的空間——記錄你「經歷了什麼」，而不是「知道什麼」（Atlas）或「在做什麼」（Efforts）。</p> </div> <h3>核心概念三：五種筆記類型</h3> <p>
+LYT 把知識卡片分成五種類型，幫你打破「所有筆記都長一個樣」的盲點：
+</p> <ul> <li><strong>Things</strong>：這是什麼？（概念定義、工具說明）</li> <li><strong>Statements</strong>：我怎麼想？（你的洞察、觀點、原則）</li> <li><strong>Questions</strong>：我好奇什麼？（待探索的問題）</li> <li><strong>Quotes</strong>：別人怎麼說？（值得記下的引言）</li> <li><strong>People</strong>：這個人是誰？（人物筆記）</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch07/03-infographic-five-note-types.png" alt="LYT 五種筆記類型：Things、Statements、Questions、Quotes、People，其中 Statements 是最有價值的類型" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>五種筆記類型幫你打破「所有筆記都長一個樣」的盲點，其中 Statements（你自己的想法）最容易被忽略，卻最有長期價值。</figcaption> </figure> <p>
+大多數人只寫 Things——「X 是什麼」「Y 怎麼用」。但真正讓知識系統產生價值的是 <strong>Statements</strong>——你自己的想法。一個月後你回來看自己當時的洞察，那個筆記才有真正的意義。
+</p> <h2>Daily Notes 如何融入 LYT</h2> <p>
+有了 ACE 架構和 MOC 的概念，Daily Notes 的角色就更清楚了：它是<strong>輸入門戶</strong>，而 Atlas 的知識卡片是<strong>長期儲存</strong>。兩者之間的橋樑，是定期的「整理動作」。
+</p> <h3>會議筆記的連結策略</h3> <p>
+日常最常遇到的場景是會議記錄。一個實用的做法是：把會議記錄放在當天的 Daily Note 裡，然後用 <code>[[wikilink]]</code> 連結到相關的人物筆記或專案筆記。例如：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="## 會議筆記 - 2026/06/20
+
+### 與 [[Brian]] 的一對一會議
+- 討論 [[官網改版專案]] 的下一步
+- #discussion-topic 需要和 [[Maria]] 確認 SEO 策略
+
+→ 行動項目：下週前提供 [[竹蜻蜓設計稿]] 初版" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75">## 會議筆記 - 2026/06/20</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">### 與 [[</span><span style="color:#61AFEF">Brian</span><span style="color:#E06C75">]] 的一對一會議</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 討論 [[</span><span style="color:#61AFEF">官網改版專案</span><span style="color:#ABB2BF">]] 的下一步</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> #discussion-topic 需要和 [[</span><span style="color:#61AFEF">Maria</span><span style="color:#ABB2BF">]] 確認 SEO 策略</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">→ 行動項目：下週前提供 [[</span><span style="color:#61AFEF">竹蜻蜓設計稿</span><span style="color:#ABB2BF">]] 初版</span></span></code></pre> </div> </div>   <p>
+這樣做的效果：Brian 的人物筆記的反向連結面板會自動顯示你和他的所有討論；官網改版專案筆記也能追蹤到所有相關的會議記錄。不需要手動整理，連結讓資訊自動歸位。
+</p> <p>
+但會議記錄並非只有一種處理方式。根據會議類型與場合，可以選擇以下三種策略：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- Strategy 1 -->
+    <rect x="10" y="10" width="244" height="280" rx="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+    <text x="132" y="38" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">策略一：放 Daily Note</text>
+    <line x1="20" y1="50" x2="244" y2="50" stroke="var(--accent)" stroke-width="1" opacity="0.3" />
+    <text x="24" y="72" font-size="14px" fill="var(--text)" font-weight="bold">適合：</text>
+    <text x="24" y="90" font-size="14px" fill="var(--text)">非正式會議、臨時討論</text>
+    <text x="24" y="116" font-size="14px" fill="var(--text)" font-weight="bold">做法：</text>
+    <text x="24" y="134" font-size="14px" fill="var(--text)">把記錄放當天 Daily Note，</text>
+    <text x="24" y="152" font-size="14px" fill="var(--text)">用 [[wikilink]] 連結人物</text>
+    <text x="24" y="170" font-size="14px" fill="var(--text)">和專案筆記</text>
+    <text x="24" y="196" font-size="14px" fill="var(--text)" font-weight="bold">優點：</text>
+    <text x="24" y="214" font-size="14px" fill="var(--text)">零額外操作，自動出現</text>
+    <text x="24" y="232" font-size="14px" fill="var(--text)">在 backlinks 面板</text>
+    <text x="24" y="264" font-size="13px" fill="var(--accent)" opacity="0.8">★★★ 最常用、入門推薦</text>
+    <!-- Strategy 2 -->
+    <rect x="274" y="10" width="204" height="280" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="376" y="38" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">策略二：獨立會議筆記</text>
+    <line x1="284" y1="50" x2="468" y2="50" stroke="var(--border)" stroke-width="1" opacity="0.3" />
+    <text x="288" y="72" font-size="14px" fill="var(--text)" font-weight="bold">適合：</text>
+    <text x="288" y="90" font-size="14px" fill="var(--text)">正式會議、專案相關討論</text>
+    <text x="288" y="116" font-size="14px" fill="var(--text)" font-weight="bold">做法：</text>
+    <text x="288" y="134" font-size="14px" fill="var(--text)">建立獨立 .md 檔放在</text>
+    <text x="288" y="152" font-size="14px" fill="var(--text)">專案資料夾，Daily Note</text>
+    <text x="288" y="170" font-size="14px" fill="var(--text)">只放連結指向它</text>
+    <text x="288" y="196" font-size="14px" fill="var(--text)" font-weight="bold">優點：</text>
+    <text x="288" y="214" font-size="14px" fill="var(--text)">易搜尋、可附附件、</text>
+    <text x="288" y="232" font-size="14px" fill="var(--text)">與專案筆記同目錄</text>
+    <text x="288" y="264" font-size="13px" fill="var(--text)" opacity="0.7">★★★ 正式場合推薦</text>
+    <!-- Strategy 3 -->
+    <rect x="498" y="10" width="296" height="280" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="646" y="38" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">策略三：Frontmatter + Dataview</text>
+    <line x1="508" y1="50" x2="784" y2="50" stroke="var(--border)" stroke-width="1" opacity="0.3" />
+    <text x="512" y="72" font-size="14px" fill="var(--text)" font-weight="bold">適合：</text>
+    <text x="512" y="90" font-size="14px" fill="var(--text)">大量會議、需跨查詢統計</text>
+    <text x="512" y="116" font-size="14px" fill="var(--text)" font-weight="bold">做法：</text>
+    <text x="512" y="134" font-size="14px" fill="var(--text)">frontmatter 加 participants</text>
+    <text x="512" y="152" font-size="14px" fill="var(--text)">/ project 欄位，用</text>
+    <text x="512" y="170" font-size="14px" fill="var(--text)">Dataview 動態彙整</text>
+    <text x="512" y="196" font-size="14px" fill="var(--text)" font-weight="bold">優點：</text>
+    <text x="512" y="214" font-size="14px" fill="var(--text)">可跨筆記查詢、自動</text>
+    <text x="512" y="232" font-size="14px" fill="var(--text)">生成會議列表與統計</text>
+    <text x="512" y="264" font-size="13px" fill="var(--text)" opacity="0.7">★★★ 進階用戶推薦</text>
+  </g>
+</svg>
+ <figcaption>三種會議筆記策略對比：從最輕量到最強大，依需求選擇，也可以混合使用。</figcaption> </figure> <div class="call info"> <p><strong>混合使用</strong>：大多數人最終會組合這三種策略——日常隨機討論用策略一，跨週的正式專案會議用策略二，需要追蹤大量參與者或做統計分析時才引入策略三（Dataview）。</p> </div> <h3>從 Daily Note 到知識卡片的流動</h3> <p>
+每週或每隔幾天，翻閱最近的 Daily Notes，把其中有價值的想法「升格」為知識卡片：
+</p> <ul> <li>在想法速記裡看到一個反覆出現的洞察 → 建立一則 Statement 筆記</li> <li>某篇文章的摘要值得長期保留 → 建立一則 Things 筆記並連結到對應 MOC</li> <li>某個待跟進的話題已有足夠筆記 → 建立一張 MOC 把散落的筆記整合起來</li> </ul> <p>
+Daily Notes 不是最終目的地，而是一個<strong>緩衝區</strong>——讓你可以先不加判斷地輸入，之後再決定哪些值得升格進入長期知識庫。
+</p> <div class="call warn"> <p><strong>不要讓 Daily Notes 堆積太久</strong>：如果超過兩週沒有整理，Daily Notes 就會變成另一個混亂的 Inbox。建議每週固定花 20~30 分鐘做「週回顧」——掃描本週的 Daily Notes，把值得保留的內容升格，把完成的待辦事項標記，把沒用的草稿刪除。</p> </div> <h2>兩種使用模式</h2> <p>LYT 看起來架構複雜，但實際上你可以選擇適合自己的深度：</p> <h3>輕量模式：Daily Note 作 Inbox</h3> <p>
+只用 Daily Notes，不建 ACE 架構。每天記錄，每週整理，把有價值的內容用 <code>[[wikilink]]</code> 連結到主題筆記。這個模式進入門檻低，適合剛開始用 Obsidian 的人。缺點是當筆記累積到幾百則之後，頂層導航會開始感覺混亂。
+</p> <h3>完整模式：ACE + MOC + Daily Notes</h3> <p>
+建立 <code>Atlas/</code>、<code>Calendar/</code>、<code>Efforts/</code> 三個頂層資料夾，為每個主要主題建立 MOC，Daily Notes 放進 <code>Calendar/Journal/</code>。這個模式前期設定成本較高，但一旦結構穩定，知識積累的複利效應非常明顯。建議在 Vault 累積到 100~200 則筆記後，再考慮導入完整架構。
+</p> <div class="call info"> <p><strong>LYT 和 PARA 的差異</strong>：PARA（Tiago Forte 的框架）用資料夾按專案分類，適合以行動為中心的人；LYT 用連結和 MOC 建立知識網絡，適合以學習和思考為中心的人。兩者不是非此即彼，許多人會把 Efforts 資料夾的結構借鑒自 PARA 的專案管理邏輯。</p> </div> <h2>Periodic Notes：從每日延伸到週、月、年</h2> <p>
+Daily Notes 解決的是每天的輸入問題，但真正的知識積累需要更長的週期回顧。<strong>Periodic Notes 插件</strong>（社群插件，需另行安裝）把 Daily Notes 的概念擴展到週記（Weekly）、月記（Monthly）和年記（Yearly），讓你的反思週期形成完整的閉環。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 290" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-p" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Daily -->
+    <rect x="10" y="20" width="174" height="250" rx="8" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" />
+    <text x="97" y="50" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">Daily Note</text>
+    <text x="97" y="68" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每天</text>
+    <line x1="20" y1="78" x2="174" y2="78" stroke="var(--accent)" stroke-width="1" opacity="0.3" />
+    <text x="24" y="98" font-size="14px" fill="var(--text)">• 今日待辦</text>
+    <text x="24" y="116" font-size="14px" fill="var(--text)">• 會議記錄</text>
+    <text x="24" y="134" font-size="14px" fill="var(--text)">• 想法速記</text>
+    <text x="24" y="152" font-size="14px" fill="var(--text)">• 閱讀摘要</text>
+    <text x="24" y="170" font-size="14px" fill="var(--text)">• 情緒日記</text>
+    <text x="24" y="200" font-size="13px" fill="var(--text)" opacity="0.55">⏱ 5 分鐘 / 天</text>
+    <text x="24" y="216" font-size="13px" fill="var(--text)" opacity="0.55">插件：Daily Notes</text>
+    <text x="24" y="232" font-size="13px" fill="var(--text)" opacity="0.55">或 Periodic Notes</text>
+    <line x1="186" y1="145" x2="210" y2="145" stroke="var(--border)" stroke-width="2" marker-end="url(#arr-p)" />
+    <!-- Weekly -->
+    <rect x="214" y="20" width="174" height="250" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="301" y="50" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Weekly Review</text>
+    <text x="301" y="68" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每週日</text>
+    <line x1="224" y1="78" x2="378" y2="78" stroke="var(--border)" stroke-width="1" opacity="0.3" />
+    <text x="228" y="98" font-size="14px" fill="var(--text)">• 整理 Daily Notes</text>
+    <text x="228" y="116" font-size="14px" fill="var(--text)">• 升格知識卡片</text>
+    <text x="228" y="134" font-size="14px" fill="var(--text)">• 更新 MOC</text>
+    <text x="228" y="152" font-size="14px" fill="var(--text)">• 記錄本週洞察</text>
+    <text x="228" y="170" font-size="14px" fill="var(--text)">• 規劃下週重點</text>
+    <text x="228" y="200" font-size="13px" fill="var(--text)" opacity="0.55">⏱ 20–30 分鐘 / 週</text>
+    <text x="228" y="216" font-size="13px" fill="var(--text)" opacity="0.55">插件：Periodic Notes</text>
+    <line x1="390" y1="145" x2="414" y2="145" stroke="var(--border)" stroke-width="2" marker-end="url(#arr-p)" />
+    <!-- Monthly -->
+    <rect x="418" y="20" width="174" height="250" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="505" y="50" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Monthly Review</text>
+    <text x="505" y="68" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每月初</text>
+    <line x1="428" y1="78" x2="582" y2="78" stroke="var(--border)" stroke-width="1" opacity="0.3" />
+    <text x="432" y="98" font-size="14px" fill="var(--text)">• 回顧月度目標</text>
+    <text x="432" y="116" font-size="14px" fill="var(--text)">• 決定新 MOC</text>
+    <text x="432" y="134" font-size="14px" fill="var(--text)">• 歸檔舊專案</text>
+    <text x="432" y="152" font-size="14px" fill="var(--text)">• 精煉知識體系</text>
+    <text x="432" y="170" font-size="14px" fill="var(--text)">• 設定下月 OKR</text>
+    <text x="432" y="200" font-size="13px" fill="var(--text)" opacity="0.55">⏱ 1 小時 / 月</text>
+    <text x="432" y="216" font-size="13px" fill="var(--text)" opacity="0.55">插件：Periodic Notes</text>
+    <line x1="594" y1="145" x2="618" y2="145" stroke="var(--border)" stroke-width="2" marker-end="url(#arr-p)" />
+    <!-- Yearly -->
+    <rect x="622" y="20" width="168" height="250" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5" />
+    <text x="706" y="50" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--text)">Yearly Review</text>
+    <text x="706" y="68" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">每年初</text>
+    <line x1="632" y1="78" x2="780" y2="78" stroke="var(--border)" stroke-width="1" opacity="0.3" />
+    <text x="636" y="98" font-size="14px" fill="var(--text)">• 全年主題回顧</text>
+    <text x="636" y="116" font-size="14px" fill="var(--text)">• Vault 健康檢查</text>
+    <text x="636" y="134" font-size="14px" fill="var(--text)">• 重構知識架構</text>
+    <text x="636" y="152" font-size="14px" fill="var(--text)">• 年度成長盤點</text>
+    <text x="636" y="170" font-size="14px" fill="var(--text)">• 設定年度 OKR</text>
+    <text x="636" y="200" font-size="13px" fill="var(--text)" opacity="0.55">⏱ 半天 / 年</text>
+    <text x="636" y="216" font-size="13px" fill="var(--text)" opacity="0.55">插件：Periodic Notes</text>
+  </g>
+</svg>
+ <figcaption>Periodic Notes 四層週期：從每日輸入到年度知識結構，每個週期都有對應的整理動作與時間預算。</figcaption> </figure> <h3>五步驟週回顧 SOP</h3> <p>
+週回顧是整個系統的關鍵齒輪——沒有它，Daily Notes 只會越堆越多而不產生複利。以下是一個可以在 20~30 分鐘內完成的標準流程：
+</p> <ol> <li><strong>掃描本週 Daily Notes</strong>：快速瀏覽，標記值得升格的想法（可用高亮或加標籤 <code>#review</code>）</li> <li><strong>升格知識卡片</strong>：把標記過的 fleeting notes 整理成獨立的 Atlas 筆記，補充脈絡和連結</li> <li><strong>更新 MOC</strong>：把升格後的卡片加進對應的 MOC，或決定是否需要建立新 MOC</li> <li><strong>回顧 Efforts</strong>：檢查本週各專案的進度，更新 Kanban 或待辦清單狀態</li> <li><strong>寫下洞察與下週重點</strong>：一句話總結本週最大的領悟，以及下週三個最重要的行動項目</li> </ol> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+week: W25
+date_range: 2026-06-15 ~ 2026-06-21
+---
+
+## 📥 本週 Daily Notes 回顧
+<!-- 快速掃描本週每則 Daily Note，標記有價值的內容 -->
+- [ ] 已掃描完畢
+
+## 🔗 知識升格
+<!-- 把標記的 fleeting notes 整理成獨立的 Atlas 筆記 -->
+- [ ]
+
+## ✅ 專案進度
+<!-- 回顧 Efforts/ 下各專案本週狀態 -->
+
+## 💡 本週最重要的洞察
+>
+
+## 🎯 下週三個重點
+- [ ]
+- [ ]
+- [ ] " data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">week</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">W25</span></span>
+<span class="line"><span style="color:#E06C75">date_range</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026-06-15 ~ 2026-06-21</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 📥 本週 Daily Notes 回顧</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 快速掃描本週每則 Daily Note，標記有價值的內容 --></span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ] 已掃描完畢</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 🔗 知識升格</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 把標記的 fleeting notes 整理成獨立的 Atlas 筆記 --></span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## ✅ 專案進度</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">&#x3C;!-- 回顧 Efforts/ 下各專案本週狀態 --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 💡 本週最重要的洞察</span></span>
+<span class="line"><span style="color:#5C6370">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 🎯 下週三個重點</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ] </span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>Periodic Notes 插件設定</strong>：安裝後在設定裡分別指定週記、月記的模板路徑（如 <code>Templates/weekly-template.md</code>）和存放位置（如 <code>Calendar/Weekly/</code>），就能用快捷鍵一鍵建立。搭配 <strong>Calendar 插件</strong>可以在日曆 UI 上直接點選週數建立週記。</p> </div> <h2>小結</h2> <p>
+Daily Notes 是 Obsidian 日常使用的起點：每天的想法、會議、閱讀統一倒進這個收件匣，不用擔心分類；再透過 <code>[[wikilink]]</code> 把當下的記錄連接到長期知識——這樣知識庫才能真正「活著」，而不是堆放資料的檔案夾。
+</p> <p>
+LYT 的 MOC 提供了一個在連結之上的地圖層，讓你在知識網絡裡不會迷路。ACE 的三個空間（知識 / 時間 / 行動）讓你的 Vault 從一開始就有清晰的頂層結構，不需要反覆重組。
+</p> <p>
+Periodic Notes 把反思的週期延伸到週、月、年——Daily Notes 是每天的輸入，Weekly Review 是每週的消化，Monthly Review 是每月的精煉。每個週期都有明確的「整理動作」，讓知識不只是輸入，而是真正沉澱成複利。
+</p> <p>
+有了工作流之後，下一步是讓工具本身更強大。下一章我們進入插件篇，介紹新手必裝的 10 個插件——它們能讓 Obsidian 的日常使用效率大幅提升，從自動化模板到任務管理，每一個都解決一個真實的痛點。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span> </a> <a href="/obsidian/ch08-essential-plugins" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

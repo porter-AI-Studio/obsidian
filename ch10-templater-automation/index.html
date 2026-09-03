@@ -1,0 +1,809 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Templater 與自動化：告別重複勞動 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Templater 是 Obsidian 最強大的自動化插件之一——它讓模板從靜態文字變成動態腳本，可以自動填入日期、讀取檔案資訊、執行 JavaScript 邏輯。本章從基礎語法到實戰模板，帶你消除筆記工作流中的重複操作，並介紹 Auto Note Mover 插件，讓筆記在建立後自動歸類到正確的資料夾。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 10 章 · Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <h1>Templater 與自動化：告別重複勞動</h1> <p class="cdesc">讓模板「活起來」：從靜態插入到動態腳本</p> <figure class="svg-fig"> <img src="/obsidian/img/ch10/01-flowchart-static-to-dynamic-template.png" alt="Templater 將靜態模板轉成動態腳本引擎並自動生成 Daily Note" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 10-0：Templater 的核心價值——把每天重複的 30 秒操作，轉成由 tp.date、tp.file、tp.system、tp.user 驅動的動態模板。</figcaption> </figure> <h2>重複操作的隱性成本</h2> <p>
+你每天打開 Obsidian 新建一則筆記，然後做同樣的事：輸入今天的日期、貼上「## 待辦」的標題、填入本週週數、寫上星期幾。這些動作每次不超過 30 秒，但一年 365 天加起來就是好幾個小時——更重要的是，每一次這樣的重複都在打斷你真正應該做的事：思考和寫作。
+</p> <p>
+Obsidian 內建的 Templates 核心插件只能做靜態插入——你定義一個模板，它就原封不動地貼進去。想讓模板自動帶入今天的日期？不行。想讓不同的筆記類型自動套用不同的格式？不行。
+</p> <p>
+Templater 解決了這個問題。它讓模板從「靜態文字」變成「動態腳本」——每次插入時，模板裡的變數會被即時求值，填入當下的時間、檔案名稱、系統資訊，甚至執行自訂的 JavaScript 邏輯。
+</p> <h2>Templater 是什麼，跟內建 Templates 有何不同</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">靜態模板 vs 動態模板</text>
+
+    <!-- Left column: Static -->
+    <rect x="30" y="50" width="350" height="230" rx="10" fill="var(--bg2)" stroke="var(--border)" />
+    <rect x="30" y="50" width="350" height="44" rx="10" fill="var(--border)" />
+    <rect x="30" y="80" width="350" height="14" rx="0" fill="var(--border)" />
+    <text x="205" y="79" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--bg)">內建 Templates（靜態）</text>
+
+    <text x="55" y="120" font-size="14px" fill="var(--text)">✓  安裝即用，零學習成本</text>
+    <text x="55" y="145" font-size="14px" fill="var(--text)">✓  純文字替換，速度極快</text>
+    <text x="55" y="170" font-size="14px" fill="var(--text)">✗  僅支援 {{date}} / {{time}} 兩個變數</text>
+    <text x="55" y="195" font-size="14px" fill="var(--text)">✗  無法執行條件、迴圈、計算</text>
+    <text x="55" y="220" font-size="14px" fill="var(--text)">✗  無互動提示（不能問使用者問題）</text>
+    <text x="55" y="250" font-size="14px" fill="var(--text)">適合：固定格式的會議紀錄、週報框架</text>
+
+    <!-- Right column: Dynamic -->
+    <rect x="420" y="50" width="350" height="230" rx="10" fill="var(--bg2)" stroke="var(--accent)" stroke-width="1.5" />
+    <rect x="420" y="50" width="350" height="44" rx="10" fill="var(--accent)" />
+    <rect x="420" y="80" width="350" height="14" rx="0" fill="var(--accent)" />
+    <text x="595" y="79" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--bg)">Templater（動態）</text>
+
+    <text x="445" y="120" font-size="14px" fill="var(--text)">✓  完整 JavaScript 運算環境</text>
+    <text x="445" y="145" font-size="14px" fill="var(--text)">✓  tp.date / tp.file / tp.system / tp.user</text>
+    <text x="445" y="170" font-size="14px" fill="var(--text)">✓  互動式 prompt / suggester</text>
+    <text x="445" y="195" font-size="14px" fill="var(--text)">✓  Folder Templates 自動套用規則</text>
+    <text x="445" y="220" font-size="14px" fill="var(--text)">✓  可呼叫 Obsidian 內部 API</text>
+    <text x="445" y="250" font-size="14px" fill="var(--text)">適合：Daily Note、專案啟動、讀書筆記</text>
+  </g>
+</svg>
+ <figcaption>內建 Templates 只能做靜態插入；Templater 是完整的動態腳本引擎，提供 JavaScript 運算、互動提示與 Folder Templates 自動套用。</figcaption> </figure> <p>
+安裝路徑：設定 → 社群插件 → 搜尋 <code>Templater</code> → 安裝並啟用。啟用後在設定裡指定一個「模板資料夾」（建議新建 <code>Templates/</code> 資料夾）。
+</p> <p>兩者最核心的差異：</p> <ul> <li><strong>內建 Templates</strong>：純靜態。模板裡的 <code>{{date}}</code> 是唯一的動態變數，而且只能插入，無法計算。</li> <li><strong>Templater</strong>：動態腳本引擎。語法是 <code>&lt;% ... %&gt;</code>，支援 JavaScript 運算、條件判斷、迴圈，以及豐富的內建模組（日期、檔案、系統、游標控制等）。</li> </ul> <div class="call info"> <p><strong>安裝後的第一個設定</strong>：在 Templater 的設定頁面，打開「Trigger Templater on new file creation」選項。這樣每次新建筆記時，Templater 都會自動詢問要套用哪個模板——或是根據你設定的規則自動套用，完全不需要手動觸發。</p> </div> <h2>tp.* 函數分類全覽</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch10-tree" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Root -->
+    <rect x="300" y="20" width="200" height="44" rx="8" fill="var(--accent)" />
+    <text x="400" y="38" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--bg)">Templater</text>
+    <text x="400" y="55" text-anchor="middle" font-size="14px" fill="var(--bg)">tp.* 函數模組</text>
+
+    <!-- Trunk lines -->
+    <line x1="400" y1="64" x2="400" y2="90" stroke="var(--border)" stroke-width="1.5" />
+    <line x1="120" y1="90" x2="705" y2="90" stroke="var(--border)" stroke-width="1.5" />
+    <line x1="120" y1="90" x2="120" y2="110" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch10-tree)" />
+    <line x1="320" y1="90" x2="320" y2="110" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch10-tree)" />
+    <line x1="520" y1="90" x2="520" y2="110" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch10-tree)" />
+    <line x1="705" y1="90" x2="705" y2="110" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-ch10-tree)" />
+
+    <!-- tp.date -->
+    <rect x="40" y="110" width="160" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="120" y="126" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">tp.date</text>
+    <text x="120" y="142" text-anchor="middle" font-size="14px" fill="var(--text)">日期與時間</text>
+    <line x1="120" y1="150" x2="120" y2="165" stroke="var(--border)" stroke-width="1" />
+    <rect x="15" y="165" width="210" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="120" y="184" text-anchor="middle" font-size="13px" fill="var(--text)">.now() · .tomorrow() · .yesterday()</text>
+    <line x1="120" y1="193" x2="120" y2="208" stroke="var(--border)" stroke-width="1" />
+    <rect x="30" y="208" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="120" y="227" text-anchor="middle" font-size="13px" fill="var(--text)">.weekday() · offset 偏移計算</text>
+
+    <!-- tp.file -->
+    <rect x="240" y="110" width="160" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="320" y="126" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">tp.file</text>
+    <text x="320" y="142" text-anchor="middle" font-size="14px" fill="var(--text)">檔案資訊</text>
+    <line x1="320" y1="150" x2="320" y2="165" stroke="var(--border)" stroke-width="1" />
+    <rect x="230" y="165" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="320" y="184" text-anchor="middle" font-size="13px" fill="var(--text)">.title · .folder() · .path()</text>
+    <line x1="320" y1="193" x2="320" y2="208" stroke="var(--border)" stroke-width="1" />
+    <rect x="218" y="208" width="204" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="320" y="227" text-anchor="middle" font-size="13px" fill="var(--text)">.creation_date() · .tags · .cursor()</text>
+    <line x1="320" y1="236" x2="320" y2="251" stroke="var(--border)" stroke-width="1" />
+    <rect x="225" y="251" width="190" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="320" y="270" text-anchor="middle" font-size="13px" fill="var(--text)">.rename() · .move() · .include()</text>
+
+    <!-- tp.system -->
+    <rect x="440" y="110" width="160" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="520" y="126" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">tp.system</text>
+    <text x="520" y="142" text-anchor="middle" font-size="14px" fill="var(--text)">系統互動</text>
+    <line x1="520" y1="150" x2="520" y2="165" stroke="var(--border)" stroke-width="1" />
+    <rect x="430" y="165" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="520" y="184" text-anchor="middle" font-size="13px" fill="var(--text)">.prompt() 文字輸入框</text>
+    <line x1="520" y1="193" x2="520" y2="208" stroke="var(--border)" stroke-width="1" />
+    <rect x="430" y="208" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="520" y="227" text-anchor="middle" font-size="13px" fill="var(--text)">.suggester() 下拉選單</text>
+    <line x1="520" y1="236" x2="520" y2="251" stroke="var(--border)" stroke-width="1" />
+    <rect x="430" y="251" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="520" y="270" text-anchor="middle" font-size="13px" fill="var(--text)">.clipboard() 剪貼簿內容</text>
+
+    <!-- tp.user -->
+    <rect x="625" y="110" width="160" height="40" rx="6" fill="var(--bg2)" stroke="var(--border)" />
+    <text x="705" y="126" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">tp.user</text>
+    <text x="705" y="142" text-anchor="middle" font-size="14px" fill="var(--text)">自訂函數</text>
+    <line x1="705" y1="150" x2="705" y2="165" stroke="var(--border)" stroke-width="1" />
+    <rect x="615" y="165" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="705" y="184" text-anchor="middle" font-size="13px" fill="var(--text)">掛載自訂 JS 函數檔案</text>
+    <line x1="705" y1="193" x2="705" y2="208" stroke="var(--border)" stroke-width="1" />
+    <rect x="615" y="208" width="180" height="28" rx="4" fill="var(--bg)" stroke="var(--border)" />
+    <text x="705" y="227" text-anchor="middle" font-size="13px" fill="var(--text)">tp.user.myFunc() 呼叫</text>
+
+    <!-- Script mode note -->
+    <rect x="200" y="310" width="400" height="50" rx="8" fill="var(--abg)" stroke="var(--border)" stroke-dasharray="4,3" />
+    <text x="400" y="330" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">腳本模式 <%* ... %></text>
+    <text x="400" y="348" text-anchor="middle" font-size="14px" fill="var(--text)">可執行完整 JavaScript · 呼叫 Obsidian API · await 非同步操作</text>
+  </g>
+</svg>
+ <figcaption>Templater 的四大函數模組：tp.date 處理時間、tp.file 讀取檔案資訊、tp.system 實現互動、tp.user 掛載自訂邏輯。底部的腳本模式（<%* ... %>）可執行完整 JavaScript。</figcaption> </figure> <h2>基礎語法：四大模組</h2> <p>
+Templater 的語法都包在 <code>&lt;% ... %&gt;</code> 裡。四個內建模組覆蓋了絕大多數使用情境：<code>tp.date</code>（日期時間）、<code>tp.file</code>（檔案資訊）、<code>tp.system</code>（系統互動）、<code>tp.user</code>（自訂函數）。
+</p> <h3>tp.date — 日期與時間</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<% tp.date.now(&quot;YYYY-MM-DD&quot;) %>          → 今天日期，如 2026-06-20
+<% tp.date.now(&quot;YYYY/MM/DD&quot;) %>          → 斜線格式，如 2026/06/20
+<% tp.date.now(&quot;dddd&quot;) %>                → 星期幾，如 Friday
+<% tp.date.now(&quot;WW&quot;) %>                  → 本年第幾週，如 25
+<% tp.date.now(&quot;YYYY-MM-DD&quot;, 1) %>       → 明天
+<% tp.date.now(&quot;YYYY-MM-DD&quot;, -7) %>      → 7 天前
+<% tp.date.now(&quot;YYYY-MM-DD HH:mm&quot;) %>   → 含時分，如 2026-06-20 09:30" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("YYYY-MM-DD") %>          → 今天日期，如 2026-06-20</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("YYYY/MM/DD") %>          → 斜線格式，如 2026/06/20</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("dddd") %>                → 星期幾，如 Friday</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("WW") %>                  → 本年第幾週，如 25</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("YYYY-MM-DD", 1) %>       → 明天</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("YYYY-MM-DD", -7) %>      → 7 天前</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.date.now("YYYY-MM-DD HH:mm") %>   → 含時分，如 2026-06-20 09:30</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <h3>tp.file — 檔案資訊</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<% tp.file.title %>        → 當前筆記的檔案名稱（不含 .md）
+<% tp.file.folder() %>     → 當前筆記所在資料夾名稱
+<% tp.file.path() %>       → 完整路徑，如 Projects/design-review.md
+<% tp.file.creation_date(&quot;YYYY-MM-DD&quot;) %>  → 檔案建立日期" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.title %>        → 當前筆記的檔案名稱（不含 .md）</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.folder() %>     → 當前筆記所在資料夾名稱</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.path() %>       → 完整路徑，如 Projects/design-review.md</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.creation_date("YYYY-MM-DD") %>  → 檔案建立日期</span></span></code></pre> </div> </div>   <h3>tp.system — 系統互動</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<% await tp.system.prompt(&quot;輸入主題：&quot;) %>
+→ 彈出輸入框，讓你在建立筆記時填入一個值
+
+<% await tp.system.suggester([&quot;讀書&quot;, &quot;工作&quot;, &quot;個人&quot;], [&quot;book&quot;, &quot;work&quot;, &quot;personal&quot;]) %>
+→ 彈出選單，選一個選項（第一個陣列是顯示文字，第二個是實際值）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">&#x3C;% await tp.system.prompt("輸入主題：") %></span></span>
+<span class="line"><span style="color:#ABB2BF">→ 彈出輸入框，讓你在建立筆記時填入一個值</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% await tp.system.suggester(["讀書", "工作", "個人"], ["book", "work", "personal"]) %></span></span>
+<span class="line"><span style="color:#ABB2BF">→ 彈出選單，選一個選項（第一個陣列是顯示文字，第二個是實際值）</span></span></code></pre> </div> </div>   <p> <code>tp.system</code> 讓模板在建立時變成一個「填問卷」的流程——每次新建筆記，Templater 依序問你幾個問題，自動填入正確的欄位，不需要手動去找 frontmatter 的位置逐一修改。
+</p> <h3>tp.file — 進階用法</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<% tp.file.cursor() %>            → 模板套用後，游標自動跳到此位置
+<% tp.file.cursor(1) %>           → 第一個 Tab 停駐點（可設多個，按 Tab 鍵切換）
+<% tp.file.cursor(2) %>           → 第二個 Tab 停駐點
+
+<% tp.file.include(&quot;[[Other Note]]&quot;) %>   → 嵌入另一個筆記的內容（類似 Transclude）
+<% await tp.file.move(&quot;/Projects/new-name&quot;) %>  → 模板執行後自動重新命名並移動檔案" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.cursor() %>            → 模板套用後，游標自動跳到此位置</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.cursor(1) %>           → 第一個 Tab 停駐點（可設多個，按 Tab 鍵切換）</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.cursor(2) %>           → 第二個 Tab 停駐點</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% tp.file.include("[[Other Note]]") %>   → 嵌入另一個筆記的內容（類似 Transclude）</span></span>
+<span class="line"><span style="color:#ABB2BF">&#x3C;% await tp.file.move("/Projects/new-name") %>  → 模板執行後自動重新命名並移動檔案</span></span></code></pre> </div> </div>   <h3>tp.user — 掛載自訂函數</h3> <p> <code>tp.user</code> 讓你把常用的 JavaScript 函數寫成獨立檔案，在任何模板裡重複呼叫。在 Templater 設定裡設定「User Script Functions Folder」後，該資料夾裡的 <code>.js</code> 檔案就會以 <code>tp.user.檔名()</code> 的形式暴露給所有模板。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// 存成 Scripts/utils.js
+function utils(tp) {
+  return {
+    // 取得本週的星期一日期
+    weekStart: () => {
+      const d = new Date();
+      const day = d.getDay();
+      const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+      return new Date(d.setDate(diff)).toISOString().split('T')[0];
+    },
+    // 格式化專案 ID
+    projectId: (name) => name.toLowerCase().replace(/\s+/g, '-')
+  };
+}
+module.exports = utils;
+
+// 在模板中呼叫：
+// <% tp.user.utils(tp).weekStart() %>
+// <% tp.user.utils(tp).projectId(&quot;My Project&quot;) %>" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="javascript"><code><span class="line"><span style="color:#7F848E;font-style:italic">// 存成 Scripts/utils.js</span></span>
+<span class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> utils</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">tp</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#C678DD">  return</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    // 取得本週的星期一日期</span></span>
+<span class="line"><span style="color:#61AFEF">    weekStart</span><span style="color:#ABB2BF">: () </span><span style="color:#C678DD">=></span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">      const</span><span style="color:#E5C07B"> d</span><span style="color:#56B6C2"> =</span><span style="color:#C678DD"> new</span><span style="color:#61AFEF"> Date</span><span style="color:#ABB2BF">();</span></span>
+<span class="line"><span style="color:#C678DD">      const</span><span style="color:#E5C07B"> day</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> d</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getDay</span><span style="color:#ABB2BF">();</span></span>
+<span class="line"><span style="color:#C678DD">      const</span><span style="color:#E5C07B"> diff</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> d</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getDate</span><span style="color:#ABB2BF">() </span><span style="color:#56B6C2">-</span><span style="color:#E06C75"> day</span><span style="color:#56B6C2"> +</span><span style="color:#ABB2BF"> (</span><span style="color:#E06C75">day</span><span style="color:#56B6C2"> ===</span><span style="color:#D19A66"> 0</span><span style="color:#C678DD"> ?</span><span style="color:#56B6C2"> -</span><span style="color:#D19A66">6</span><span style="color:#C678DD"> :</span><span style="color:#D19A66"> 1</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#C678DD">      return</span><span style="color:#C678DD"> new</span><span style="color:#61AFEF"> Date</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">d</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">setDate</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">diff</span><span style="color:#ABB2BF">)).</span><span style="color:#61AFEF">toISOString</span><span style="color:#ABB2BF">().</span><span style="color:#61AFEF">split</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'T'</span><span style="color:#ABB2BF">)[</span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">];</span></span>
+<span class="line"><span style="color:#ABB2BF">    },</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    // 格式化專案 ID</span></span>
+<span class="line"><span style="color:#61AFEF">    projectId</span><span style="color:#ABB2BF">: (</span><span style="color:#E06C75;font-style:italic">name</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">=></span><span style="color:#E5C07B"> name</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">toLowerCase</span><span style="color:#ABB2BF">().</span><span style="color:#61AFEF">replace</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">/\s</span><span style="color:#D19A66">+</span><span style="color:#E06C75">/</span><span style="color:#C678DD">g</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">'-'</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">  };</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"><span style="color:#E5C07B">module</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">exports</span><span style="color:#56B6C2"> =</span><span style="color:#E06C75"> utils</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 在模板中呼叫：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// &#x3C;% tp.user.utils(tp).weekStart() %></span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// &#x3C;% tp.user.utils(tp).projectId("My Project") %></span></span></code></pre> </div> </div>   <h2>Templater 模板工作流</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch10-flow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Step boxes -->
+    <!-- 1 Trigger -->
+    <rect x="20" y="80" width="140" height="100" rx="8" fill="var(--bg2)" stroke="var(--border)" />
+    <circle cx="90" cy="60" r="18" fill="var(--accent)" />
+    <text x="90" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--bg)">1</text>
+    <text x="90" y="103" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">觸發</text>
+    <text x="90" y="121" text-anchor="middle" font-size="13px" fill="var(--text)">新建筆記</text>
+    <text x="90" y="138" text-anchor="middle" font-size="13px" fill="var(--text)">Calendar 點擊</text>
+    <text x="90" y="155" text-anchor="middle" font-size="13px" fill="var(--text)">Command 執行</text>
+
+    <line x1="160" y1="130" x2="195" y2="130" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch10-flow)" />
+
+    <!-- 2 Select -->
+    <rect x="195" y="80" width="140" height="100" rx="8" fill="var(--bg2)" stroke="var(--border)" />
+    <circle cx="265" cy="60" r="18" fill="var(--accent)" />
+    <text x="265" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--bg)">2</text>
+    <text x="265" y="103" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">選擇模板</text>
+    <text x="265" y="121" text-anchor="middle" font-size="13px" fill="var(--text)">Folder Template</text>
+    <text x="265" y="138" text-anchor="middle" font-size="13px" fill="var(--text)">自動匹配資料夾</text>
+    <text x="265" y="155" text-anchor="middle" font-size="13px" fill="var(--text)">或手動選擇</text>
+
+    <line x1="335" y1="130" x2="370" y2="130" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch10-flow)" />
+
+    <!-- 3 Fill -->
+    <rect x="370" y="80" width="140" height="100" rx="8" fill="var(--bg2)" stroke="var(--border)" />
+    <circle cx="440" cy="60" r="18" fill="var(--accent)" />
+    <text x="440" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--bg)">3</text>
+    <text x="440" y="103" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">動態填入</text>
+    <text x="440" y="121" text-anchor="middle" font-size="13px" fill="var(--text)">日期/時間解析</text>
+    <text x="440" y="138" text-anchor="middle" font-size="13px" fill="var(--text)">prompt 問卷</text>
+    <text x="440" y="155" text-anchor="middle" font-size="13px" fill="var(--text)">JS 腳本執行</text>
+
+    <line x1="510" y1="130" x2="545" y2="130" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr-ch10-flow)" />
+
+    <!-- 4 Save -->
+    <rect x="545" y="80" width="140" height="100" rx="8" fill="var(--bg2)" stroke="var(--border)" />
+    <circle cx="615" cy="60" r="18" fill="var(--accent)" />
+    <text x="615" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--bg)">4</text>
+    <text x="615" y="103" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">儲存歸類</text>
+    <text x="615" y="121" text-anchor="middle" font-size="13px" fill="var(--text)">寫入 Frontmatter</text>
+    <text x="615" y="138" text-anchor="middle" font-size="13px" fill="var(--text)">游標定位至填寫區</text>
+    <text x="615" y="155" text-anchor="middle" font-size="13px" fill="var(--text)">Auto Note Mover</text>
+
+    <!-- Bottom note -->
+    <rect x="20" y="205" width="760" height="38" rx="6" fill="var(--abg)" stroke="var(--border)" stroke-dasharray="4,3" />
+    <text x="400" y="220" text-anchor="middle" font-size="14px" fill="var(--text)">Startup Template：Obsidian 啟動時自動執行指定模板腳本（在 Templater 設定中指定）</text>
+    <text x="400" y="236" text-anchor="middle" font-size="14px" fill="var(--text)">Folder Templates：不同資料夾可各自對應不同模板，新建筆記時自動套用</text>
+  </g>
+</svg>
+ <figcaption>Templater 完整工作流：從觸發→選擇模板→動態填入→儲存歸類。Startup Template 在 Obsidian 啟動時自動執行；Folder Templates 則根據筆記所在資料夾自動套用對應模板。</figcaption> </figure> <h2>實戰：建立每日筆記模板</h2> <p>
+把以下內容存成 <code>Templates/Daily Note.md</code>，然後在 Templater 設定裡把它指定為 Daily Notes 的模板：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+date: <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+week: W<% tp.date.now(&quot;WW&quot;) %>
+day: <% tp.date.now(&quot;dddd&quot;) %>
+---
+
+# <% tp.date.now(&quot;YYYY-MM-DD&quot;) %> · <% tp.date.now(&quot;dddd&quot;) %>
+
+## 今日待辦
+- [ ]
+
+## 會議與約定
+
+## 想法速記
+
+## 今日回顧
+> 今天完成了什麼？
+> 明天最重要的一件事是：" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">date</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#E06C75">week</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">W&#x3C;% tp.date.now("WW") %></span></span>
+<span class="line"><span style="color:#E06C75">day</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("dddd") %></span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># &#x3C;% tp.date.now("YYYY-MM-DD") %> · &#x3C;% tp.date.now("dddd") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日待辦</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 會議與約定</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 想法速記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日回顧</span></span>
+<span class="line"><span style="color:#5C6370">> 今天完成了什麼？</span></span>
+<span class="line"><span style="color:#5C6370">> 明天最重要的一件事是：</span></span></code></pre> </div> </div>   <p>
+設定完成後，每次用 Calendar 插件點擊日期建立新的 Daily Note，這個模板就會自動被套用——日期、星期、週數全部自動填好，你只需要開始寫內容。
+</p> <h2>常用模板範例集</h2> <p>
+以下四個模板涵蓋了知識工作者最常見的筆記類型，直接複製到 <code>Templates/</code> 資料夾即可使用。每個模板都搭配 <code>tp.system.suggester</code>，讓 frontmatter 的 status 欄位以選單方式填入，避免手動輸入打錯。
+</p> <h3>會議記錄模板</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+date: <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+time: <% tp.date.now(&quot;HH:mm&quot;) %>
+type: meeting
+attendees: []
+tags: [會議紀錄]
+---
+
+# <% await tp.system.prompt(&quot;會議主題：&quot;) %>
+
+**日期：** <% tp.date.now(&quot;YYYY-MM-DD (dddd)&quot;) %>
+**時間：** <% tp.date.now(&quot;HH:mm&quot;) %>
+**與會者：** <% await tp.system.prompt(&quot;與會人員（逗號分隔）：&quot;) %>
+
+## 議程
+
+-
+
+## 討論紀錄
+
+## 決議事項
+
+- [ ]
+
+## 後續行動（Action Items）
+
+| 項目 | 負責人 | 截止日期 |
+|------|--------|---------|
+|      |        |         |
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">date</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#E06C75">time</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("HH:mm") %></span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">meeting</span></span>
+<span class="line"><span style="color:#E06C75">attendees</span><span style="color:#ABB2BF">: []</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">會議紀錄</span><span style="color:#ABB2BF">]</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># &#x3C;% await tp.system.prompt("會議主題：") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D19A66">**日期：**</span><span style="color:#ABB2BF"> &#x3C;% tp.date.now("YYYY-MM-DD (dddd)") %></span></span>
+<span class="line"><span style="color:#D19A66">**時間：**</span><span style="color:#ABB2BF"> &#x3C;% tp.date.now("HH:mm") %></span></span>
+<span class="line"><span style="color:#D19A66">**與會者：**</span><span style="color:#ABB2BF"> &#x3C;% await tp.system.prompt("與會人員（逗號分隔）：") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 議程</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">-</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 討論紀錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 決議事項</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 後續行動（Action Items）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">| 項目 | 負責人 | 截止日期 |</span></span>
+<span class="line"><span style="color:#ABB2BF">|------|--------|---------|</span></span>
+<span class="line"><span style="color:#ABB2BF">|      |        |         |</span></span></code></pre> </div> </div>   <h3>讀書筆記模板</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: <% tp.file.title %>
+author: <% await tp.system.prompt(&quot;作者：&quot;) %>
+date_read: <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+status: <% await tp.system.suggester([&quot;閱讀中&quot;, &quot;已讀完&quot;, &quot;待讀&quot;], [&quot;reading&quot;, &quot;done&quot;, &quot;todo&quot;]) %>
+rating:
+tags: [讀書筆記]
+---
+
+# <% tp.file.title %>
+
+**作者：**
+**讀完日期：** <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+
+## 核心主張
+
+> 這本書的最重要觀點是什麼？
+
+## 金句摘錄
+
+>
+
+## 三個重要概念
+
+1.
+2.
+3.
+
+## 個人反思
+
+## 可應用的行動
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.file.title %></span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% await tp.system.prompt("作者：") %></span></span>
+<span class="line"><span style="color:#E06C75">date_read</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#E06C75">status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% await tp.system.suggester(["閱讀中", "已讀完", "待讀"], ["reading", "done", "todo"]) %></span></span>
+<span class="line"><span style="color:#E06C75">rating</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">讀書筆記</span><span style="color:#ABB2BF">]</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># &#x3C;% tp.file.title %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D19A66">**作者：**</span></span>
+<span class="line"><span style="color:#D19A66">**讀完日期：**</span><span style="color:#ABB2BF"> &#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 核心主張</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5C6370">> 這本書的最重要觀點是什麼？</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 金句摘錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5C6370">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 三個重要概念</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">1.</span></span>
+<span class="line"><span style="color:#ABB2BF">2.</span></span>
+<span class="line"><span style="color:#ABB2BF">3.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 個人反思</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 可應用的行動</span></span></code></pre> </div> </div>   <h3>專案啟動模板</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+project: <% tp.file.title %>
+start_date: <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+status: active
+type: <% await tp.system.suggester([&quot;工作專案&quot;, &quot;個人計畫&quot;, &quot;學習計畫&quot;, &quot;研究課題&quot;], [&quot;work&quot;, &quot;personal&quot;, &quot;learning&quot;, &quot;research&quot;]) %>
+tags: [專案]
+---
+
+# <% tp.file.title %>
+
+**建立日期：** <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+**負責人：** <% await tp.system.prompt(&quot;負責人：&quot;) %>
+**預計完成：** <% await tp.system.prompt(&quot;預計完成日期：&quot;) %>
+
+## 目標
+
+> 這個專案要達成什麼？成功的定義是？
+
+## 里程碑
+
+- [ ]
+- [ ]
+- [ ]
+
+## 資源與參考
+
+## 相關筆記
+
+## 進度更新
+
+### <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+
+-
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">project</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.file.title %></span></span>
+<span class="line"><span style="color:#E06C75">start_date</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#E06C75">status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">active</span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% await tp.system.suggester(["工作專案", "個人計畫", "學習計畫", "研究課題"], ["work", "personal", "learning", "research"]) %></span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">專案</span><span style="color:#ABB2BF">]</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># &#x3C;% tp.file.title %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D19A66">**建立日期：**</span><span style="color:#ABB2BF"> &#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#D19A66">**負責人：**</span><span style="color:#ABB2BF"> &#x3C;% await tp.system.prompt("負責人：") %></span></span>
+<span class="line"><span style="color:#D19A66">**預計完成：**</span><span style="color:#ABB2BF"> &#x3C;% await tp.system.prompt("預計完成日期：") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 目標</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#5C6370">> 這個專案要達成什麼？成功的定義是？</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 里程碑</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 資源與參考</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 相關筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 進度更新</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">### &#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">-</span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>Folder Templates 讓模板自動套用</strong>：把以上三個模板分別設定到對應資料夾——<code>Meetings/</code> → 會議記錄、<code>Reading/</code> → 讀書筆記、<code>Projects/</code> → 專案啟動。這樣只要在正確的資料夾裡新建筆記，模板會自動套用，不需要每次手動選擇。</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch10/02-infographic-folder-template-mapping.png" alt="Folder Templates 資料夾與模板對應：Meetings 對應會議記錄模板、Reading 對應讀書筆記模板、Projects 對應專案啟動模板、Journal 對應 Daily Note 模板" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>四個資料夾各自對應固定模板，新建筆記時自動套用，不需要每次手動選擇。</figcaption> </figure> <h3>Folder Templates 設定方法</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// Templater 設定 → Folder Templates 設定範例：
+//
+// 資料夾路徑              →  套用模板
+// Journal/               →  Templates/Daily Note.md
+// Projects/              →  Templates/Project Kickoff.md
+// Reading/               →  Templates/Book Note.md
+// Meetings/              →  Templates/Meeting Note.md
+//
+// 設定方式：
+// 1. 開啟 Templater 設定頁面
+// 2. 找到「Folder Templates」區塊
+// 3. 點「Add new folder template」
+// 4. 在左欄輸入資料夾路徑（支援子路徑，如 Projects/Active）
+// 5. 在右欄選擇對應的模板檔案
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="javascript"><code><span class="line"><span style="color:#7F848E;font-style:italic">// Templater 設定 → Folder Templates 設定範例：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">//</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 資料夾路徑              →  套用模板</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// Journal/               →  Templates/Daily Note.md</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// Projects/              →  Templates/Project Kickoff.md</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// Reading/               →  Templates/Book Note.md</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// Meetings/              →  Templates/Meeting Note.md</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">//</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 設定方式：</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 1. 開啟 Templater 設定頁面</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 2. 找到「Folder Templates」區塊</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 3. 點「Add new folder template」</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 4. 在左欄輸入資料夾路徑（支援子路徑，如 Projects/Active）</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 5. 在右欄選擇對應的模板檔案</span></span></code></pre> </div> </div>   <h2>Startup Template：Obsidian 開啟就自動執行</h2> <p>
+Startup Template 是 Templater 的隱藏強力功能——你指定一個模板，每次 Obsidian 啟動時自動執行它的腳本。最實用的用法是「自動建立今天的日記」：如果今天的日記不存在，就在正確的位置自動建立一份；如果已存在，就什麼都不做。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<%*
+// === Startup Template ===
+// 設定位置：Templater 設定 → Startup Templates → 選擇此檔案
+// 每次 Obsidian 啟動時自動執行
+
+const today = tp.date.now(&quot;YYYY-MM-DD&quot;);
+const todayFile = app.vault.getAbstractFileByPath(`Journal/${today}.md`);
+
+// 如果今天的日記不存在，自動建立
+if (!todayFile) {
+  const templateFile = app.vault.getAbstractFileByPath(&quot;Templates/Daily Note.md&quot;);
+  if (templateFile) {
+    await tp.file.create_new(templateFile, today, true, app.vault.getAbstractFileByPath(&quot;Journal&quot;));
+    new Notice(&quot;已建立今日日記：&quot; + today, 4000);
+  }
+}
+%>" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="javascript"><code><span class="line"><span style="color:#56B6C2">&#x3C;%*</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// === Startup Template ===</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 設定位置：Templater 設定 → Startup Templates → 選擇此檔案</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 每次 Obsidian 啟動時自動執行</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> today</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> tp</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">date</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">now</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"YYYY-MM-DD"</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> todayFile</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">vault</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getAbstractFileByPath</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">`Journal/</span><span style="color:#C678DD">${</span><span style="color:#E06C75">today</span><span style="color:#C678DD">}</span><span style="color:#98C379">.md`</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 如果今天的日記不存在，自動建立</span></span>
+<span class="line"><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> (</span><span style="color:#56B6C2">!</span><span style="color:#E06C75">todayFile</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#C678DD">  const</span><span style="color:#E5C07B"> templateFile</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">vault</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getAbstractFileByPath</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"Templates/Daily Note.md"</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E06C75">templateFile</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#C678DD">    await</span><span style="color:#E5C07B"> tp</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">file</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">create_new</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">templateFile</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">today</span><span style="color:#ABB2BF">, </span><span style="color:#D19A66">true</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">vault</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getAbstractFileByPath</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"Journal"</span><span style="color:#ABB2BF">));</span></span>
+<span class="line"><span style="color:#C678DD">    new</span><span style="color:#61AFEF"> Notice</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"已建立今日日記："</span><span style="color:#56B6C2"> +</span><span style="color:#E06C75"> today</span><span style="color:#ABB2BF">, </span><span style="color:#D19A66">4000</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"><span style="color:#56B6C2">%></span></span></code></pre> </div> </div>   <p>
+設定方式：Templater 設定 → Startup Templates → 點「+」新增 → 選擇剛才的腳本檔案。之後每次開啟 Obsidian，這個腳本就會靜默執行——如果今天的日記不存在，Journal 資料夾裡就會多出一份以今天日期命名的筆記，完全不需要你手動建立。
+</p> <div class="call warn"> <p><strong>Startup Template 不要放太多邏輯</strong>：Obsidian 啟動時 Startup Template 會立即執行，如果腳本有錯誤或執行時間過長，會影響啟動速度甚至造成卡頓。建議只放輕量的「如果不存在就建立」邏輯，複雜的批次操作還是放在獨立模板裡手動執行。</p> </div> <h2>與 Dataview 組合：模板插入 Metadata</h2> <p>
+Templater 和 Dataview 是 Obsidian 最強大的搭檔組合。Templater 負責在新建筆記時填入結構化的 frontmatter（如日期、類型、狀態），Dataview 則負責後續跨筆記查詢。用 Templater 插入的每一筆 metadata，都成為 Dataview 可以查詢的資料點。
+</p> <p>
+以每日筆記為例：如果模板在 frontmatter 裡插入了 <code>mood</code> 和 <code>energy</code> 欄位，你就可以在週報裡用 Dataview 自動產生這週的心情趨勢表格。
+</p> <h3>每日筆記模板（含 Dataview 查詢 metadata）</h3> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+date: <% tp.date.now(&quot;YYYY-MM-DD&quot;) %>
+week: <% tp.date.now(&quot;YYYY-[W]WW&quot;) %>
+type: daily
+mood: <% await tp.system.suggester([&quot;😊 好&quot;, &quot;😐 普通&quot;, &quot;😔 差&quot;], [&quot;good&quot;, &quot;neutral&quot;, &quot;bad&quot;]) %>
+energy: <% await tp.system.suggester([&quot;高&quot;, &quot;中&quot;, &quot;低&quot;], [&quot;high&quot;, &quot;medium&quot;, &quot;low&quot;]) %>
+tags: [daily]
+---
+
+# <% tp.date.now(&quot;YYYY-MM-DD&quot;) %> · <% tp.date.now(&quot;dddd&quot;) %>
+
+## 今日待辦
+- [ ]
+
+## 今日紀錄
+
+## 今日回顧
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">date</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-MM-DD") %></span></span>
+<span class="line"><span style="color:#E06C75">week</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% tp.date.now("YYYY-[W]WW") %></span></span>
+<span class="line"><span style="color:#E06C75">type</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">daily</span></span>
+<span class="line"><span style="color:#E06C75">mood</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% await tp.system.suggester(["😊 好", "😐 普通", "😔 差"], ["good", "neutral", "bad"]) %></span></span>
+<span class="line"><span style="color:#E06C75">energy</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&#x3C;% await tp.system.suggester(["高", "中", "低"], ["high", "medium", "low"]) %></span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">daily</span><span style="color:#ABB2BF">]</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># &#x3C;% tp.date.now("YYYY-MM-DD") %> · &#x3C;% tp.date.now("dddd") %></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日待辦</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [ ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日紀錄</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 今日回顧</span></span></code></pre> </div> </div>   <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="// 使用 Templater 建立含 Dataview 查詢的週報模板
+// 存成 Templates/Weekly Review.md
+
+```dataview
+TABLE date, mood, energy
+FROM &quot;Journal&quot;
+WHERE week = &quot;<% tp.date.now(&quot;YYYY-[W]WW&quot;) %>&quot;
+SORT date ASC
+```
+
+```dataview
+TASK
+FROM &quot;Projects&quot;
+WHERE !completed AND date >= date(&quot;<% tp.date.now(&quot;YYYY-MM-DD&quot;, -7) %>&quot;)
+SORT date ASC
+```
+" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="javascript"><code><span class="line"><span style="color:#7F848E;font-style:italic">// 使用 Templater 建立含 Dataview 查詢的週報模板</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 存成 Templates/Weekly Review.md</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379">```dataview</span></span>
+<span class="line"><span style="color:#98C379">TABLE date, mood, energy</span></span>
+<span class="line"><span style="color:#98C379">FROM "Journal"</span></span>
+<span class="line"><span style="color:#98C379">WHERE week = "&#x3C;% tp.date.now("YYYY-[W]WW") %>"</span></span>
+<span class="line"><span style="color:#98C379">SORT date ASC</span></span>
+<span class="line"><span style="color:#98C379">```</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379">```dataview</span></span>
+<span class="line"><span style="color:#98C379">TASK</span></span>
+<span class="line"><span style="color:#98C379">FROM "Projects"</span></span>
+<span class="line"><span style="color:#98C379">WHERE !completed AND date >= date("&#x3C;% tp.date.now("YYYY-MM-DD", -7) %>")</span></span>
+<span class="line"><span style="color:#98C379">SORT date ASC</span></span>
+<span class="line"><span style="color:#98C379">```</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>Templater + Dataview 設計原則</strong>：讓 Templater 負責「輸入端」——每次新建筆記時，用 prompt/suggester 確保 metadata 格式統一；讓 Dataview 負責「輸出端」——跨筆記聚合、排序、過濾。兩者分工明確，才能讓知識庫真正「活起來」。</p> </div> <h2>進階：用 Templater 腳本自動歸類筆記</h2> <p>
+Templater 真正的威力在於 <code>&lt;%* ... %&gt;</code> 語法——進入「腳本模式」，可以執行完整的 JavaScript 程式碼，包括讀取 Vault 裡所有筆記、移動檔案、呼叫 Obsidian API。
+</p> <p>
+以下是一個實用的自動歸類腳本，可以掃描整個 Vault，把符合關鍵字條件的筆記批次移動到指定資料夾：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="<%*
+// === 配置（每次使用前修改這裡）===
+const 配置 = {
+  模擬模式: true,                // true=只預覽不實際移動，false=真正移動
+  搜尋關鍵字: &quot;環境數據&quot;,         // 要篩選的關鍵字
+  目標資料夾: &quot;Pages/環境數據&quot;,   // 移動到的目標資料夾
+  排除目錄: [&quot;Templates&quot;, &quot;Assets&quot;],
+  搜尋範圍: {
+    檔案名: true,    // 搜尋檔案名稱
+    正文: false,     // 搜尋正文內容（較慢）
+    元數據: false    // 搜尋 YAML frontmatter
+  }
+};
+
+// === 主流程 ===
+const 所有筆記 = app.vault.getMarkdownFiles();
+const 匹配清單 = [];
+
+for (const 檔案 of 所有筆記) {
+  // 排除目錄檢查
+  if (配置.排除目錄.some(d => 檔案.path.includes(d + '/'))) continue;
+  if (檔案.path.startsWith(配置.目標資料夾)) continue;
+
+  if (配置.搜尋範圍.檔案名 &amp;&amp; 檔案.name.includes(配置.搜尋關鍵字)) {
+    匹配清單.push(檔案);
+    continue;
+  }
+
+  if (配置.搜尋範圍.正文 || 配置.搜尋範圍.元數據) {
+    const 內容 = await app.vault.read(檔案);
+    if (內容.includes(配置.搜尋關鍵字)) 匹配清單.push(檔案);
+  }
+}
+
+// 移動或預覽
+let 成功 = 0;
+for (const 檔案 of 匹配清單) {
+  const 新路徑 = 配置.目標資料夾 + '/' + 檔案.name;
+  if (配置.模擬模式) {
+    console.log('[預覽] ' + 檔案.path + ' → ' + 新路徑);
+    成功++;
+  } else {
+    await app.fileManager.renameFile(檔案, 新路徑);
+    成功++;
+  }
+}
+
+const 狀態 = 配置.模擬模式 ? '預覽' : '完成';
+new Notice(狀態 + '：找到 ' + 匹配清單.length + ' 個，成功 ' + 成功 + ' 個', 6000);
+%>" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="javascript"><code><span class="line"><span style="color:#56B6C2">&#x3C;%*</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// === 配置（每次使用前修改這裡）===</span></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 配置</span><span style="color:#56B6C2"> =</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#E06C75">  模擬模式</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">true</span><span style="color:#ABB2BF">,                </span><span style="color:#7F848E;font-style:italic">// true=只預覽不實際移動，false=真正移動</span></span>
+<span class="line"><span style="color:#E06C75">  搜尋關鍵字</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"環境數據"</span><span style="color:#ABB2BF">,         </span><span style="color:#7F848E;font-style:italic">// 要篩選的關鍵字</span></span>
+<span class="line"><span style="color:#E06C75">  目標資料夾</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"Pages/環境數據"</span><span style="color:#ABB2BF">,   </span><span style="color:#7F848E;font-style:italic">// 移動到的目標資料夾</span></span>
+<span class="line"><span style="color:#E06C75">  排除目錄</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">"Templates"</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">"Assets"</span><span style="color:#ABB2BF">],</span></span>
+<span class="line"><span style="color:#E06C75">  搜尋範圍</span><span style="color:#ABB2BF">: {</span></span>
+<span class="line"><span style="color:#E06C75">    檔案名</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">true</span><span style="color:#ABB2BF">,    </span><span style="color:#7F848E;font-style:italic">// 搜尋檔案名稱</span></span>
+<span class="line"><span style="color:#E06C75">    正文</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">false</span><span style="color:#ABB2BF">,     </span><span style="color:#7F848E;font-style:italic">// 搜尋正文內容（較慢）</span></span>
+<span class="line"><span style="color:#E06C75">    元數據</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">false</span><span style="color:#7F848E;font-style:italic">    // 搜尋 YAML frontmatter</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// === 主流程 ===</span></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 所有筆記</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">vault</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getMarkdownFiles</span><span style="color:#ABB2BF">();</span></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 匹配清單</span><span style="color:#56B6C2"> =</span><span style="color:#ABB2BF"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">for</span><span style="color:#ABB2BF"> (</span><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 檔案</span><span style="color:#C678DD"> of</span><span style="color:#E06C75"> 所有筆記</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">  // 排除目錄檢查</span></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">排除目錄</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">some</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">d</span><span style="color:#C678DD"> =></span><span style="color:#E5C07B"> 檔案</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">path</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">includes</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">d</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> '/'</span><span style="color:#ABB2BF">))) </span><span style="color:#C678DD">continue</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">檔案</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">path</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">startsWith</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">目標資料夾</span><span style="color:#ABB2BF">)) </span><span style="color:#C678DD">continue</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">搜尋範圍</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">檔案名</span><span style="color:#56B6C2"> &#x26;&#x26;</span><span style="color:#E5C07B"> 檔案</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">name</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">includes</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">搜尋關鍵字</span><span style="color:#ABB2BF">)) {</span></span>
+<span class="line"><span style="color:#E5C07B">    匹配清單</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">push</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">檔案</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#C678DD">    continue</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">搜尋範圍</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">正文</span><span style="color:#56B6C2"> ||</span><span style="color:#E5C07B"> 配置</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">搜尋範圍</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">元數據</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#C678DD">    const</span><span style="color:#E5C07B"> 內容</span><span style="color:#56B6C2"> =</span><span style="color:#C678DD"> await</span><span style="color:#E5C07B"> app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">vault</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">read</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">檔案</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#C678DD">    if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">內容</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">includes</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">搜尋關鍵字</span><span style="color:#ABB2BF">)) </span><span style="color:#E5C07B">匹配清單</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">push</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">檔案</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">// 移動或預覽</span></span>
+<span class="line"><span style="color:#C678DD">let</span><span style="color:#E06C75"> 成功</span><span style="color:#56B6C2"> =</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">for</span><span style="color:#ABB2BF"> (</span><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 檔案</span><span style="color:#C678DD"> of</span><span style="color:#E06C75"> 匹配清單</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#C678DD">  const</span><span style="color:#E5C07B"> 新路徑</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> 配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">目標資料夾</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> '/'</span><span style="color:#56B6C2"> +</span><span style="color:#E5C07B"> 檔案</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">name</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">  if</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">模擬模式</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#E5C07B">    console</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">log</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'[預覽] '</span><span style="color:#56B6C2"> +</span><span style="color:#E5C07B"> 檔案</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">path</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> ' → '</span><span style="color:#56B6C2"> +</span><span style="color:#E06C75"> 新路徑</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#E06C75">    成功</span><span style="color:#56B6C2">++</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#ABB2BF">  } </span><span style="color:#C678DD">else</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">    await</span><span style="color:#E5C07B"> app</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">fileManager</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">renameFile</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">檔案</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">新路徑</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#E06C75">    成功</span><span style="color:#56B6C2">++</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">const</span><span style="color:#E5C07B"> 狀態</span><span style="color:#56B6C2"> =</span><span style="color:#E5C07B"> 配置</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">模擬模式</span><span style="color:#C678DD"> ?</span><span style="color:#98C379"> '預覽'</span><span style="color:#C678DD"> :</span><span style="color:#98C379"> '完成'</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">new</span><span style="color:#61AFEF"> Notice</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">狀態</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> '：找到 '</span><span style="color:#56B6C2"> +</span><span style="color:#E5C07B"> 匹配清單</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">length</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> ' 個，成功 '</span><span style="color:#56B6C2"> +</span><span style="color:#E06C75"> 成功</span><span style="color:#56B6C2"> +</span><span style="color:#98C379"> ' 個'</span><span style="color:#ABB2BF">, </span><span style="color:#D19A66">6000</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#56B6C2">%></span></span></code></pre> </div> </div>   <p>
+使用方式：把這段腳本存成 <code>Templates/批次歸類.md</code>，在需要整理 Vault 時執行（命令面板 → Templater: Insert Template → 選擇這個模板）。第一次執行時保持 <code>模擬模式: true</code>，確認清單正確後改成 <code>false</code> 才實際移動。
+</p> <div class="call warn"> <p><strong>腳本移動不可復原</strong>：Templater 腳本直接呼叫 Obsidian 的檔案 API，移動後無法用 Ctrl+Z 復原。建議搭配 Obsidian Git 插件（ch08 介紹過）做備份，並且首次使用一定要先跑模擬模式確認結果。</p> </div> <h2>Auto Note Mover：零程式碼的自動歸類方案</h2> <p>
+如果覺得 Templater 腳本太複雜，Auto Note Mover 是另一個選擇。它是一個獨立插件，用圖形介面設定規則，完全不需要寫程式碼。
+</p> <p>安裝路徑：設定 → 社群插件 → 搜尋 <code>Auto Note Mover</code> → 安裝並啟用。</p> <p>設定規則的三個要素：</p> <ul> <li><strong>Folder（目標資料夾）</strong>：筆記要被移動到哪裡</li> <li><strong>Tag（標籤條件）</strong>：筆記帶有特定 <code>#tag</code> 時觸發移動</li> <li><strong>Title by regex（標題正則）</strong>：筆記名稱符合正則表達式時觸發移動</li> </ul> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="Auto Note Mover 規則範例：
+
+規則 1：閱讀筆記自動歸類
+  Folder:  Reading/Books
+  Tag:     #閱讀筆記
+
+規則 2：Daily Note 按年月歸類
+  Folder:  Journal/2026-06
+  Title regex:  ^2026-06   （以 &quot;2026-06&quot; 開頭的筆記）
+
+規則 3：工作專案筆記歸類
+  Folder:  Work/Active
+  Tag:     #work/active
+
+注意事項：
+- 一個筆記命中多個規則時，以第一個規則為準
+- 不想被移動的筆記，在 frontmatter 加上 disabled: true
+- Vault 根目錄的筆記無法被規則觸發（需先移到子資料夾）" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">Auto Note Mover 規則範例：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">規則 1：閱讀筆記自動歸類</span></span>
+<span class="line"><span style="color:#ABB2BF">  Folder:  Reading/Books</span></span>
+<span class="line"><span style="color:#ABB2BF">  Tag:     #閱讀筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">規則 2：Daily Note 按年月歸類</span></span>
+<span class="line"><span style="color:#ABB2BF">  Folder:  Journal/2026-06</span></span>
+<span class="line"><span style="color:#ABB2BF">  Title regex:  ^2026-06   （以 "2026-06" 開頭的筆記）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">規則 3：工作專案筆記歸類</span></span>
+<span class="line"><span style="color:#ABB2BF">  Folder:  Work/Active</span></span>
+<span class="line"><span style="color:#ABB2BF">  Tag:     #work/active</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">注意事項：</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 一個筆記命中多個規則時，以第一個規則為準</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 不想被移動的筆記，在 frontmatter 加上 disabled: true</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> Vault 根目錄的筆記無法被規則觸發（需先移到子資料夾）</span></span></code></pre> </div> </div>   <p>
+Auto Note Mover 預設是「自動觸發」——每次你儲存或建立筆記，它會即時檢查規則並自動移動。如果想先測試規則是否正確，可以改成「手動觸發」，用命令面板手動執行一次確認。
+</p> <div class="call info"> <p><strong>Templater 腳本 vs Auto Note Mover</strong>：兩者不互斥，各有適合的場景。Auto Note Mover 適合「持續性的自動分類規則」（例如所有 #工作 的筆記自動去 Work 資料夾）；Templater 腳本適合「一次性的批次整理任務」（例如把過去三個月的舊筆記一次整理好）。</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch10/03-comparison-templater-script-vs-auto-note-mover.png" alt="Templater 腳本與 Auto Note Mover 的對比：Templater 腳本適合一次性批次整理、需要寫 JavaScript；Auto Note Mover 適合持續性自動分類規則、零程式碼圖形介面" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>Templater 腳本適合一次性大掃除，Auto Note Mover 適合長期持續運作的分類規則，兩者可以並用。</figcaption> </figure> <h2>Templater 常見問題</h2> <h3>語法執行沒效果，模板貼進去還是原始文字</h3> <p>
+最常見的原因：你用的是「複製貼上」，不是透過 Templater 命令插入模板。Templater 語法只有在透過命令面板的「Templater: Insert Template」，或者新建筆記時自動套用，才會被執行。直接複製模板內容貼到筆記，語法不會被解析。
+</p> <h3>tp.date.now() 顯示的是英文星期</h3> <p>
+Templater 的日期格式使用 Moment.js，語言跟隨 Obsidian 的語系設定。如果顯示英文但你想要中文，在 Obsidian 設定裡把介面語言改成繁體中文（或簡體中文），<code>dddd</code> 就會輸出「星期五」而不是「Friday」。
+</p> <h3>腳本執行後彈出「Failed to run Templater」錯誤</h3> <p>
+腳本模式（<code>&lt;%* ... %&gt;</code>）裡的語法錯誤不會有詳細的錯誤訊息。開啟 Obsidian 的開發者工具（Ctrl+Shift+I），切到 Console 頁籤，重新執行腳本，就能看到具體的 JavaScript 錯誤行號。
+</p> <h2>小結</h2> <p>
+Templater 讓模板從「靜態文字」進化成「動態腳本引擎」。本章涵蓋了它的完整能力：
+</p> <ul> <li><strong>四大 tp.* 模組</strong>：tp.date 處理時間計算、tp.file 讀取檔案資訊（含游標定位）、tp.system 實現互動式 prompt/suggester、tp.user 掛載可重用的自訂函數。</li> <li><strong>常用模板範例</strong>：每日筆記、會議記錄、讀書筆記、專案啟動——每個模板都示範了如何用 frontmatter 欄位為 Dataview 提供查詢資料。</li> <li><strong>Folder Templates</strong>：不同資料夾各自對應不同模板，新建筆記時自動套用，零選擇摩擦。</li> <li><strong>Startup Template</strong>：Obsidian 啟動時自動執行腳本，例如自動建立今天的日記。</li> <li><strong>Templater + Dataview 組合</strong>：Templater 負責結構化的 metadata 輸入，Dataview 負責跨筆記聚合輸出。</li> <li><strong>腳本模式（<%* ... %>）</strong>：完整 JavaScript 環境，可呼叫 Obsidian API 做批次操作。</li> <li><strong>Auto Note Mover</strong>：不需寫程式碼的圖形化規則設定，根據標籤或標題正則自動分類筆記。</li> </ul> <p>
+Vault 的日常維護問題解決了，下一個挑戰是「附件的混亂」。隨著你在筆記裡越來越多地插入圖片和檔案，Vault 裡的附件資料夾會變得雜亂，甚至出現孤兒附件（筆記刪了，圖片還留著佔空間）。下一章我們介紹附件與圖片管理的最佳實踐，讓 Vault 保持整潔。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span> </a> <a href="/obsidian/ch11-attachments-images" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

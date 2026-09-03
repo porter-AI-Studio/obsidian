@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Metadata 與標籤系統：讓筆記可以被找到 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Obsidian 的 Properties（YAML frontmatter）讓你為每則筆記加上結構化屬性，標籤系統讓筆記可以跨資料夾篩選與分類。本章介紹 frontmatter 的欄位設計、標籤命名規範、巢狀標籤的用法，以及「在 Metadata 使用內部連結」這個讓知識累積自動發生的技巧。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 6 章 · Part 2：核心功能：筆記、連結與關聯圖</span> <h1>Metadata 與標籤系統：讓筆記可以被找到</h1> <p class="cdesc">一則找不到的筆記，比沒有筆記更浪費時間</p> <h2>筆記消失的真正原因</h2> <p>
+你可能有過這樣的經歷：明明記得寫過某個主題，就是找不到。搜尋關鍵字找到了 20 則結果，但沒有一則是你要的。最後放棄，重新查資料，重新寫一遍。
+</p> <p>
+問題通常不在於你沒有記筆記，而在於筆記缺乏<strong>可以被找到的結構</strong>。標題太模糊、沒有標籤、寫完就歸檔再也不看——這些筆記在 Vault 裡存在，卻無法被有效存取。
+</p> <p>
+Obsidian 提供兩個互補的機制來解決這個問題：<strong>Properties（屬性）</strong>讓每則筆記帶有結構化的 Metadata，<strong>Tags（標籤）</strong>讓筆記可以跨資料夾歸類和篩選。兩者合用，才能讓知識庫真正可以被導航。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch06/02-infographic-findable-structure.png" alt="用 Metadata、Properties、Tags 與內部連結讓筆記從找不到變成可導航的知識" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>Metadata、Properties、Tags 與內部連結把零散筆記轉成可被搜尋、篩選與探索的知識系統。</figcaption> </figure> <h2>Properties：每則筆記的身分證</h2> <p>
+Obsidian 的 Properties 是放在筆記最頂部的 YAML 區塊，用 <code>---</code> 包夾起來。它不是筆記的「內容」，而是筆記的「描述」——讓 Obsidian 和你自己快速了解這則筆記是什麼、什麼時候寫的、屬於哪些主題。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 行為設計學讀書筆記
+created: 2026/06/20
+tags:
+  - 行為心理學
+  - 閱讀筆記
+  - 習慣設計
+description: BJ Fogg《設計你的小習慣》核心架構整理，包含動機/能力/提示三角模型與 Tiny Habits 方法論
+重要性: ⭐⭐⭐⭐
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">行為設計學讀書筆記</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026/06/20</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">行為心理學</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">習慣設計</span></span>
+<span class="line"><span style="color:#E06C75">description</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">BJ Fogg《設計你的小習慣》核心架構整理，包含動機/能力/提示三角模型與 Tiny Habits 方法論</span></span>
+<span class="line"><span style="color:#E06C75">重要性</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">⭐⭐⭐⭐</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <p>
+Obsidian 1.4 之後，Properties 可以透過介面直接編輯，不需要手動寫 YAML。點擊筆記頂部的屬性區塊，即可用下拉選單和輸入框管理所有欄位。這個視覺化的 Properties 面板是 Obsidian 對新用戶最友善的改動之一。
+</p> <h3>Properties 的六種欄位類型</h3> <p>
+Obsidian 的 Properties 面板支援六種欄位類型，每種類型有不同的輸入介面和用途。選對類型，讓 Dataview 的查詢和排序事半功倍：
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="32" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Obsidian Properties 六種欄位類型</text>
+
+    <!-- Type cards: row 1 -->
+    <!-- Text -->
+    <rect x="40" y="55" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="40" y="55" width="220" height="8" fill="var(--accent)" rx="10"/>
+    <rect x="40" y="63" width="220" height="0" fill="var(--accent)"/>
+    <text x="150" y="90" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Text（文字）</text>
+    <text x="150" y="108" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">title, description, author</text>
+    <text x="150" y="126" text-anchor="middle" font-size="13px" fill="var(--muted)">單行或多行自由文字</text>
+
+    <!-- Date -->
+    <rect x="290" y="55" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="290" y="55" width="220" height="8" fill="var(--blue)" rx="10"/>
+    <text x="400" y="90" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Date（日期）</text>
+    <text x="400" y="108" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">created, published, due</text>
+    <text x="400" y="126" text-anchor="middle" font-size="13px" fill="var(--muted)">可用日曆選取，Dataview 可排序</text>
+
+    <!-- List -->
+    <rect x="540" y="55" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="540" y="55" width="220" height="8" fill="var(--green)" rx="10"/>
+    <text x="650" y="90" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">List（清單）</text>
+    <text x="650" y="108" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">tags, topics, authors</text>
+    <text x="650" y="126" text-anchor="middle" font-size="13px" fill="var(--muted)">多值陣列，支援 [[wikilink]]</text>
+
+    <!-- Type cards: row 2 -->
+    <!-- Number -->
+    <rect x="40" y="170" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="40" y="170" width="220" height="8" fill="var(--purple)" rx="10"/>
+    <text x="150" y="205" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Number（數字）</text>
+    <text x="150" y="223" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">重要性, 閱讀進度, 評分</text>
+    <text x="150" y="241" text-anchor="middle" font-size="13px" fill="var(--muted)">整數或小數，可用於排序</text>
+
+    <!-- Checkbox -->
+    <rect x="290" y="170" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="290" y="170" width="220" height="8" fill="var(--accent2)" rx="10"/>
+    <text x="400" y="205" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Checkbox（勾選）</text>
+    <text x="400" y="223" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">published, archived, reviewed</text>
+    <text x="400" y="241" text-anchor="middle" font-size="13px" fill="var(--muted)">布林值，過濾完成/未完成</text>
+
+    <!-- Aliases -->
+    <rect x="540" y="170" width="220" height="90" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="540" y="170" width="220" height="8" fill="var(--border)" rx="10"/>
+    <text x="650" y="205" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Aliases（別名）</text>
+    <text x="650" y="223" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.75">縮寫、別稱、舊標題</text>
+    <text x="650" y="241" text-anchor="middle" font-size="13px" fill="var(--muted)">讓 [[wikilink]] 找到這則筆記</text>
+
+    <!-- Bottom bar -->
+    <rect x="40" y="290" width="720" height="60" fill="var(--accent-light)" stroke="var(--accent)" rx="10"/>
+    <text x="400" y="315" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">設計原則：只加你真的會用來「查詢或過濾」的欄位</text>
+    <text x="400" y="335" text-anchor="middle" font-size="14px" fill="var(--accent)" opacity="0.85">例：想按「日期」排序 → 加 date 欄位；想篩選「未完成」→ 加 checkbox</text>
+  </g>
+</svg>
+ <figcaption>六種 Properties 欄位類型及其適用場景。List 類型特別重要，因為它支援放入 [[wikilink]]，讓 Metadata 本身也成為知識網絡的一部分。</figcaption> </figure> <h3>建議的欄位設計</h3> <p>一套實用的 Metadata 架構不需要複雜，以下欄位足以應付大多數情況：</p> <ul> <li><strong>title</strong>（Text）：筆記的完整標題（有時候檔案名稱是縮寫）</li> <li><strong>created</strong>（Date）：建立日期，格式統一 <code>YYYY/MM/DD</code></li> <li><strong>tags</strong>（List）：主題標籤，3～8 個，kebab-case（見下節）</li> <li><strong>description</strong>（Text）：1～2 句話說明這則筆記的核心內容</li> <li><strong>重要性</strong>（Number）：1～5 評分，配合 Dataview 排序用</li> <li><strong>published</strong>（Checkbox）：是否已完成/發布，用於篩選未完成項目</li> </ul> <div class="call info"> <p><strong>不要過度設計 Metadata</strong>：欄位太多反而讓你每次建立新筆記都有心理負擔。先從 3～4 個欄位開始，等到你發現「我常常需要按某個條件找筆記，但現在找不到」再新增對應欄位。Metadata 是為了解決真實痛點，不是為了讓結構看起來完整。</p> </div> <h2>標籤系統：命名規範很重要</h2> <p>
+標籤讓你在不改動資料夾結構的情況下，為筆記加上多個維度的分類。一則筆記可以同時有 <code>#閱讀筆記</code>、<code>#行為心理學</code>、<code>#2026</code> 三個標籤——這是資料夾做不到的事。
+</p> <h3>命名規範：永遠使用連字號</h3> <p>
+Obsidian 的標籤<strong>不支援空白字元</strong>。如果你輸入 <code>#Hermes Agent</code>，系統只會把 <code>#Hermes</code> 識別為標籤，後面的 <code>Agent</code> 變成普通文字——這是初學者最常踩到的陷阱。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 標籤命名：三種可用格式
+
+✅ 連字號（Kebab-case）— 強烈推薦
+#行為心理學
+#reading-notes
+#product-management
+
+✅ 底線（Snake_case）
+#reading_notes
+
+✅ 駝峰式（CamelCase）
+#ReadingNotes
+
+❌ 有空白 — 無效，只會識別到第一個詞
+#reading notes   → 只有 #reading 生效
+#Hermes Agent    → 只有 #Hermes 生效" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 標籤命名：三種可用格式</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">✅ 連字號（Kebab-case）— 強烈推薦</span></span>
+<span class="line"><span style="color:#ABB2BF">#行為心理學</span></span>
+<span class="line"><span style="color:#ABB2BF">#reading-notes</span></span>
+<span class="line"><span style="color:#ABB2BF">#product-management</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">✅ 底線（Snake_case）</span></span>
+<span class="line"><span style="color:#ABB2BF">#reading_notes</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">✅ 駝峰式（CamelCase）</span></span>
+<span class="line"><span style="color:#ABB2BF">#ReadingNotes</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">❌ 有空白 — 無效，只會識別到第一個詞</span></span>
+<span class="line"><span style="color:#ABB2BF">#reading notes   → 只有 #reading 生效</span></span>
+<span class="line"><span style="color:#ABB2BF">#Hermes Agent    → 只有 #Hermes 生效</span></span></code></pre> </div> </div>   <h3>巢狀標籤：用斜線建立層級</h3> <p>
+Obsidian 支援用 <code>/</code> 建立階層式標籤。<code>#book/non-fiction</code> 同時屬於 <code>#book</code> 大類和 <code>#book/non-fiction</code> 子類，讓你可以按不同粒度篩選。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 巢狀標籤範例
+
+#book/non-fiction       → 屬於 #book 也屬於 #book/non-fiction
+#project/active         → 進行中的專案
+#project/completed      → 已完成的專案
+#source/youtube         → 來源是 YouTube 影片
+#source/article         → 來源是文章
+
+→ 在標籤面板點開 #book，可以看到所有子標籤
+→ 搜尋 #project 會同時找到 active 和 completed" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 巢狀標籤範例</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">#book/non-fiction       → 屬於 #book 也屬於 #book/non-fiction</span></span>
+<span class="line"><span style="color:#ABB2BF">#project/active         → 進行中的專案</span></span>
+<span class="line"><span style="color:#ABB2BF">#project/completed      → 已完成的專案</span></span>
+<span class="line"><span style="color:#ABB2BF">#source/youtube         → 來源是 YouTube 影片</span></span>
+<span class="line"><span style="color:#ABB2BF">#source/article         → 來源是文章</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">→ 在標籤面板點開 #book，可以看到所有子標籤</span></span>
+<span class="line"><span style="color:#ABB2BF">→ 搜尋 #project 會同時找到 active 和 completed</span></span></code></pre> </div> </div>   <h3>推薦的四大頂層標籤系統</h3> <p>
+設計巢狀標籤時，頂層分類決定了你的整個查詢維度。以下是一套經過實踐驗證、通用性強的四大頂層結構：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 推薦的四大頂層標籤
+
+#source/    → 來源類型
+  /youtube  /article  /book  /podcast  /course
+
+#topic/     → 主題領域
+  /psychology  /productivity  /design  /tech
+
+#status/    → 處理狀態
+  /active  /done  /someday  /reference
+
+#project/   → 所屬專案
+  /work  /personal  /learning
+
+# 使用方式：組合搭配
+一則閱讀筆記可能同時有：
+  #source/book
+  #topic/psychology
+  #status/done" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 推薦的四大頂層標籤</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">#source/    → 來源類型</span></span>
+<span class="line"><span style="color:#ABB2BF">  /youtube  /article  /book  /podcast  /course</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">#topic/     → 主題領域</span></span>
+<span class="line"><span style="color:#ABB2BF">  /psychology  /productivity  /design  /tech</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">#status/    → 處理狀態</span></span>
+<span class="line"><span style="color:#ABB2BF">  /active  /done  /someday  /reference</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">#project/   → 所屬專案</span></span>
+<span class="line"><span style="color:#ABB2BF">  /work  /personal  /learning</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75"># 使用方式：組合搭配</span></span>
+<span class="line"><span style="color:#ABB2BF">一則閱讀筆記可能同時有：</span></span>
+<span class="line"><span style="color:#ABB2BF">  #source/book</span></span>
+<span class="line"><span style="color:#ABB2BF">  #topic/psychology</span></span>
+<span class="line"><span style="color:#ABB2BF">  #status/done</span></span></code></pre> </div> </div>   <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-tag" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="var(--border)"/>
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">巢狀標籤層次設計：三層結構範例</text>
+
+    <!-- Layer labels -->
+    <text x="30" y="90" font-size="13px" fill="var(--muted)" font-weight="700" text-anchor="middle" transform="rotate(-90,30,90)">第一層 (大類)</text>
+    <text x="30" y="220" font-size="13px" fill="var(--muted)" font-weight="700" text-anchor="middle" transform="rotate(-90,30,220)">第二層 (子類)</text>
+    <text x="30" y="360" font-size="13px" fill="var(--muted)" font-weight="700" text-anchor="middle" transform="rotate(-90,30,360)">第三層 (細分)</text>
+
+    <!-- L1 nodes -->
+    <rect x="80" y="55" width="140" height="36" fill="var(--accent)" rx="18"/>
+    <text x="150" y="78" text-anchor="middle" font-size="15px" fill="white" font-weight="600">#source</text>
+
+    <rect x="280" y="55" width="140" height="36" fill="var(--blue)" rx="18"/>
+    <text x="350" y="78" text-anchor="middle" font-size="15px" fill="white" font-weight="600">#topic</text>
+
+    <rect x="480" y="55" width="140" height="36" fill="var(--green)" rx="18"/>
+    <text x="550" y="78" text-anchor="middle" font-size="15px" fill="white" font-weight="600">#status</text>
+
+    <rect x="660" y="55" width="120" height="36" fill="var(--purple)" rx="18"/>
+    <text x="720" y="78" text-anchor="middle" font-size="15px" fill="white" font-weight="600">#project</text>
+
+    <!-- connector lines L1->L2 -->
+    <line x1="150" y1="91" x2="63" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="150" y1="91" x2="148" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="350" y1="91" x2="262" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="350" y1="91" x2="376" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="550" y1="91" x2="490" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="550" y1="91" x2="564" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="720" y1="91" x2="653" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+    <line x1="720" y1="91" x2="735" y2="170" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-tag)"/>
+
+    <!-- L2 nodes -->
+    <rect x="20" y="170" width="86" height="32" fill="var(--bg2)" stroke="var(--accent)" rx="6"/>
+    <text x="63" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/youtube</text>
+
+    <rect x="112" y="170" width="72" height="32" fill="var(--bg2)" stroke="var(--accent)" rx="6"/>
+    <text x="148" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/article</text>
+
+    <rect x="208" y="170" width="107" height="32" fill="var(--bg2)" stroke="var(--blue)" rx="6"/>
+    <text x="262" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/psychology</text>
+
+    <rect x="321" y="170" width="110" height="32" fill="var(--bg2)" stroke="var(--blue)" rx="6"/>
+    <text x="376" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/productivity</text>
+
+    <rect x="455" y="170" width="70" height="32" fill="var(--bg2)" stroke="var(--green)" rx="6"/>
+    <text x="490" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/active</text>
+
+    <rect x="531" y="170" width="65" height="32" fill="var(--bg2)" stroke="var(--green)" rx="6"/>
+    <text x="564" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/done</text>
+
+    <rect x="620" y="170" width="65" height="32" fill="var(--bg2)" stroke="var(--purple)" rx="6"/>
+    <text x="653" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/work</text>
+
+    <rect x="691" y="170" width="88" height="32" fill="var(--bg2)" stroke="var(--purple)" rx="6"/>
+    <text x="735" y="191" text-anchor="middle" font-size="14px" fill="var(--text)">/personal</text>
+
+    <!-- connector lines L2->L3 (selected) -->
+    <line x1="262" y1="202" x2="280" y2="285" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <line x1="262" y1="202" x2="360" y2="285" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+    <!-- L3 examples under psychology -->
+    <rect x="210" y="285" width="135" height="28" fill="var(--bg3)" stroke="var(--border)" rx="5"/>
+    <text x="277" y="303" text-anchor="middle" font-size="13px" fill="var(--text)">/behavioral-design</text>
+
+    <rect x="355" y="285" width="110" height="28" fill="var(--bg3)" stroke="var(--border)" rx="5"/>
+    <text x="410" y="303" text-anchor="middle" font-size="13px" fill="var(--text)">/habit-formation</text>
+
+    <!-- Rule box -->
+    <rect x="80" y="345" width="640" height="55" fill="var(--accent-light)" stroke="var(--accent)" rx="10"/>
+    <text x="400" y="368" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">實踐原則：層次不要超過三層，標籤總數控制在 30-50 個以內</text>
+    <text x="400" y="388" text-anchor="middle" font-size="14px" fill="var(--accent)" opacity="0.85">點選第一層 #source 可過濾所有來源筆記；點選 #source/youtube 則只看影片筆記</text>
+  </g>
+</svg>
+ <figcaption>巢狀標籤三層結構示意圖。第一層是大類（#source、#topic），第二層是子類（/youtube、/psychology），第三層是細分（/behavioral-design）。實際使用不需要強制用到三層，依需求決定深度。</figcaption> </figure> <h3>避免標籤爆炸</h3> <p>
+標籤只有在「一個標籤下有多則筆記」才有意義。如果你有 200 個標籤，每個標籤底下只有 1～2 則筆記，標籤就失去了分類的作用。建議定期檢視標籤面板，把只出現一兩次的標籤合併或刪除。健康的標籤系統：<strong>30～50 個標籤，每個標籤下至少 3 則筆記</strong>。
+</p> <figure class="svg-fig"> <img src="/obsidian/img/ch06/04-comparison-tag-health.png" alt="標籤爆炸與健康標籤系統的對比：200 多個標籤每個只有 1-2 則筆記，對比 30-50 個標籤每個至少 3 則筆記" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>標籤爆炸 vs. 健康標籤系統：標籤數量少不是壞事，每個標籤底下有足夠筆記才有篩選效果。</figcaption> </figure> <div class="call warn"> <p><strong>不要用標籤記錄「這篇很重要」</strong>：<code>#important</code>、<code>#must-read</code> 這類標籤用一段時間後，幾乎每則筆記都會加上，完全失去篩選效果。改用 Number 類型的 <code>重要性</code> 欄位（1～5），用 Dataview 查詢才有意義。</p> </div> <h2>在 Metadata 使用 [[內部連結]]</h2> <p>
+這是一個讓知識自動積累的技巧，許多 Obsidian 進階用戶都在用，但很少有人第一時間想到：<strong>在 Metadata 的欄位值裡放 <code>[[內部連結]]</code>，而不只是放文字</strong>。
+</p> <h3>作者筆記：追蹤思想脈絡</h3> <p>
+在 frontmatter 的 <code>author</code> 欄位，不要只填寫作者名字的純文字，而是連結到一則以作者命名的筆記：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 《原子習慣》讀書筆記
+author: &quot;[[James Clear]]&quot;
+tags:
+  - 閱讀筆記
+  - 習慣設計
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">《原子習慣》讀書筆記</span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"[[James Clear]]"</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">習慣設計</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>   <p>
+當你這樣做，<code>James Clear</code> 這則筆記的反向連結面板會自動顯示所有讀過他著作的筆記。久而久之，你不需要主動整理，這位作者的思想脈絡就會自然浮現——哪些書、哪些主題、哪些觀點之間有關聯，在 Graph View 裡一目了然。
+</p> <h3>主題 MOC：用連結取代標籤分類</h3> <p>
+傳統上，筆記主題用資料夾或標籤分類。但這兩種方式都有盲點：資料夾一個蘿蔔一個坑（一則筆記只能屬於一個資料夾），標籤看不出主題之間的關係。
+</p> <p>
+更好的做法是在 Metadata 的 <code>topics</code> 欄位，用 <code>[[]]</code> 連結到主題筆記（Map of Content，簡稱 MOC）：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 行為設計師讀書筆記
+topics:
+  - &quot;[[行為心理學 MOC]]&quot;
+  - &quot;[[產品設計 MOC]]&quot;
+  - &quot;[[習慣養成 MOC]]&quot;
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">行為設計師讀書筆記</span></span>
+<span class="line"><span style="color:#E06C75">topics</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[行為心理學 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[產品設計 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[習慣養成 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>   <p>
+這樣，一則筆記可以同時屬於多個主題，而且主題本身是「活的筆記」——你可以在 <code>[[行為心理學 MOC]]</code> 裡寫下這個主題和其他主題的關係，在 Graph View 看到叢集自然形成。
+</p> <div class="call info"> <p><strong>MOC 是什麼？</strong> Map of Content（內容地圖）是一則專門用來連結其他筆記的索引筆記。它本身不需要有太多內容，主要的作用是成為某個主題的「交通樞紐」，讓相關筆記都能從它出發。MOC 在 ch07 的 LYT 系統中會有更詳細的介紹。</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch06/03-framework-metadata-links-network.png" alt="Metadata 欄位裡的 wikilink 指向作者筆記與主題 MOC，這些筆記再從其他筆記收到反向連結，自然形成知識網絡" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>在 author、topics 這類 Metadata 欄位放 [[內部連結]]，讓筆記自動成為反向連結網絡的一部分，不需要手動整理。</figcaption> </figure> <h2>搭配 Dataview：讓 Metadata 產生動態視圖</h2> <p>
+如果你安裝了 Dataview 插件（第九章會詳細介紹），Metadata 的價值會再乘以十倍。你在 frontmatter 設定的每個欄位，都可以成為 Dataview 的查詢條件，自動生成表格、清單或任務看板。
+</p> <p>
+關鍵在於：<strong>Metadata 的設計要從「我需要什麼樣的視圖」出發，而不是「我覺得應該記錄什麼」</strong>。
+</p> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-dv" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" font-size="18px" font-weight="bold" fill="var(--text)">Metadata 設計 → Dataview 查詢工作流</text>
+
+    <!-- Step 1 -->
+    <rect x="40" y="55" width="155" height="110" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="40" y="55" width="155" height="8" fill="var(--accent)" rx="10"/>
+    <text x="117" y="84" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">1. 設計 Metadata</text>
+    <text x="117" y="104" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">決定要查詢什麼</text>
+    <text x="117" y="120" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">先確定需求，再</text>
+    <text x="117" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">設計欄位和類型</text>
+    <text x="117" y="152" text-anchor="middle" font-size="13px" fill="var(--muted)">status, due, tags...</text>
+
+    <line x1="195" y1="110" x2="220" y2="110" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-dv)"/>
+
+    <!-- Step 2 -->
+    <rect x="222" y="55" width="155" height="110" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="222" y="55" width="155" height="8" fill="var(--blue)" rx="10"/>
+    <text x="299" y="84" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">2. 寫入筆記</text>
+    <text x="299" y="104" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">每則筆記的 YAML</text>
+    <text x="299" y="120" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">frontmatter 加入</text>
+    <text x="299" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">對應欄位和值</text>
+    <text x="299" y="152" text-anchor="middle" font-size="13px" fill="var(--muted)">可用 Template 批量建立</text>
+
+    <line x1="377" y1="110" x2="402" y2="110" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-dv)"/>
+
+    <!-- Step 3 -->
+    <rect x="404" y="55" width="155" height="110" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <rect x="404" y="55" width="155" height="8" fill="var(--green)" rx="10"/>
+    <text x="481" y="84" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">3. Dataview 查詢</text>
+    <text x="481" y="104" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">在 MOC 或 index</text>
+    <text x="481" y="120" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">頁面撰寫 DQL</text>
+    <text x="481" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">動態彙整符合</text>
+    <text x="481" y="152" text-anchor="middle" font-size="13px" fill="var(--muted)">條件的所有筆記</text>
+
+    <line x1="559" y1="110" x2="584" y2="110" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr-dv)"/>
+
+    <!-- Step 4 -->
+    <rect x="586" y="55" width="174" height="110" fill="var(--accent-light)" stroke="var(--accent)" rx="10"/>
+    <rect x="586" y="55" width="174" height="8" fill="var(--accent)" rx="10"/>
+    <text x="673" y="84" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">4. 動態視圖</text>
+    <text x="673" y="104" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">自動更新的表格</text>
+    <text x="673" y="120" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">清單、日曆、</text>
+    <text x="673" y="136" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">Kanban 看板</text>
+    <text x="673" y="152" text-anchor="middle" font-size="13px" fill="var(--muted)">無需手動維護</text>
+
+    <!-- Example queries section -->
+    <rect x="40" y="200" width="720" height="130" fill="var(--bg2)" stroke="var(--border)" rx="10"/>
+    <text x="400" y="222" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">常見 Dataview 查詢範例（欄位對應左邊設計）</text>
+
+    <!-- 3 query example boxes -->
+    <rect x="55" y="232" width="212" height="82" fill="var(--bg)" stroke="var(--border)" rx="6"/>
+    <text x="161" y="250" text-anchor="middle" font-size="13px" font-weight="bold" fill="var(--accent)">未完成任務列表</text>
+    <text x="161" y="267" text-anchor="middle" font-size="12px" fill="var(--muted)">WHERE status = "active"</text>
+    <text x="161" y="282" text-anchor="middle" font-size="12px" fill="var(--muted)">AND due &lt;= date(today)</text>
+    <text x="161" y="297" text-anchor="middle" font-size="12px" fill="var(--muted)">SORT due ASC</text>
+
+    <rect x="294" y="232" width="212" height="82" fill="var(--bg)" stroke="var(--border)" rx="6"/>
+    <text x="400" y="250" text-anchor="middle" font-size="13px" font-weight="bold" fill="var(--accent)">高重要性閱讀筆記</text>
+    <text x="400" y="267" text-anchor="middle" font-size="12px" fill="var(--muted)">WHERE contains(tags,"reading")</text>
+    <text x="400" y="282" text-anchor="middle" font-size="12px" fill="var(--muted)">AND 重要性 >= 4</text>
+    <text x="400" y="297" text-anchor="middle" font-size="12px" fill="var(--muted)">SORT created DESC</text>
+
+    <rect x="533" y="232" width="212" height="82" fill="var(--bg)" stroke="var(--border)" rx="6"/>
+    <text x="639" y="250" text-anchor="middle" font-size="13px" font-weight="bold" fill="var(--accent)">本月建立的筆記</text>
+    <text x="639" y="267" text-anchor="middle" font-size="12px" fill="var(--muted)">WHERE created >= date(2026-07-01)</text>
+    <text x="639" y="282" text-anchor="middle" font-size="12px" fill="var(--muted)">AND created &lt; date(2026-08-01)</text>
+    <text x="639" y="297" text-anchor="middle" font-size="12px" fill="var(--muted)">SORT file.name ASC</text>
+  </g>
+</svg>
+ <figcaption>Metadata 設計到 Dataview 動態視圖的四步驟工作流程。核心邏輯：先想好要查什麼，再決定設哪些欄位，欄位一致了查詢才有意義。</figcaption> </figure> <h3>常見 Dataview 查詢範例</h3> <p>以下三個查詢展示了良好 Metadata 設計帶來的實際效益：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="TABLE title, created, 重要性
+FROM &quot;閱讀筆記&quot;
+WHERE contains(tags, &quot;reading/non-fiction&quot;)
+SORT 重要性 DESC" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="sql"><code><span class="line"><span style="color:#C678DD">TABLE</span><span style="color:#ABB2BF"> title, created, 重要性</span></span>
+<span class="line"><span style="color:#C678DD">FROM</span><span style="color:#98C379"> "閱讀筆記"</span></span>
+<span class="line"><span style="color:#C678DD">WHERE</span><span style="color:#ABB2BF"> contains(tags, </span><span style="color:#98C379">"reading/non-fiction"</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT 重要性 </span><span style="color:#C678DD">DESC</span></span></code></pre> </div> </div>   <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="TASK
+FROM &quot;專案&quot;
+WHERE status = &quot;active&quot; AND !completed
+SORT due ASC" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="sql"><code><span class="line"><span style="color:#ABB2BF">TASK</span></span>
+<span class="line"><span style="color:#C678DD">FROM</span><span style="color:#98C379"> "專案"</span></span>
+<span class="line"><span style="color:#C678DD">WHERE</span><span style="color:#C678DD"> status</span><span style="color:#56B6C2"> =</span><span style="color:#98C379"> "active"</span><span style="color:#C678DD"> AND</span><span style="color:#ABB2BF"> !completed</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT due </span><span style="color:#C678DD">ASC</span></span></code></pre> </div> </div>   <p>
+Dataview 也支援 <strong>Inline Field</strong>——在筆記正文中，用 <code>欄位名:: 值</code> 的格式直接加入可查詢的屬性，不需要全部集中在 frontmatter：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 某篇會議紀錄
+status:: active
+due:: 2026/07/15
+---
+
+討論了產品路線圖，決定優先做 XX 功能。
+
+# 待辦事項
+- [ ] 寫提案文件 [due:: 2026/07/10]
+- [ ] 安排下次會議" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">某篇會議紀錄</span></span>
+<span class="line"><span style="color:#98C379">status:</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">active</span></span>
+<span class="line"><span style="color:#98C379">due:</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026/07/15</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379">討論了產品路線圖，決定優先做 XX 功能。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 待辦事項</span></span>
+<span class="line"><span style="color:#ABB2BF">- [ ] </span><span style="color:#98C379">寫提案文件 [due:</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026/07/10]</span></span>
+<span class="line"><span style="color:#ABB2BF">- [ ] </span><span style="color:#98C379">安排下次會議</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>frontmatter vs. Inline Field：</strong>通用的結構化屬性（標題、日期、標籤）放 frontmatter；特定段落的臨時標記（這個待辦的 due date、這段引言的來源）用 Inline Field。兩者都可以被 Dataview 查詢。</p> </div> <h2>完整的 Frontmatter 模板</h2> <p>
+把上面所有設計整合起來，以下是一個適合大多數筆記的完整 frontmatter 模板：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 行為設計學讀書筆記
+created: 2026/06/20
+published: false
+due: 2026/07/15
+重要性: 4
+tags:
+  - reading/non-fiction
+  - topic/psychology
+description: BJ Fogg《設計你的小習慣》核心架構整理
+author: &quot;[[BJ Fogg]]&quot;
+topics:
+  - &quot;[[行為心理學 MOC]]&quot;
+  - &quot;[[習慣設計 MOC]]&quot;
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">行為設計學讀書筆記</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026/06/20</span></span>
+<span class="line"><span style="color:#E06C75">published</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">false</span></span>
+<span class="line"><span style="color:#E06C75">due</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">2026/07/15</span></span>
+<span class="line"><span style="color:#E06C75">重要性</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">4</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">reading/non-fiction</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">topic/psychology</span></span>
+<span class="line"><span style="color:#E06C75">description</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">BJ Fogg《設計你的小習慣》核心架構整理</span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"[[BJ Fogg]]"</span></span>
+<span class="line"><span style="color:#E06C75">topics</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[行為心理學 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[習慣設計 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>   <p>
+不是每則筆記都需要填滿所有欄位。<code>due</code> 只在有截止日期時才填，<code>published</code> 只在追蹤完成狀態時才用。模板的作用是提醒你「有哪些選項」，而不是強制填滿每個格子。
+</p> <h2>三種分類法的比較</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+
+  <g font-family="system-ui, sans-serif">
+    <!-- Top 3 boxes -->
+    <rect x="60" y="40" width="200" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="160" y="64" text-anchor="middle" font-size="17px" fill="var(--text)">Properties (Metadata)</text>
+
+    <rect x="300" y="40" width="200" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="400" y="64" text-anchor="middle" font-size="17px" fill="var(--text)">Tags（標籤）</text>
+
+    <rect x="540" y="40" width="200" height="40" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="640" y="64" text-anchor="middle" font-size="17px" fill="var(--text)">[[內部連結]]</text>
+
+    <!-- Flow lines -->
+    <line x1="260" y1="60" x2="290" y2="60" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <line x1="500" y1="60" x2="530" y2="60" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+
+    <!-- Text below arrows -->
+    <text x="275" y="80" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">組合</text>
+    <text x="515" y="80" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">延伸</text>
+
+    <!-- Wide rows -->
+    <!-- Row 1 -->
+    <rect x="60" y="110" width="680" height="50" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="400" y="133" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">Metadata 欄位：title · created · tags · description · 重要性</text>
+    <text x="400" y="150" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">標籤命名規範：kebab-case、巢狀標籤</text>
+
+    <!-- Row 2 -->
+    <rect x="60" y="180" width="680" height="65" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="400" y="203" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">在 Metadata 使用 [[內部連結]]：作者筆記、主題 MOC</text>
+    <text x="400" y="220" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">讓知識自動積累，不需要主動整理</text>
+    <text x="400" y="235" text-anchor="middle" font-size="15px" fill="var(--text)" opacity="0.7">主題之間的關係在 Graph View 視覺化</text>
+
+    <!-- Row 3 -->
+    <rect x="60" y="265" width="680" height="50" fill="var(--accent-light)" stroke="var(--accent)" rx="8" />
+    <text x="400" y="287" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">三種分類法比較：資料夾、標籤、[[內部連結]]</text>
+    <text x="400" y="304" text-anchor="middle" font-size="15px" fill="var(--accent)">搭配使用：地理結構、快速篩選、有語義關聯</text>
+  </g>
+</svg>
+ <figcaption>這張圖比較了資料夾、標籤與內部連結的屬性，展示了如何在 Metadata 中組合這三者以達到最佳的知識導航效果。</figcaption> </figure> <p>理解了 Properties、標籤和內部連結之後，自然會有個問題：我應該用哪一種？</p> <ul> <li> <strong>資料夾</strong>：適合存放「有明確歸屬」的筆記，例如特定專案的所有文件、特定年份的日記。優點是直覺；缺點是一則筆記只能放在一個地方。
+</li> <li> <strong>標籤</strong>：適合「橫跨多個資料夾的主題分類」，例如所有 <code>#閱讀筆記</code>，不管它們放在哪個資料夾。優點是靈活；缺點是標籤之間的關係不可見。
+</li> <li> <strong>[[內部連結]]</strong>：適合「需要看出主題之間關係」的分類。連結本身就是一則可以有內容的筆記，可以在裡面寫脈絡、關係、演變，同時在 Graph View 視覺化。
+</li> </ul> <p>
+實際上，這三種方法不是互斥的，而是搭配使用：資料夾作粗粒度的地理結構，標籤作快速篩選，內部連結做有語義的主題關聯。
+</p> <div class="call warn"> <p><strong>從小開始</strong>：不要試圖一開始就設計出完美的分類體系。先用最少的欄位（<code>title</code>、<code>created</code>、<code>tags</code>），等到 Vault 累積到 50～100 則筆記，你才會知道自己真正需要哪些 Metadata 來找到想找的東西。</p> </div> <h2>小結</h2> <p>
+Properties 讓筆記帶有結構化的身分資訊，標籤讓筆記可以被跨資料夾篩選，而在 Metadata 使用 <code>[[內部連結]]</code> 則讓知識的積累以一種你幾乎不需要刻意管理的方式自動發生。三者合用，才能讓 Vault 真正成為一個可以被導航、可以被探索的知識系統。
+</p> <p>
+當你的 Metadata 設計夠完整，Dataview 插件可以在任何筆記裡生成動態彙整視圖——這是傳統資料夾歸檔完全做不到的事。下一章，我們把 Metadata 和每日筆記結合起來，讓 Obsidian 成為你每天思考的起點。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span> </a> <a href="/obsidian/ch07-daily-notes-lyt" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

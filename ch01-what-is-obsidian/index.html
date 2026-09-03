@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Obsidian 是什麼？與 Notion 的關鍵差異 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="你的筆記散落在 Notion、Google Doc、手機備忘錄？Obsidian 用雙向連結把碎片知識串成網絡，本章從「為什麼是它」切入，帶你理解本地 Markdown 哲學、與 Notion 的根本差異，以及 2026 年它為何成為 AI 時代標配工具。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 1 章 · Part 1：認識 Obsidian：為什麼是它？</span> <h1>Obsidian 是什麼？與 Notion 的關鍵差異</h1> <p class="cdesc">從「file over app」到 AI 知識庫——一款沉寂六年、在 2026 年突然引爆的筆記軟體</p> <figure class="svg-fig"> <img src="/obsidian/img/ch01/01-framework-local-vault.png" alt="Obsidian 將碎片化筆記轉成可由 AI 讀取的本地 Markdown 知識網絡" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 1-0：Obsidian 的核心心智模型——從分散工具、本地 Vault、雙向連結到 AI 直接讀取 Markdown。</figcaption> </figure> <h2>你的知識碎片化了嗎？</h2> <p>
+你的筆記現在散落在幾個地方？Notion 裡有工作紀錄，Google Doc 有會議摘要，手機備忘錄有突然想到的點子，LINE 記事本有隨手貼的連結。每一個工具都方便，但它們彼此隔離，你的知識從來沒有真正「連在一起」。
+</p> <div style="border:1px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg2);margin:1.5rem 0;overflow-x:auto"> <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem;text-align:center">知識碎片化問題</div> <div style="display:flex;align-items:center;gap:0;min-width:520px;font-size:.82rem;justify-content:center">  <div style="display:flex;flex-direction:column;gap:.5rem;flex-shrink:0"> <div style="padding:.45rem .8rem;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;text-align:center;font-size:.75rem;color:var(--text2)">📝 Notion</div> <div style="padding:.45rem .8rem;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;text-align:center;font-size:.75rem;color:var(--text2)">📄 Google Doc</div> <div style="padding:.45rem .8rem;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;text-align:center;font-size:.75rem;color:var(--text2)">📱 手機備忘錄</div> <div style="padding:.45rem .8rem;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;text-align:center;font-size:.75rem;color:var(--text2)">💬 LINE 記事本</div> </div>  <div style="display:flex;flex-direction:column;align-items:center;padding:0 .75rem;flex-shrink:0;color:var(--muted)"> <div style="font-size:.7rem;white-space:nowrap;margin-bottom:.2rem">各自獨立</div> <div style="font-size:1.2rem;color:var(--accent)">→</div> <div style="font-size:.7rem;white-space:nowrap;margin-top:.2rem">無法互連</div> </div>  <div style="flex-shrink:0;padding:.8rem 1.1rem;background:var(--bg);border:2px dashed var(--accent);border-radius:9px;text-align:center"> <div style="font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:.3rem">💔 知識孤島</div> <div style="font-size:.75rem;color:var(--text2);line-height:1.5">筆記找不到<br>連結斷裂<br>思路無法累積</div> </div>  <div style="display:flex;flex-direction:column;align-items:center;padding:0 .75rem;flex-shrink:0;color:var(--muted)"> <div style="font-size:.7rem;white-space:nowrap;margin-bottom:.2rem">解法</div> <div style="font-size:1.2rem;color:#16a34a">→</div> </div>  <div style="flex-shrink:0;padding:.8rem 1.1rem;background:var(--bg);border:2px solid #2d7a4f;border-radius:9px;text-align:center"> <div style="font-size:.72rem;font-weight:700;color:#2d7a4f;margin-bottom:.3rem">✅ Obsidian</div> <div style="font-size:.75rem;color:var(--text2);line-height:1.5">統一在地端<br>雙向連結<br>知識成網絡</div> </div> </div> </div> <p>
+更令人沮喪的是：六個月前花一個小時寫的研究筆記，你完全找不到。你寫下過的東西，大部分在寫完之後就消失了。不是因為你不夠用功，而是因為人類的大腦在設計上本來就不適合儲存資訊——它是一台思考引擎，不是硬碟。
+</p> <h2>Obsidian 是什麼？三件事先記住</h2> <p>
+Obsidian 是 2020 年推出的筆記軟體，由一個只有 8 人的小團隊開發，但全球工程師、研究者、創作者都為之瘋狂。它不靠花俏功能取勝，而是用一個簡單理念打動人心：
+</p> <div class="call info"> <p><strong>「Your notes live on your device. Period.」</strong><br>你的筆記就在你的裝置上，句號。— Obsidian 官方</p> </div> <p>在開始比較任何功能之前，你需要先理解 Obsidian 的三個核心特點：</p> <figure class="svg-fig"> <img src="/obsidian/img/ch01/02-infographic-three-pillars.png" alt="Obsidian 的三大核心支柱：本地 Markdown、雙向連結與 2700+ 社群外掛" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 1-1：Obsidian 的三大核心支柱——本地 Markdown 儲存、雙向連結與 2700+ 社群外掛。</figcaption> </figure> <h3>1. 本地 Markdown 儲存</h3> <p>
+每一則筆記都是電腦裡的一個 <code>.md</code> 純文字檔案，存在你選定的資料夾（稱為 Vault）。不需要帳號，不需要連網，離線也能完整運作。
+</p> <p>
+這有什麼意義？Obsidian 倒了，你的檔案完整無缺。改用其他工具，直接搬走。2023 年 Notion 發生長達數小時的全球當機，所有人的筆記都打不開——這件事在 Obsidian 使用者身上不可能發生。
+</p> <div class="call tip"> <span class="ci">💡</span> <p><strong>最佳實踐：Vault 命名與位置建議</strong><br>
+建議將 Vault 命名為 <code>my-knowledge-base</code> 或 <code>notes</code>，並存放在雲端同步資料夾（如 iCloud Drive、Google Drive、Dropbox）內。這樣即使 Obsidian 本身不提供同步，你的筆記仍能跨裝置自動備份。避免使用中文或特殊字元作為 Vault 名稱，以確保跨平台相容性。</p> </div> <h3>2. 雙向連結</h3> <p>
+傳統筆記用資料夾分類，像一棵樹：大分類下有小分類，每則筆記只能放在一個位置。但很多知識同時屬於多個主題——一篇關於「AI 倫理」的筆記，既屬於「技術」，也屬於「社會議題」，放在哪個資料夾都不完整。
+</p> <p>
+雙向連結解決了這個問題。你在筆記裡輸入 <code>[[筆記名稱]]</code>，就能連到另一則筆記，而被連結的那則筆記會自動顯示「誰連到了我」——這就是「雙向」的意義。知識不再是樹狀結構，而是網狀結構，更接近大腦神經元的連結方式。
+</p> <div style="border:1px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg2);margin:1.5rem 0;overflow-x:auto"> <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem;text-align:center">筆記結構：樹狀 vs 網狀</div> <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:stretch;font-size:.82rem;min-width:480px">  <div style="border:1.5px solid #c0533a;border-radius:9px;padding:1rem;background:var(--bg)"> <div style="font-weight:700;color:#c0533a;margin-bottom:.75rem;text-align:center;font-size:.82rem">❌ 傳統資料夾（樹狀）</div> <div style="font-family:var(--mono);font-size:.72rem;color:var(--text2);line-height:1.8;background:var(--bg2);border-radius:6px;padding:.6rem .8rem">
+📁 技術/<br>
+&nbsp;&nbsp;📄 AI 倫理.md<br>
+📁 社會/<br>
+&nbsp;&nbsp;📄 ??? 放哪裡<br> </div> <div style="margin-top:.6rem;padding:.4rem .7rem;background:#fff1f2;border:1px dashed #fca5a5;border-radius:5px;font-size:.72rem;color:#dc2626;text-align:center">
+⚠️ 每篇筆記只能在一個位置
+</div> </div>  <div style="display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);font-size:.85rem">vs</div>  <div style="border:1.5px solid #2d7a4f;border-radius:9px;padding:1rem;background:var(--bg)"> <div style="font-weight:700;color:#2d7a4f;margin-bottom:.75rem;text-align:center;font-size:.82rem">✅ 雙向連結（網狀）</div> <div style="display:flex;flex-direction:column;gap:.35rem;align-items:center"> <div style="padding:.3rem .8rem;background:#dcfce7;border:1px solid #86efac;border-radius:5px;font-size:.72rem;font-family:var(--mono);color:#166534;text-align:center">AI 倫理.md</div> <div style="display:flex;gap:1.5rem;font-size:.7rem;color:#16a34a"> <span>↙ 引用</span> <span>↘ 引用</span> </div> <div style="display:flex;gap:.5rem"> <div style="padding:.3rem .6rem;background:#dcfce7;border:1px solid #86efac;border-radius:5px;font-size:.7rem;font-family:var(--mono);color:#166534">技術</div> <div style="padding:.3rem .6rem;background:#dcfce7;border:1px solid #86efac;border-radius:5px;font-size:.7rem;font-family:var(--mono);color:#166534">社會議題</div> </div> </div> <div style="margin-top:.6rem;padding:.4rem .7rem;background:#f0fdf4;border:1px solid #86efac;border-radius:5px;font-size:.72rem;color:#166534;text-align:center">
+✓ 同時屬於多個主題，自由連結
+</div> </div> </div> </div> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 人工智慧倫理
+
+## 相關議題
+- [[算法偏見]]
+- [[AI 治理框架]]
+- [[自動化與就業]]
+
+## 應用案例
+見 [[GPT-4 技術報告]] 第三章" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 人工智慧倫理</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 相關議題</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">算法偏見</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[AI 治理框架]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">自動化與就業</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 應用案例</span></span>
+<span class="line"><span style="color:#ABB2BF">見 [[GPT-4 技術報告]] 第三章</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>常見陷阱：雙向連結失效的兩種情況</strong><br>
+1. <strong>檔案重新命名後未更新連結</strong>：如果你在檔案總管中直接重新命名 <code>.md</code> 檔案，Obsidian 不會自動更新其他筆記中的 <code>[[舊名稱]]</code> 連結。解決方案：一律在 Obsidian 內使用右鍵 →「重新命名檔案」，這樣所有引用會自動更新。<br>
+2. <strong>連結目標不存在</strong>：當你輸入 <code>[[不存在的筆記]]</code> 時，Obsidian 會以灰色顯示該連結。點擊後會自動建立新檔案，但如果你誤拼了名稱，就會產生重複的筆記。建議養成使用「Ctrl+O」搜尋現有筆記名稱的習慣，再插入連結。</p> </div> <h3>3. 2700+ 社群外掛</h3> <p>
+Obsidian 有一個龐大的開源外掛生態系——從日曆、待辦事項、AI 整合，到 Excalidraw 手繪板，缺什麼就裝什麼。每一個外掛都由社群維護，完全開源。這個生態系的豐富程度，是其他本地筆記軟體難以匹敵的。
+</p> <div class="call info"> <span class="ci">ℹ️</span> <p><strong>外掛安裝三步驟</strong><br>
+1. 開啟 Obsidian → 點擊左下角齒輪圖示（設定）<br>
+2. 左側選單選擇「社群外掛」→ 關閉「安全模式」<br>
+3. 點擊「瀏覽」搜尋外掛名稱 → 點擊「安裝」→ 啟用<br> <em>建議新手先從「Calendar」、「Kanban」、「Dataview」這三個外掛開始，它們能大幅提升筆記管理效率。</em></p> </div> <h2>Obsidian vs Notion：根本差異只有一句話</h2> <p>
+最根本的差異就一句話：<strong>Obsidian 是本地軟體，Notion 是雲端服務。</strong> 這個差異延伸出所有其他不同。
+</p> <p>
+Notion 的資料存在 AWS 伺服器上，需要網路、帳號、授權。它強項在即時協作——多人同時編輯一份文件毫無壓力，模板系統豐富，適合團隊管理專案。
+</p> <p>
+Obsidian 的筆記就在你的硬碟裡，隱私性極高，可攜性極強。它強項在個人知識管理——雙向連結、Graph View、高度客製化的外掛組合，讓它成為知識工作者個人思考的工具。
+</p> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch01" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+
+  <!-- 頂部標題 -->
+  <rect x="10" y="10" width="780" height="300" fill="transparent" stroke="var(--border)" stroke-dasharray="4" rx="12" />
+  <text x="400" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18px" font-weight="bold" fill="var(--text)">Obsidian vs Notion：核心差異架構</text>
+
+  <!-- Obsidian 欄 (Accent / 橘紅色) -->
+  <rect x="40" y="60" width="320" height="220" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="10" />
+  <text x="200" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="var(--accent)">Obsidian</text>
+  <line x1="60" y1="102" x2="340" y2="102" stroke="var(--border)" stroke-width="1" />
+
+  <rect x="60" y="115" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="200" y="137" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">本地 .md 純文字 · 永久可攜</text>
+
+  <rect x="60" y="158" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="200" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">雙向連結 · Graph View 知識網絡</text>
+
+  <rect x="60" y="200" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="200" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">2700+ 社群外掛 · 完全離線可用</text>
+
+  <rect x="60" y="242" width="280" height="28" fill="var(--accent-light)" stroke="var(--accent)" rx="5" />
+  <text x="200" y="261" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" font-weight="bold" fill="var(--accent)">★ AI 時代最佳個人知識庫</text>
+
+  <!-- 中間比較 VS -->
+  <text x="400" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="23px" font-weight="bold" fill="var(--text)">VS</text>
+
+  <!-- Notion 欄 (Blue / 藍色) -->
+  <rect x="440" y="60" width="320" height="220" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2" rx="10" />
+  <text x="600" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="var(--blue)">Notion</text>
+  <line x1="460" y1="102" x2="740" y2="102" stroke="var(--border)" stroke-width="1" />
+
+  <rect x="460" y="115" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="600" y="137" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">雲端資料庫 · 需要網路與帳號</text>
+
+  <rect x="460" y="158" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">多人即時協作 · 豐富模板系統</text>
+
+  <rect x="460" y="200" width="280" height="34" fill="var(--bg)" stroke="var(--border)" rx="5" />
+  <text x="600" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--text)">專有格式 · 資料存在第三方伺服器</text>
+
+  <rect x="460" y="242" width="280" height="28" fill="var(--blue-bg)" stroke="var(--blue)" stroke-dasharray="3" rx="5" />
+  <text x="600" y="261" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15px" fill="var(--blue)">★ 團隊協作最佳選擇</text>
+</svg> <figcaption>這張圖表比較了 Obsidian (本地純文字、雙向連結) 與 Notion (雲端資料庫、即時協作) 的核心架構差異，顯示 Obsidian 在個人知識庫上的優勢。</figcaption> </figure><div class="call info"> <span class="ci">ℹ️</span> <p><strong>比較重點</strong></p> <table> <thead> <tr> <th>比較項目</th> <th>Obsidian</th> <th>Notion</th> </tr> </thead> <tbody> <tr> <td>儲存方式</td> <td>本地 Markdown 檔案</td> <td>雲端資料庫</td> </tr> <tr> <td>離線使用</td> <td>完整支援</td> <td>有限支援</td> </tr> <tr> <td>即時協作</td> <td>不支援</td> <td>強項，多人同時編輯</td> </tr> <tr> <td>資料格式</td> <td>Markdown 純文字，可攜性高</td> <td>專有格式，匯出有限</td> </tr> <tr> <td>隱私性</td> <td>極高，資料不離開裝置</td> <td>資料存在第三方伺服器</td> </tr> <tr> <td>外掛生態</td> <td>2700+ 社群外掛</td> <td>內建整合為主</td> </tr> <tr> <td>學習曲線</td> <td>中等偏高</td> <td>低，上手快</td> </tr> <tr> <td>個人使用費用</td> <td>完全免費</td> <td>免費（有功能限制）</td> </tr> </tbody> </table> </div> <p>
+兩者並不互斥。很多人的做法是：個人知識管理用 Obsidian，團隊工作協作用 Notion，各取所長。
+</p> <h2>2026 年：為什麼 Obsidian 突然爆紅？</h2> <p>
+Obsidian 在 2020 年推出，卻等到 2026 年才真正引爆——這件事本身就很值得理解。
+</p> <p>
+2026 年 4 月，前 Tesla AI 主管、OpenAI 創辦成員 Andrej Karpathy 在 X 平台發了一篇貼文，示範他如何用 Claude Code 把 Obsidian 變成一個 AI 自動維護的個人知識庫。那篇 GitHub Gist 一週收到 5000 顆星。他說的那句話被廣泛流傳：
+</p> <div class="call info"> <span class="ci">ℹ️</span> <p> <em>"Obsidian is the IDE; the LLM is the programmer; the wiki is the codebase."</em><br>
+— Andrej Karpathy, 2026.04
+</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch01/03-flowchart-ai-wiki.png" alt="Obsidian 在 2026 AI 時代的 LLM Wiki 工作流" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 1-4：AI 時代的 Obsidian 工作流——LLM 直接讀取本地 Markdown，依 raw、schema、wiki 三層維護個人知識作業系統。</figcaption> </figure> <p>
+這件事為什麼能在 Obsidian 上發生？因為純文字 Markdown 是 LLM 訓練資料裡最熟悉的格式之一。你給 Claude 一個 Notion 連結，它要先打 API、處理權限、轉換格式——給它一個本地資料夾，它直接讀。Obsidian 的「老派」設計，在 AI 時代反而變成了最大優勢。
+</p> <div style="border:1px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg2);margin:1.5rem 0;overflow-x:auto"> <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1.25rem;text-align:center">LLM Wiki 三層架構（Karpathy 模式）</div> <div style="display:flex;flex-direction:column;align-items:center;gap:0;font-size:.82rem;max-width:500px;margin:0 auto">  <div style="width:100%;padding:.7rem 1.1rem;background:var(--accent);color:#fff;border-radius:8px;text-align:center"> <div style="font-size:.7rem;font-weight:700;letter-spacing:.05em;margin-bottom:.2rem;opacity:.85">第一層 · 原始輸入</div> <div style="font-family:var(--mono);font-size:.85rem;font-weight:600">raw/</div> <div style="font-size:.72rem;margin-top:.25rem;opacity:.9">文章、影片摘要、網頁截取 — 只讀，不修改</div> </div>  <div style="display:flex;flex-direction:column;align-items:center;padding:.3rem 0;color:var(--muted)"> <div style="font-size:.7rem">AI 讀取並依規則整理</div> <div style="font-size:1.1rem;color:var(--accent)">↓</div> </div>  <div style="width:100%;padding:.7rem 1.1rem;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;text-align:center"> <div style="font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:.2rem">第二層 · 規則定義</div> <div style="font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--text)">schema/ (AGENTS.md)</div> <div style="font-size:.72rem;margin-top:.25rem;color:var(--muted)">定義格式、告訴 AI 如何整理、頁面命名規則</div> </div>  <div style="display:flex;flex-direction:column;align-items:center;padding:.3rem 0;color:var(--muted)"> <div style="font-size:.7rem">AI 自動生成並維護</div> <div style="font-size:1.1rem;color:#16a34a">↓</div> </div>  <div style="width:100%;padding:.7rem 1.1rem;background:#2d7a4f;color:#fff;border-radius:8px;text-align:center"> <div style="font-size:.7rem;font-weight:700;letter-spacing:.05em;margin-bottom:.2rem;opacity:.85">第三層 · 知識輸出</div> <div style="font-family:var(--mono);font-size:.85rem;font-weight:600">wiki/</div> <div style="font-size:.72rem;margin-top:.25rem;opacity:.9">concepts/ · sources/ · entities/ — 結構化、可查詢</div> </div>  <div style="display:flex;gap:.5rem;margin-top:.9rem;width:100%"> <div style="flex:1;padding:.45rem .65rem;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent);font-size:.72rem;color:var(--muted)"> <strong style="color:var(--text);display:block;margin-bottom:.15rem">你負責</strong>
+收集 raw/ 素材，維護 schema/ 規則
+</div> <div style="flex:1;padding:.45rem .65rem;background:var(--bg3);border-radius:6px;border-left:3px solid #2d7a4f;font-size:.72rem;color:var(--muted)"> <strong style="color:var(--text);display:block;margin-bottom:.15rem">AI 負責</strong>
+讀 raw/ → 依 schema/ → 寫 wiki/
+</div> </div> </div> </div> <p>
+同一年，Obsidian 官方也宣布商業使用完全免費，並推出了 CLI 命令列工具，讓 AI agent 可以直接從 terminal 呼叫 Obsidian 指令。這個組合讓 Obsidian 從「一個 app」變成了「可被自動化呼叫的知識引擎」。
+</p> <div class="call tip"> <span class="ci">💡</span> <p><strong>AI 整合實戰：讓 Claude 讀取你的 Obsidian Vault</strong><br>
+假設你已經有一個 Obsidian Vault 在 <code>~/Documents/my-vault</code>，你可以這樣讓 Claude 直接存取：<br> <code>claude --vault ~/Documents/my-vault "幫我找出所有關於機器學習的筆記，並整理成一份摘要"</code><br>
+這個指令會讓 Claude 掃描整個 Vault 中的 <code>.md</code> 檔案，並根據內容進行分析。確保你的筆記有良好的標題和標籤結構，AI 才能更精準地理解內容。</p> </div> <h2>你適合用 Obsidian 嗎？</h2> <p>選 Obsidian 的情境：</p> <ul> <li>你是個人使用者，在意資料隱私與長期可攜性</li> <li>你需要離線工作，或希望筆記不依賴任何雲端服務</li> <li>你想建立個人知識庫，讓知識之間產生連結</li> <li>你對客製化有需求，願意花時間調整工作流</li> <li>你想讓 AI（Claude、GPT）直接讀取你的知識庫</li> </ul> <p>暫時不適合的情境：</p> <ul> <li>你主要需要與團隊即時協作編輯同一份文件</li> <li>你完全不想學習 Markdown 語法</li> <li>你希望有豐富的官方模板、開箱即用的體驗</li> </ul> <div class="call info"> <span class="ci">ℹ️</span> <p><strong>定價一覽</strong>：個人使用完全免費，無功能限制。若需多裝置同步可選購 Obsidian Sync（年繳 $4/月），若需將筆記發布為網站可選購 Obsidian Publish（年繳 $8/月）。兩者皆非必要，本書所有內容在免費版本下都可完整實踐。</p> </div> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>邊緣案例：當 Vault 檔案數量超過 10,000 則</strong><br>
+雖然 Obsidian 對大量檔案處理得相當好，但當 Vault 中的 <code>.md</code> 檔案超過 10,000 則時，你可能會遇到以下問題：<br>
+1. <strong>Graph View 渲染變慢</strong>：建議關閉 Graph View 中的「自動渲染」，改用手動點擊節點展開。<br>
+2. <strong>搜尋延遲</strong>：安裝「Omnisearch」外掛可以大幅提升全文搜尋速度。<br>
+3. <strong>啟動時間增加</strong>：將不常用的外掛關閉，或使用「Lazy Plugin Loader」外掛延遲載入。<br>
+這些都是高階使用者的甜蜜煩惱，代表你的知識庫已經相當豐富了！</p> </div> <h2>小結</h2> <p>
+Obsidian 不是 Notion 的對手，它們解決的是不同問題。Obsidian 的核心不是「一個更好的雲端筆記」，而是一個讓你的知識在本地生根、用連結茁壯、在 AI 時代被充分利用的個人思考系統。
+</p> <p>
+接下來的章節，我們會從安裝設定開始，一步步帶你建立自己的 Vault，並在第二部分深入雙向連結、Graph View 等核心功能。準備好了嗎？讓我們開始。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <div class="ph" data-astro-cid-mw7aashj></div> <a href="/obsidian/ch02-install-setup" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

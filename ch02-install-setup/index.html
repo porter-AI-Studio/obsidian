@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>安裝與基本設定：從零開始的第一步 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="從下載 Obsidian 到建立第一個 Vault，本章帶你完成所有初始設定。涵蓋跨平台安裝、介面四大區域認識、Vault 資料夾結構說明，以及語言、外觀、檔案連結等必要偏好設定，讓你五分鐘內進入可以實際使用的狀態。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 2 章 · Part 1：認識 Obsidian：為什麼是它？</span> <h1>安裝與基本設定：從零開始的第一步</h1> <p class="cdesc">五分鐘完成安裝，建立你的第一個 Vault</p> <figure class="svg-fig"> <img src="/obsidian/img/ch02/02-flowchart-five-minute-vault.png" alt="Obsidian 五分鐘安裝到建立第一個 Vault 的流程圖" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>從下載、安裝到建立 Vault、完成基本設定與寫下第一則筆記，第二章會帶你把 Obsidian 變成可以立即使用的本地知識庫。</figcaption> </figure> <h2>Obsidian 是免費的嗎？</h2> <p>
+Obsidian 核心功能<strong>完全免費</strong>，個人與商業用途皆可使用，無需帳號登入。你的所有筆記以純 Markdown 格式儲存在本機，不被任何平台鎖定。
+</p> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- 標題 -->
+    <text x="400" y="24" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Obsidian 版本與費用一覽</text>
+
+    <!-- 免費版 -->
+    <rect x="20" y="38" width="230" height="240" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="20" y="38" width="230" height="50" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5" rx="10" />
+    <rect x="20" y="68" width="230" height="20" fill="var(--green-bg)" />
+    <text x="135" y="58" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--green)">免費版</text>
+    <text x="135" y="80" text-anchor="middle" font-size="23px" font-weight="bold" fill="var(--green)">$0</text>
+    <text x="135" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 本地 Vault 無限制</text>
+    <text x="135" y="135" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 所有核心功能</text>
+    <text x="135" y="155" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 2700+ 社群外掛</text>
+    <text x="135" y="175" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 個人商業用途免費</text>
+    <text x="135" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">✗ 官方雲端同步</text>
+    <text x="135" y="215" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">✗ 官方 Publish 發布</text>
+    <text x="135" y="255" text-anchor="middle" font-size="14px" fill="var(--green)" font-weight="bold">推薦：99% 使用者首選</text>
+
+    <!-- Sync 付費 -->
+    <rect x="285" y="38" width="230" height="240" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="285" y="38" width="230" height="50" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" rx="10" />
+    <rect x="285" y="68" width="230" height="20" fill="var(--blue-bg)" />
+    <text x="400" y="58" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--blue)">Sync 方案</text>
+    <text x="400" y="80" text-anchor="middle" font-size="23px" font-weight="bold" fill="var(--blue)">$5 / 月</text>
+    <text x="400" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 官方端對端加密同步</text>
+    <text x="400" y="135" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 10 GB 儲存空間</text>
+    <text x="400" y="155" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 版本歷史紀錄</text>
+    <text x="400" y="175" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 多裝置即時同步</text>
+    <text x="400" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">免費替代：iCloud / Syncthing</text>
+    <text x="400" y="255" text-anchor="middle" font-size="14px" fill="var(--blue)" font-weight="bold">多裝置族群適合</text>
+
+    <!-- Publish 付費 -->
+    <rect x="550" y="38" width="230" height="240" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="550" y="38" width="230" height="50" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="1.5" rx="10" />
+    <rect x="550" y="68" width="230" height="20" fill="var(--purple-bg)" />
+    <text x="665" y="58" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--purple)">Publish 方案</text>
+    <text x="665" y="80" text-anchor="middle" font-size="23px" font-weight="bold" fill="var(--purple)">$10 / 月</text>
+    <text x="665" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 將 Vault 發布為網站</text>
+    <text x="665" y="135" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 自訂網域</text>
+    <text x="665" y="155" text-anchor="middle" font-size="14px" fill="var(--text)">✓ 密碼保護頁面</text>
+    <text x="665" y="175" text-anchor="middle" font-size="14px" fill="var(--text)">✓ Graph View 嵌入</text>
+    <text x="665" y="195" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">免費替代：Quartz / GitHub Pages</text>
+    <text x="665" y="255" text-anchor="middle" font-size="14px" fill="var(--purple)" font-weight="bold">數位花園建立者適合</text>
+  </g>
+</svg> <figcaption>Obsidian 提供免費版（核心功能完整）以及 Sync（$5/月）、Publish（$10/月）兩個付費增值服務，大多數使用者只需免費版即可。</figcaption> </figure> <div class="call tip"> <span class="ci">💡</span> <p><strong>免費同步替代方案</strong>：如果你需要跨裝置同步但不想付費，可以使用 iCloud（macOS/iOS）、Google Drive、Dropbox 等雲端硬碟，或開源的 Syncthing（適合進階使用者）。這些方案免費且運作良好，差別只是沒有官方的端對端加密保障。</p> </div> <h2>下載 Obsidian</h2> <p>
+Obsidian 支援所有主流平台，前往官網下載對應版本即可：
+</p> <div class="call info"> <p><strong>下載地址</strong>：<a href="https://obsidian.md/download" target="_blank">obsidian.md/download</a></p> <p>支援平台：Windows、macOS、Linux、iOS、Android</p> </div> <figure class="svg-fig"> <img src="/obsidian/img/ch02/03-comparison-download-platforms.png" alt="Obsidian 官方下載來源與 Windows macOS Linux iOS Android 平台選擇" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 2-1：下載 Obsidian 時先確認官方來源，再依 Windows、macOS、Linux、iOS、Android 選擇對應版本，避免從未知下載站取得安裝檔。</figcaption> </figure> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 200" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-install" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- 標題 -->
+    <text x="400" y="22" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Obsidian 安裝流程</text>
+
+    <!-- Step 1: 下載 -->
+    <rect x="20" y="38" width="170" height="50" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" rx="8" />
+    <text x="105" y="60" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--blue)">① 下載安裝檔</text>
+    <text x="105" y="77" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">obsidian.md/download</text>
+
+    <!-- Arrow 1→2 -->
+    <line x1="190" y1="63" x2="206" y2="63" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-install)" />
+
+    <!-- Step 2: 安裝 -->
+    <rect x="206" y="38" width="176" height="50" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="8" />
+    <text x="294" y="60" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--text)">② 執行安裝程式</text>
+    <text x="294" y="77" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">.exe / .dmg / .AppImage</text>
+
+    <!-- Arrow 2→3 -->
+    <line x1="382" y1="63" x2="398" y2="63" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-install)" />
+
+    <!-- Step 3: 建立 Vault -->
+    <rect x="398" y="38" width="120" height="50" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5" rx="8" />
+    <text x="458" y="60" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--green)">③ 建立 Vault</text>
+    <text x="458" y="77" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">選擇資料夾位置</text>
+
+    <!-- Arrow 3→4 -->
+    <line x1="518" y1="63" x2="534" y2="63" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-install)" />
+
+    <!-- Step 4: 初始設定 -->
+    <rect x="534" y="38" width="130" height="50" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="1.5" rx="8" />
+    <text x="599" y="60" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--purple)">④ 基本設定</text>
+    <text x="599" y="77" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">語言、連結、附件</text>
+
+    <!-- Arrow 4→5 -->
+    <line x1="664" y1="63" x2="680" y2="63" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-install)" />
+
+    <!-- Step 5: 開始使用 -->
+    <rect x="680" y="38" width="100" height="50" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="8" />
+    <text x="730" y="60" text-anchor="middle" font-size="15px" font-weight="bold" fill="var(--accent)">⑤ 開始使用</text>
+    <text x="730" y="77" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">建立第一則筆記</text>
+
+    <!-- 底部說明標籤 -->
+    <text x="105" y="115" text-anchor="middle" font-size="13px" fill="var(--blue)" opacity="0.8">跨平台支援</text>
+    <text x="294" y="115" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">無需管理員權限</text>
+    <text x="458" y="115" text-anchor="middle" font-size="13px" fill="var(--green)" opacity="0.8">純本地資料夾</text>
+    <text x="599" y="115" text-anchor="middle" font-size="13px" fill="var(--purple)" opacity="0.8">5 分鐘完成</text>
+    <text x="730" y="115" text-anchor="middle" font-size="13px" fill="var(--accent)" opacity="0.8">完全免費</text>
+
+    <!-- 版本標籤 -->
+    <text x="400" y="160" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.5">Windows · macOS · Linux · iOS · Android</text>
+  </g>
+</svg> <figcaption>Obsidian 安裝只需 5 個步驟，從下載到開始使用只要幾分鐘。整個過程不需要管理員權限，所有資料存放在你指定的本機資料夾中。</figcaption> </figure> <p>
+Obsidian <strong>沒有網頁版</strong>，必須安裝桌面應用程式。它的安裝非常單純：
+</p> <h3>Windows 安裝</h3> <p>
+下載 <code>.exe</code> 安裝檔，雙擊執行。程式會自動安裝並啟動，不需要任何管理員權限，也不會在你電腦裡寫入雜亂的設定檔，所有筆記和設定都可以打包帶走。
+</p> <div class="call tip"> <span class="ci">💡</span> <p><strong>Windows 安裝小技巧</strong>：如果你希望 Obsidian 成為可攜式應用程式（Portable App），可以下載 <code>.zip</code> 壓縮檔版本。解壓縮後直接執行 <code>Obsidian.exe</code>，所有設定都會保存在同一個資料夾中，非常適合放在 USB 隨身碟上使用。</p> </div> <h3>macOS 安裝</h3> <p>
+下載 <code>.dmg</code> 檔案，雙擊打開，將 Obsidian 圖示拖曳到 Applications 資料夾中即可完成安裝。
+</p> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>macOS 安全性提示</strong>：如果系統提示「無法打開 Obsidian，因為它來自未識別的開發者」，請前往「系統偏好設定 → 安全性與隱私權 → 一般」，點擊「仍要打開」按鈕。這是因為 Obsidian 未在 Apple Developer Program 中註冊，但軟體本身是安全的開源專案。</p> </div> <h3>Linux 安裝</h3> <p>
+提供 <code>.AppImage</code>、<code>.deb</code>、<code>.rpm</code> 等多種封裝。以最通用的 AppImage 為例：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 給予執行權限
+chmod +x Obsidian-*.AppImage
+
+# 執行應用程式
+./Obsidian-*.AppImage" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 給予執行權限</span></span>
+<span class="line"><span style="color:#61AFEF">chmod</span><span style="color:#98C379"> +x</span><span style="color:#98C379"> Obsidian-</span><span style="color:#E5C07B">*</span><span style="color:#98C379">.AppImage</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 執行應用程式</span></span>
+<span class="line"><span style="color:#61AFEF">./Obsidian-*.AppImage</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <div class="call info"> <span class="ci">ℹ️</span> <p><strong>Linux 套件管理員安裝</strong>：如果你使用 Arch Linux，可以透過 AUR 安裝：<code>yay -S obsidian</code>。Ubuntu/Debian 使用者可以直接安裝 <code>.deb</code> 套件，會自動處理相依性問題。</p> </div> <h2>第一次開啟與建立你的第一個 Vault</h2> <p>
+第一次開啟 Obsidian，你會看到一個歡迎畫面，主要有三個選項：
+</p> <ul> <li><strong>快速開始 (Quick Start)</strong>：在預設位置自動建立一個 Vault，讓你立即開始記筆記。</li> <li><strong>建立新儲存庫 (Create new vault)</strong>：自訂名稱和存放路徑來建立一個全新儲存庫。</li> <li><strong>開啟資料夾為儲存庫 (Open folder as vault)</strong>：如果你已經有 Markdown 筆記，可以直接把該資料夾在 Obsidian 中打開。</li> </ul> <p>
+這裡我們選擇<strong>「建立新儲存庫」</strong>，填入儲存庫名稱（例如 <code>My Knowledge Base</code>），並點擊「瀏覽」選擇存在你電腦的哪個資料夾（例如 <code>Documents/Obsidian</code>）。點擊「建立」後，你專屬的知識儲存庫就誕生了。
+</p> <div class="call tip"> <span class="ci">💡</span> <p><strong>Vault 命名建議</strong>：建議使用英文名稱命名 Vault，避免在某些外掛或跨平台同步時出現編碼問題。例如用 <code>knowledge-base</code> 取代 <code>知識庫</code>。Vault 內部的筆記檔案名稱則可以使用中文，完全沒有問題。</p> </div> <h2>認識介面：四大區域</h2> <p>
+進入 Vault 後，你會看到 Obsidian 的主介面。它分為四個主要區域：
+</p> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <!-- 外框背景 -->
+  <rect x="10" y="10" width="780" height="280" fill="var(--bg)" stroke="var(--border)" stroke-width="2" rx="10" />
+  <text x="400" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16px" fill="var(--text2)">Obsidian 主介面 · 四大區域</text>
+
+  <!-- 區域 1: Ribbon 工具列 - Blue -->
+  <rect x="20" y="45" width="55" height="235" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" rx="6" />
+  <text x="47" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" font-weight="bold" fill="var(--blue)">①</text>
+  <text x="47" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">Ribbon</text>
+  <text x="47" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">工具列</text>
+  <text x="47" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19px" fill="var(--text2)">🔍</text>
+  <text x="47" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19px" fill="var(--text2)">🕸</text>
+  <text x="47" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19px" fill="var(--text2)">📅</text>
+  <text x="47" y="220" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19px" fill="var(--text2)">📋</text>
+  <text x="47" y="255" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19px" fill="var(--text2)">⚙️</text>
+
+  <!-- 區域 2: 左側面板 (File Explorer) - Green -->
+  <rect x="84" y="45" width="155" height="235" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5" rx="6" />
+  <text x="161" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" font-weight="bold" fill="var(--green)">② 左側面板</text>
+  <text x="161" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text2)">File Explorer</text>
+  <line x1="94" y1="100" x2="229" y2="100" stroke="var(--green)" stroke-width="1" />
+  <text x="100" y="122" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📁 00-Inbox</text>
+  <text x="100" y="140" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📁 Projects</text>
+  <text x="100" y="158" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📁 Areas</text>
+  <text x="100" y="176" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📁 Resources</text>
+  <text x="100" y="200" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📄 我的筆記.md</text>
+  <text x="100" y="218" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">📄 閱讀清單.md</text>
+
+  <!-- 區域 3: 中央編輯區 - Accent / 橘紅色 -->
+  <rect x="248" y="45" width="340" height="235" fill="var(--abg)" stroke="var(--accent)" stroke-width="2" rx="6" />
+  <text x="418" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" font-weight="bold" fill="var(--accent)">③ 中央編輯區 (主工作區)</text>
+  <line x1="258" y1="82" x2="578" y2="82" stroke="var(--accent)" stroke-width="1" />
+  <text x="268" y="105" font-family="system-ui, sans-serif" font-size="16px" font-weight="bold" fill="var(--text)"># 我的知識系統</text>
+  <text x="268" y="125" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">今天學到了 [[雙向連結]] 的概念...</text>
+  <text x="268" y="145" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">參考 [[C.O.D.E 四步法]] 整理筆記。</text>
+  <text x="268" y="168" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text2)">支援即時預覽 · 可分割視窗</text>
+  <rect x="260" y="180" width="310" height="85" fill="var(--bg2)" stroke="var(--border)" rx="4" />
+  <text x="415" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text2)">Source Mode (原始碼模式)</text>
+  <text x="270" y="220" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">## 相關筆記</text>
+  <text x="270" y="237" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">- [[Obsidian 外掛推薦]]</text>
+  <text x="270" y="252" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">- [[第二大腦哲學]]</text>
+
+  <!-- 區域 4: 右側面板 - Purple -->
+  <rect x="597" y="45" width="183" height="235" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="1.5" rx="6" />
+  <text x="688" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" font-weight="bold" fill="var(--purple)">④ 右側面板</text>
+  <line x1="607" y1="82" x2="770" y2="82" stroke="var(--purple)" stroke-width="1" />
+  <text x="688" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">🔗 反向連結</text>
+  <text x="688" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text2)">(Backlinks)</text>
+  <rect x="607" y="130" width="163" height="25" fill="var(--bg)" stroke="var(--border)" rx="3" />
+  <text x="688" y="147" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">第二大腦哲學.md</text>
+  <rect x="607" y="162" width="163" height="25" fill="var(--bg)" stroke="var(--border)" rx="3" />
+  <text x="688" y="179" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text)">Obsidian 安裝指南.md</text>
+  <text x="688" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14px" fill="var(--text)">🏷 標籤</text>
+  <text x="688" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13px" fill="var(--text2)">#知識管理 #Obsidian</text>
+</svg> <figcaption>這張圖展示了 Obsidian 主介面的四大核心區域：Ribbon 工具列、左側檔案面板、中央編輯區以及右側面板（反向連結與標籤）。</figcaption> </figure><h3>1. Ribbon 工具列（最左側）</h3> <p>
+一排垂直圖示，由上到下依序是：
+</p> <ul> <li>🔍 快速切換（Ctrl/Cmd+O）：搜尋並開啟任何筆記</li> <li>🕸 關聯圖（Graph View）：視覺化整個知識網絡</li> <li>📅 今天的每日筆記</li> <li>📋 命令面板（Ctrl/Cmd+P）：執行所有可用指令</li> <li>⚙️ 設定</li> </ul> <div class="call tip"> <span class="ci">💡</span> <p><strong>Ribbon 自訂技巧</strong>：安裝社群外掛後，許多外掛會自動在 Ribbon 工具列新增圖示。如果覺得太擁擠，可以在設定中調整「外觀 → Ribbon 工具列」來隱藏不常用的圖示，保持介面簡潔。</p> </div> <h3>2. 左側面板 (File Explorer)</h3> <p>
+顯示 Vault 裡所有的資料夾和筆記。點擊資料夾可展開，點擊筆記可開啟。你也可以在這裡用右鍵新增資料夾、重新命名、或刪除檔案。
+</p> <h3>3. 中央編輯區</h3> <p>
+主要工作區域。Obsidian 預設為「即時預覽」模式——你輸入 Markdown 語法的同時看到渲染結果，不需要手動切換。你也可以切換到「原始碼模式」查看純 Markdown 文字。
+</p> <p>
+中央區域支援分割視窗——在右上角選單選擇「向右分割」，可同時開啟兩份筆記並排查看。
+</p> <h3>4. 右側面板</h3> <p>
+預設顯示「反向連結」（Backlinks）和「標籤」——哪些筆記連結到了目前這則，以及這則筆記有哪些標籤。這個面板在你的知識網絡越來越大之後會變得非常有用。
+</p> <h2>必要的基本設定</h2> <p>
+點擊左下角齒輪圖示（或按 Ctrl/Cmd+,）進入設定。以下幾項建議第一次就設定好：
+</p> <h3>切換介面語言</h3> <p>
+前往「設定 → 關於 → 語言」，選擇「繁體中文」，重啟 Obsidian 後生效。
+</p> <div class="call info"> <span class="ci">ℹ️</span> <p><strong>語言切換注意事項</strong>：切換語言後，部分社群外掛的設定介面可能仍維持英文，這是因為外掛開發者尚未提供繁體中文翻譯，屬於正常現象，不影響功能使用。</p> </div> <h3>設定新筆記的預設位置</h3> <p>
+前往「設定 → 檔案與連結 → 新筆記的預設位置」。推薦選擇「目前資料夾」或指定一個 inbox 資料夾（例如 <code>00-Inbox</code>），避免新筆記散落在 Vault 根目錄。
+</p> <h3>設定附件儲存位置</h3> <p>
+前往「設定 → 檔案與連結 → 附件資料夾路徑」，指定一個專門放圖片和附件的資料夾（例如 <code>Assets</code>）。這樣你貼進去的截圖和圖片會自動存放到對應位置，Vault 才不會亂。
+</p> <h3>開啟「使用 [[Wikilinks]]」</h3> <p>
+前往「設定 → 檔案與連結」，確認「使用 [[Wikilinks]]」已開啟。這是 Obsidian 雙向連結的語法基礎，建議保持開啟狀態。
+</p> <h2>Vault 的資料夾結構</h2> <p>
+Vault 內部就是你電腦上的普通資料夾，你可以直接在檔案總管裡查看。一個剛建立的 Vault 大概長這樣：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="My Knowledge Base/          ← 你的 Vault 根目錄
+├── .obsidian/              ← Obsidian 的設定資料夾（隱藏）
+│   ├── app.json            ← 應用程式設定
+│   ├── appearance.json     ← 外觀設定
+│   ├── community-plugins.json
+│   └── plugins/            ← 安裝的外掛
+└── (你的筆記 .md 檔案)" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="bash"><code><span class="line"><span style="color:#61AFEF">My</span><span style="color:#98C379"> Knowledge</span><span style="color:#98C379"> Base/</span><span style="color:#98C379">          ←</span><span style="color:#98C379"> 你的</span><span style="color:#98C379"> Vault</span><span style="color:#98C379"> 根目錄</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span style="color:#98C379"> .obsidian/</span><span style="color:#98C379">              ←</span><span style="color:#98C379"> Obsidian</span><span style="color:#98C379"> 的設定資料夾（隱藏）</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span style="color:#98C379">   ├──</span><span style="color:#98C379"> app.json</span><span style="color:#98C379">            ←</span><span style="color:#98C379"> 應用程式設定</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span style="color:#98C379">   ├──</span><span style="color:#98C379"> appearance.json</span><span style="color:#98C379">     ←</span><span style="color:#98C379"> 外觀設定</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span style="color:#98C379">   ├──</span><span style="color:#98C379"> community-plugins.json</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span style="color:#98C379">   └──</span><span style="color:#98C379"> plugins/</span><span style="color:#98C379">            ←</span><span style="color:#98C379"> 安裝的外掛</span></span>
+<span class="line"><span style="color:#61AFEF">└──</span><span style="color:#ABB2BF"> (你的筆記 </span><span style="color:#98C379">.md</span><span style="color:#98C379"> 檔案</span><span style="color:#ABB2BF">)</span></span></code></pre> </div> </div>   <figure class="svg-fig"> <img src="/obsidian/img/ch02/04-framework-vault-folder-structure-v3.png" alt="Obsidian Vault 是本機資料夾包含 Markdown 筆記附件資料夾與 Obsidian 設定" style="width:75%;height:auto;display:block;margin:0 auto;" loading="lazy"> <figcaption>圖 2-2：Vault 本質上就是本機資料夾，裡面包含 Markdown 筆記、附件資料夾與 Obsidian 設定；這也是 Obsidian 本地優先與可攜性的基礎。</figcaption> </figure> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- 標題 -->
+    <text x="400" y="24" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">Vault 資料夾結構解析</text>
+
+    <!-- 左：.obsidian 設定夾 -->
+    <rect x="20" y="38" width="360" height="320" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <text x="200" y="62" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">📁 .obsidian / （隱藏設定資料夾）</text>
+    <line x1="30" y1="70" x2="370" y2="70" stroke="var(--border)" stroke-width="1" />
+
+    <rect x="40" y="82" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="60" y="99" font-size="15px" fill="var(--accent)">app.json</text>
+    <text x="60" y="113" font-size="13px" fill="var(--text)" opacity="0.7">應用程式偏好設定（編輯器行為、熱鍵）</text>
+
+    <rect x="40" y="128" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="60" y="145" font-size="15px" fill="var(--accent)">appearance.json</text>
+    <text x="60" y="159" font-size="13px" fill="var(--text)" opacity="0.7">外觀設定（佈景主題、字型大小）</text>
+
+    <rect x="40" y="174" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="60" y="191" font-size="15px" fill="var(--accent)">community-plugins.json</text>
+    <text x="60" y="205" font-size="13px" fill="var(--text)" opacity="0.7">已安裝社群外掛清單</text>
+
+    <rect x="40" y="220" width="320" height="38" fill="var(--blue-bg)" stroke="var(--blue)" rx="6" />
+    <text x="60" y="237" font-size="15px" fill="var(--blue)">📁 plugins/</text>
+    <text x="60" y="251" font-size="13px" fill="var(--text)" opacity="0.7">各外掛的程式碼與設定資料</text>
+
+    <rect x="40" y="266" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="60" y="283" font-size="15px" fill="var(--accent)">graph.json</text>
+    <text x="60" y="297" font-size="13px" fill="var(--text)" opacity="0.7">關聯圖（Graph View）的顯示偏好</text>
+
+    <rect x="40" y="312" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="60" y="329" font-size="15px" fill="var(--accent)">hotkeys.json</text>
+    <text x="60" y="343" font-size="13px" fill="var(--text)" opacity="0.7">自訂快速鍵對應</text>
+
+    <!-- 右：筆記本體 -->
+    <rect x="420" y="38" width="360" height="320" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <text x="600" y="62" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">📁 你的筆記資料夾</text>
+    <line x1="430" y1="70" x2="770" y2="70" stroke="var(--border)" stroke-width="1" />
+
+    <rect x="440" y="82" width="320" height="38" fill="var(--abg)" stroke="var(--accent)" rx="6" />
+    <text x="460" y="99" font-size="15px" fill="var(--accent)">📁 00-Inbox/</text>
+    <text x="460" y="113" font-size="13px" fill="var(--text)" opacity="0.7">收件匣：新筆記暫存區，定期清理</text>
+
+    <rect x="440" y="128" width="320" height="38" fill="var(--green-bg)" stroke="var(--green)" rx="6" />
+    <text x="460" y="145" font-size="15px" fill="var(--green)">📁 Projects/</text>
+    <text x="460" y="159" font-size="13px" fill="var(--text)" opacity="0.7">進行中的專案（PARA 方法論）</text>
+
+    <rect x="440" y="174" width="320" height="38" fill="var(--green-bg)" stroke="var(--green)" rx="6" />
+    <text x="460" y="191" font-size="15px" fill="var(--green)">📁 Areas/</text>
+    <text x="460" y="205" font-size="13px" fill="var(--text)" opacity="0.7">長期責任領域（工作、健康、學習）</text>
+
+    <rect x="440" y="220" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="460" y="237" font-size="15px" fill="var(--text)">📁 Resources/</text>
+    <text x="460" y="251" font-size="13px" fill="var(--text)" opacity="0.7">參考資料、書摘、技術筆記</text>
+
+    <rect x="440" y="266" width="320" height="38" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="460" y="283" font-size="15px" fill="var(--text)">📁 Archive/</text>
+    <text x="460" y="297" font-size="13px" fill="var(--text)" opacity="0.7">封存：完成或暫停的專案</text>
+
+    <rect x="440" y="312" width="320" height="38" fill="var(--purple-bg)" stroke="var(--purple)" rx="6" />
+    <text x="460" y="329" font-size="15px" fill="var(--purple)">📁 Assets/</text>
+    <text x="460" y="343" font-size="13px" fill="var(--text)" opacity="0.7">圖片、附件（建議統一存放）</text>
+  </g>
+</svg> <figcaption>Vault 由兩個部分組成：左側的 .obsidian 隱藏資料夾（存放所有設定），以及你建立的筆記資料夾。推薦依照 PARA 方法論（Inbox / Projects / Areas / Resources / Archive）規劃資料夾結構。</figcaption> </figure> <p> <code>.obsidian</code> 資料夾由 Obsidian 自動管理，存放這個 Vault 專屬的偏好設定、快速鍵、佈景主題和外掛。不同的 Vault 有各自獨立的 <code>.obsidian</code> 設定，互不干擾。
+</p> <div class="call tip"> <span class="ci">💡</span> <p><strong>建議加入 .obsidian 到 Git</strong>：如果你使用 Git 管理 Vault，建議將 <code>.obsidian</code> 資料夾一起加入版本控制。這樣換了電腦或重裝系統，所有的設定、外掛、快速鍵都能一鍵還原。</p> </div> <div class="call info"> <p><strong>多個 Vault</strong>：你可以建立多個 Vault，例如一個放工作筆記、一個放個人學習。在 Obsidian 左下角點擊 Vault 圖示可以切換。Vault 之間的筆記是完全隔離的，內部連結只在同一個 Vault 內有效。</p> </div> <h2>建立第一則筆記</h2> <p>
+一切都設定好了，現在建立第一則筆記試試：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 我的第一則筆記
+
+今天開始用 Obsidian 管理知識！
+
+## 我想用它來做什麼
+
+- 整理閱讀心得
+- 記錄工作上學到的技術
+- 連結不同主題的想法
+
+## 相關筆記
+
+- [[我的閱讀清單]]
+- [[工作筆記]]" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 我的第一則筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">今天開始用 Obsidian 管理知識！</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 我想用它來做什麼</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 整理閱讀心得</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 記錄工作上學到的技術</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> 連結不同主題的想法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E06C75">## 相關筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">我的閱讀清單</span><span style="color:#ABB2BF">]]</span></span>
+<span class="line"><span style="color:#E5C07B">-</span><span style="color:#ABB2BF"> [[</span><span style="color:#61AFEF">工作筆記</span><span style="color:#ABB2BF">]]</span></span></code></pre> </div> </div>   <p>
+輸入 <code>[[我的閱讀清單]]</code> 時，Obsidian 會提示你可以建立一則新筆記。按 Enter 確認，這個連結就建立了——即使那則筆記還不存在，Obsidian 也會幫你把它記下來，等你之後建立。
+</p> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>連結斷裂的處理方式</strong>：如果你重新命名或移動了筆記檔案，Obsidian 會自動更新所有指向該筆記的內部連結。但如果透過作業系統的檔案總管直接移動或重新命名檔案，連結就會斷裂。建議一律在 Obsidian 內部進行檔案操作，或安裝「File Explorer Note Title」外掛來輔助管理。</p> </div> <h2>進階設定：外觀與佈景主題</h2> <p>
+除了基本設定，Obsidian 也提供豐富的外觀自訂選項，讓你的筆記環境更符合個人喜好：
+</p> <h3>切換深色/淺色模式</h3> <p>
+前往「設定 → 外觀 → 主題」，可以選擇「淺色」、「深色」或「跟隨系統」。建議開啟「跟隨系統」，讓 Obsidian 自動根據你的作業系統設定切換。
+</p> <h3>安裝社群佈景主題</h3> <p>
+在「設定 → 外觀 → 主題」中點擊「管理」，可以瀏覽社群提供的數百種佈景主題。熱門主題包括：
+</p> <ul> <li><strong>Minimal</strong>：簡潔現代，高度可自訂</li> <li><strong>Blue Topaz</strong>：台灣開發者製作，功能豐富</li> <li><strong>Things</strong>：靈感來自 Things 3 的設計風格</li> <li><strong>AnuPpuccin</strong>：色彩柔和，閱讀體驗極佳</li> </ul> <div class="call tip"> <span class="ci">💡</span> <p><strong>佈景主題切換建議</strong>：建議先使用預設主題熟悉基本操作，等使用一週後再嘗試更換佈景主題。過早更換主題可能會因為介面變化而增加學習曲線。</p> </div> <h2>常見問題與疑難排解</h2> <h3>安裝後無法啟動</h3> <p>
+如果你在安裝後點擊圖示卻沒有反應，請嘗試以下步驟：
+</p> <ol> <li>確認你的作業系統版本是否符合最低需求（Windows 10+、macOS 10.13+、Linux 支援 x86_64 架構）</li> <li>重新下載安裝檔，可能檔案在下載過程中損毀</li> <li>檢查防毒軟體是否阻擋了 Obsidian 的執行</li> <li>在終端機中執行 Obsidian，查看錯誤訊息</li> </ol> <h3>Vault 無法開啟</h3> <p>
+如果 Vault 資料夾中的 <code>.obsidian</code> 設定檔損毀，可能會導致無法開啟。解決方法：
+</p> <ol> <li>備份你的筆記檔案（<code>.md</code> 檔案）</li> <li>刪除 Vault 中的 <code>.obsidian</code> 資料夾</li> <li>重新在 Obsidian 中開啟該資料夾，系統會自動建立全新的設定檔</li> </ol> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>重要提醒</strong>：刪除 <code>.obsidian</code> 資料夾會遺失所有自訂設定、快速鍵、已安裝的外掛和佈景主題。但你的筆記內容（<code>.md</code> 檔案）完全不受影響。建議定期備份整個 Vault 資料夾。</p> </div> <h3>中文輸入法問題</h3> <p>
+部分使用者在 Obsidian 中遇到中文輸入法無法正常運作的問題，通常是因為：
+</p> <ul> <li>Windows 使用者：確認輸入法切換為「微軟注音」或「微軟倉頡」</li> <li>macOS 使用者：嘗試切換到「繁體拼音」或「倉頡」輸入法</li> <li>Linux 使用者：確認 fcitx5 或 ibus 輸入法框架已正確設定</li> </ul> <h2>最佳實踐建議</h2> <div class="call tip"> <span class="ci">💡</span> <p><strong>新手最佳實踐</strong>：</p> <ul> <li><strong>先求有，再求好</strong>：第一週先專注於建立筆記習慣，不要急著安裝外掛或調整設定</li> <li><strong>每天寫一則筆記</strong>：即使只是簡單的日記或想法記錄，持續使用比完美設定更重要</li> <li><strong>善用每日筆記</strong>：開啟每日筆記功能，讓 Obsidian 自動為你建立每天的記錄頁面</li> <li><strong>建立連結習慣</strong>：每則新筆記至少連結到一則現有筆記，逐步建立你的知識網絡</li> </ul> </div> <h2>新手必裝的 4 個初始外掛</h2> <p>
+雖然建議先用原生功能熟悉 Obsidian 一到兩週，但以下 4 個外掛幾乎每位使用者都需要，越早安裝越省心：
+</p> <figure class="svg-fig"> 
+<svg viewBox="0 0 800 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <!-- 標題 -->
+    <text x="400" y="22" text-anchor="middle" font-size="16px" fill="var(--text)" opacity="0.7">新手最推薦的 4 個初始外掛</text>
+
+    <!-- 外掛 1: Custom Attachment Location -->
+    <rect x="20" y="35" width="175" height="200" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="20" y="35" width="175" height="45" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" rx="10" />
+    <rect x="20" y="60" width="175" height="20" fill="var(--blue-bg)" />
+    <text x="107" y="52" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--blue)">Custom Attachment</text>
+    <text x="107" y="66" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--blue)">Location</text>
+    <text x="107" y="95" text-anchor="middle" font-size="27px">📎</text>
+    <text x="107" y="125" text-anchor="middle" font-size="13px" fill="var(--text)">附件依筆記位置</text>
+    <text x="107" y="141" text-anchor="middle" font-size="13px" fill="var(--text)">自動分類儲存</text>
+    <text x="107" y="165" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">解決：圖片亂放</text>
+    <text x="107" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">的混亂問題</text>
+    <text x="107" y="220" text-anchor="middle" font-size="13px" fill="var(--blue)">⭐ 強烈推薦</text>
+
+    <!-- 外掛 2: Editing Toolbar -->
+    <rect x="215" y="35" width="175" height="200" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="215" y="35" width="175" height="45" fill="var(--green-bg)" stroke="var(--green)" stroke-width="1.5" rx="10" />
+    <rect x="215" y="60" width="175" height="20" fill="var(--green-bg)" />
+    <text x="302" y="52" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--green)">Editing Toolbar</text>
+    <text x="302" y="66" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--green)">編輯工具列</text>
+    <text x="302" y="95" text-anchor="middle" font-size="27px">🖊️</text>
+    <text x="302" y="125" text-anchor="middle" font-size="13px" fill="var(--text)">可視化格式工具列</text>
+    <text x="302" y="141" text-anchor="middle" font-size="13px" fill="var(--text)">無需記憶語法</text>
+    <text x="302" y="165" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">解決：Markdown</text>
+    <text x="302" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">語法學習門檻</text>
+    <text x="302" y="220" text-anchor="middle" font-size="13px" fill="var(--green)">新手友善</text>
+
+    <!-- 外掛 3: Local Backup -->
+    <rect x="410" y="35" width="175" height="200" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="410" y="35" width="175" height="45" fill="var(--abg)" stroke="var(--accent)" stroke-width="1.5" rx="10" />
+    <rect x="410" y="60" width="175" height="20" fill="var(--abg)" />
+    <text x="497" y="52" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">Local Backup</text>
+    <text x="497" y="66" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">本地備份</text>
+    <text x="497" y="95" text-anchor="middle" font-size="27px">🛡️</text>
+    <text x="497" y="125" text-anchor="middle" font-size="13px" fill="var(--text)">自動排程備份</text>
+    <text x="497" y="141" text-anchor="middle" font-size="13px" fill="var(--text)">可回滾歷史版本</text>
+    <text x="497" y="165" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">解決：誤刪筆記</text>
+    <text x="497" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">與資料遺失風險</text>
+    <text x="497" y="220" text-anchor="middle" font-size="13px" fill="var(--accent)">⭐ 強烈推薦</text>
+
+    <!-- 外掛 4: Dataview (預告) -->
+    <rect x="605" y="35" width="175" height="200" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="605" y="35" width="175" height="45" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="1.5" rx="10" />
+    <rect x="605" y="60" width="175" height="20" fill="var(--purple-bg)" />
+    <text x="692" y="52" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--purple)">Dataview</text>
+    <text x="692" y="66" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--purple)">筆記資料庫查詢</text>
+    <text x="692" y="95" text-anchor="middle" font-size="27px">🔍</text>
+    <text x="692" y="125" text-anchor="middle" font-size="13px" fill="var(--text)">用 SQL 語法查詢</text>
+    <text x="692" y="141" text-anchor="middle" font-size="13px" fill="var(--text)">筆記中的 Metadata</text>
+    <text x="692" y="165" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">解決：筆記難以</text>
+    <text x="692" y="183" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.6">系統化整理</text>
+    <text x="692" y="220" text-anchor="middle" font-size="13px" fill="var(--purple)">進階使用者</text>
+  </g>
+</svg> <figcaption>這 4 個外掛分別解決了「附件混亂」、「語法門檻」、「資料遺失」和「筆記管理」四大新手痛點。前三個建議安裝後立即設定，Dataview 可等熟悉基礎後再學習。</figcaption> </figure> <h3>安裝外掛的方式</h3> <ol> <li>前往「設定 → 社群外掛 → 瀏覽」</li> <li>搜尋外掛名稱（例如 <code>Custom Attachment Location</code>）</li> <li>點擊「安裝」，安裝完畢後記得點擊「啟用」</li> </ol> <div class="call warn"> <span class="ci">⚠️</span> <p><strong>安全性提醒</strong>：安裝社群外掛前，請先確認「設定 → 社群外掛 → 關閉安全模式」已開啟（Obsidian 預設關閉社群外掛）。建議只安裝下載量大、有定期更新的外掛，並定期到「已安裝外掛」頁面點擊「更新全部」。</p> </div> <h3>Custom Attachment Location 設定建議</h3> <p>
+安裝後，前往「設定 → Custom Attachment Location」，推薦設定為：<code>&lbrace;notedir&rbrace;/assets</code>。這樣每則筆記的圖片都會自動放到同一資料夾內的 <code>assets</code> 子目錄，結構清晰，移動筆記時圖片不會失連。
+</p> <h3>Local Backup 設定建議</h3> <p>
+安裝 Local Backup 後，建議設定：
+</p> <ul> <li><strong>備份路徑</strong>：指定到 Vault 外部的資料夾（例如 <code>D:\ObsidianBackup</code>）</li> <li><strong>備份頻率</strong>：每天一次自動備份</li> <li><strong>保留版本數</strong>：至少 7 個（保留一週的歷史）</li> </ul> <h2>小結</h2> <p>
+你現在已經完成了：安裝 Obsidian、建立第一個 Vault、認識介面四大區域、完成基本設定，以及建立第一則含有雙向連結的筆記。
+</p> <p>
+工具已就緒，但在繼續深入功能之前，有一個更重要的問題值得先想清楚：為什麼你需要一個知識系統？下一章，我們來談「第二大腦」的哲學——這是讓你在一年後還持續使用 Obsidian 的真正動力。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span> </a> <a href="/obsidian/ch03-second-brain-philosophy" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 

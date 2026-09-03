@@ -1,0 +1,555 @@
+<!DOCTYPE html><html lang="zh-TW" data-astro-cid-mw7aashj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dataview：用查詢語法讓筆記自動彙整 | </title><link rel="stylesheet" href="/obsidian/_astro/DocsLayout.aG6tJG97.css"><style>.cb-wrap[data-astro-cid-jgrc2lfe]{margin-bottom:1.25rem}.cb-bar[data-astro-cid-jgrc2lfe]{display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;border-radius:6px 6px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);padding:.18rem .5rem .18rem .75rem;min-height:1.8rem}.cb-label[data-astro-cid-jgrc2lfe]{color:#a6adc8;font-family:Fira Code,Cascadia Code,Consolas,monospace;font-size:.73rem;letter-spacing:.04em}.cb-inner[data-astro-cid-jgrc2lfe] pre{border-radius:0 0 8px 8px!important;margin-bottom:0!important}.cb-copy[data-astro-cid-jgrc2lfe]{background:#ffffff14;color:#888;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.15rem .55rem;font-size:.7rem;cursor:pointer;transition:all .15s;flex-shrink:0}.cb-copy[data-astro-cid-jgrc2lfe]:hover{background:#ffffff2e;color:#fff}.cb-copy[data-astro-cid-jgrc2lfe].copied{color:#4ec9b0;border-color:#4ec9b0}
+</style></head>Obsidian 完全實戰指南 <meta name="description" content="Dataview 是 Obsidian 插件生態裡最強大的工具之一——它讓你用類 SQL 語法，從 Vault 裡動態提取符合條件的筆記，自動生成表格、清單或待辦事項。本章從安裝到語法，帶你寫出第一個 Dataview 查詢，並以五個場景（含一個跨工具排程系統的真實實測）展示它如何改變你的筆記工作流。"> <link rel="icon" href="/obsidian/favicon.svg" type="image/svg+xml"> <script>
+    (function () {
+      const s = localStorage.getItem('cc-theme');
+      const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+    })();
+  </script>  </html> <body data-astro-cid-mw7aashj> <div id="pb" data-astro-cid-mw7aashj></div> <header data-astro-cid-mw7aashj> <div class="hi" data-astro-cid-mw7aashj> <div class="hl" data-astro-cid-mw7aashj> <button id="mbtn" class="ibtn" aria-label="選單" data-astro-cid-mw7aashj> <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-mw7aashj></path> </svg> </button> <a href="/obsidian/" class="site-name" data-astro-cid-mw7aashj> <span class="logo" style="background:none" data-astro-cid-mw7aashj><img src="/obsidian/favicon.svg" width="22" height="22" alt="" data-astro-cid-mw7aashj></span>&nbsp;&nbsp;Obsidian 完全實戰指南
+</a> </div> <div class="hr" data-astro-cid-mw7aashj> <button id="tt" class="ibtn" aria-label="切換主題" data-astro-cid-mw7aashj> <svg id="isun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" data-astro-cid-mw7aashj></path> </svg> <svg id="imoon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z" data-astro-cid-mw7aashj></path> </svg> </button> </div> </div> </header> <div id="layout" data-astro-cid-mw7aashj> <nav id="sb" data-astro-cid-mw7aashj> <div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="1" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 1：認識 Obsidian：為什麼是它？</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="1" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch01-what-is-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>1.</span> <span data-astro-cid-mw7aashj>Obsidian 是什麼？與 Notion 的關鍵差異</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch02-install-setup" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>2.</span> <span data-astro-cid-mw7aashj>安裝與基本設定：從零開始的第一步</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch03-second-brain-philosophy" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>3.</span> <span data-astro-cid-mw7aashj>第二大腦的哲學：為什麼你需要一個知識系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="2" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 2：核心功能：筆記、連結與關聯圖</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="2" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch04-bidirectional-links" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>4.</span> <span data-astro-cid-mw7aashj>雙向連結的力量：[[wikilink]] 完全指南</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch05-graph-view" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>5.</span> <span data-astro-cid-mw7aashj>關聯圖（Graph View）：視覺化你的知識網絡</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch06-metadata-tags" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>6.</span> <span data-astro-cid-mw7aashj>Metadata 與標籤系統：讓筆記可以被找到</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch07-daily-notes-lyt" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>7.</span> <span data-astro-cid-mw7aashj>日常筆記工作流：每日筆記與 LYT 系統</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt open" data-pid="3" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl" data-pl="3" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>8.</span> <span data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch09-dataview" class="active" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>9.</span> <span data-astro-cid-mw7aashj>Dataview：用查詢語法讓筆記自動彙整</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch10-templater-automation" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>10.</span> <span data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch11-attachments-images" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>11.</span> <span data-astro-cid-mw7aashj>附件與圖片管理：讓 Vault 保持整潔</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="4" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 4：Web Clipper 與資訊收集</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="4" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch12-web-clipper" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>12.</span> <span data-astro-cid-mw7aashj>Obsidian Web Clipper：一鍵剪藏網頁到 Vault</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch13-clipper-advanced" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>13.</span> <span data-astro-cid-mw7aashj>進階剪藏：自訂模板與 AI 自動摘要</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="5" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 5：AI 整合：打造 AI 驅動的知識庫</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="5" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/ch14-claude-obsidian" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>14.</span> <span data-astro-cid-mw7aashj>Claude Code + Obsidian：AI 第二大腦完整建置</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch15-obsidian-cli-skills" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>15.</span> <span data-astro-cid-mw7aashj>Obsidian CLI 與 AI Skills：讓 AI 自動寫筆記</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch16-llm-wiki" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>16.</span> <span data-astro-cid-mw7aashj>LLM Wiki 知識庫：讓知識自動進化</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch17-sync" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>17.</span> <span data-astro-cid-mw7aashj>多終端同步：手機、電腦、平板一致體驗</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/ch18-task-scheduling" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>18.</span> <span data-astro-cid-mw7aashj>任務與排程管理：讓 Obsidian 成為 AI Agent 的集中排程中心</span>  </a> </li> </ul> </div><div class="np" data-astro-cid-mw7aashj> <button class="pt" data-pid="6" data-astro-cid-mw7aashj> <span data-astro-cid-mw7aashj>Part 6：附錄</span> <svg class="arr" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" data-astro-cid-mw7aashj> <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" data-astro-cid-mw7aashj></path> </svg> </button> <ul class="nl closed" data-pl="6" data-astro-cid-mw7aashj> <li data-astro-cid-mw7aashj> <a href="/obsidian/glossary" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>19.</span> <span data-astro-cid-mw7aashj>術語表：Obsidian 核心詞彙速查</span>  </a> </li><li data-astro-cid-mw7aashj> <a href="/obsidian/about" data-astro-cid-mw7aashj> <span class="cn" data-astro-cid-mw7aashj>20.</span> <span data-astro-cid-mw7aashj>關於本書與資料來源</span>  </a> </li> </ul> </div> </nav> <div id="ov" data-astro-cid-mw7aashj></div> <main data-astro-cid-mw7aashj> <div class="cb" data-astro-cid-mw7aashj>  <span class="clabel">第 9 章 · Part 3：插件生態：讓 Obsidian 變成你的超級工具</span> <h1>Dataview：用查詢語法讓筆記自動彙整</h1> <p class="cdesc">你的 Vault 不只是筆記的倉庫，更是一個可以查詢的知識資料庫</p> <figure class="svg-fig"> <img src="/obsidian/img/ch09/01-flowchart-dataview-query-layer.png" alt="Dataview DQL 將 Obsidian Vault 的 Metadata 轉成 TABLE、LIST 與 TASK 動態視圖" style="width:75%;height:auto;display:block;margin:0 auto;" loading="eager"> <figcaption>圖 9-0：Dataview 的核心模型——Metadata / Properties 讓筆記成為資料列，DQL 再用 TABLE、FROM、WHERE、SORT 產生動態視圖。</figcaption> </figure> <h2>當 Vault 越來越大，靠人工整理就輸了</h2> <p>
+你可能有過這樣的經歷：Vault 累積到一定數量後，想找「所有標記為重要的閱讀筆記」、「這個月修改過的所有專案筆記」、「所有連結到某個主題的筆記」——卻只能一則一則手動查找，或者在搜尋結果裡反覆過濾。
+</p> <p>
+這個問題的根源不在搜尋，而在「展示方式」：全文搜尋找到的是結果清單，而你真正需要的是一張可以排序、可以篩選、可以隨筆記更新而自動刷新的動態表格。
+</p> <p>
+Dataview 解決的正是這個問題。它讓你在任何一則筆記裡寫入一段查詢語法，Obsidian 就會在顯示時即時執行查詢、渲染出結果——而且每次開啟筆記，結果都是最新的。
+</p> <h2>Dataview 是什麼</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-main" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Sources -->
+    <rect x="50" y="40" width="200" height="150" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="150" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">1. 結構化資料源 (Vault)</text>
+    <line x1="60" y1="75" x2="240" y2="75" stroke="var(--border)" stroke-width="1" />
+    <rect x="65" y="90" width="170" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="150" y="112" text-anchor="middle" font-size="15px" fill="var(--text)">YAML Frontmatter (---)</text>
+    <rect x="65" y="134" width="170" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="150" y="156" text-anchor="middle" font-size="15px" fill="var(--text)">Inline Fields (::)</text>
+
+    <!-- Connector 1 -->
+    <line x1="250" y1="115" x2="300" y2="115" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <text x="275" y="102" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">讀取</text>
+
+    <!-- Dataview Engine -->
+    <rect x="300" y="40" width="200" height="150" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="400" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">2. DQL 查詢引擎</text>
+    <line x1="310" y1="75" x2="490" y2="75" stroke="var(--border)" stroke-width="1" />
+    <rect x="315" y="90" width="170" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="400" y="112" text-anchor="middle" font-size="15px" fill="var(--text)">FROM &amp; WHERE (篩選)</text>
+    <rect x="315" y="134" width="170" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="400" y="156" text-anchor="middle" font-size="15px" fill="var(--text)">SORT &amp; GROUP (排序)</text>
+
+    <!-- Connector 2 -->
+    <line x1="500" y1="115" x2="550" y2="115" stroke="var(--border)" stroke-width="1.5" marker-end="url(#arr-main)" />
+    <text x="525" y="102" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">渲染</text>
+
+    <!-- Outputs -->
+    <rect x="550" y="40" width="200" height="150" fill="var(--bg2)" stroke="var(--border)" rx="8" />
+    <text x="650" y="65" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">3. 動態展示視圖</text>
+    <line x1="560" y1="75" x2="740" y2="75" stroke="var(--border)" stroke-width="1" />
+    <rect x="565" y="90" width="170" height="34" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="650" y="112" text-anchor="middle" font-size="15px" fill="var(--text)">TABLE | LIST | TASK</text>
+    <text x="650" y="155" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.7">每次開啟筆記時即時更新</text>
+  </g>
+</svg>
+ <figcaption>Dataview 將你的 Obsidian 轉化為強大的資料庫，讓你透過類似 SQL 的語法動態查詢與呈現筆記。</figcaption> </figure> <p>
+Dataview 是一款社群插件，讓你用類 SQL 的查詢語言（DQL，Dataview Query Language）從整個 Vault 提取筆記資料。你可以把 Vault 想像成一個資料庫，每則筆記是一列資料，筆記的 Metadata（Properties）是各欄位——Dataview 就是讓你「SELECT 這些欄位 FROM 這個 Vault」的工具。
+</p> <p>查詢結果支援三種呈現格式：</p> <ul> <li><strong>TABLE</strong>：表格，適合比較多則筆記的特定欄位</li> <li><strong>LIST</strong>：清單，適合快速列出符合條件的筆記標題</li> <li><strong>TASK</strong>：待辦事項，適合跨筆記彙整所有 <code>- [ ]</code> 任務</li> </ul> <div class="call info"> <p><strong>Dataview 與 ch06 的連結</strong>：Dataview 查詢的資料來源是每則筆記的 Metadata（Properties/YAML frontmatter）。這也是 ch06 強調「給筆記加上結構化屬性」的原因——沒有 Metadata，Dataview 就只能查詢檔案系統的內建欄位（建立時間、修改時間等），威力大打折扣。</p> </div> <div class="call warn"> <p><strong>維護狀態查證（2026-09 查證）</strong>：Dataview 原作者 blacksmithgu 自 2023 年起已放緩開發步調，官方 repository 累積數百個未處理 issue，主分支長期沒有新 commit。但截至查證當下，Dataview 並未被封存（archived）或標示為棄用，核心 DQL 查詢引擎自 2022 年起維持穩定、未受 Obsidian API 重大變更影響，本章示範的所有查詢語法仍可正常運作——可以視為「穩定但已凍結」的狀態安心使用，不必因此棄用它；只是若你需要新功能或積極的 bug 修復，社群回應速度會比幾年前慢很多。</p> </div> <h2>在筆記中建立可查詢的欄位</h2> <p>在使用 Dataview 查詢之前，先確認你的筆記有可查詢的欄位。Dataview 支援兩種欄位來源：</p> <h3>方法一：YAML frontmatter（推薦）</h3> <p>
+在筆記頂部用 <code>---</code> 包住的 YAML 區塊，所有欄位都可以被 Dataview 查詢。這也是 Obsidian 官方的 Properties 格式（ch06 介紹過）。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="---
+title: 《原子習慣》讀書筆記
+created: 2026-06-15
+tags:
+  - 閱讀筆記
+  - 習慣設計
+status: 🌱
+重要性: ⭐⭐⭐⭐
+author: &quot;[[James Clear]]&quot;
+topics:
+  - &quot;[[習慣養成 MOC]]&quot;
+  - &quot;[[行為心理學 MOC]]&quot;
+---" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="yaml"><code><span class="line"><span style="color:#ABB2BF">---</span></span>
+<span class="line"><span style="color:#E06C75">title</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">《原子習慣》讀書筆記</span></span>
+<span class="line"><span style="color:#E06C75">created</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">2026-06-15</span></span>
+<span class="line"><span style="color:#E06C75">tags</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">習慣設計</span></span>
+<span class="line"><span style="color:#E06C75">status</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">🌱</span></span>
+<span class="line"><span style="color:#E06C75">重要性</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">⭐⭐⭐⭐</span></span>
+<span class="line"><span style="color:#E06C75">author</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">"[[James Clear]]"</span></span>
+<span class="line"><span style="color:#E06C75">topics</span><span style="color:#ABB2BF">:</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[習慣養成 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">  - </span><span style="color:#98C379">"[[行為心理學 MOC]]"</span></span>
+<span class="line"><span style="color:#ABB2BF">---</span></span></code></pre> </div> </div>  <script type="module">document.querySelectorAll(".cb-copy").forEach(e=>{e.addEventListener("click",()=>{const t=e.dataset.code;t&&navigator.clipboard.writeText(t).then(()=>{e.textContent="已複製!",e.classList.add("copied"),setTimeout(()=>{e.textContent="複製",e.classList.remove("copied")},2e3)})})});</script> <h3>方法二：Inline field（彈性更高）</h3> <p>
+在 YAML 區塊外部，用 <code>欄位名稱:: 值</code> 的格式（雙冒號）定義行內欄位。這種格式更適合放 <code>[[內部連結]]</code> 的值，因為 YAML 裡放連結語法在技術上不夠規範。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="閱讀日期:: 2026-06-15
+作者:: [[James Clear]]
+重要性:: ⭐⭐⭐⭐⭐" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">閱讀日期:: 2026-06-15</span></span>
+<span class="line"><span style="color:#ABB2BF">作者:: [[James Clear]]</span></span>
+<span class="line"><span style="color:#ABB2BF">重要性:: ⭐⭐⭐⭐⭐</span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>何時用 Inline field？</strong> 如果欄位值是 <code>[[內部連結]]</code>，或者你希望欄位直接顯示在筆記正文中（而不是折疊在 Properties 面板裡），用 Inline field 會更直觀。兩者可以混用——同一則筆記的 YAML frontmatter 和 Inline field 都可被 Dataview 查詢。</p> </div> <h2>基本查詢語法逐行拆解</h2> <p>Dataview 查詢寫在一個特殊的 code block 裡，語言標記為 <code>dataview</code>：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE field1, field2
+FROM #tag 或 &quot;資料夾路徑&quot; 或 [[筆記連結]]
+WHERE 條件
+SORT 欄位 asc/desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE field1, field2</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #tag 或 "資料夾路徑" 或 [[筆記連結]]</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE 條件</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT 欄位 asc/desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>第一行：選擇呈現格式與欄位</h3> <p><code>TABLE</code>、<code>LIST</code> 或 <code>TASK</code> 決定輸出格式。<code>TABLE</code> 後面跟著你想顯示的欄位名稱，用逗號分隔。可以用 <code>as "別名"</code> 替欄位加上中文標題：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE file.mtime as &quot;最後修改&quot;, 重要性, status as &quot;狀態&quot;
+FROM #閱讀筆記
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE file.mtime as "最後修改", 重要性, status as "狀態"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>第二行：FROM — 決定資料來源</h3> <p>Dataview 支援三種來源語法：</p> <ul> <li><code>FROM #tag</code>：查詢帶有特定標籤的所有筆記</li> <li><code>FROM "資料夾名稱"</code>：查詢特定資料夾下的所有筆記（含子資料夾）</li> <li><code>FROM [[筆記名稱]]</code>：查詢所有連結到該筆記的筆記（反向連結）</li> </ul> <h3>第三行：WHERE — 篩選條件</h3> <p>常用的篩選條件：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+LIST
+FROM #閱讀筆記
+
+WHERE 重要性 >= &quot;⭐⭐⭐&quot;        ← 重要性大於等於 3 顆星
+WHERE file.mtime >= date(today) - dur(7 days)  ← 最近 7 天修改
+WHERE file.ctime >= date(today)                ← 今天建立
+WHERE !contains(file.name, &quot;MOC&quot;)              ← 排除包含 MOC 的檔名
+WHERE status != null                           ← status 欄位有值
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">LIST</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #閱讀筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">WHERE 重要性 >= "⭐⭐⭐"        ← 重要性大於等於 3 顆星</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE file.mtime >= date(today) - dur(7 days)  ← 最近 7 天修改</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE file.ctime >= date(today)                ← 今天建立</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE !contains(file.name, "MOC")              ← 排除包含 MOC 的檔名</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE status != null                           ← status 欄位有值</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>第四行：SORT — 排序</h3> <p> <code>SORT 欄位 desc</code> 倒序（最新到最舊），<code>asc</code> 正序（最舊到最新）。常見排序：<code>SORT file.mtime desc</code>（按修改時間）、<code>SORT file.ctime desc</code>（按建立時間）。
+</p> <h2>四種查詢類型深度比較</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch09-qt" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" font-size="19px" font-weight="bold" fill="var(--text)">Dataview 四種查詢類型比較</text>
+
+    <!-- TABLE Card -->
+    <rect x="30" y="50" width="170" height="270" fill="var(--bg2)" stroke="var(--accent)" stroke-width="1.5" rx="10" />
+    <rect x="30" y="50" width="170" height="40" fill="var(--accent)" rx="10" />
+    <rect x="30" y="78" width="170" height="12" fill="var(--accent)" rx="0" />
+    <text x="115" y="76" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--bg)">TABLE</text>
+    <text x="115" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">多欄位表格呈現</text>
+    <line x1="45" y1="128" x2="185" y2="128" stroke="var(--border)" stroke-width="0.8" />
+    <text x="55" y="148" font-size="13px" fill="var(--text)" opacity="0.85">✓ 比較多筆記欄位</text>
+    <text x="55" y="165" font-size="13px" fill="var(--text)" opacity="0.85">✓ 閱讀清單 / 書單</text>
+    <text x="55" y="182" font-size="13px" fill="var(--text)" opacity="0.85">✓ 專案狀態追蹤</text>
+    <text x="55" y="199" font-size="13px" fill="var(--text)" opacity="0.85">✓ 可自訂欄位別名</text>
+    <line x1="45" y1="212" x2="185" y2="212" stroke="var(--border)" stroke-width="0.8" />
+    <text x="115" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">適合情境</text>
+    <text x="115" y="248" text-anchor="middle" font-size="13px" fill="var(--accent)">資料比較、彙整報表</text>
+    <text x="115" y="265" text-anchor="middle" font-size="13px" fill="var(--accent)">多屬性並排顯示</text>
+    <rect x="45" y="278" width="140" height="28" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="115" y="297" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">TABLE file.link, status</text>
+
+    <!-- LIST Card -->
+    <rect x="220" y="50" width="170" height="270" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="220" y="50" width="170" height="40" fill="var(--abg)" rx="10" />
+    <rect x="220" y="78" width="170" height="12" fill="var(--abg)" rx="0" />
+    <text x="305" y="76" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">LIST</text>
+    <text x="305" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">簡潔清單呈現</text>
+    <line x1="235" y1="128" x2="375" y2="128" stroke="var(--border)" stroke-width="0.8" />
+    <text x="245" y="148" font-size="13px" fill="var(--text)" opacity="0.85">✓ 快速瀏覽筆記標題</text>
+    <text x="245" y="165" font-size="13px" fill="var(--text)" opacity="0.85">✓ 最近修改的筆記</text>
+    <text x="245" y="182" font-size="13px" fill="var(--text)" opacity="0.85">✓ 標籤索引頁</text>
+    <text x="245" y="199" font-size="13px" fill="var(--text)" opacity="0.85">✓ 輕量、低干擾</text>
+    <line x1="235" y1="212" x2="375" y2="212" stroke="var(--border)" stroke-width="0.8" />
+    <text x="305" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">適合情境</text>
+    <text x="305" y="248" text-anchor="middle" font-size="13px" fill="var(--accent)">快速瀏覽、索引頁</text>
+    <text x="305" y="265" text-anchor="middle" font-size="13px" fill="var(--accent)">不需要額外欄位</text>
+    <rect x="235" y="278" width="140" height="28" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="305" y="297" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">LIST FROM #tag</text>
+
+    <!-- TASK Card -->
+    <rect x="410" y="50" width="170" height="270" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="410" y="50" width="170" height="40" fill="var(--abg)" rx="10" />
+    <rect x="410" y="78" width="170" height="12" fill="var(--abg)" rx="0" />
+    <text x="495" y="76" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">TASK</text>
+    <text x="495" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">跨筆記待辦彙整</text>
+    <line x1="425" y1="128" x2="565" y2="128" stroke="var(--border)" stroke-width="0.8" />
+    <text x="435" y="148" font-size="13px" fill="var(--text)" opacity="0.85">✓ 彙整所有 - [ ] 任務</text>
+    <text x="435" y="165" font-size="13px" fill="var(--text)" opacity="0.85">✓ 可直接勾選完成</text>
+    <text x="435" y="182" font-size="13px" fill="var(--text)" opacity="0.85">✓ 篩選未完成項目</text>
+    <text x="435" y="199" font-size="13px" fill="var(--text)" opacity="0.85">✓ 按資料夾/標籤篩選</text>
+    <line x1="425" y1="212" x2="565" y2="212" stroke="var(--border)" stroke-width="0.8" />
+    <text x="495" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">適合情境</text>
+    <text x="495" y="248" text-anchor="middle" font-size="13px" fill="var(--accent)">GTD 收集箱</text>
+    <text x="495" y="265" text-anchor="middle" font-size="13px" fill="var(--accent)">專案任務追蹤看板</text>
+    <rect x="413" y="278" width="164" height="28" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="495" y="297" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">TASK WHERE !completed</text>
+
+    <!-- CALENDAR Card -->
+    <rect x="600" y="50" width="170" height="270" fill="var(--bg2)" stroke="var(--border)" stroke-width="1.5" rx="10" />
+    <rect x="600" y="50" width="170" height="40" fill="var(--abg)" rx="10" />
+    <rect x="600" y="78" width="170" height="12" fill="var(--abg)" rx="0" />
+    <text x="685" y="76" text-anchor="middle" font-size="17px" font-weight="bold" fill="var(--accent)">CALENDAR</text>
+    <text x="685" y="115" text-anchor="middle" font-size="14px" fill="var(--text)">日曆時間軸視圖</text>
+    <line x1="615" y1="128" x2="755" y2="128" stroke="var(--border)" stroke-width="0.8" />
+    <text x="625" y="148" font-size="13px" fill="var(--text)" opacity="0.85">✓ 日期欄位映射到月曆</text>
+    <text x="625" y="165" font-size="13px" fill="var(--text)" opacity="0.85">✓ 可視化時間分佈</text>
+    <text x="625" y="182" font-size="13px" fill="var(--text)" opacity="0.85">✓ Daily Note 出勤圖</text>
+    <text x="625" y="199" font-size="13px" fill="var(--text)" opacity="0.85">✓ 需要日期欄位</text>
+    <line x1="615" y1="212" x2="755" y2="212" stroke="var(--border)" stroke-width="0.8" />
+    <text x="685" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">適合情境</text>
+    <text x="685" y="248" text-anchor="middle" font-size="13px" fill="var(--accent)">習慣追蹤、打卡記錄</text>
+    <text x="685" y="265" text-anchor="middle" font-size="13px" fill="var(--accent)">活動時間軸瀏覽</text>
+    <rect x="615" y="278" width="140" height="28" fill="var(--bg)" stroke="var(--border)" rx="4" />
+    <text x="685" y="297" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.8">CALENDAR file.ctime</text>
+  </g>
+</svg>
+ <figcaption>Dataview 的四種查詢類型各有最適合的使用情境，選對類型可以大幅提升查詢的可讀性。</figcaption> </figure> <p>除了最常用的 TABLE、LIST、TASK，Dataview 還支援第四種類型 <strong>CALENDAR</strong>。以下是四種類型的使用要點：</p> <ul> <li><strong>TABLE</strong>：當你需要比較多則筆記的特定屬性，或製作可排序的報表時首選。可透過 <code>as "別名"</code> 讓欄位標題更易讀。</li> <li><strong>LIST</strong>：當你只需要看到符合條件的筆記標題清單，不需要額外欄位資訊時使用。輕量、簡潔，適合索引頁。</li> <li><strong>TASK</strong>：專為彙整 Markdown checkbox（<code>- [ ]</code> 和 <code>- [x]</code>）設計，查詢到的任務可在 Dataview 視圖中直接勾選完成，並同步回原始筆記。</li> <li><strong>CALENDAR</strong>：將筆記中的日期欄位映射到月曆視圖，特別適合 Daily Note 出勤圖或習慣打卡記錄的視覺化。</li> </ul> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+CALENDAR file.ctime
+FROM &quot;Daily Notes&quot;
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">CALENDAR file.ctime</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "Daily Notes"</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>CALENDAR 的前提</strong>：使用 CALENDAR 查詢時，Dataview 需要一個日期欄位作為映射基準。<code>file.ctime</code> 和 <code>file.mtime</code> 是內建欄位，可直接使用；如果想用自訂的 <code>閱讀日期</code> 或 <code>created</code> 欄位，只需確保其值為合法的日期格式（YYYY-MM-DD）即可。</p> </div> <h2>DQL 語法完整結構</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-ch09-dql" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--border)" />
+    </marker>
+  </defs>
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-size="19px" font-weight="bold" fill="var(--text)">DQL 語法結構解析</text>
+
+    <!-- Line 1: Query Type -->
+    <rect x="30" y="45" width="100" height="36" fill="var(--accent)" rx="6" />
+    <text x="80" y="68" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--bg)">第 1 行</text>
+    <rect x="150" y="45" width="220" height="36" fill="var(--bg2)" stroke="var(--accent)" stroke-width="1.5" rx="6" />
+    <text x="260" y="63" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">TABLE / LIST / TASK</text>
+    <text x="260" y="76" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">選擇輸出格式 + 欄位清單</text>
+    <line x1="370" y1="63" x2="430" y2="63" stroke="var(--border)" stroke-width="1" marker-end="url(#arr-ch09-dql)" />
+    <rect x="435" y="45" width="335" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="603" y="63" text-anchor="middle" font-size="14px" fill="var(--text)">TABLE title, status as "狀態", file.mtime as "修改"</text>
+
+    <!-- Line 2: FROM -->
+    <rect x="30" y="97" width="100" height="36" fill="var(--abg)" stroke="var(--accent)" stroke-width="1" rx="6" />
+    <text x="80" y="120" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">第 2 行</text>
+    <rect x="150" y="97" width="220" height="36" fill="var(--bg2)" stroke="var(--border)" stroke-width="1" rx="6" />
+    <text x="260" y="115" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">FROM</text>
+    <text x="260" y="128" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">資料來源：標籤 / 資料夾 / 連結</text>
+    <line x1="370" y1="115" x2="430" y2="115" stroke="var(--border)" stroke-width="1" marker-end="url(#arr-ch09-dql)" />
+    <rect x="435" y="97" width="335" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="603" y="110" text-anchor="middle" font-size="13.5px" fill="var(--text)">#tag  |  "資料夾路徑"  |  [[筆記名稱]]</text>
+    <text x="603" y="126" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">也可用 AND / OR 組合多個來源</text>
+
+    <!-- Line 3: WHERE -->
+    <rect x="30" y="149" width="100" height="36" fill="var(--abg)" stroke="var(--accent)" stroke-width="1" rx="6" />
+    <text x="80" y="172" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">第 3 行</text>
+    <rect x="150" y="149" width="220" height="36" fill="var(--bg2)" stroke="var(--border)" stroke-width="1" rx="6" />
+    <text x="260" y="167" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">WHERE（選填）</text>
+    <text x="260" y="180" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">條件篩選，支援邏輯運算子</text>
+    <line x1="370" y1="167" x2="430" y2="167" stroke="var(--border)" stroke-width="1" marker-end="url(#arr-ch09-dql)" />
+    <rect x="435" y="149" width="335" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="603" y="162" text-anchor="middle" font-size="13.5px" fill="var(--text)">status != null  AND  重要性 &gt;= 3</text>
+    <text x="603" y="178" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">date()、dur()、contains() 等函式可用</text>
+
+    <!-- Line 4: SORT -->
+    <rect x="30" y="201" width="100" height="36" fill="var(--abg)" stroke="var(--accent)" stroke-width="1" rx="6" />
+    <text x="80" y="224" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">第 4 行</text>
+    <rect x="150" y="201" width="220" height="36" fill="var(--bg2)" stroke="var(--border)" stroke-width="1" rx="6" />
+    <text x="260" y="219" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">SORT（選填）</text>
+    <text x="260" y="232" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">排序方式，asc 或 desc</text>
+    <line x1="370" y1="219" x2="430" y2="219" stroke="var(--border)" stroke-width="1" marker-end="url(#arr-ch09-dql)" />
+    <rect x="435" y="201" width="335" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="603" y="214" text-anchor="middle" font-size="13.5px" fill="var(--text)">SORT file.mtime desc, 重要性 desc</text>
+    <text x="603" y="230" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">多欄位排序用逗號分隔</text>
+
+    <!-- Line 5: LIMIT -->
+    <rect x="30" y="253" width="100" height="36" fill="var(--abg)" stroke="var(--accent)" stroke-width="1" rx="6" />
+    <text x="80" y="276" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--accent)">第 5 行</text>
+    <rect x="150" y="253" width="220" height="36" fill="var(--bg2)" stroke="var(--border)" stroke-width="1" rx="6" />
+    <text x="260" y="271" text-anchor="middle" font-size="16px" font-weight="bold" fill="var(--text)">LIMIT（選填）</text>
+    <text x="260" y="284" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">限制顯示筆數，避免結果過長</text>
+    <line x1="370" y1="271" x2="430" y2="271" stroke="var(--border)" stroke-width="1" marker-end="url(#arr-ch09-dql)" />
+    <rect x="435" y="253" width="335" height="36" fill="var(--bg)" stroke="var(--border)" rx="6" />
+    <text x="603" y="271" text-anchor="middle" font-size="13.5px" fill="var(--text)">LIMIT 10</text>
+    <text x="603" y="287" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.7">最多顯示 10 筆結果</text>
+  </g>
+</svg>
+ <figcaption>DQL 由五個子句組成，前三行（查詢類型、FROM、WHERE）最常用，SORT 和 LIMIT 為選填。</figcaption> </figure> <p>掌握這五個子句，就能覆蓋 90% 的 Dataview 使用情境：</p> <ul> <li><strong>查詢類型</strong>（必填）：TABLE / LIST / TASK / CALENDAR，決定輸出格式</li> <li><strong>FROM</strong>（建議填）：指定資料來源；省略時查詢整個 Vault（可能很慢）</li> <li><strong>WHERE</strong>（選填）：篩選條件，支援 AND / OR / NOT 邏輯運算</li> <li><strong>SORT</strong>（選填）：排序規則，多欄位用逗號分隔</li> <li><strong>LIMIT</strong>（選填）：限制顯示筆數，避免結果過長</li> </ul> <h3>GROUP BY：進階分組查詢</h3> <p>除了以上五個子句，Dataview 還支援 <code>GROUP BY</code>，可以把結果依某個欄位值分組顯示——例如把所有筆記依 <code>status</code> 分組：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE rows.file.link as &quot;筆記&quot;
+FROM #專案筆記
+GROUP BY status as &quot;狀態&quot;
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE rows.file.link as "筆記"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #專案筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">GROUP BY status as "狀態"</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>GROUP BY 的注意事項</strong>：使用 GROUP BY 後，<code>TABLE</code> 後面的欄位需要用 <code>rows.欄位名稱</code> 格式來引用，因為每一列現在代表一個分組，而非單一筆記。這是 Dataview 初學者常見的困惑點。</p> </div> <h2>五個實戰案例</h2> <figure class="svg-fig"> <img src="/obsidian/img/ch09/02-infographic-four-realworld-cases.png" alt="Dataview 四個實戰案例：每日復盤、閱讀清單、MOC 自動彙整、跨筆記任務追蹤" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>前四個是最常見的 Dataview 教學場景，涵蓋每日回顧、閱讀管理、主題彙整與跨筆記任務追蹤；第五個案例是本書 <a href="/obsidian/ch18-task-scheduling">ch18</a> 排程系統的真實實測，見下方。</figcaption> </figure> <h3>案例一：每日復盤 — 查看今天建立或修改的筆記</h3> <p>
+在 Daily Note 的模板裡加入這段查詢，每天打開日誌時就能自動看到當天所有有動靜的筆記，幫助你做當日回顧：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+LIST
+FROM &quot;&quot;
+WHERE file.ctime >= date(today) OR file.mtime >= date(today)
+SORT file.mtime desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">LIST</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM ""</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE file.ctime >= date(today) OR file.mtime >= date(today)</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT file.mtime desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>案例二：閱讀清單 — 彙整所有閱讀筆記並按重要性排序</h3> <p>建立一則「閱讀清單 MOC」，加入這段查詢，就有一張永遠是最新狀態的閱讀書單：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE file.link as &quot;書目&quot;, author as &quot;作者&quot;, status as &quot;狀態&quot;, 重要性
+FROM #閱讀筆記
+SORT 重要性 desc, file.mtime desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE file.link as "書目", author as "作者", status as "狀態", 重要性</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT 重要性 desc, file.mtime desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>案例三：MOC 自動彙整 — 列出所有連結到某個主題的筆記</h3> <p>
+在任何一則 MOC（內容地圖）筆記裡加入這段查詢，就能自動顯示所有連結到這個主題的筆記，不需要手動維護清單。這是 Dataview 最讓人驚艷的用法之一：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE file.mtime as &quot;更新時間&quot;, status as &quot;狀態&quot;, file.inlinks as &quot;被引用次數&quot;
+FROM [[習慣養成 MOC]]
+WHERE !contains(file.name, &quot;MOC&quot;)
+SORT status desc, file.mtime desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE file.mtime as "更新時間", status as "狀態", file.inlinks as "被引用次數"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM [[習慣養成 MOC]]</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE !contains(file.name, "MOC")</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT status desc, file.mtime desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h3>案例四：跨筆記任務追蹤 — 彙整所有未完成待辦事項</h3> <p>
+如果你習慣在各筆記裡用 <code>- [ ]</code> 記錄待辦事項，Dataview 的 TASK 模式可以把它們全部提取到一個地方集中管理：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TASK
+FROM &quot;Projects&quot;
+WHERE !completed
+SORT file.mtime desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TASK</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "Projects"</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE !completed</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT file.mtime desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call info"> <p><strong>Dataview 查詢是即時的</strong>：以上所有查詢都是動態的——每次開啟包含查詢的筆記時，Dataview 都會重新掃描 Vault 並渲染最新結果。你不需要手動更新，新增或修改筆記後，相關查詢頁面會自動反映變化。</p> </div> <h3>案例五：跨工具排程儀表板（實測案例，非教學範例）</h3> <p>
+前四個案例是常見的教學場景；這一個不是——它是 <a href="/obsidian/ch18-task-scheduling">ch18</a> 那套跨 AI 工具排程追蹤系統
+    （<code>schedule-log/</code>，`~45` 筆真實資料）的 Dataview 平行實作，用來驗證同一套 frontmatter schema
+    能不能同時服務 Bases 跟 Dataview 兩種檢視方式——答案是可以，資料格式完全沒有鎖定任何單一工具。
+</p> <p>「⚠️ 需要人工介入」：抓出漏跑（<code>missed</code>）、中斷（<code>stalled</code>）、逾期（<code>overdue</code>）的項目：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE status, health, scheduled_for, started_at
+FROM &quot;schedule-log/items&quot; OR &quot;schedule-log/done&quot;
+WHERE status = &quot;missed&quot; OR status = &quot;stalled&quot; OR health = &quot;overdue&quot;
+SORT scheduled_for ASC
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE status, health, scheduled_for, started_at</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "schedule-log/items" OR "schedule-log/done"</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE status = "missed" OR status = "stalled" OR health = "overdue"</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT scheduled_for ASC</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <p>用 <code>GROUP BY type</code> 做出「全部總覽」，一次性跟週期性項目分開顯示：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE WITHOUT ID rows.file.link as &quot;項目&quot;, rows.status as &quot;狀態&quot;
+FROM &quot;schedule-log/items&quot; OR &quot;schedule-log/done&quot;
+GROUP BY type
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE WITHOUT ID rows.file.link as "項目", rows.status as "狀態"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "schedule-log/items" OR "schedule-log/done"</span></span>
+<span class="line"><span style="color:#ABB2BF">GROUP BY type</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <p>只看週期性項目的執行狀態（<code>schedule_kind</code> 是 <code>interval</code> 還是 <code>manual-trigger</code>）：</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE status, schedule_kind, last_run_at, next_expected_at
+FROM &quot;schedule-log/items&quot;
+WHERE type = &quot;recurring&quot;
+SORT status ASC
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE status, schedule_kind, last_run_at, next_expected_at</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM "schedule-log/items"</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE type = "recurring"</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT status ASC</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call tip"> <p> <strong>跟 ch18 的 Bases 版本實測對照</strong>：這三個查詢都已經用 Dataview 的 API（<code>tryQuery()</code>）對
+      真實資料跑過，結果跟 Bases 版一致——同樣抓到 11 筆需要人工介入的項目。體感差異很明顯：Dataview 要手寫 DQL，
+<code>GROUP BY</code> 之後要改用 <code>rows.欄位</code> 語法才能攤開內容，比 Bases 點選介面設定分組來得繞；
+      Dataview 也沒有 Bases 的 <code>formulas</code> 公式欄位，複雜邏輯得升級寫 DataviewJS（見下一節）才行。
+      兩種工具各有取捨，但**資料本身完全通用**，這是排程系統設計時刻意的決定。
+</p> </div> <h2>Inline Dataview：在正文中嵌入即時數值</h2> <p>
+除了 code block 查詢，Dataview 還支援一種更輕量的用法——<strong>Inline Dataview</strong>，讓你在正文的任何位置嵌入即時計算值，語法是 <code>`= 運算式`</code>（反引號包住等號和運算式）。
+</p> <p>常見用法：</p> <ul> <li><code>`= this.status`</code>：顯示當前筆記的 <code>status</code> 欄位值</li> <li><code>`= this.file.mtime`</code>：顯示當前筆記的最後修改時間</li> <li><code>`= date(today)`</code>：顯示今天日期</li> <li><code>`= date(today) - this.created`</code>：計算筆記建立後經過了幾天</li> </ul> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="# 《原子習慣》讀書筆記
+
+**狀態**：`= this.status`
+**建立時間**：`= this.file.ctime`
+**距今已讀**：`= date(today) - this.file.ctime` 天
+
+本書核心論點：..." data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#E06C75"># 《原子習慣》讀書筆記</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D19A66">**狀態**</span><span style="color:#ABB2BF">：</span><span style="color:#E5C07B">`</span><span style="color:#98C379">= this.status</span><span style="color:#E5C07B">`</span></span>
+<span class="line"><span style="color:#D19A66">**建立時間**</span><span style="color:#ABB2BF">：</span><span style="color:#E5C07B">`</span><span style="color:#98C379">= this.file.ctime</span><span style="color:#E5C07B">`</span></span>
+<span class="line"><span style="color:#D19A66">**距今已讀**</span><span style="color:#ABB2BF">：</span><span style="color:#E5C07B">`</span><span style="color:#98C379">= date(today) - this.file.ctime</span><span style="color:#E5C07B">`</span><span style="color:#ABB2BF"> 天</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">本書核心論點：...</span></span></code></pre> </div> </div>   <div class="call tip"> <p><strong>Inline Dataview 的典型用途</strong>：在筆記 header 區域顯示「這則筆記的關鍵屬性」，例如狀態、最後更新時間、所屬專案等。這比手動維護這些資訊要可靠得多——值永遠是從 frontmatter 即時讀取的。</p> </div> <h2>LIMIT 與 SORT 組合：打造最近 N 筆查詢</h2> <p>
+在儀表板或 MOC 筆記中，常常只需要「最近 10 筆」而非全部結果。<code>SORT</code> 搭配 <code>LIMIT</code> 是標準做法：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE file.link as &quot;筆記&quot;, 閱讀日期, 作者
+FROM #閱讀筆記
+WHERE 閱讀日期 >= date(today) - dur(30 days)
+SORT 閱讀日期 desc
+LIMIT 10
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE file.link as "筆記", 閱讀日期, 作者</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE 閱讀日期 >= date(today) - dur(30 days)</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT 閱讀日期 desc</span></span>
+<span class="line"><span style="color:#ABB2BF">LIMIT 10</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <h2>應用場景矩陣</h2> <figure class="svg-fig"> 
+<svg width="100%" height="auto" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="system-ui, sans-serif">
+    <text x="400" y="28" text-anchor="middle" font-size="19px" font-weight="bold" fill="var(--text)">Dataview 應用場景矩陣</text>
+
+    <!-- Y axis label -->
+    <text x="18" y="180" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6" transform="rotate(-90, 18, 180)">資料複雜度</text>
+    <!-- X axis label -->
+    <text x="440" y="330" text-anchor="middle" font-size="14px" fill="var(--text)" opacity="0.6">更新頻率</text>
+
+    <!-- Grid -->
+    <rect x="50" y="45" width="720" height="265" fill="var(--bg2)" stroke="var(--border)" rx="6" />
+
+    <!-- Quadrant lines -->
+    <line x1="410" y1="45" x2="410" y2="310" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,3" />
+    <line x1="50" y1="178" x2="770" y2="178" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,3" />
+
+    <!-- Quadrant labels (faint) -->
+    <text x="230" y="65" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.4">低頻率 · 低複雜</text>
+    <text x="590" y="65" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.4">高頻率 · 低複雜</text>
+    <text x="230" y="200" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.4">低頻率 · 高複雜</text>
+    <text x="590" y="200" text-anchor="middle" font-size="13px" fill="var(--text)" opacity="0.4">高頻率 · 高複雜</text>
+
+    <!-- Use case bubbles -->
+    <!-- 閱讀清單 (低頻·高複雜) -->
+    <ellipse cx="180" cy="240" rx="72" ry="28" fill="var(--accent)" opacity="0.18" stroke="var(--accent)" stroke-width="1.5" />
+    <text x="180" y="236" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">閱讀清單</text>
+    <text x="180" y="250" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">TABLE + 多欄位</text>
+
+    <!-- 標籤索引 (低頻·低複雜) -->
+    <ellipse cx="280" cy="110" rx="65" ry="26" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.2" />
+    <text x="280" y="107" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">標籤索引頁</text>
+    <text x="280" y="120" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">LIST FROM #tag</text>
+
+    <!-- 每日復盤 (高頻·低複雜) -->
+    <ellipse cx="560" cy="115" rx="70" ry="28" fill="var(--accent)" opacity="0.18" stroke="var(--accent)" stroke-width="1.5" />
+    <text x="560" y="111" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">每日復盤</text>
+    <text x="560" y="125" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">LIST · 今日筆記</text>
+
+    <!-- 跨筆記任務 (高頻·高複雜) -->
+    <ellipse cx="640" cy="255" rx="80" ry="32" fill="var(--accent)" opacity="0.22" stroke="var(--accent)" stroke-width="2" />
+    <text x="640" y="250" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">跨筆記任務追蹤</text>
+    <text x="640" y="265" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">TASK + WHERE !completed</text>
+
+    <!-- MOC 自動彙整 -->
+    <ellipse cx="130" cy="155" rx="60" ry="25" fill="var(--accent)" opacity="0.13" stroke="var(--accent)" stroke-width="1.2" />
+    <text x="130" y="151" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">MOC 彙整</text>
+    <text x="130" y="164" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">FROM [[MOC]]</text>
+
+    <!-- 習慣追蹤 (高頻·中等) -->
+    <ellipse cx="490" cy="220" rx="68" ry="27" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.3" />
+    <text x="490" y="216" text-anchor="middle" font-size="14px" font-weight="bold" fill="var(--accent)">習慣追蹤</text>
+    <text x="490" y="229" text-anchor="middle" font-size="12px" fill="var(--text)" opacity="0.7">CALENDAR · 打卡圖</text>
+
+    <!-- Axes -->
+    <line x1="50" y1="310" x2="770" y2="310" stroke="var(--border)" stroke-width="1.5" />
+    <line x1="50" y1="45" x2="50" y2="310" stroke="var(--border)" stroke-width="1.5" />
+    <text x="60" y="308" font-size="13px" fill="var(--text)" opacity="0.5">低</text>
+    <text x="750" y="308" font-size="13px" fill="var(--text)" opacity="0.5">高</text>
+    <text x="52" y="58" font-size="13px" fill="var(--text)" opacity="0.5">高</text>
+    <text x="52" y="307" font-size="13px" fill="var(--text)" opacity="0.5">低</text>
+  </g>
+</svg>
+ <figcaption>不同 Dataview 查詢類型適合不同的使用情境，依更新頻率和資料複雜度選擇最適合的方案。</figcaption> </figure> <h2>進階技巧：Dataview + Templater 搭配</h2> <p>
+案例三的 MOC 查詢有一個問題：你要在每一則 MOC 筆記裡手動填入對應筆記名稱。如果 MOC 數量多，這很繁瑣。
+</p> <p>
+搭配 Templater（ch10 會詳細介紹），可以用 <code>&lt;% tp.file.title %&gt;</code> 變數自動帶入當前筆記名稱：
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+TABLE file.mtime as &quot;更新時間&quot;, status as &quot;狀態&quot;
+FROM [[<% tp.file.title %>]]
+WHERE !contains(file.name, &quot;MOC&quot;)
+SORT file.mtime desc
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">TABLE file.mtime as "更新時間", status as "狀態"</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM [[&#x3C;% tp.file.title %>]]</span></span>
+<span class="line"><span style="color:#ABB2BF">WHERE !contains(file.name, "MOC")</span></span>
+<span class="line"><span style="color:#ABB2BF">SORT file.mtime desc</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <p>
+將這段內容存為 Templater 模板，之後在任何新 MOC 筆記裡插入，查詢語法就會自動填入該筆記的名稱——一個模板，適用於所有 MOC。
+</p> <h2>Dataview vs DataviewJS：什麼時候需要升級？</h2> <p>
+Dataview 的 DQL（上面介紹的所有語法）適合 90% 的日常需求。但有些場景 DQL 無法滿足，這時可以升級使用 <strong>DataviewJS</strong>——用 JavaScript 撰寫查詢邏輯，語言標記為 <code>dataviewjs</code>。
+</p> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataviewjs
+const pages = dv.pages('#閱讀筆記')
+  .sort(p => p.file.mtime, 'desc')
+  .slice(0, 5);
+
+dv.table(['書名', '作者', '狀態'],
+  pages.map(p => [p.file.link, p.author, p.status])
+);
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataviewjs</span></span>
+<span class="line"><span style="color:#ABB2BF">const pages = dv.pages('#閱讀筆記')</span></span>
+<span class="line"><span style="color:#ABB2BF">  .sort(p => p.file.mtime, 'desc')</span></span>
+<span class="line"><span style="color:#ABB2BF">  .slice(0, 5);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">dv.table(['書名', '作者', '狀態'],</span></span>
+<span class="line"><span style="color:#ABB2BF">  pages.map(p => [p.file.link, p.author, p.status])</span></span>
+<span class="line"><span style="color:#ABB2BF">);</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <p>以下是選擇 DQL 還是 DataviewJS 的判斷依據：</p> <ul> <li><strong>用 DQL 就夠的情境</strong>：篩選 + 排序 + 顯示欄位，絕大多數的閱讀清單、任務彙整、MOC 查詢。</li> <li><strong>需要 DataviewJS 的情境</strong>：自訂輸出 HTML 結構、做複雜的資料轉換（例如統計標籤數量）、動態產生不規則的表格佈局、跨欄位的數學計算。</li> </ul> <figure class="svg-fig"> <img src="/obsidian/img/ch09/03-comparison-dql-vs-dataviewjs.png" alt="DQL 與 DataviewJS 的對比：DQL 負責篩選排序顯示欄位、無法執行任意程式碼、安全；DataviewJS 支援自訂輸出結構與複雜資料轉換，但需要理解來源程式碼" style="width:75%;height:auto;display:block;margin:0 auto;"> <figcaption>DQL 覆蓋 90% 日常需求且安全；只有真的需要自訂邏輯時，才升級到 DataviewJS。</figcaption> </figure> <div class="call warn"> <p><strong>DataviewJS 的安全提醒</strong>：DataviewJS 本質上是在 Obsidian 環境裡執行 JavaScript，能力更強但也有風險——如果從外部複製來源不明的 DataviewJS 程式碼，請先理解它在做什麼再使用。DQL 則無此風險，因為它只有查詢能力，沒有執行任意程式碼的能力。</p> </div> <h2>常見問題與注意事項</h2> <h3>欄位名稱有大小寫之分</h3> <p>
+Dataview 的欄位名稱<strong>區分大小寫</strong>。如果 frontmatter 寫的是 <code>Status</code>，查詢裡就要用 <code>Status</code>，寫 <code>status</code> 會找不到資料。養成在整個 Vault 使用一致大小寫的習慣，能省去很多除錯時間。
+</p> <h3>Emoji 插入方式的坑</h3> <p>
+如果你用 Emoji 作為欄位值（例如 <code>status: 🌱</code>），不要透過某些插件工具列插入 Emoji——部分工具插入的是不同編碼格式，Dataview 無法正確讀取。直接從鍵盤輸入或複製貼上 Emoji 字元是最安全的做法。
+</p> <h3>查詢沒有結果時的系統化除錯步驟</h3> <p>遇到 Dataview 查詢沒有結果（或結果不符預期），按以下步驟逐步排查：</p> <ol> <li><strong>先用最簡單的查詢確認來源</strong>：只保留 <code>LIST FROM #tag</code>，確認標籤是否正確、是否有筆記帶這個標籤。</li> <li><strong>逐步加入篩選條件</strong>：確認來源正確後，再加入 WHERE，每次只加一個條件，確認哪一步開始結果為空。</li> <li><strong>檢查欄位名稱拼寫</strong>：打開一則應該出現在結果裡的筆記，對照 frontmatter 確認欄位名稱大小寫完全一致。</li> <li><strong>確認 Dataview 索引已更新</strong>：剛新增欄位後，有時需要等待幾秒讓 Dataview 重新索引，或用快捷鍵關閉再重新開啟該筆記。</li> </ol> <div class="cb-wrap" data-astro-cid-jgrc2lfe> <div class="cb-bar" data-astro-cid-jgrc2lfe> <span class="cb-label" data-astro-cid-jgrc2lfe></span> <button class="cb-copy" data-code="```dataview
+LIST
+FROM #閱讀筆記
+```" data-astro-cid-jgrc2lfe>複製</button> </div> <div class="cb-inner" data-astro-cid-jgrc2lfe> <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto;" tabindex="0" data-astro-cid-jgrc2lfe data-language="markdown"><code><span class="line"><span style="color:#ABB2BF">```dataview</span></span>
+<span class="line"><span style="color:#ABB2BF">LIST</span></span>
+<span class="line"><span style="color:#ABB2BF">FROM #閱讀筆記</span></span>
+<span class="line"><span style="color:#ABB2BF">```</span></span></code></pre> </div> </div>   <div class="call warn"> <p><strong>查詢沒有結果時怎麼辦？</strong> 90% 的原因是：欄位名稱拼錯、標籤格式不對、或來源筆記沒有對應的 Metadata。遇到問題時，先用最簡單的查詢（只有 <code>LIST FROM #tag</code>）確認資料來源正確，再逐步加入 WHERE 和 SORT 條件縮小範圍。</p> </div> <h2>小結</h2> <p>
+Dataview 把 Vault 從「靜態的筆記倉庫」變成「動態的知識資料庫」。只要你的筆記有一致的 Metadata 結構（這是 ch06 打好的地基），就能用幾行查詢語法換來永遠最新的自動彙整頁面——閱讀清單、每日復盤、主題 MOC、跨筆記任務追蹤，全都不需要手動維護。
+</p> <p>
+本章重點回顧：四種查詢類型（TABLE/LIST/TASK/CALENDAR）各有最適合的情境；DQL 五個子句（查詢類型、FROM、WHERE、SORT、LIMIT）覆蓋日常 90% 需求；Inline Dataview 讓你在正文中嵌入即時數值；需要更複雜邏輯時再升級到 DataviewJS。
+</p> <p>
+說到「減少重複勞動」，下一章我們要介紹 Templater 的進階用法——不只是插入日期的動態模板，而是讓 Obsidian 在新建筆記時自動套用格式、填入欄位，甚至根據規則把筆記自動移動到正確的資料夾。
+</p>  </div> <nav class="cnav" data-astro-cid-mw7aashj> <a href="/obsidian/ch08-essential-plugins" class="prev" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>← 上一章</span> <span class="nt" data-astro-cid-mw7aashj>必裝插件 Top 10：新手必知清單</span> </a> <a href="/obsidian/ch10-templater-automation" class="next" data-astro-cid-mw7aashj> <span class="nd" data-astro-cid-mw7aashj>下一章 →</span> <span class="nt" data-astro-cid-mw7aashj>Templater 與自動化：告別重複勞動</span> </a> </nav> </main> </div> <script>
+    // Theme
+    const html = document.documentElement;
+    const tt = document.getElementById('tt');
+    const isun = document.getElementById('isun');
+    const imoon = document.getElementById('imoon');
+    function syncIcons() {
+      const dk = html.classList.contains('dark');
+      isun.style.display = dk ? 'block' : 'none';
+      imoon.style.display = dk ? 'none' : 'block';
+    }
+    syncIcons();
+    tt?.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('cc-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      syncIcons();
+    });
+
+    // Progress
+    const pb = document.getElementById('pb');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollHeight - window.innerHeight;
+      pb.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
+    }, { passive: true });
+
+    // Sidebar part toggles
+    document.querySelectorAll('.pt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.pid;
+        const list = document.querySelector(`[data-pl="${id}"]`);
+        btn.classList.toggle('open');
+        list?.classList.toggle('closed');
+      });
+    });
+
+    // Mobile menu
+    const sb = document.getElementById('sb');
+    const ov = document.getElementById('ov');
+    const mb = document.getElementById('mbtn');
+    const open = () => { sb.classList.add('open'); ov.classList.add('open'); document.body.style.overflow='hidden'; };
+    const close = () => { sb.classList.remove('open'); ov.classList.remove('open'); document.body.style.overflow=''; };
+    mb?.addEventListener('click', open);
+    ov?.addEventListener('click', close);
+  </script> </body> 
